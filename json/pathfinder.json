@@ -1,0 +1,117 @@
+{
+    "pathfinder_welcome": "Welcome to the Pathfinding Visualizer!",
+
+    "algorithmsIntro": "Know Your Algorithms",
+
+    "algorithms": [
+        {
+            "name": "Dijkstra's",
+            "id": "dijkstra",
+            "description": "The father of pathfinding algorithms. Visits nodes in the order of weighted distance from the start node. A weighted algorithm. Guaranteed to find the shortest path. No heuristic applied."
+        },
+        {
+            "name": "A* (Euclidean Heuristic)",
+            "id": "a-star-lin",
+            "description": "A variation of Dijkstra's with a geometric straight-line heuristic applied. A weighted algorithm. Guaranteed to find the shortest path."
+        },
+        {
+            "name": "A* (Manhattan Heuristic)",
+            "id": "a-star-man",
+            "description": "The strongest algorithm in this demo. A variation of Dijkstra's with a Manhattan heuristic applied. A weighted algorithm. Guaranteed to find the shortest path."
+        },
+        {
+            "name": "A* (Swarm Heuristic)",
+            "id": "a-star-swarm",
+            "description": "A variation of Dijkstra's with a custom heuristic that is the sum of the Manhattan distances to the start and end nodes and has a distinctive cone-shaped search pattern. A weighted algorithm. Not guaranteed to find the shortest path."
+        },
+        {
+            "name": "Convergent Swarm",
+            "id": "conv-swarm",
+            "description": "A more heuristic-heavy version of A* (Swarm Heuristic) that \"converges\" to the end node. A weighted algorithm. Not guaranteed to find the shortest path."
+        },
+        {
+            "name": "Greedy Best-first Search",
+            "id": "greedy",
+            "description": "A very heuristic-heavy and faster version of A* (Manhattan Heuristic). A weighted algorithm. Not guaranteed to find the shortest path due to its aggressive preference for nodes close to the end node."
+        },
+        {
+            "name": "Bidirectional Dijkstra's",
+            "id": "bidijkstra",
+            "description": "A bidirectional version of Dijkstra's algorithm. Visits nodes in the order of weighted distance from the start or end nodes. A weighted algorithm. Guaranteed to find the shortest path. No heuristic applied."
+        },
+        {
+            "name": "Bidirectional Swarm",
+            "id": "bi-swarm",
+            "description": "A bidirectional version of A* (Swarm Heuristic). A weighted algorithm. Not guaranteed to find the shortest path."
+        },
+        {
+            "name": "Depth-first Search",
+            "id": "dfs",
+            "description": "Not a very good algorithm for pathfinding, but essential to many graph algorithms. An unweighted algorithm. Not guaranteed to find the shortest path."
+        },
+        {
+            "name": "Breadth-first Search",
+            "id": "bfs",
+            "description": "Searches nodes in order of distance from the start node. An unweighted algorithm. Guaranteed to find the shortest path if no weighted nodes exist."
+        }
+    ],
+
+    "instructionsIntro": "Getting Started",
+    
+    "instructions": [
+        {
+            "text": "Click and drag on the grid to add walls. Hold the \"w\" key and click to add weighted nodes. Click on any wall or weighted nodes to remove them.",
+            "list": []
+        },
+        {
+            "text": "Choose a maze or pattern, or make your own!",
+            "list": [
+                {"text": "Wall nodes are impassable."},
+                {"text": "Weighted nodes are passable, but have a higher cost associated with passing through them."}
+            ]
+        },
+        {
+            "text": "Select an algorithm...",
+            "list": []
+        },
+        {
+            "text": "...And then press \"Visualize!\"",
+            "list": []
+        },
+        {
+            "text": "After visualizing, move the start and end nodes to see how the path and search pattern change! Play around and add more wall or weighted nodes.",
+            "list": []
+        },
+        {
+            "text": "To reset the visualizer, click \"Reset Visualizer.\" To reset the visualizer and remove all wall and weighted nodes, click \"Reset All.\"",
+            "list": []
+        },
+        {
+            "text": "If the visualization is too fast, you can also select a different speed.",
+            "list": []
+        }
+    ],
+
+    "patterns": [
+        {
+            "name": "Maze (Recursive Division)",
+            "id": "recur-maze"
+        },
+        {
+            "name": "Recursive Maze with Weights",
+            "id": "recur-maze-weights"
+        },
+        {
+            "name": "Random Walls",
+            "id": "rand-walls"
+        },
+        {
+            "name": "Random Weights",
+            "id": "rand-weights"
+        },
+        {
+            "name": "Random Walls and Weights",
+            "id": "rand-walls-weights"
+        }
+    ]
+}

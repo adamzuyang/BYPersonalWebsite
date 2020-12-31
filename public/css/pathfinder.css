@@ -1,0 +1,437 @@
+:root {
+    --node-border-color:rgba(0, 211, 211, 0.8);
+    --end-color: rgb(204, 0, 0);
+    --start-color: rgb(8, 189, 90);
+    --visited-color: rgba(0, 190, 218, 0.75);
+    --path-color: rgb(255, 254, 106);
+    --wall-color: rgba(0, 0, 0, 0.75);
+}
+
+table, td {
+    border: 1px solid var(--node-border-color) !important;
+}
+
+.node {
+    height: 25px;
+    width: 25px;
+}
+
+.visited {
+    background-color: var(--visited-color);
+}
+
+.weighted-and-visited {
+    background: radial-gradient(ellipse at center,  #000000cb 0%,#000000cb 47%,#000000cb 47%,#000000cb 47%, var(--visited-color) 48%);
+}
+
+.weighted-and-path {
+    background: radial-gradient(ellipse at center,  #000000cb 0%,#000000cb 47%,#000000cb 47%,#000000cb 47%,var(--path-color) 48%);
+}
+
+.path {
+    background-color: var(--path-color);
+}
+
+.weighted {
+    background: radial-gradient(ellipse at center,  #000000cb 0%,#000000cb 47%,#ffffff 48%);
+}
+
+.wall {
+    background-color: var(--wall-color);
+}
+
+.start {
+    background-color: var(--start-color);
+}
+
+.end {
+    background-color: var(--end-color);
+}
+
+.node-to-end, .weighted-to-end {
+    animation-name: nodeToEnd;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+@keyframes nodeToEnd {
+    0% {
+        transform: scale(0);
+        background-color: var(--end-color);
+    }
+    
+    50% {
+        transform: scale(1.2);
+        background-color: var(--end-color);
+    }
+    
+    100% {
+        transform: scale(1);
+        background-color: var(--end-color);
+    }
+}
+
+.wall-to-end {
+    animation-name: wallToEnd;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+@keyframes wallToEnd {
+    0% {
+        transform: scale(0);
+        background-color: var(--end-color);
+    }
+    
+    50% {
+        transform: scale(1.2);
+        background-color: var(--end-color);
+    }
+    
+    100% {
+        transform: scale(1);
+        background-color: var(--end-color);
+    }
+}
+
+/*
+.to-node {
+    animation-name: toNode;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+@keyframes toNode {
+    0% {
+        transform: scale(0);
+        background-color: rgb(255, 255, 255);
+    }
+    
+    50% {
+        transform: scale(0.5);
+        background-color: rgb(255, 255, 255);
+    }
+    
+    100% {
+        transform: scale(1);
+        background-color:rgb(255, 255, 255);
+    }
+}
+*/
+
+.node-to-start, .weighted-to-start {
+    animation-name: nodeToStart;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+@keyframes nodeToStart {
+    0% {
+        transform: scale(0);
+        background-color: var(--start-color);
+    }
+    
+    50% {
+        transform: scale(1.2);
+        background-color: var(--start-color);
+    }
+    
+    100% {
+        transform: scale(1);
+        background-color: var(--start-color);
+    }
+}
+
+.wall-to-start {
+    animation-name: wallToStart;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+@keyframes wallToStart {
+    0% {
+        transform: scale(0);
+        background-color: var(--start-color);
+    }
+    
+    50% {
+        transform: scale(1.2);
+        background-color: var(--start-color);
+    }
+    
+    100% {
+        transform: scale(1);
+        background-color: var(--start-color);
+    }
+}
+
+.node-to-visited {
+    animation-name: nodeToVisited;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+@keyframes nodeToVisited {
+    0% {
+        transform: scale(0.3);
+        background-color: rgba(0, 0, 66, 0.75);
+        border-radius: 100%;
+    }
+    
+    50% {
+        transform: scale(0.9);
+        background-color: rgba(17, 104, 217, 0.75);
+    }
+    
+    75% {
+      transform: scale(1.2);
+      background-color: rgba(0, 217, 159, 0.75);
+    }
+    
+    100% {
+      transform: scale(1);
+      background-color: var(--visited-color);
+    }
+}
+
+.node-to-path {
+    animation-name: nodeToPath;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+  
+@keyframes nodeToPath {
+    0% {
+      transform: scale(0.6);
+      background-color: var(--path-color);
+    }
+  
+    50% {
+      transform: scale(1.2);
+      background-color: var(--path-color);
+    }
+  
+    100% {
+      transform: scale(1);
+      background-color: var(--path-color);
+    }
+}
+
+.node-to-wall, .start-to-wall, .end-to-wall {
+    animation-name: nodeToWall;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+@keyframes nodeToWall {
+    0% {
+        transform: scale(0.4);
+        background-color: var(--wall-color);
+      }
+    
+      50% {
+        transform: scale(0.7);
+        background-color: var(--wall-color);
+      }
+    
+      100% {
+        transform: scale(1);
+        background-color: var(--wall-color);
+      }
+}
+
+.node-to-weighted, .start-to-weighted, .end-to-weighted {
+    animation-name: nodeToWeighted;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+@keyframes nodeToWeighted {
+    0% {
+        transform: scale(0.4);
+        background: radial-gradient(ellipse at center,  #000000cb 0%,#000000cb 47%,#000000cb 47%,#000000cb 47%,#ffffff 48%);
+      }
+    
+      50% {
+        transform: scale(0.7);
+        background: radial-gradient(ellipse at center,  #000000cb 0%,#000000cb 47%,#000000cb 47%,#000000cb 47%,#ffffff 48%);
+      }
+
+      100% {
+        transform: scale(1);
+        background: radial-gradient(ellipse at center,  #000000cb 0%,#000000cb 47%,#000000cb 47%,#000000cb 47%,#ffffff 48%);
+      }
+}
+
+.weighted-to-visited {
+    animation-name: weightedToVisited;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+@keyframes weightedToVisited {
+    0% {
+        transform: scale(0.3);
+        background: radial-gradient(ellipse at center,  #000000cb 0%,#000000cb 47%,#000000cb 47%,#000000cb 47%,#ffffff 48%);
+    }
+    
+    50% {
+        transform: scale(0.9);
+        background: radial-gradient(ellipse at center,  #000000cb 0%,#000000cb 47%,#000000cb 47%,#000000cb 47%,rgba(17, 104, 217, 0.75) 48%);
+    }
+    
+    75% {
+        transform: scale(1.2);
+        background: radial-gradient(ellipse at center,  #000000cb 0%,#000000cb 47%,#000000cb 47%,#000000cb 47%,rgba(0, 217, 159, 0.75) 48%);
+    }
+    
+    100% {
+        transform: scale(1);
+        background: radial-gradient(ellipse at center,  #000000cb 0%,#000000cb 47%,#000000cb 47%,#000000cb 47%, var(--visited-color) 48%);
+    }
+}
+
+.weighted-to-path {
+    animation-name: weightedToPath;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+@keyframes weightedToPath {
+    0% {
+        transform: scale(0.6);
+        background: radial-gradient(ellipse at center,  #000000cb 0%,#000000cb 47%,#000000cb 47%,#000000cb 47%,#ffffff 48%);
+    }
+    
+    50% {
+        transform: scale(1.2);
+        background: radial-gradient(ellipse at center,  #000000cb 0%,#000000cb 47%,#000000cb 47%,#000000cb 47%,var(--path-color) 48%);
+    }
+    
+    100% {
+        transform: scale(1);
+        background: radial-gradient(ellipse at center,  #000000cb 0%,#000000cb 47%,#000000cb 47%,#000000cb 47%,var(--path-color) 48%);
+    }
+}
+
+.dropdown-toggle {
+    background-color: white;
+}
+
+.dropdown-toggle:hover, .not-in-dropdown:hover {
+    color: rgb(102, 102, 102);
+}
+
+.not-in-dropdown {
+    transform: translate(0, 19%);
+    margin-left: 13px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.menu-link {
+    cursor: pointer;
+}
+
+.vis-button {
+    margin-top: 7px;
+}
+
+.dropup {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    transform: translate(0, 90px);
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+  
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

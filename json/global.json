@@ -1,0 +1,40 @@
+{
+    "site_name": "Barnett Yang",
+    "img_logo_nav": "/images/logo.png",
+    "header_nav": [
+        {
+            "text": "Projects",
+            "link": "/#project_section"
+        },
+        {
+            "text": "Blog",
+            "link": "https://adamzuyang.medium.com/"
+        },
+        {
+            "text": "Resume",
+            "link": "/resume"
+        },
+        {
+            "text": "PathFinder",
+            "link": "/pathfinder"
+        },
+        {
+            "text": "Contact",
+            "link": "/#contact"
+        }
+    ],
+    "social": {
+        "facebook": {
+            "link": "https://www.facebook.com/adam.yang.1614"
+        },
+        "linkedin": {
+            "link": "https://www.linkedin.com/in/barnettyang/"
+        },
+        "instagram": {
+            "link": "https://www.instagram.com/adamzuyang/"
+        },
+        "github": {
+            "link": "https://github.com/adamzuyang"
+        }
+    }
+}

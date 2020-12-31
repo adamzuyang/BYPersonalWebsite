@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Barnett Yang</title>
+    <meta name="description" content="Barnett Yang's Personal Portfolio" />
+
+    <%- include('partials/head.ejs') %>
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/pathfinder.css" rel="stylesheet">
+</head>
+
+<body>
+    <%- include('partials/navbar.ejs') %>
+
+    <div class="container-fluid" style="">
+        <div class="row" style="width: 100vw">
+            <!--HTML table used for visualizer-->
+            <div class="col d-flex justify-content-center">
+                <table style="" id="grid">
+                </table>
+            </div>
+        </div>
+        <br>
+        <div class="row" style="">
+            <!--Example nodes-->
+            <div class="col-4 d-flex justify-content-center">
+                <div class="node start" style="border: transparent; position: relative; transform: translate(-5px, 0)"></div>
+                <p style="position: relative; transform: translate(5px, 0)">Start</p>
+            </div>
+            <div class="col-4 d-flex justify-content-center">
+                <div class="node wall" style="border: transparent; position: relative; transform: translate(-5px, 0)"></div>
+                <p style="position: relative; transform: translate(5px, 0)">Wall</p>
+            </div>
+            <div class="col-4 d-flex justify-content-center">
+                <div class="node visited" style="border: transparent; position: relative; transform: translate(-5px, 0)"></div>
+                <p style="position: relative; transform: translate(5px, 0)">Visited</p>
+            </div>
+        </div>
+        <div class="row" style="">
+            <div class="col-4 d-flex justify-content-center">
+                <div class="node end" style="border: transparent; position: relative; transform: translate(-5px, 0)"></div>
+                <p style="position: relative; transform: translate(5px, 0)">End</p>
+            </div>
+            <div class="col-4 d-flex justify-content-center">
+                <div class="node weighted" style="border: transparent; position: relative; transform: translate(-5px, 0)"></div>
+                <p style="position: relative; transform: translate(5px, 0)">Weight</p>
+            </div>
+            <div class="col-4 d-flex justify-content-center">
+                <div class="node path" style="border: transparent; position: relative; transform: translate(-5px, 0)"></div>
+                <p style="position: relative; transform: translate(5px, 0)">Path</p>
+            </div>
+        </div>
+    </div>
+    
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    
+    <div class="navbar" id="vis-buttons" style="position:absolute; bottom: 0px; width: 90vw; margin-right: 5vw; margin-left: 5vw">
+        <!--Buttons to control the visualizer-->
+        <div class="not-in-dropdown">
+            <a class="menu-link" id="intro">Introduction</a>
+        </div>
+        <div class="not-in-dropdown">
+            <a class="menu-link" id="reset-all">Reset All</a>
+        </div>
+        <div class="not-in-dropdown">
+            <a class="menu-link" id="reset-vis">Reset Visualizer</a>
+        </div>
+        <div class="not-in-dropdown">
+            <a class="menu-link" id="start-vis">Visualize</a>
+        </div>
+        <div class="btn-group dropup">
+            <button type="button" class="btn dropdown-toggle shadow-none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Algorithms
+            </button>
+            <ul class="dropdown dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <% algorithms.forEach(function(item){ %>
+                    <li class="menu-link"><a class="dropdown-item" id="<%= item.id %>"><%= item.name %></a><li>
+                <% }); %>
+            </ul>
+        </div>
+        <div class="btn-group dropup">
+            <button type="button" class="btn dropdown-toggle shadow-none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Patterns
+            </button>
+            <ul class="dropdown dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <% patterns.forEach(function(item){ %>
+                    <li class="menu-link"><a class="dropdown-item" id="<%= item.id %>"><%= item.name %></a></li>
+                <% }); %>
+            </ul>
+        </div>
+        <div class="btn-group dropup">
+            <button type="button" class="btn dropdown-toggle shadow-none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="speed">
+                Speed: Fast
+            </button>
+            <ul class="dropdown dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li class="menu-link"><a class="dropdown-item" id="fast">Fast</a></li>
+                <li class="menu-link"><a class="dropdown-item" id="normal">Normal</a></li>
+                <li class="menu-link"><a class="dropdown-item" id="slow">Slow</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- The Modal -->
+    <div id="vismodal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content" style="margin-bottom:120px">
+            <span class="close">&times;</span>
+            <section class="section">
+                <div class="container">
+                    <div class="row block-header">
+                        <div class="col-sm-8 mx-auto text-center">
+                            <h1 class="display-4 mt-1 section-title" style="font-size: 36px;"><%= pathfinder_welcome %></h1>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-md-4 mb-4">
+                            <h5><%= instructionsIntro %></h5>
+                            <ol>
+                                <% instructions.forEach(function(item){ %>
+                                    <li><%= item.text %>
+                                        <ul>
+                                            <% item.list.forEach(function(subitem){ %>
+                                                <li><%= subitem.text %></li>
+                                            <% }); %>
+                                        </ul>
+                                    </li>
+                                <% }); %>
+                            </ol>
+                        </div>
+                        <div class="col-md-8 mb-4">
+                            <h5><%= algorithmsIntro %></h5>
+                            <ul>
+                                <% algorithms.forEach(function(item){ %>
+                                    <li><b><%= item.name %>:</b> <%= item.description %></li>
+                                <% }); %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <%- include('partials/scripts.ejs') %>
+    <script src="js/pathfinder.js"></script>
+</body>
+
+</html>
