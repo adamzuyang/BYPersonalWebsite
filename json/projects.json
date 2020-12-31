@@ -45,7 +45,7 @@
             "slug":"pathfinder",
             "image":"/images/projects/pathfinder.png",
             "description":"<p>After taking a course in data structures and algorithms at UC Berkeley, I sought to apply what I had learned by creating an online pathfinding visualizer. The visualizer features Dijkstra's, A*, Greedy, BFS, DFS, and bidirectional algorithms and makes use of heuristics to generate different search patterns. The visualizer is interactive, allowing the user to add walls, weighted nodes, and utilize a recursive random maze generator. This project was created in conjunction with my personal portfolio and uses Node.js, Bootstrap, and Javascript. Animations were created with CSS. The full Github repository can be found <a href='https://github.com/adamzuyang/BYPersonalWebsite' target='_blank'>here</a>.</p>",
-            "link":"https://barnettyang.herokuapp.com/visualizer",
+            "link":"https://barnettyang.herokuapp.com/pathfinder",
             "client_name":"",
             "client_company":"",
             "client_feedback":"",
