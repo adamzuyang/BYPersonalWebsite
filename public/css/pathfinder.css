@@ -373,9 +373,11 @@ table, td {
     background-color: white;
 }
 
+/*
 .dropdown-toggle:hover, .not-in-dropdown:hover {
     color: rgb(102, 102, 102);
 }
+*/
 
 .not-in-dropdown {
     transform: translate(0, 19%);
@@ -392,9 +394,28 @@ table, td {
     margin-top: 7px;
 }
 
-.dropup {
-    margin-left: 0px;
-    margin-right: 0px;
+.vis-fancy-link {
+    text-decoration: none;
+    position: relative;
+}
+
+.vis-fancy-link::after {
+    content: '';
+    position: absolute;
+    left: -7.5%;
+    bottom: -7px;
+    width: 115%;
+    height: 2px;
+    background: currentColor;
+
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 150ms ease-in;
+}
+
+.vis-fancy-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
 }
 
 /* The Modal (background) */

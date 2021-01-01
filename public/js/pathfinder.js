@@ -1183,52 +1183,52 @@ function main() {
     selectDijkstra.addEventListener('click', e => {
         myVis.algorithm = 'dijkstra';
         startVis.innerHTML = "Visualize Dijkstra's";
-        startVis.className = "menu-link vis-button";
+        startVis.className = "menu-link vis-button vis-fancy-link";
     });
     selectAStarLin.addEventListener('click', e => {
         myVis.algorithm = 'a-star-lin';
         startVis.innerHTML = "Visualize A* (Euclidean)";
-        startVis.className = "menu-link vis-button";
+        startVis.className = "menu-link vis-button vis-fancy-link";
     });
     selectAStarMan.addEventListener('click', e => {
         myVis.algorithm = 'a-star-man';
         startVis.innerHTML = "Visualize A* (Manhattan)";
-        startVis.className = "menu-link vis-button";
+        startVis.className = "menu-link vis-button vis-fancy-link";
     });
     selectAStarSwarm.addEventListener('click', e => {
         myVis.algorithm = 'a-star-swarm';
         startVis.innerHTML = "Visualize A* (Swarm)";
-        startVis.className = "menu-link vis-button";
+        startVis.className = "menu-link vis-button vis-fancy-link";
     });
     selectConvSwarm.addEventListener('click', e => {
         myVis.algorithm = 'conv-swarm';
         startVis.innerHTML = "Visualize Convergent Swarm";
-        startVis.className = "menu-link vis-button";
+        startVis.className = "menu-link vis-button vis-fancy-link";
     });
     selectGreedy.addEventListener('click', e => {
         myVis.algorithm = 'greedy';
         startVis.innerHTML = "Visualize Greedy";
-        startVis.className = "menu-link vis-button";
+        startVis.className = "menu-link vis-button vis-fancy-link";
     });
     selectBiDijkstra.addEventListener('click', e => {
         myVis.algorithm = 'bidijkstra';
         startVis.innerHTML = "Visualize Bidirectional Dijkstra's";
-        startVis.className = "menu-link vis-button";
+        startVis.className = "menu-link vis-button vis-fancy-link";
     });
     selectBiAStar.addEventListener('click', e => {
         myVis.algorithm = 'bi-swarm';
         startVis.innerHTML = "Visualize Bidirectional Swarm";
-        startVis.className = "menu-link vis-button";
+        startVis.className = "menu-link vis-button vis-fancy-link";
     });
     selectDFS.addEventListener('click', e => {
         myVis.algorithm = 'dfs';
         startVis.innerHTML = "Visualize Depth-first Search";
-        startVis.className = "menu-link vis-button";
+        startVis.className = "menu-link vis-button vis-fancy-link";
     });
     selectBFS.addEventListener('click', e => {
         myVis.algorithm = 'bfs';
         startVis.innerHTML = "Visualize Breadth-first Search";
-        startVis.className = "menu-link vis-button";
+        startVis.className = "menu-link vis-button vis-fancy-link";
     });
 
     // Reset functionality
