@@ -764,7 +764,7 @@ class Visualizer {
                 result = this.dijkstra(convSwarmHeuristic);
             } else if (this.algorithm == 'greedy') {
                 function greedyHeuristic(node) {
-                    return 1.001 * (Math.abs(node.xPos - end.xPos) + Math.abs(node.yPos - end.yPos));
+                    return 1.001 * (Math.abs(node.xPos - end.xPos) + Math.abs(node.yPos - end.yPos)) + 2 * node.weight();
                 }
                 result = this.greedy(greedyHeuristic);
             } else if (this.algorithm == 'dfs') {
