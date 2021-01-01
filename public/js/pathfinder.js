@@ -96,7 +96,7 @@ class Visualizer {
         this.idToNode = {};
         this.nodes = [];
         this.width = Math.max(Math.floor((windowWidth - 25) / cellWidth), 12);
-        this.height = Math.max(Math.floor((windowHeight - 300) / cellHeight), 12);
+        this.height = Math.max(Math.floor((windowHeight - 250) / cellHeight), 12);
         this.reset = true;
         this.key = '';
         this.weightValue = 4;

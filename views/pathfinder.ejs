@@ -11,6 +11,53 @@
 
 <body>
     <%- include('partials/navbar.ejs') %>
+    
+    <div class="navbar" id="vis-buttons" style="width: 90vw; margin-right: 5vw; margin-left: 5vw">
+        <!--Buttons to control the visualizer-->
+        <div class="not-in-dropdown">
+            <a class="menu-link" id="intro">Introduction</a>
+        </div>
+        <div class="not-in-dropdown">
+            <a class="menu-link" id="reset-all">Reset All</a>
+        </div>
+        <div class="not-in-dropdown">
+            <a class="menu-link" id="reset-vis">Reset Visualizer</a>
+        </div>
+        <div class="not-in-dropdown">
+            <a class="menu-link" id="start-vis">Visualize</a>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn dropdown-toggle shadow-none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Algorithms
+            </button>
+            <ul class="dropdown dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <% algorithms.forEach(function(item){ %>
+                    <li class="menu-link"><a class="dropdown-item" id="<%= item.id %>"><%= item.name %></a><li>
+                <% }); %>
+            </ul>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn dropdown-toggle shadow-none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Patterns
+            </button>
+            <ul class="dropdown dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <% patterns.forEach(function(item){ %>
+                    <li class="menu-link"><a class="dropdown-item" id="<%= item.id %>"><%= item.name %></a></li>
+                <% }); %>
+            </ul>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn dropdown-toggle shadow-none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="speed">
+                <!-- Default speed is Normal -->
+                Speed: Normal
+            </button>
+            <ul class="dropdown dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li class="menu-link"><a class="dropdown-item" id="fast">Fast</a></li>
+                <li class="menu-link"><a class="dropdown-item" id="normal">Normal</a></li>
+                <li class="menu-link"><a class="dropdown-item" id="slow">Slow</a></li>
+            </ul>
+        </div>
+    </div>
 
     <div class="container-fluid" style="">
         <div class="row" style="width: 100vw">
@@ -20,8 +67,7 @@
                 </table>
             </div>
         </div>
-        <br>
-        <div class="row" style="">
+        <div class="row mt-4" style="">
             <!--Example nodes-->
             <div class="col-4 d-flex justify-content-center">
                 <div class="node start" style="border: transparent; position: relative; transform: translate(-5px, 0)"></div>
@@ -51,64 +97,11 @@
             </div>
         </div>
     </div>
-    
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    
-    <div class="navbar" id="vis-buttons" style="position:absolute; bottom: 5px; width: 90vw; margin-right: 5vw; margin-left: 5vw">
-        <!--Buttons to control the visualizer-->
-        <div class="not-in-dropdown">
-            <a class="menu-link" id="intro">Introduction</a>
-        </div>
-        <div class="not-in-dropdown">
-            <a class="menu-link" id="reset-all">Reset All</a>
-        </div>
-        <div class="not-in-dropdown">
-            <a class="menu-link" id="reset-vis">Reset Visualizer</a>
-        </div>
-        <div class="not-in-dropdown">
-            <a class="menu-link" id="start-vis">Visualize</a>
-        </div>
-        <div class="btn-group dropup">
-            <button type="button" class="btn dropdown-toggle shadow-none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Algorithms
-            </button>
-            <ul class="dropdown dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <% algorithms.forEach(function(item){ %>
-                    <li class="menu-link"><a class="dropdown-item" id="<%= item.id %>"><%= item.name %></a><li>
-                <% }); %>
-            </ul>
-        </div>
-        <div class="btn-group dropup">
-            <button type="button" class="btn dropdown-toggle shadow-none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Patterns
-            </button>
-            <ul class="dropdown dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <% patterns.forEach(function(item){ %>
-                    <li class="menu-link"><a class="dropdown-item" id="<%= item.id %>"><%= item.name %></a></li>
-                <% }); %>
-            </ul>
-        </div>
-        <div class="btn-group dropup">
-            <button type="button" class="btn dropdown-toggle shadow-none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="speed">
-                <!-- Default speed is Normal -->
-                Speed: Normal
-            </button>
-            <ul class="dropdown dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li class="menu-link"><a class="dropdown-item" id="fast">Fast</a></li>
-                <li class="menu-link"><a class="dropdown-item" id="normal">Normal</a></li>
-                <li class="menu-link"><a class="dropdown-item" id="slow">Slow</a></li>
-            </ul>
-        </div>
-    </div>
 
     <!-- The Modal -->
     <div id="vismodal" class="modal">
         <!-- Modal content -->
-        <div class="modal-content" style="margin-bottom:120px">
+        <div class="modal-content" style="">
             <span class="close">&times;</span>
             <section class="section">
                 <div class="container">

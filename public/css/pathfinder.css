@@ -414,11 +414,12 @@ table, td {
 /* Modal Content */
 .modal-content {
     background-color: #fefefe;
-    transform: translate(0, 90px);
+    transform: translate(0, 30px);
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
+    margin-bottom:30px
 }
 
 /* The Close Button */
