@@ -107,15 +107,15 @@ class Visualizer {
         this.algorithm = '';
 
         // Animation Speeds
-        this.visFast = 10;
-        this.pathFast = 20;
-        this.visNormal = 25;
-        this.pathNormal = 35;
-        this.visSlow = 50;
-        this.pathSlow = 60;
+        this.visFast = 25;
+        this.pathFast = 25;
+        this.visNormal = 45;
+        this.pathNormal = 45;
+        this.visSlow = 65;
+        this.pathSlow = 65;
         // Default speed
-        this.visSpeed = this.visFast;
-        this.pathSpeed = this.pathFast;
+        this.visSpeed = this.visNormal;
+        this.pathSpeed = this.pathNormal;
 
         /*
         Used for animations when adding/removing/moving nodes:
