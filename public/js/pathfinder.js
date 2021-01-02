@@ -85,7 +85,7 @@ class Visualizer {
             startNode: The starting node to start the algorithm
             endNode: The node that ends the algorithm
             reset: If the graph has been reset
-            key: For key presses
+            key: For key presses. Should only ever be "w" or "" for now
             weightValue: Weight of weighted nodes
             patternWallIds: List of wall node ids for patterns
             patternWeightIds: List of weight node ids for patterns
