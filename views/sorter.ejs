@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Pathfinding Visualizer</title>
+    <title>Sorting Visualizer</title>
     <meta name="description" content="Barnett Yang's Personal Portfolio" />
 
     <%- include('partials/head.ejs') %>
     <link href="css/main.css" rel="stylesheet">
-    <link href="css/pathfinder.css" rel="stylesheet">
+    <link href="css/sorter.css" rel="stylesheet">
 </head>
 
 <body>
@@ -18,10 +18,7 @@
             <a class="menu-link vis-fancy-link" id="intro">Intro</a>
         </div>
         <div class="not-in-dropdown">
-            <a class="menu-link vis-fancy-link" id="reset-all">Reset All</a>
-        </div>
-        <div class="not-in-dropdown">
-            <a class="menu-link vis-fancy-link" id="reset-vis">Reset Visualizer</a>
+            <a class="menu-link vis-fancy-link" id="gen-new">Generate New Array</a>
         </div>
         <div class="not-in-dropdown">
             <a class="menu-link vis-fancy-link" id="start-vis">Visualize</a>
@@ -38,16 +35,6 @@
         </div>
         <div class="btn-group">
             <button type="button" class="btn dropdown-toggle shadow-none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <a class="menu-link vis-fancy-link">Patterns</a>
-            </button>
-            <ul class="dropdown dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <% patterns.forEach(function(item){ %>
-                    <li class="menu-link"><a class="dropdown-item" id="<%= item.id %>"><%= item.name %></a></li>
-                <% }); %>
-            </ul>
-        </div>
-        <div class="btn-group">
-            <button type="button" class="btn dropdown-toggle shadow-none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <!-- Default speed is Normal -->
                 <a class="menu-link vis-fancy-link" id="speed">Speed: Normal</a>
             </button>
@@ -59,42 +46,9 @@
         </div>
     </div>
 
-    <div class="container-fluid" style="">
-        <div class="row" style="width: 100vw">
-            <!--HTML table used for visualizer-->
-            <div class="col d-flex justify-content-center">
-                <table style="" id="grid">
-                </table>
-            </div>
-        </div>
-        <div class="row mt-4" style="">
-            <!--Example nodes-->
-            <div class="col-4 d-flex justify-content-center">
-                <div class="node start" style="border: transparent; position: relative; transform: translate(-5px, 0)"></div>
-                <p style="position: relative; transform: translate(5px, 0)">Start</p>
-            </div>
-            <div class="col-4 d-flex justify-content-center">
-                <div class="node wall" style="border: transparent; position: relative; transform: translate(-5px, 0)"></div>
-                <p style="position: relative; transform: translate(5px, 0)">Wall</p>
-            </div>
-            <div class="col-4 d-flex justify-content-center">
-                <div class="node visited" style="border: transparent; position: relative; transform: translate(-5px, 0)"></div>
-                <p style="position: relative; transform: translate(5px, 0)">Visited</p>
-            </div>
-        </div>
-        <div class="row" style="">
-            <div class="col-4 d-flex justify-content-center">
-                <div class="node end" style="border: transparent; position: relative; transform: translate(-5px, 0)"></div>
-                <p style="position: relative; transform: translate(5px, 0)">End</p>
-            </div>
-            <div class="col-4 d-flex justify-content-center">
-                <div class="node weighted" style="border: transparent; position: relative; transform: translate(-5px, 0)"></div>
-                <p style="position: relative; transform: translate(5px, 0)">Weight</p>
-            </div>
-            <div class="col-4 d-flex justify-content-center">
-                <div class="node path" style="border: transparent; position: relative; transform: translate(-5px, 0)"></div>
-                <p style="position: relative; transform: translate(5px, 0)">Path</p>
-            </div>
+    <div class="container-fluid" id="">
+        <div class="row" id="">
+            <div class="col d-flex justify-content-center" id="visualizer"></div>
         </div>
     </div>
 
@@ -129,7 +83,7 @@
                             <h5><%= algorithmsIntro %></h5>
                             <ul>
                                 <% algorithms.forEach(function(item){ %>
-                                    <li><b><%= item.name %>:</b> <%= item.description %></li>
+                                    <li><b><%= item.name %>:</b> <%- item.description %></li>
                                 <% }); %>
                             </ul>
                         </div>
@@ -140,7 +94,7 @@
     </div>
 
     <%- include('partials/scripts.ejs') %>
-    <script src="js/pathfinder.js"></script>
+    <script src="js/sorter.js"></script>
 </body>
 
 </html>

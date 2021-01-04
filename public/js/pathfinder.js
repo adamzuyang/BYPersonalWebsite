@@ -22,7 +22,7 @@ class Node {
         this.id = '(' + xPos.toString() + ',' + yPos.toString() + ')';
 
         /*
-        The status of the node. Only four values so far:
+        The status of the node. Only five values so far:
         'node': Indicates a regular node
         'start': Indicates that any pathfinding algorithms should start from this node
         'end': Indicates that any pathfinding algorithms should end at this node
@@ -122,7 +122,7 @@ class Visualizer {
             mouseIsPressed: If mouse is down
             mouseStatus: Describes how the mouse should change the nodes it enters when it is pressed down
             lastMousedOverNode: Helper memory slot. Keeps track of the node last moused over
-            lastMousedOverDiv: Corresponding HTML div to lastMousedOverNode
+            lastMousedOverDiv: Corresponding HTML table cell to lastMousedOverNode
             locked: When true, locks the visualizer so the user cannot do anything other than resetting the visualizer
         */
         this.mouseIsPressed = false;
@@ -132,7 +132,7 @@ class Visualizer {
         this.locked = false;
 
         // Create nodes, add to this.idToNode, add to this.nodes
-        // Add node divs to HTML with IDs corresponding to each node.id
+        // Add node cells to HTML table with IDs corresponding to each node.id
         // Assign each node's visualizer to THIS
         var i;
         var j;

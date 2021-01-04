@@ -1,26 +1,6 @@
 {
     "projects": [
         {
-            "name":"Personal Website",
-            "slug":"portfolio",
-            "image":"/images/projects/portfolio.jpg",
-            "description":"<p>Online portfolio that hosts my resume, Medium blog, and pathfinding visualizer. This website was created using Node.js, Bootstrap, Javascript, and the template engine Mustache. The full Github repository can be found <a href='https://github.com/adamzuyang/BYPersonalWebsite' target='_blank'>here</a>.</p>",
-            "link":"https://barnettyang.herokuapp.com/",
-            "client_name":"",
-            "client_company":"",
-            "client_feedback":"",
-            "schema":"project",
-            "dateString":"Sunday, December 27, 2020",
-            "timestamp":{},
-            "_id":"AiPrShjzcINWAcgN",
-            "category":"Web Design",
-            "opts":null,
-            "preview":"",
-            "client":"",
-            "dateRange":"2021"
-        },
-        
-        {
             "name":"UrsaTech Study",
             "slug":"ursatech-study",
             "image":"/images/projects/ursatech_study.png",
@@ -58,6 +38,26 @@
             "preview":"",
             "client":"",
             "dateRange":"2020"
+        },
+
+        {
+            "name":"Sorting Visualizer",
+            "slug":"sorter",
+            "image":"/images/projects/sorter.png",
+            "description":"<p>In addition to the pathfinding visualizer, I also created a sorting visualizer after taking CS 61B at UC Berkeley. The visualizer currently features five comparison-based algorithms: Selection Sort, Heap Sort, Merge Sort, Insertion Sort, and Quick Sort. This project was created in conjunction with my personal portfolio and uses Node.js, Bootstrap, and Javascript. The full Github repository can be found <a href='https://github.com/adamzuyang/BYPersonalWebsite' target='_blank'>here</a>.</p>",
+            "link":"https://barnettyang.herokuapp.com/sorter",
+            "client_name":"",
+            "client_company":"",
+            "client_feedback":"",
+            "schema":"project",
+            "dateString":"Sunday, December 27, 2020",
+            "timestamp":{},
+            "_id":"CmUuvYwgjNGLWOfB",
+            "category":"Software Engineering and Algorithms",
+            "opts":null,
+            "preview":"",
+            "client":"",
+            "dateRange":"2021"
         },
         
         {

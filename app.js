@@ -54,6 +54,15 @@ app.get('/resume', (req, res) => {
     res.render('resume', data);
 })
 
+app.get('/sorter', (req, res) => {
+    let maindata = JSON.parse(fs.readFileSync('json/main.json'));
+    let globaldata = JSON.parse(fs.readFileSync('json/global.json'));
+    let sorterdata = JSON.parse(fs.readFileSync('json/sorter.json'));
+
+    let data = mergeJSON.merge(mergeJSON.merge(maindata, sorterdata), globaldata);
+    res.render('sorter', data);
+})
+
 app.listen(PORT, () => {
     console.log(`App listening on port 3000`)
 });
