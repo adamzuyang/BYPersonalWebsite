@@ -7,7 +7,7 @@ The pathfinding visualizer features Dijkstra's, A*, Greedy, BFS, DFS, and bidire
 - The CSS file for the pathfinding visualizer is located at `public/css/pathfinder.css`
 - The HTML file for the pathfinding visualizer is located at `views/pathfinder.ejs`
 
-The sorting visualizer currently features five comparison-based algorithms: Selection Sort, Heap Sort, Merge Sort, Insertion Sort, and Quick Sort.
+The sorting visualizer currently features five comparison-based algorithms (Selection Sort, Heap Sort, Merge Sort, Insertion Sort, and Quick Sort) and two radix sorts (LSD Radix Sort and MSD Radix Sort).
 - The Javascript file for the sorting visualizer is located at `public/js/sorter.js`
 - The CSS file for the sorting visualizer is located at `public/css/sorter.css`
 - The HTML file for the pathfinding visualizer is located at `views/pathfinder.ejs`
