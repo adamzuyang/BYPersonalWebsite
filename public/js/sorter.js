@@ -1,8 +1,15 @@
 const VIS = document.getElementById("visualizer");
 
+const DEFAULT_COLOR = "turquoise";
+const VISITED_COLOR = "red";
+
 function getRandInteger(min, max) {
     // Returns an integer between min and max, inclusive
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function getBaseLog(x, y) {
+    return Math.log(y) / Math.log(x);
 }
 
 class Bar {
@@ -12,8 +19,8 @@ class Bar {
         // id must be a string. height is an integer
         this.height = height;
         this.id = id;
-        // Red means it is being compared, turquoise is default
-        this.color = "turquoise";
+        // VISITED_COLOR means it is being compared, DEFAULT_COLOR is default
+        this.color = DEFAULT_COLOR;
 
         // Create corresponding div
         VIS.innerHTML += `<div class="bar" id='${id}'>`;
@@ -44,7 +51,7 @@ class Bar {
     }
 
     animateCompare() {
-        this.changeColor("red");
+        this.changeColor(VISITED_COLOR);
         // setTimeout(() => {
         //     this.changeColor("turquoise");
         // }, this.visualizer.speed);
@@ -137,6 +144,14 @@ class Visualizer {
             "contents": [i, height]
         });
         this.array[i] = height;
+    }
+    getDigit(i, digit) {
+        // Gets the digit'th digit (counting from the left, digit=1 corresponds to ones digit) of the i'th element in the array
+        this.animations.push({
+            "type": "visit",
+            "contents": [i, digit]
+        });
+        return Math.floor(this.array[i] / Math.pow(10, digit - 1)) % 10
     }
 
     // Selection sort
@@ -306,6 +321,73 @@ class Visualizer {
         this.quickSortHelper(pivot + 1, end);
     }
 
+    countSort(start, end, digit) {
+        if (digit <= 0 || end - start <= 0) {
+            return;
+        }
+        // Used for radix sorts
+        // Counting sort algorithm that sorts elements from start to end inclusive based on digit given
+        let auxArray = [];
+        let counts = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+        // Populate counts array
+        for (let i = start; i <= end; i += 1) {
+            counts[this.getDigit(i, digit)] += 1;
+            auxArray.push(null);
+        }
+
+        // Create starting points array
+        let startingPoints = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        for (let k = 0; k <= 9; k += 1) {
+            let sum = 0;
+            for (let kk=0; kk < k; kk += 1) {
+                sum += counts[kk];
+            }
+            startingPoints[k] = sum;
+        }
+
+        for (let j = start; j <= end; j += 1) {
+            let nextElem = this.array[j];
+            let elemDigit = this.getDigit(j, digit);
+            auxArray[startingPoints[elemDigit]] = nextElem;
+            startingPoints[elemDigit] += 1;
+        }
+
+        for (let l = start; l <= end; l += 1) {
+            this.changeHeight(l, auxArray[l - start]);
+        }
+
+        // For MSD Radix Sort
+        return startingPoints;
+    }
+    // LSD Radix Sort
+    lsdRadix() {
+        let maxDigit = 1 + getBaseLog(10, this.maxHeight);
+        for (let i = 1; i <= maxDigit; i += 1) {
+            this.countSort(0, this.numBars - 1, i);
+        }
+    }
+
+    // MSD Radix Sort
+    msdRadix() {
+        let maxDigit = 1 + getBaseLog(10, this.maxHeight);
+        this.msdRadixHelper(0, this.numBars - 1, maxDigit);
+    }
+    msdRadixHelper(start, end, digit) {
+        if (digit <= 0) {
+            return;
+        }
+        if (end - start <= 0) {
+            return;
+        }
+
+        let startingPoints = this.countSort(start, end, digit);
+        this.msdRadixHelper(start, start + startingPoints[0] - 1, digit - 1);
+        for (let i = 1; i <= 9; i += 1) {
+            this.msdRadixHelper(start + startingPoints[i-1], start + startingPoints[i] - 1, digit - 1);
+        }
+    }
+
     sort() {
         // Sort the array based on sort selected
         if (this.algorithm == '') {
@@ -321,6 +403,10 @@ class Visualizer {
                 this.insertionSort();
             } else if (this.algorithm == 'quick') {
                 this.quickSort();
+            } else if (this.algorithm == 'lsd') {
+                this.lsdRadix();
+            } else if (this.algorithm == 'msd') {
+                this.msdRadix();
             }
             this.animate();
         }
@@ -334,7 +420,7 @@ class Visualizer {
         });
         for (let j = 0; j < this.bars.length; j += 1) {
             let bar = this.bars[j];
-            bar.changeColor("turquoise");
+            bar.changeColor(DEFAULT_COLOR);
         }
         let animate1Finish = false;
         this.animating = true;
@@ -347,23 +433,23 @@ class Visualizer {
                     let index1 = nextAnimation["contents"][0];
                     let index2 = nextAnimation["contents"][1];
                     if (lastIndex1 >= 0 && lastIndex1 != index1) {
-                        this.bars[lastIndex1].changeColor("turquoise");
+                        this.bars[lastIndex1].changeColor(DEFAULT_COLOR);
                     }
                     if (lastIndex2 >= 0 && lastIndex2 != index2) {
-                        this.bars[lastIndex2].changeColor("turquoise");
+                        this.bars[lastIndex2].changeColor(DEFAULT_COLOR);
                     }
-                    this.bars[index1].changeColor('red');
-                    this.bars[index2].changeColor('red');
+                    this.bars[index1].changeColor(VISITED_COLOR);
+                    this.bars[index2].changeColor(VISITED_COLOR);
                     lastIndex1 = index1;
                     lastIndex2 = index2;
                 } else if (nextAnimation.type == "swap") {
                     let index1 = nextAnimation["contents"][0];
                     let index2 = nextAnimation["contents"][1];
                     if (lastIndex1 >= 0 && lastIndex1 != index1) {
-                        this.bars[lastIndex1].changeColor("turquoise");
+                        this.bars[lastIndex1].changeColor(DEFAULT_COLOR);
                     }
                     if (lastIndex2 >= 0 && lastIndex2 != index2) {
-                        this.bars[lastIndex2].changeColor("turquoise");
+                        this.bars[lastIndex2].changeColor(DEFAULT_COLOR);
                     }
                     let tempHeight = this.bars[index1].height;
                     this.bars[index1].changeHeight(this.bars[index2].height);
@@ -374,12 +460,24 @@ class Visualizer {
                     let index1 = nextAnimation["contents"][0];
                     let height = nextAnimation["contents"][1];
                     if (lastIndex1 >= 0 && lastIndex1 != index1) {
-                        this.bars[lastIndex1].changeColor("turquoise");
+                        this.bars[lastIndex1].changeColor(DEFAULT_COLOR);
                     }
                     if (lastIndex2 >= 0) {
-                        this.bars[lastIndex2].changeColor("turquoise");
+                        this.bars[lastIndex2].changeColor(DEFAULT_COLOR);
                     }
                     this.bars[index1].changeHeight(height);
+                    lastIndex1 = index1;
+                    lastIndex2 = -1;
+                } else if (nextAnimation.type == "visit") {
+                    let index1 = nextAnimation["contents"][0];
+                    let digit = nextAnimation["contents"][1];
+                    if (lastIndex1 >= 0 && lastIndex1 != index1) {
+                        this.bars[lastIndex1].changeColor(DEFAULT_COLOR);
+                    }
+                    if (lastIndex2 >= 0) {
+                        this.bars[lastIndex2].changeColor(DEFAULT_COLOR);
+                    }
+                    this.bars[index1].changeColor(VISITED_COLOR);
                     lastIndex1 = index1;
                     lastIndex2 = -1;
                 }
@@ -456,23 +554,33 @@ function main() {
     });
     let heapBtn = document.getElementById('heap');
     heapBtn.addEventListener('click', () => {
-        startVis.innerHTML = "Visualize Heap Sort"
+        startVis.innerHTML = "Visualize Heap Sort";
         myVis.algorithm = "heap";
     });
     let mergeBtn = document.getElementById('merge');
     mergeBtn.addEventListener('click', () => {
-        startVis.innerHTML = "Visualize Merge Sort"
+        startVis.innerHTML = "Visualize Merge Sort";
         myVis.algorithm = "merge";
     });
     let insertionBtn = document.getElementById('insertion');
     insertionBtn.addEventListener('click', () => {
-        startVis.innerHTML = "Visualize Insertion Sort"
+        startVis.innerHTML = "Visualize Insertion Sort";
         myVis.algorithm = "insertion";
     });
     let quickBtn = document.getElementById('quick');
     quickBtn.addEventListener('click', () => {
-        startVis.innerHTML = "Visualize Quick Sort"
+        startVis.innerHTML = "Visualize Quick Sort";
         myVis.algorithm = "quick";
+    });
+    let lsdBtn = document.getElementById('lsd');
+    lsdBtn.addEventListener('click', () => {
+        startVis.innerHTML = "Visualize LSD Radix Sort";
+        myVis.algorithm = "lsd";
+    });
+    let msdBtn = document.getElementById('msd');
+    msdBtn.addEventListener('click', () => {
+        startVis.innerHTML = "Visualize MSD Radix Sort";
+        myVis.algorithm = "msd";
     });
 
     // Buttons for speed
