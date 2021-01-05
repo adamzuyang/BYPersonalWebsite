@@ -22,12 +22,12 @@
         {
             "name": "Insertion Sort",
             "id": "insertion",
-            "description": "A comparison-based algorithm that, for all elements of the array, swaps each element towards the front of the array until all elements before the given element are smaller than that given element. Runs in &Omega;(N) and O(N<sup>2</sup>) time, where N is the size of the array. Insertion sort is unique in that its runtime is proportional to the number \"inversions\" in the array. Given K inversions, the runtime of insertion sort is &Theta;(N+K). This sort is stable."
+            "description": "A comparison-based algorithm that, for all elements of the array, swaps each element towards the front of the array until all elements before the given element are smaller than that given element. Runs in &Omega;(N) and O(N<sup>2</sup>) time, where N is the size of the array. Insertion sort is unique in that its runtime is proportional to the number of \"inversions\" in the array. Given K inversions, the runtime of insertion sort is &Theta;(N+K). This sort is stable."
         },
         {
             "name": "Quick Sort",
             "id": "quick",
-            "description": "A comparison-based algorithm that first partitions the given array into two sub-arrays based on a \"pivot\" and then recursively sorts the two sub-arrays. The partitioning algorithm used for this implementation of Quick Sort is Tony Hoare's partitioning scheme. Despite having a runtime of &Omega;(N*log(N)) and O(N<sup>2</sup>), where N is the size of the array, it is empirically the fastest comparison-based sort. Due to the way this implementation of Quick Sort partitions an array, this sort is not stable. However, there are stable variations of Quick Sort."
+            "description": "A comparison-based algorithm that first partitions the given array into two sub-arrays based on a \"pivot\" and then recursively sorts the two sub-arrays. The partitioning algorithm used for this implementation of Quick Sort is Tony Hoare's partitioning scheme. Despite having a runtime of &Omega;(N*log(N)) and O(N<sup>2</sup>), where N is the size of the array, it is empirically the fastest comparison-based sort on average. Due to the way this implementation of Quick Sort partitions an array, this sort is not stable. However, there are stable variations of Quick Sort."
         }
     ],
 
@@ -46,6 +46,10 @@
         },
         {
             "text": "To reset the array or generate a new one, simply click \"Generate New Array.\"",
+            "list": []
+        },
+        {
+            "text": "If the visualizer is too fast or slow, you can also change the animation speed.",
             "list": []
         },
         {
