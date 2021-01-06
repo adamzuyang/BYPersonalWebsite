@@ -10,6 +10,11 @@
             "description": "A comparison-based algorithm that finds the smallest element of the unsorted portion of the array and places it at the end of the sorted portion. A fairly slow algorithm that runs in &Theta;(N<sup>2</sup>) time, where N represents the size of the array. This sort is not stable."
         },
         {
+            "name": "Bubble Sort",
+            "id": "bubble",
+            "description": "A comparison-based algorithm that continuously cycles through the array and swaps unsorted and adjacent pairs until the array is sorted. A fairly slow algorithm that runs in &Theta;(N<sup>2</sup>) time in the worst and average case and &Theta;(N) time in the best case, where N represents the size of the array. This sort is stable."
+        },
+        {
             "name": "Heap Sort",
             "id": "heap",
             "description": "A comparison-based algorithm that uses a max-heap to sort a given array. Runs in O(N*log(N)) time, where N represents the size of the array, but can achieve a runtime of &Theta;(N) if given an array of duplicates. This sort is not stable."

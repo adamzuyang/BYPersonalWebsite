@@ -147,6 +147,7 @@ class Visualizer {
     }
     getDigit(i, digit) {
         // Gets the digit'th digit (counting from the left, digit=1 corresponds to ones digit) of the i'th element in the array
+        // Useful for radix sorts
         this.animations.push({
             "type": "visit",
             "contents": [i, digit]
@@ -174,6 +175,20 @@ class Visualizer {
             }
         }
         this.swap(i, smallestIndex);
+    }
+
+    // Bubble sort
+    bubbleSort() {
+        let sorted = false;
+        while (!sorted) {
+            sorted = true;
+            for (let i = 0; i < this.numBars - 1; i += 1) {
+                if (this.compare(i, i + 1) > 0) {
+                    sorted = false;
+                    this.swap(i, i + 1);
+                }
+            }
+        }
     }
 
     // Heap sort
@@ -396,6 +411,8 @@ class Visualizer {
         } else {
             if (this.algorithm == 'selection') {
                 this.selectionSort();
+            } else if (this.algorithm == 'bubble') {
+                this.bubbleSort();
             } else if (this.algorithm == 'heap') {
                 this.heapSort();
             } else if (this.algorithm == 'merge') {
@@ -552,6 +569,11 @@ function main() {
     selectionBtn.addEventListener('click', () => {
         startVis.innerHTML = "Visualize Selection Sort";
         myVis.algorithm = "selection";
+    });
+    let bubbleBtn = document.getElementById('bubble');
+    bubbleBtn.addEventListener('click', () => {
+        startVis.innerHTML = "Visualize Bubble Sort";
+        myVis.algorithm = "bubble";
     });
     let heapBtn = document.getElementById('heap');
     heapBtn.addEventListener('click', () => {
