@@ -370,7 +370,8 @@ class Visualizer {
 
     // MSD Radix Sort
     msdRadix() {
-        let maxDigit = 1 + getBaseLog(10, this.maxHeight);
+        let maxNumber = Math.max(...this.array);
+        let maxDigit = 1 + getBaseLog(10, maxNumber);
         this.msdRadixHelper(0, this.numBars - 1, maxDigit);
     }
     msdRadixHelper(start, end, digit) {
