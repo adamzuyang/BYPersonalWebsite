@@ -1,4 +1,4 @@
-# Prefix Operations and Trees
+# Prefix Operations and Tries
 #### 10/16/2020
 
 ## Tries
