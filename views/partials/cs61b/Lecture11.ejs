@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture11.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-11-exceptions-iterators-object-methods">Lecture 11: Exceptions, Iterators, Object Methods</h1>
+<h4 id="9212020">9/21/2020</h4>
+<h2 id="lists-and-sets-in-java">Lists and Sets in Java</h2>
+<h3 id="lists">Lists</h3>
+<ul>
+<li>In lecture, we've built two types of lists: ALists and SLLists
+<ul>
+<li>Similar to Python lists</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>List61B&lt;Integer&gt; L = new AList&lt;&gt;();
+L.addLast(5);
+L.addLast(10);
+L.addLast(15);
+L.print();
+</div></code></pre>
+<ul>
+<li>We built a list from scratch, but Java provides a built-in <code>List</code> interface and several implementations, eg <code>ArrayList</code></li>
+</ul>
+<pre class="hljs"><code><div>java.util.List&lt;Integer&gt; L = new java.util.ArrayList&lt;&gt;();
+L.add(5);
+L.add(10);
+L.add(15);
+System.out.println(L);
+</div></code></pre>
+<h3 id="lists-in-real-java-code">Lists in Real Java Code</h3>
+<ul>
+<li>By including &quot;import java.util.List&quot; and &quot;import java.util.ArrayList&quot;, we can make our code more compact</li>
+</ul>
+<pre class="hljs"><code><div>import java.util.List;
+import java.util.ArrayList;
+
+List&lt;Integer&gt; L = new ArrayList&lt;&gt;();
+</div></code></pre>
+<h3 id="sets-in-java-and-python">Sets in Java and Python</h3>
+<ul>
+<li>Another data structure is the set
+<ul>
+<li>Stores a set of values with no duplicates. Has no sense of order.</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>Set&lt;String&gt; S = new HashSet&lt;&gt;();
+S.add(&quot;Tokyo&quot;);
+S.add(&quot;Beijing&quot;);
+S.add(&quot;Lagos&quot;);
+S.add(&quot;Sao Paulo&quot;);
+Sysetme.out.println(S.contains(&quot;Tokyo&quot;));
+</div></code></pre>
+<h3 id="arrayset">ArraySet</h3>
+<ul>
+<li>Today we're going to write our own set called <code>ArraySet</code></li>
+</ul>
+<h3 id="goals">Goals</h3>
+<ul>
+<li>Goal 1: Create a class ArraySet with the following methods:
+<ul>
+<li>add(value): Add the value to the set if it is not already present</li>
+<li>contains(value): Checks to see if ArraySet contains the key</li>
+<li>size(): Returns the size of the array</li>
+</ul>
+</li>
+</ul>
+<h3 id="arrayset-basic-implementation">ArraySet (Basic Implementation)</h3>
+<pre class="hljs"><code><div>public class ArraySet&lt;T&gt; {
+    private T[] items;
+    private int size;
+
+    public ArraySet() {
+        items = (T[]) new Object[100];
+        size = 0;
+    }
+
+    public boolean contains(T x) {
+        for (int i = 0; i &lt; size; i += 1) {
+            if (e.equals(items[i])) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void add(T x) {
+        if (contains(x)) {
+            return;
+        }
+        items[size] = x;
+        size += 1;
+    }
+
+    public int size() {
+        return size;
+    }
+}
+</div></code></pre>
+<h2 id="exceptions">Exceptions</h2>
+<h3 id="exceptions">Exceptions</h3>
+<ul>
+<li>Basic idea:
+<ul>
+<li>When something goes really wrong, break the normal flow of control</li>
+<li>So far, we've only seen implicit exceptions</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>public class ArraySet&lt;T&gt; {
+
+    ...
+
+    public void add(T x) {
+        if (x == null) {
+            throw new IllegalArgumentException(&quot;You can't add null to an ArraySet&quot;);
+        }
+        if (contains(x)) {
+            return;
+        }
+        items[size] = x;
+        size += 1;
+    }
+
+    ...
+
+}
+</div></code></pre>
+<h3 id="explicit-exceptions">Explicit Exceptions</h3>
+<ul>
+<li>We can also throw our own exceptions using the <strong>throw</strong> keyword
+<ul>
+<li>Can provide more informative message to a user</li>
+<li>Can provide more information to code that &quot;catches&quot; the exception</li>
+</ul>
+</li>
+<li>Arguably this is a bad exception
+<ul>
+<li>Our code now crashes when someone tries to add a null</li>
+<li>Other fixes:
+<ul>
+<li>Ignore nulls</li>
+<li>Fix <code>contains</code> so it doesn't crash when it tries to add null</li>
+</ul>
+<pre class="hljs"><code><div>public boolean contains(T x) {
+    if (items[i] == null) {
+        if (x == null) {
+            return true;
+        }
+    }
+    if (e.equals(items[i])) {
+        return true;
+    }
+}
+</div></code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="iteration">Iteration</h2>
+<h3 id="the-enhanced-for-loop">The Enhanced For Loop</h3>
+<ul>
+<li>Java allows us to iterate through Lists and Sets using a convenient shorthand syntax sometimes called the &quot;foreach&quot; or &quot;enhanced for&quot; loop
+<ul>
+<li>Doesn't work with our ArraySet</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>for (int i : javaset) {
+    System.out.println(i);
+}
+</div></code></pre>
+<h3 id="how-iteration-really-works">How Iteration Really Works</h3>
+<ul>
+<li>An alternate, uglier way to iterate through a List is to use the iterator() method</li>
+</ul>
+<pre class="hljs"><code><div>ArraySet&lt;Integer&gt; = new ArraySet&lt;&gt;();
+
+Iterator&lt;Integer&gt; seer = aset.iterator();
+
+while (seer.hasNext()) {
+    int i = seer.next();
+    System.out.println(i);
+}
+</div></code></pre>
+<ul>
+<li>To make this work, the Set interface needs to have an iterator() method and the iterator interface needs to have next/hasNext() methods</li>
+</ul>
+<h3 id="support-ugly-iteration-in-arraysets">Support Ugly Iteration in ArraySets</h3>
+<ul>
+<li>To support ugly iteration:
+<ul>
+<li>Add an <code>iterator()</code> method to <code>ArraySet</code> that returns an <code>Iterator&lt;T&gt;</code></li>
+<li>The <code>Iterator&lt;T&gt;</code> that we return should have a useful <code>hasNext()</code> and <code>next()</code> method</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>public class ArraySet&lt;T&gt; implements Iterable&lt;T&gt; {
+    
+    ...
+
+    public Iterator&lt;T&gt; iterator() {
+        return new ArraySetIterator();
+    }
+
+    private class ArraySetIterator implements Iterator&lt;T&gt; {
+        private int wizPos;
+        public ArraySetIterator() {
+            wizPos = 0;
+        }
+
+        public boolean hasNext() {
+            return wizPos &lt; size;
+        }
+
+        public T next() {
+            T returnItem = items[wizPos];
+            wizPos += 1;
+            return returnItem;
+        }
+    }
+}
+</div></code></pre>
+<h3 id="the-enhanced-for-loop">The Enhanced For Loop</h3>
+<ul>
+<li>The problem: Java isn't smart enough to realize that our ArraySet has an iterator() method
+<ul>
+<li>Luckily there's an interface for that</li>
+</ul>
+</li>
+<li>To support the enhanced for loop, we need to make <code>ArraySet</code> implement the <code>Iterable</code> interface</li>
+</ul>
+<pre class="hljs"><code><div>public interface Iterable&lt;T&gt; {
+    Iterator&lt;T&gt; iterator();
+}
+
+public class ArraySet&lt;T&gt; implements Iterable&lt;T&gt; {
+    
+    ...
+
+    public Iterator&lt;T&gt; iterator() {
+        return new ArraySetIterator();
+    }
+
+    private class ArraySetIterator implements Iterator&lt;T&gt; {
+        private int wizPos;
+        public ArraySetIterator() {
+            wizPos = 0;
+        }
+
+        public boolean hasNext() {
+            return wizPos &lt; size;
+        }
+
+        public T next() {
+            T returnItem = items[wizPos];
+            wizPos += 1;
+            return returnItem;
+        }
+    }
+}
+</div></code></pre>
+<h3 id="the-iterable-interface">The Iterable Interface</h3>
+<ul>
+<li>By the way, this is how <code>Set</code> works as well
+<ul>
+<li><code>Set</code> implements <code>Collection</code> which implements <code>Iterable</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="iteration-summary">Iteration Summary</h3>
+<ul>
+<li>To support the enhanced for loop:
+<ul>
+<li>Add an <code>iterator()</code> method to your class that returns an <code>Iterator&lt;T&gt;</code></li>
+<li>The <code>Iterator&lt;T&gt;</code> returned should have a useful <code>hasNext()</code> and <code>next()</code> method</li>
+<li>Add <code>implements Iterable&lt;T&gt;</code> to the line defining your class</li>
+</ul>
+</li>
+</ul>
+<h2 id="object-methods-equals-and-tostring">Object Methods: Equals and toString()</h2>
+<h3 id="objects">Objects</h3>
+<ul>
+<li>All classes are hyponyms of <code>Object</code></li>
+</ul>
+<h3 id="tostring">toString()</h3>
+<ul>
+<li>The <code>toString()</code> method provides a string representation of an object
+<ul>
+<li><code>System.out.println(Object x)</code> calls <code>x.toString()</code>
+<ul>
+<li>println calls String.valueOf which calls toString</li>
+</ul>
+</li>
+<li>The implementation of toString() in Object is the name of the class, then an @ sign, then the memory location of the object</li>
+</ul>
+</li>
+</ul>
+<h3 id="arrayset-tostring">ArraySet toString</h3>
+<ul>
+<li>One approach is shown below
+<ul>
+<li>Warning: This code is slow. Intuition: Adding even a single character to a string creates an entirely new string. Will discuss why at the end of the course.</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>public class ArraySet&lt;T&gt; implements Iterable&lt;T&gt; {
+    
+    ...
+
+    @Override
+    public String toString() {
+        String returnString = &quot;{&quot;;
+        for (int i = 0; i &lt; size - 1; i += 1) {
+            returnString += item.toString();
+            return String += &quot;, &quot;;
+        }
+        returnString += items[size - 1];
+        returnString += &quot;}&quot;;
+        return returnString;
+    }
+}
+</div></code></pre>
+<h3 id="arraymap-tostring">ArrayMap toString</h3>
+<ul>
+<li>Intuition: Append operation for a StringBuilder is fast</li>
+</ul>
+<pre class="hljs"><code><div>public class ArraySet&lt;T&gt; implements Iterable&lt;T&gt; {
+    
+    ...
+
+    @Override
+    public String toString() {
+        StringBuilder returnSB = new StringBuilder(&quot;{&quot;);
+        for (int i = 0; i &lt; size - 1; i += 1) {
+            returnSB.append(items[i].toString());
+            returnSB.append(&quot;, &quot;);
+        }
+        returnS.append(items[size - 1]);
+        returnString.append(&quot;}&quot;);
+        return returnSB.toString();
+    }
+}
+</div></code></pre>
+<h3 id="equals-vs">Equals vs. ==</h3>
+<ul>
+<li>As mentioned before, <code>==</code> and <code>.equals()</code> behave differently
+<ul>
+<li><code>==</code> compares the bits. For references, <code>==</code> means &quot;referencing the same object&quot;</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>Set&lt;Integer&gt; javaset = Set.of(5, 23, 42);
+Set&lt;Integer&gt; javaset2 = Set.of(5, 23, 42);
+System.out.println(javaset == javaset2); // Prints false
+</div></code></pre>
+<ul>
+<li>To test equality in the sense we usually mean it, use:
+<ul>
+<li><code>.equals</code> for classes. Requires writing a <code>.equals</code> method for your own classes
+<ul>
+<li>Default implementation of <code>.equals</code> uses <code>==</code></li>
+</ul>
+</li>
+<li>BTW: Use <code>Arrays.equal</code> of <code>Arrays.deepEquals</code> for arrays</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>Set&lt;Integer&gt; javaset = Set.of(5, 23, 42);
+Set&lt;Integer&gt; javaset2 = Set.of(5, 23, 42);
+System.out.println(javaset.equals(javaset2)); // Prints true
+</div></code></pre>
+<h3 id="the-default-implementation-of-equals">The Default Implementation of Equals</h3>
+<ul>
+<li>The below implementation is a good start, but fails with <code>null</code> and objects not of type <code>ArraySet</code></li>
+</ul>
+<pre class="hljs"><code><div>public class ArraySet&lt;T&gt; implements Iterable&lt;T&gt; {
+    
+    ...
+
+    @Override
+    public boolean equals(Object other) {
+        ArraySet&lt;T&gt; o = (ArraySet&lt;T&gt;) other;
+        if (o.size() != this.size()) {
+            return false;
+        }
+        for (T item: this) {
+            if (o.contains(item)) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+</div></code></pre>
+<ul>
+<li>Better implementation below, but we can speed things up</li>
+</ul>
+<pre class="hljs"><code><div>public class ArraySet&lt;T&gt; implements Iterable&lt;T&gt; {
+    
+    ...
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) {
+            return false;
+        }
+        if (other.getClass() != this.getClass()) {
+            return false;
+        }
+        ArraySet&lt;T&gt; o = (ArraySet&lt;T&gt;) other;
+        if (o.size() != this.size()) {
+            return false;
+        }
+        for (T item: this) {
+            if (o.contains(item)) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+</div></code></pre>
+<ul>
+<li>Even faster implementation, pretty close to what a standard equals method looks like</li>
+</ul>
+<pre class="hljs"><code><div>public class ArraySet&lt;T&gt; implements Iterable&lt;T&gt; {
+    
+    ...
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null) {
+            return false;
+        }
+        if (other.getClass() != this.getClass()) {
+            return false;
+        }
+        ArraySet&lt;T&gt; o = (ArraySet&lt;T&gt;) other;
+        if (o.size() != this.size()) {
+            return false;
+        }
+        for (T item: this) {
+            if (o.contains(item)) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+</div></code></pre>
+<h2 id="summary">Summary</h2>
+<h3 id="summary">Summary</h3>
+<ul>
+<li>We built our own Array based Set implementation</li>
+<li>To make it more industrial strength we:
+<ul>
+<li>Added an exception if a user tried to add null to the set
+<ul>
+<li>There are other ways to deal with nulls. Our choice was arguably bad.</li>
+</ul>
+</li>
+<li>Added support for &quot;ugly&quot; then &quot;nice&quot; iteration
+<ul>
+<li>Ugly iteration: Creating a subclass with next and hasNext methods</li>
+<li>Nice iteration: Declaring that ArraySet implements Iterable</li>
+</ul>
+</li>
+<li>Added a toString() method
+<ul>
+<li>Beware of String concatenation</li>
+</ul>
+</li>
+<li>Added an equals(Object) method
+<ul>
+<li>Make sure to deal with null and non-ArraySet arguments!</li>
+<li>Used getClass to check the class of the passed object. Use sparingly.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</body>
+</html>

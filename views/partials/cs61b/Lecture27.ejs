@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture27.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-27-software-engineering-i">Lecture 27: Software Engineering I</h1>
+<h4 id="10302020">10/30/2020</h4>
+<h3 id="motivation">Motivation</h3>
+<ul>
+<li>In some ways, we have misled you about what programing entails:
+<ul>
+<li>61A: Fill in the function</li>
+<li>61B: Implement the class according to our spec</li>
+</ul>
+</li>
+<li>Always working at a &quot;small scale&quot; introduces habits that will cause you great pain later</li>
+<li>The goal of these lectures is to gain a sense of how to deal with the &quot;large scale&quot;
+<ul>
+<li>Project 3 will give you a chance to encounter &quot;large scale&quot; issues yourself</li>
+</ul>
+</li>
+</ul>
+<h2 id="complexity-defined">Complexity Defined</h2>
+<h3 id="the-power-of-software">The Power of Software</h3>
+<ul>
+<li>Unlike other engineering disciplines, software is effectively unconstrained by the laws of physics
+<ul>
+<li>Programming is an act of almost pure creativity!</li>
+</ul>
+</li>
+<li>The greatest limitation we face in building systems is being able to understand what we're building! Very unlike other disciplines, e.g.
+<ul>
+<li>Chemical engineers have to worry about temperature</li>
+<li>Material scientists have to worry about how brittle a material is</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity-the-enemy">Complexity, the Enemy</h3>
+<ul>
+<li>Our greatest limitation is simply understanding the system we're trying to build!</li>
+<li>As real programs are worked on, they gain more features and complexity
+<ul>
+<li>Over time, it becomes more difficult for programmers to understand all the relevant pieces as they make future modifications</li>
+</ul>
+</li>
+<li>Tools like IntelliJ, JUnit tests, the IntelliJ debugger, the visualizer, all make it easier to deal with complexity
+<ul>
+<li>But our most important goal is to keep our software <strong>simple</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="dealing-with-complexity">Dealing with Complexity</h3>
+<ul>
+<li>There are two approaches to managing complexity
+<ul>
+<li>Making code simpler and more obvious
+<ul>
+<li>Eliminating special cases, e.g. sentinel nodes</li>
+</ul>
+</li>
+<li>Encapsulation into modules
+<ul>
+<li>In a modular design, creators of one &quot;module&quot; can use other modules without knowing how they work</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="the-nature-of-complxity">The Nature of Complxity</h3>
+<ul>
+<li>What is complexity exactly?
+<ul>
+<li>Ousterhout: &quot;Complexity is anything related to the structure of a software system that makes it hard to understand and modify the system</li>
+</ul>
+</li>
+<li>Takes many forms:
+<ul>
+<li>Understanding how the code works</li>
+<li>The amount of time it takes to make small improvements</li>
+<li>Finding what needs to be modified to make an improvement</li>
+<li>Difficult to fix one bug without introducing another</li>
+</ul>
+</li>
+<li>&quot;If a software system is hard to understand and modify, then it is complicated. If it is asy to understand and modify, then it is simple&quot;</li>
+<li>Cost view of complexity:
+<ul>
+<li>In a complex system, takes a lot of effort to make small improvements</li>
+<li>In a simple system, bigger improvements require less effort</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<ul>
+<li>Note: Our usage of the term &quot;complex&quot; is not synonymous with &quot;large and sophisticated&quot;
+<ul>
+<li>It is possible for even short programs to be complex</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity-and-importance">Complexity and Importance</h3>
+<ul>
+<li>Complexity also depends on how often a piece of a system is modified
+<ul>
+<li>A system may have a few pieces that are highly complex, but if nobody ever looks at that code, then the overall impact is minimal</li>
+</ul>
+</li>
+<li>Ousterhout gives a crude mathematical formulation:
+<ul>
+<li>C = sum(c_p * t_p) for each part p
+<ul>
+<li>c_p is the complexity of part p</li>
+<li>t_p is time spent working on part p</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="symptoms-and-causes-of-complexity">Symptoms and Causes of Complexity</h2>
+<h3 id="symptoms-of-complexity">Symptoms of Complexity</h3>
+<ul>
+<li>Ousterhout describes three symptoms of complexity:
+<ul>
+<li><strong>Change amplification</strong>: A simple change requires modification in many places</li>
+<li><strong>Cognitive load</strong>: How much you need to know in order to make a change
+<ul>
+<li>Note: This is not the same as number of lines of code. Often MORE lines of code actually makes code simpler, because it is more narrative</li>
+</ul>
+</li>
+<li><strong>Unknown unknowns</strong>: Worst type of complexity. This occurs when it's not even clear what you need to know in order to make modifications
+<ul>
+<li>Common in large code bases</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="obvious-systems">Obvious Systems</h3>
+<ul>
+<li>In a good design, a system is ideally <strong>obvious</strong></li>
+<li>In an obvious system, to make a change a developer can:
+<ul>
+<li>Quickly understand how existing code works</li>
+<li>Come up with a proposed change without doing too much thinking</li>
+<li>Have a high confidence that the change should actually work, despite not reading much code</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity-comes-slowly">Complexity Comes Slowly</h3>
+<ul>
+<li>Every software system starts out beautiful, pure, and clean</li>
+<li>As they are built upon, they slowly twist into uglier and uglier shapes. This is almost inevitable in real systems
+<ul>
+<li>Each complexity introduced is no big deal, but: &quot;complexity comes about because hundreds of thousands of small dependencies and obscurities build up over time</li>
+<li>&quot;Eventually, there are so many of these small issues that every possible change is affected by several of them&quot;</li>
+<li>This incremental process is part of what makes controlling complexity so hard</li>
+<li>Ousterhout recommends a zero tolerance philosophy</li>
+</ul>
+</li>
+</ul>
+<h2 id="strategic-vs-tactical-programming">Strategic vs. Tactical Programming</h2>
+<h3 id="tactical-programming">Tactical Programming</h3>
+<ul>
+<li>Much (or all) of the programming that you've done, Ousterhout would describe as &quot;tactical&quot;
+<ul>
+<li>&quot;Your main focus is to get something working, such as a new feature or bug fix&quot;</li>
+</ul>
+</li>
+<li>The problem with tactical programming:
+<ul>
+<li>You don't spend problem thinking about overall design</li>
+<li>As a result, you introduce tons of little complexities</li>
+<li>Each individual complexity seems reasonable, but eventually you start to feel the weight
+<ul>
+<li>Refactoring would fix the problem, but it would also take time, so you end up introducing even more complexity to deal with the original ones</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>The end result is misery</li>
+</ul>
+<h3 id="strategic-programming">Strategic Programming</h3>
+<ul>
+<li>&quot;The first step towards becoming a good software engineer is to realize that <strong>working code isn't enough</strong>&quot;
+<ul>
+<li>&quot;The most important thing is the long term structure of the system&quot;</li>
+<li>Adding complexities to achieve short term time games is unacceptable</li>
+</ul>
+</li>
+<li>Strategic programming requires lots of time investment
+<ul>
+<li>Try to plan ahead and realize your system is very likely going to be horrible looking when you're done</li>
+</ul>
+</li>
+</ul>
+<h3 id="suggestions-for-strategic-programming">Suggestions for Strategic Programming</h3>
+<ul>
+<li>For each new class/task
+<ul>
+<li>Rather than implementing the first idea, try coming up with (and possibly even partially implementing) a few different ideas</li>
+<li>When you feel like you have found something that feels clean, then fully implement that idea</li>
+<li>In real systems: Try to imagine how things might need to be changed in the future, and make sure your design can handle such changes</li>
+</ul>
+</li>
+</ul>
+<h3 id="strategic-programming-is-very-hard">Strategic Programming is Very Hard</h3>
+<ul>
+<li>No matter how careful you try to be, there will be mistakes in your design
+<ul>
+<li>Avoid the temptation to patch around these mistakes. Instead, fix the design.
+<ul>
+<li>E.g. Don't add a bunch of special test cases. Instead, make sure the system gracefully handles the cases you didn't think about</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</body>
+</html>

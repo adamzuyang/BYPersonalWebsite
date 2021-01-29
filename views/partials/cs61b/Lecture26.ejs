@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture26.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-26-minimum-spanning-trees">Lecture 26: Minimum Spanning Trees</h1>
+<h4 id="10292020">10/29/2020</h4>
+<h2 id="spanning-trees">Spanning Trees</h2>
+<h3 id="spanning-trees">Spanning Trees</h3>
+<ul>
+<li>Given an <strong>undirected</strong> graph, <strong>spanning tree</strong> T is a subgraph of G, where T:
+<ul>
+<li>Is connected</li>
+<li>Is acyclic</li>
+<li>Includes all of the vertices</li>
+</ul>
+</li>
+<li>A <strong>minimum spanning tree</strong> is a spanning tree of minium total weight
+<ul>
+<li>Ex: Directly connecting buildings by power lines</li>
+</ul>
+</li>
+</ul>
+<h3 id="mst-applications">MST Applications</h3>
+<ul>
+<li>Handwriting recognition</li>
+<li>Medical imaging (e.g. arrangement of nuclei in cancer cells)</li>
+</ul>
+<h3 id="mst-vs-spt">MST vs. SPT</h3>
+<ul>
+<li>A shortest paths tree depends on the start vertex:
+<ul>
+<li>Because it tells you how to get from a source to EVERYTHING</li>
+</ul>
+</li>
+<li>There is no source for a minimum spanning tree</li>
+<li>Nonetheless, the MST sometimes happens to be a SPT for a specific vertex
+<ul>
+<li>However, this is not always true; sometimes, there is no SPT that is the MST</li>
+</ul>
+</li>
+</ul>
+<h3 id="a-useful-tool-for-finding-the-mst-cut-property">A Useful Tool for Finding the MST: Cut Property</h3>
+<ul>
+<li>A <strong>cut</strong> is an assignment of a graph's nodes to two non-empty sets</li>
+<li>A <strong>crossing edge</strong> is an edge which connects a node from one set to a node from the other set</li>
+<li><strong>Cut property</strong>: Given any cut, minimum weight crossing edge is in the MST
+<ul>
+<li>For rest of today, we'll assume edge weights are unique</li>
+</ul>
+</li>
+</ul>
+<h3 id="cut-property-proof">Cut Property Proof</h3>
+<ul>
+<li>Suppose that the minimum crossing edge <em>e</em> were not in the MST
+<ul>
+<li>Adding <em>e</em> to the MST creates a cycle</li>
+<li>Some other edge <em>f</em> must also be a crossing edge</li>
+<li>Removing <em>f</em> and adding <em>e</em> is a lower weight spanning tree</li>
+<li>Contradiction! <em>e</em> must be in the MST</li>
+</ul>
+</li>
+</ul>
+<h3 id="generic-mst-finding-algorithm">Generic MST Finding Algorithm</h3>
+<ul>
+<li>Start with no edges in the MST
+<ul>
+<li>Find a cut that has no crossing edges in the MST</li>
+<li>Add smallest crossing edge to the MST</li>
+<li>Repeat until V-1 edges</li>
+</ul>
+</li>
+<li>This should work, but we need some way of finding a cut with no crossing edges!
+<ul>
+<li>Random isn't a very good idea</li>
+</ul>
+</li>
+</ul>
+<h2 id="prims-algorithm">Prim's Algorithm</h2>
+<h3 id="prims-algorithm">Prim's Algorithm</h3>
+<ul>
+<li>Start from some arbitrary start node
+<ul>
+<li>Repeatedly add shortest edge that has one node inside the MST under construction</li>
+<li>Repeat until V-1 edges</li>
+</ul>
+</li>
+<li>Why does Prim's work? Special case of generic algorithm
+<ul>
+<li>Suppose we add edge e = v-&gt;w</li>
+<li>Side 1 of cut is all vertices connected to start, side 2 is all the others</li>
+<li>No crossing edge is black (all connected edges on side 1)</li>
+<li>No crossing edge as lower weight (consider in increasing order)</li>
+</ul>
+</li>
+</ul>
+<h3 id="prims-algorithm-implementation">Prim's Algorithm Implementation</h3>
+<ul>
+<li>The natural implementation of the conceptual version of Prim's algorithm is highly inefficient</li>
+<li>Can use some cleverness and a PQ to speed things up</li>
+</ul>
+<h3 id="prims-demo">Prim's Demo</h3>
+<ul>
+<li>Insert all vertices into fringe PQ, storing vertices in order of distance from tree</li>
+<li>Repeat: Remove (closest) vertex v from PQ, and relax all edges pointing from v</li>
+<li>Note: Vertex removal in this implementation of Prim's is equivalent to edge addition in the conceptual version of Prim's</li>
+<li>No need to reconsider edges that lead to &quot;marked&quot; vertices</li>
+</ul>
+<h3 id="prims-vs-dijkstras">Prim's vs. Dijkstra's</h3>
+<ul>
+<li>Prim's and Dijkstra's algorithms are exactly the same, except Dijkstra's considers &quot;distance from the source&quot;, and Prim's considers &quot;distance from the tree.&quot;</li>
+<li>Visit order:
+<ul>
+<li>Dijkstra's algorithm visits vertices in order of distance from the source</li>
+<li>Prim's algorithm visits vertices in some order of distance from the MST under construction</li>
+</ul>
+</li>
+<li>Relaxation:
+<ul>
+<li>Relaxation in Dijkstra's considers and edge better based on distance to source</li>
+<li>Relaxation in Prim's considers an edge better based on distance to tree</li>
+</ul>
+</li>
+</ul>
+<h3 id="prims-implementation-psuedocode">Prim's Implementation (Psuedocode)</h3>
+<pre class="hljs"><code><div>public class PrimMST {
+    public PrimMST(EdgeWeightedGraph G) {
+        edgeTo = new Edge[G.V()];
+        distTo = new double[G.V()];
+        marked = new boolean[G.V()];
+        fringe = new SpecialPQ&lt;Double&gt;(G.V());
+
+        distTo[s] = 0.0;
+        setDistancesToInfinityExceptS(s);
+
+        /* Fringe is ordered by distTo tree. 
+        Must be a specialPQ like Dijkstra's */
+        insertAllVertices(fringe);
+
+        /* Get vertices in order of distance from tree */
+        while (!fringe.isEmpty()) {
+            // Get vertex closest to tree that is unvisited
+            int v = fringe.delMin();
+            // Scan means to consider all of a vertex's outgoing edges
+            scan(G, v)
+        }
+    }
+
+    private void scan(EdgeWeightedGraph G, int v) {
+        marked[v] = true;  // Vertex is closest, so add to MST
+        for (Edge e : G.adj(v)) {
+            int w = e.other(v);
+
+            /* Already in MST, so go to next edge */
+            if (marked[w]) {continue;}  
+            
+            /* Better path to a particular vertex found, 
+            so update current best known for that vertex */
+            if (e.weight() &lt; distTo[w]) {
+                distTo[w] = e.weight();
+                edgeTo[w] = e;
+                pq.decreasePriority(w, distTo[w]);
+            }
+        }
+    }
+}
+</div></code></pre>
+<h3 id="prims-runtime">Prim's Runtime</h3>
+<ul>
+<li>What is the runtime of Prim's algorithm?
+<ul>
+<li>Assume all PQ operations take O(log V) time</li>
+<li>Give your answer in Big O notation</li>
+</ul>
+</li>
+<li>Priority Queue operation count, assume binary heap based PQ:
+<ul>
+<li>Insertion: V, each costing O(log V) time</li>
+<li>Delete-min: V, each costing O(lov V) time</li>
+<li>Decrease priority: O(E), each costing O(log V) time</li>
+</ul>
+</li>
+<li>Overall runtime: O(V<em>log(V) + V</em>log(V) + E*log(V))</li>
+</ul>
+<h2 id="kruskals-algorithm">Kruskal's Algorithm</h2>
+<h3 id="kruskals-demo">Kruskal's Demo</h3>
+<ul>
+<li>Consider edges in order of increasing weight. Add to MST unless a cycle is created
+<ul>
+<li>Repeat until V-1 edges have been added to the MST</li>
+<li>(Really just the cut property in disguise)</li>
+</ul>
+</li>
+<li>Will require a fringe will all edges ordered in smallest weight</li>
+<li>Add edges to our MST set and connect the necessary vertices in a WeightedQuickUnion object</li>
+</ul>
+<h3 id="kruskals-algorithm">Kruskal's Algorithm</h3>
+<ul>
+<li>Initially mark all edges gray
+<ul>
+<li>Consider edges in increasing order of weight</li>
+<li>Add edge to MST (mark black) unless doing so creates a cycle</li>
+<li>Repeat until V-1 edges</li>
+</ul>
+</li>
+<li>Why does Kruskal's work? Special case of generic MST algorithm
+<ul>
+<li>Suppose we add edge e = v-&gt;w</li>
+<li>Side 1 of cut is all vertices connected to v, side 2 is everything else</li>
+<li>No crossing edge is black (since we don't allow cycles)</li>
+<li>No crossing edge has lower weight (consider in increasing order)</li>
+</ul>
+</li>
+</ul>
+<h3 id="kruskals-implementation-psueocode">Kruskal's Implementation (Psueocode)</h3>
+<pre class="hljs"><code><div>public class KruskalMST {
+    private List&lt;edge&gt; mst = new ArrayList&lt;Edge&gt;();
+
+    public KruskalMST(EdgeWeightedGraph G) {
+        MinPQ&lt;Edge&gt; pq = new MinPQ&lt;Edge&gt;();
+        for (Edge e : G.edges()) {
+            pq.insert(e);
+        }
+
+        WeightedQuickUnionPC uf = 
+            new WeightedQuickUnionPC(G.V());
+
+        while(!pq.isEmpty() &amp;&amp; mst.size() &lt; G.V() - 1) {
+            Edge e = pq.delMin();
+            int v = e.from();
+            int w = e.to();
+            if (!uf.connected(v, w)) {
+                uf.union(v, w);
+                mst.add(e);
+            }
+        }
+    }
+}
+</div></code></pre>
+<ul>
+<li>What is the runtime of Kruskal's algorithm?
+<ul>
+<li>Assume all PQ operations take O(log(V)) time</li>
+<li>Assume all WQU operations take O(log* V) time</li>
+<li>Give answer in bit O notation</li>
+</ul>
+</li>
+</ul>
+<h3 id="kruskals-runtime">Kruskal's Runtime</h3>
+<ul>
+<li>Kruskal's algorithm is O(E log E)
+<ul>
+<li>Insertion: E, each costing O(log E) time: O(E log E)</li>
+<li>Delete minimum: O(E) times, each costing O(log E) time: O(E log E)</li>
+<li>Union: O(V) times, each costing O(log* V) time: O(V log* V)</li>
+<li>isConnected: O(E) times, each costing O(log* V) time: O(E log* V)</li>
+<li>Total runtime is O(E log E + V log* V + E log* V)</li>
+</ul>
+</li>
+<li>Note: If we use a pre-sorted list of edges (instead of a PQ), then we can simply iterate through the list in O(E) time, so overall runtime is O(E log* V)</li>
+</ul>
+<h3 id="shortest-paths-and-mst-algorithms-summary">Shortest Paths and MSt algorithms Summary</h3>
+<p><img src="images/26.1.png" alt=""></p>
+<ul>
+<li>Can we do better than O(E log* V)?</li>
+</ul>
+<h3 id="170-spoiler-state-of-the-art-compare-based-mst-algorithms">170 Spoiler: State of the Art Compare-Based MST Algorithms</h3>
+<p><img src="images/26.2.png" alt=""></p>
+<h2 id="csm-summary-graph-algorithms">CSM Summary: Graph Algorithms</h2>
+<h3 id="depth-first-search-dfs">Depth First Search (DFS)</h3>
+<ul>
+<li>fringe: Stack</li>
+<li>Main idea: Traverse as far as possible from start node, visiting unvisited vertices</li>
+</ul>
+<h3 id="breadth-first-search-bfs">Breadth First Search (BFS)</h3>
+<ul>
+<li>fringe: Queue</li>
+<li>Main idea: Traverse vertices based on number of edges from start vertex</li>
+</ul>
+<h3 id="shortest-paths-tree-vs-minimum-spanning-tree">Shortest Paths Tree vs Minimum Spanning Tree</h3>
+<ul>
+<li>Shortest Paths Tree (SPT) from A
+<ul>
+<li>Minimizes distance between A and all other vertices
+<ul>
+<li>Must define a start vertex</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Minimum Spanning Tree (MST)
+<ul>
+<li>Minimizes total edge weight (cost) of tree</li>
+</ul>
+</li>
+</ul>
+<h3 id="shortest-paths-tree-algorithms">Shortest Paths Tree Algorithms</h3>
+<ul>
+<li>Dijkstra's
+<ul>
+<li>Priority of each node in PQ is distance to start vertex</li>
+<li>Runtime: O((E +V)logV) ~ O(E log V)</li>
+</ul>
+</li>
+<li>A*
+<ul>
+<li>Same as Dijkstra's but a heuristic value is added to each node</li>
+<li>heuristic: prediction of cost from node to goal
+<ul>
+<li>admissible: heuristic is an underestimate of true cost</li>
+<li>consistent: difference between heuristics of two nodes is at most the true cost between them
+<ul>
+<li>h(A) - h(B) &lt;= cost(A, B)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Runtime: Same as Dijkstra's</li>
+</ul>
+</li>
+</ul>
+<h3 id="dijkstrasaprims-runtime">Dijkstra's/A*/Prim's Runtime</h3>
+<ul>
+<li>Runtime: O((E + V)logV) ~ O(E log V)
+<ul>
+<li>Usually more edges in a graph than vertices</li>
+</ul>
+</li>
+<li>Runtime analysis:
+<ul>
+<li>Add to PQ: O(log V) V times -&gt; O(V log V)</li>
+<li>Remove from PQ: O(log V) V times -&gt; O(V log V)</li>
+<li>Change priority: O(log V) at most E times -&gt; O(E log V)
+<ul>
+<li>E times, since this is the highest possible degree of a vertex
+<ul>
+<li>There are E ways to visit this vertex, worst case we update the priority each time</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="cut-property">Cut Property</h3>
+<ul>
+<li>A <strong>cut</strong> of a graph is a set of edges that separates the vertices of the graph in two</li>
+<li><strong>Cut Property:</strong> The lightest edge across a cut is in <em>some</em> MST</li>
+<li>Reasoning:
+<ul>
+<li>MST must span all vertices, so the two parts of the graph <em>must</em> be connected somehow</li>
+<li>Minimize total cost of tree by choosing lightest edge as connection</li>
+</ul>
+</li>
+</ul>
+<h3 id="mst-algorithms">MST Algorithms</h3>
+<ul>
+<li>Prim's
+<ul>
+<li>Similar to Dijkstra's, but Prim's considers distance from tree instead of distance from start vertex</li>
+<li>Fringe: priority queue
+<ul>
+<li>Priority of each node in queue is the edge weight between that node and the forming tree</li>
+</ul>
+</li>
+<li>Runtime: O(E log V) same analysis as Dijkstra's</li>
+<li>The cut in Prim's is the edges between the vertices in the tree so far and those not in the tree. The algorithm then picks the lightest edge across that cut</li>
+</ul>
+</li>
+<li>Kruskal's
+<ul>
+<li>Sort edges from least to greatest</li>
+<li>Add edges in order as long as the edge doesn't create a cycle</li>
+<li>Runtime: O(E log E) &lt;- Dominated by time for sorting edges</li>
+<li>How do we check if adding an edge forms a cycle?
+<ul>
+<li>Use a disjoint sets data structure</li>
+<li>When connecting vertices u and v:
+<ul>
+<li>Ask if u and v are connected</li>
+<li>If they are not, then we add the edge and union(u, v)</li>
+<li>Else, don't add edge (u, v) to the MST</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</body>
+</html>

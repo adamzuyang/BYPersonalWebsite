@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture18.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-18-red-black-trees">Lecture 18: Red Black Trees</h1>
+<h4 id="1072020">10/7/2020</h4>
+<h3 id="the-bad-news">The Bad News</h3>
+<ul>
+<li>2-3 trees (and 2-3-4 trees) are a real pain to implement, and suffer from performance problems. Issues include:
+<ul>
+<li>Maintaining different node types</li>
+<li>Interconversion of nodes between 2-nodes and 3-nodes</li>
+<li>Walking up the tree to split nodes</li>
+</ul>
+</li>
+</ul>
+<h2 id="bst-structure-and-tree-rotation">BST Structure and Tree Rotation</h2>
+<h3 id="bsts">BSTs</h3>
+<ul>
+<li>Suppose we have a BST with the numbers 1, 2, 3. Five possible BSTs
+<ul>
+<li>The specific BST you get is based on the insertion order</li>
+<li>More generally, for N items, there are Catalan(N) different BSTs</li>
+</ul>
+</li>
+<li>Given any BST, it is possible to move to a different configuration using &quot;rotation&quot;
+<ul>
+<li>In general, can move from any configuration to any other in 2n - 6 rotations</li>
+</ul>
+</li>
+</ul>
+<h3 id="tree-rotation-definition">Tree Rotation Definition</h3>
+<ul>
+<li>rotateLeft(G): Let x be the right child of G. Make G the <strong>new left child</strong> of x
+<ul>
+<li>Preserves search tree property. No change to semantics of tree</li>
+<li>Can think of as temporarily G and P, then sending G down and <strong>left</strong></li>
+</ul>
+</li>
+</ul>
+<p><img src="images/18.1.png" alt=""></p>
+<ul>
+<li>rotateRight(P): Let x be the left child of P. Make P the <strong>new right child</strong> of x
+<ul>
+<li>Can think of as temporarily merging G and P, then sending P down and <strong>right</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="rotation-for-balance">Rotation for Balance</h3>
+<ul>
+<li>Rotation:
+<ul>
+<li>Can shorten (or lengthen) a tree</li>
+<li>Preserves search tree property</li>
+</ul>
+</li>
+</ul>
+<p><img src="images/18.2.png" alt=""></p>
+<h3 id="rotation-an-alternate-approach-to-balance">Rotation: An Alternate Approach to Balance</h3>
+<ul>
+<li>Rotation:
+<ul>
+<li>Can shorten (or lengthen) a tree</li>
+<li>Preserves search tree property</li>
+</ul>
+</li>
+<li>Paying O(n) to occasionally balance a tree is not ideal. In this lecture, we''l see a better way to achieve balance through rotation</li>
+</ul>
+<h2 id="red-black-trees">Red-Black Trees</h2>
+<h3 id="search-trees">Search Trees</h3>
+<ul>
+<li>There are many types of search trees:
+<ul>
+<li><strong>Binary search trees</strong>: Can balance using rotation, but we have no algorithms for doing so (yet)</li>
+<li><strong>2-3 trees</strong>: Balanced by construction, i.e. no rotations required</li>
+</ul>
+</li>
+<li>Let's try something clever, but strange</li>
+<li>Our goal: Build a BST that is structurally identical to a 2-3 tree
+<ul>
+<li>Since 2-3 trees are balanced, so will our special BSTs.</li>
+</ul>
+</li>
+</ul>
+<h3 id="representing-a-2-3-tree-as-a-bst">Representing a 2-3 Tree as a BST</h3>
+<ul>
+<li>A 2-3 tree with only 2-nodes is trivial
+<ul>
+<li>BST is exactly the same!</li>
+</ul>
+</li>
+<li>What do we do about 3-nodes?
+<ul>
+<li>Possibility 1: Create dummy &quot;glue&quot; nodes
+<ul>
+<li>Result is inelegant. Wasted link. Code will be ugly</li>
+</ul>
+</li>
+<li>Possibility 2: Create &quot;glue&quot; links with the smaller item off to the left
+<ul>
+<li>Idea is commonly used in practice</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="images/18.3.png" alt=""></p>
+<h3 id="left-leaning-red-black-binary-search-tree-llrb">Left-Leaning Red Black Binary Search Tree (LLRB)</h3>
+<ul>
+<li>A BST with left glue links that represent a 2-3 tree is often called a
+&quot;Left Leaning Red Black Binary Search Tree&quot; or LLRB
+<ul>
+<li>LLRBs are normal BSTs</li>
+<li>There is a 1-1 correspondence between an LLRB and an equivalent 2-3 tree</li>
+<li>The red is just a convenient fiction. Red links don't &quot;do&quot; anything special
+<img src="images/18.4.png" alt=""></li>
+</ul>
+</li>
+</ul>
+<h2 id="red-black-tree-properties">Red Black Tree Properties</h2>
+<h3 id="left-leaning-red-black-binary-search-tree-llrb">Left-Leaning Red Black Binary Search Tree (LLRB)</h3>
+<ul>
+<li>Searching an LLRB tree for a key is easy
+<ul>
+<li>Treat it exactly like any BST</li>
+</ul>
+</li>
+</ul>
+<h3 id="left-leaning-red-black-binary-search-tree-llrb-properties">Left-Leaning Red Black Binary Search Tree (LLRB) Properties</h3>
+<ul>
+<li>Some handy LLRB properties:
+<ul>
+<li>No node has two red links [otherwise it'd be analogous to a 4 node, which are disallowed in 2-3 trees]</li>
+<li>Every path from root to a leaf has same number of <strong>black links</strong> [because 2-3 trees have the same number of links to every leaf]. LLRBs are therefore balanced</li>
+<li>Logarithmic height</li>
+</ul>
+</li>
+</ul>
+<h3 id="llrb-construction">LLRB Construction</h3>
+<ul>
+<li>Where do LLRBs come from?
+<ul>
+<li>Would not make sense to build a 2-3 tree, then convert it</li>
+<li>Instead, it turns out we implement an LLRB insert as follows:
+<ul>
+<li>Insert as usual into a BST</li>
+<li>Use zero or more rotations to maintain the 1-1 mapping</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="maintaining-1-1-correspondence-through-rotations">Maintaining 1-1 Correspondence Through Rotations</h2>
+<h3 id="the-1-1-mapping">The 1-1 Mapping</h3>
+<ul>
+<li>There exists a 1-1 mapping between:
+<ul>
+<li>2-3 Tree</li>
+<li>LLRB</li>
+</ul>
+</li>
+<li>Implementation of an LLRB is based on maintaining this 1-1 correspondence
+<ul>
+<li>When performing LLRB operations, pretend like you're a 2-3 tree</li>
+<li>Preservation of the correspondence will involve tree rotations</li>
+</ul>
+</li>
+</ul>
+<h3 id="design-task-1-insertion-color">Design Task 1: Insertion Color</h3>
+<ul>
+<li>Always use a red link when adding onto a leaf</li>
+</ul>
+<h3 id="design-task-2-insertion-on-the-right">Design Task 2: Insertion on the Right</h3>
+<ul>
+<li>Right links aren't allowed, so rotateLeft</li>
+<li>Likewise, left links aren't allowed, so rotateRight</li>
+</ul>
+<h3 id="new-rule-representation-of-temporary-4-nodes">New Rule: Representation of Temporary 4-Nodes</h3>
+<ul>
+<li>We will represent temporary 4-nodes as BST nodes with two red links
+<ul>
+<li>This state is only temporary, so temporary violation of &quot;left leaning&quot; is ok</li>
+</ul>
+</li>
+</ul>
+<h3 id="design-task-3-double-insertion-on-the-left">Design Task 3: Double insertion on the left</h3>
+<ul>
+<li>When double inserting on the left, rotate the node to the right</li>
+</ul>
+<h3 id="design-task-4-splitting-temporary-4-nodes">Design Task 4: Splitting Temporary 4-nodes</h3>
+<ul>
+<li>Suppose we have the LLRB includes a temporary 4 node
+<ul>
+<li>To fix this, flip the colors of all edges touching the node
+<ul>
+<li>Note: This doesn't change the BST structure/shape</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="thats-it">That's it!</h3>
+<ul>
+<li>We've just invented the red-black BST
+<ul>
+<li>When inserting: Use a red link</li>
+<li>If there is a right leaning &quot;3-node&quot;, we have a <strong>Left Leaning Violation</strong>
+<ul>
+<li>Rotate left the appropriate node to fix</li>
+</ul>
+</li>
+<li>If there are two consecutive left links, we have an <strong>Incorrect 4 Node VIolation</strong>
+<ul>
+<li>Rotate right the appropriate node to fix</li>
+</ul>
+</li>
+<li>If there are any nodes with two red children, we have a <strong>Temporary 4 Node</strong>
+<ul>
+<li>Color flip the node to emulate the split operation</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Cascading operations
+<ul>
+<li>It is possible that a rotation or flip operation will cause an additional violation that needs fixing</li>
+</ul>
+</li>
+</ul>
+<h2 id="llrb-runtime-and-implementation">LLRB Runtime and Implementation</h2>
+<h3 id="llrb-runtime">LLRB Runtime</h3>
+<ul>
+<li>The runtime analysis for LLRBs is simple if you trust the 2-3 tree runtime
+<ul>
+<li>LLRB tree has height O(log N)</li>
+<li>Contains is trivially O(log N)</li>
+<li>Insert is O(log N)
+<ul>
+<li>O(log N) to add the new node</li>
+<li>O(log N) rotation and color flip operations per insert</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>We will not discuss LLRB delete
+<ul>
+<li>Not too terrible really, but it's just not interesting enough to cover. See optional textbook if you're curious</li>
+</ul>
+</li>
+</ul>
+<h3 id="llrb-implementation">LLRB Implementation</h3>
+<ul>
+<li>Amazingly, turning BST into an LLRB requires only 3 clever lines of code
+<ul>
+<li>Does not include helper methods (which do not require cleverness)</li>
+</ul>
+</li>
+</ul>
+<h2 id="search-tree-summary">Search Tree Summary</h2>
+<h3 id="search-tree">Search Tree</h3>
+<ul>
+<li>In the last 3 lectures, we talked about using search trees to implement sets/maps
+<ul>
+<li>Binary search trees are simple, but they are subject to imbalance</li>
+<li>2-3 Trees (B Trees) are balanced, but painful to implement and relatively slow</li>
+<li>LLRBs insertion is simple to implement (but delete is hard)
+<ul>
+<li>Works by maintaining mathematical bijection with a 2-3 trees</li>
+</ul>
+</li>
+<li>Java's TreeMap is a red-black tree (not left leaning)
+<ul>
+<li>Maintains correspondence with 2-3-4 tree (is not a 1-1 correspondence)</li>
+<li>Allows glue links on either side</li>
+<li>More complex implementation, but significantly faster</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>There are many other types of search trees out there
+<ul>
+<li>Other self balancing trees: AVL trees, splay trees, treaps, etc.</li>
+</ul>
+</li>
+<li>There are other efficient ways to implement sets and maps entirely
+<ul>
+<li>Other linked structures: Skip lists are linked lists with express lanes</li>
+<li>Other ideas entirely: Hashing is the most common alternative. We'll discuss this idea in the next lecture</li>
+</ul>
+</li>
+</ul>
+<h2 id="csm-review">CSM Review</h2>
+<h3 id="b-trees">B-Trees</h3>
+<ul>
+<li>B is for balanced</li>
+<li>Some definitions:
+<ul>
+<li><strong>depth</strong> of a node is distance to the root (the root node has depth 0)</li>
+<li><strong>height</strong> of a tree is the depth of the lowest leaf</li>
+</ul>
+</li>
+<li>Purpose of B-trees:
+<ul>
+<li>Avoids spindly trees</li>
+<li>Keeps the tree with height log(n)</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-3-trees">2-3 Trees</h3>
+<ul>
+<li>Each non-leaf node can have 2 or 3 children</li>
+<li>Each node can be stuffed with at most 2 values
+<ul>
+<li>Once a node is overstuffed (aka 3 values), push middle value up</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-3-4-trees">2-3-4 Trees</h3>
+<ul>
+<li>Same idea as 2-3 trees, but now nodes can have 2, 3, or 4 children</li>
+<li>A node is overstuffed if it has 4 values</li>
+<li>Push up left-middle node</li>
+</ul>
+<h3 id="traversals">Traversals</h3>
+<ul>
+<li><strong>Level-Order Traversals</strong>: Nodes are visited top-to-bottom, left-to-right</li>
+<li><strong>Depth-First Traversals</strong>: Visit deep nodes before shallow ones</li>
+<li>In-order Traversal: LFR - &quot;Left, Functionality, Right&quot;
+<ul>
+<li>In a BST, this produces a sorted list of nodes in the tree (an in-order traversal that is &quot;depth-first search&quot;)</li>
+</ul>
+</li>
+</ul>
+<h3 id="rotating-nodes">Rotating Nodes</h3>
+<ul>
+<li>Imagine a circle around the node you rotate around and its child nodes</li>
+<li>&quot;Pull&quot; everything around in the direction you want to rotate</li>
+<li>Rotations do not change the in-order traversal</li>
+</ul>
+<h3 id="left-leaning-red-black-trees">Left-Leaning Red Black Trees</h3>
+<ul>
+<li>A <strong>binary</strong> search tree</li>
+<li>Has a 1-1 correlation with 2-3 trees
+<ul>
+<li>Values that are stuffed into one node are now connected with red links</li>
+</ul>
+</li>
+<li>Invariant: all red edges lean to the left
+<ul>
+<li>Fix by rotation/color swap</li>
+</ul>
+</li>
+<li>Insert nodes with a red link (in a 2-3 tree we stuff values in a leaf node)</li>
+</ul>
+<h3 id="tree-traversals">Tree Traversals</h3>
+<ul>
+<li>Depth First Search means we visit each subtree in some order recursively
+<ul>
+<li>Usually done with a stack</li>
+<li>Pre Order
+<ul>
+<li>visit self, visit left, visit right</li>
+<li>visit parent node before visiting child nodes</li>
+</ul>
+</li>
+<li>Post Order
+<ul>
+<li>visit left, visit right, visit self</li>
+<li>visit left child, then parent, then right child</li>
+<li>Can be done with a stack</li>
+</ul>
+</li>
+<li>In Order
+<ul>
+<li>visit left, visit self, visit right</li>
+<li>visit child nodes before visiting parent nodes</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Level Order (Breadth First Search)
+<ul>
+<li>Visit in order of tree levels</li>
+<li>Iterative search!</li>
+<li>Usually done with a queue</li>
+</ul>
+</li>
+</ul>
+
+</body>
+</html>

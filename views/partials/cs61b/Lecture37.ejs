@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture37.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-37-compression">Lecture 37: Compression</h1>
+<h4 id="11302020">11/30/2020</h4>
+<h3 id="zip-files-how-do-they-work">Zip Files, How Do They Work?</h3>
+<ul>
+<li>File is unchanged by zipping / unzipping</li>
+</ul>
+<h3 id="compression-model-1-algorithms-operating-on-bits">Compression Model #1: Algorithms Operating on Bits</h3>
+<ul>
+<li>In a <strong>lossless</strong> algorithm we require that no information is lost
+<ul>
+<li>Feed in to compression and then decompression algorithm</li>
+<li>Text files often compressible by 70% or more</li>
+</ul>
+</li>
+</ul>
+<h2 id="prefix-free-codes">Prefix Free Codes</h2>
+<h3 id="increasing-optimality-of-coding">Increasing Optimality of Coding</h3>
+<ul>
+<li>By default, English text is usually represented by sequences of characters, each 8 bits long</li>
+<li>Easy way to compress: Use fewer than 8 bits for eac letter
+<ul>
+<li>Have to decide which bit sequences should go with which letters</li>
+<li>More generally, we'd say which <strong>codewords</strong> go with which <strong>symbols</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="more-code-mapping-alphanumeric-symbols-to-codewords">More Code: Mapping Alphanumeric Symbols to Codewords</h3>
+<ul>
+<li>Example: Morse code
+<ul>
+<li>Goal: Compact representation</li>
+</ul>
+</li>
+<li>Note:
+<ul>
+<li>Can think of dot as 0, dash as 1</li>
+<li>Operators pause between codewords to avoid ambiguity
+<ul>
+<li>Pause acts as a 3rd symbol</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Alternate strategy: Avoid ambiguity by making code <strong>prefix free</strong></li>
+</ul>
+<h3 id="prefix-free-codes-example-1">Prefix-Free Codes [Example 1]</h3>
+<ul>
+<li>A prefix-free code is one in which no codeword is a prefix of another</li>
+<li>e.g. T = 1, E = 01, A = 001</li>
+</ul>
+<h3 id="prefix-free-codes-example-2">Prefix-Free Codes [Example 2]</h3>
+<ul>
+<li>space: 111, E: 010, T: 1101, A: 1011</li>
+</ul>
+<h3 id="prefix-free-code-design">Prefix Free Code Design</h3>
+<ul>
+<li><strong>Observation:</strong> Some prefix-free codes are better for some texts than others</li>
+<li>It'd be useful to have a procedure that calculates the &quot;best&quot; code for a given text</li>
+</ul>
+<h2 id="shannon-fano-codes-extra">Shannon Fano Codes (Extra)</h2>
+<h3 id="code-calculation-approach-1-shannon-fano-coding">Code Calculation Approach #1 (Shannon-Fano Coding)</h3>
+<ul>
+<li>Count relative frequencies of all characters in a text</li>
+<li>Split into &quot;left&quot; and &quot;right&quot; halves of roughly equal frequency
+<ul>
+<li>Left half gets a leading zero. Right half gets a leading one</li>
+<li>Repeat</li>
+</ul>
+</li>
+<li>Shannon-Fano coding is NOT optime. Does a good job, but possible to find &quot;better&quot; codes</li>
+</ul>
+<h2 id="huffman-coding">Huffman Coding</h2>
+<h3 id="code-calculation-approach-2-huffman-coding">Code Calculation Approach #2: Huffman Coding</h3>
+<ul>
+<li>Calculate relative frequencies
+<ul>
+<li>Assign each symbol to a node with weight = relative frequency</li>
+<li>Take the two smallest nodes and merge them into a super node with weight equal to sum of weights</li>
+<li>Repeat until everything is part of a tree</li>
+</ul>
+</li>
+</ul>
+<h2 id="huffman-coding-data-structures">Huffman Coding Data Structures</h2>
+<h3 id="prefix-free-codes">Prefix-Free Codes</h3>
+<ul>
+<li>Question: For encoding (bitstream to compressed bitstream), what is a natural data structure to use? Assume characters are of type Character, and bit sequences are of type bitSequence. Two approaches:
+<ul>
+<li>Array of BitSequence[], to retrieve, can use character as index
+<ul>
+<li>Faster than HashMap</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Question: For decoding (compressed bitstream back to bitstream), what is a natural data structure to use?
+<ul>
+<li>We need to look up <strong>longest matching prefix</strong>, an operation that Tries excel at</li>
+</ul>
+</li>
+</ul>
+<h2 id="huffman-coding-in-practice">Huffman Coding in Practice</h2>
+<h3 id="huffman-compression">Huffman Compression</h3>
+<ul>
+<li>Two possible philosophies for using Huffman Compression:
+<ul>
+<li>For each input type, assemble huge numbers of sample inputs for that category. Use each corpus to create a standard code for English, Chinese, etc</li>
+<li>For every possible input file, create a unique code just for that file. Send the code along with the compressed file</li>
+</ul>
+</li>
+<li>What are some advantages/disadvantages of each idea? Which is better?
+<ul>
+<li>Approach 1 will result in suboptimal encoding</li>
+<li>Approach 2 requires you to use extra space for the codeword table in the compressed bitstream</li>
+</ul>
+</li>
+<li>For very large inputs, the cost of including the codeword table will become insignificant</li>
+<li>In practice, Philosophy 2 is used in the real world</li>
+</ul>
+<h3 id="huffman-compression-steps">Huffman Compression Steps</h3>
+<ul>
+<li>Given <strong>input text</strong>:
+<ul>
+<li>Count frequencies</li>
+<li>Build encoding array and decoding trie</li>
+<li>Write decoding trie to output</li>
+<li>Write codeword for each symbol to output</li>
+</ul>
+</li>
+</ul>
+<h3 id="huffman-decompression-steps">Huffman Decompression Steps</h3>
+<ul>
+<li>Given <strong>input bitstream</strong>:
+<ul>
+<li>Read in decoding trie</li>
+<li>Use codeword bits to walk down the trie, outputting symbols every time you reach a leaf</li>
+</ul>
+</li>
+</ul>
+<h3 id="huffman-coding-summary">Huffman Coding Summary</h3>
+<ul>
+<li>Given a file X.txt that we'd like to compress into X.huf:
+<ul>
+<li>Consider each b-bit symbol of X.txt, counting occurrences of each of the 2^b possibilities, where b is the size of each symbol in bits</li>
+<li>Use Huffman code construction algorithm to create a decoding trie and encoding map. Store this trie at the beginning of X.huf</li>
+<li>Use encoding map to write codeword for each symbol of input into X.huf</li>
+</ul>
+</li>
+<li>To decompress X.huf:
+<ul>
+<li>Read in the decoding trie</li>
+<li>Repeatedly use the decoding trie's longestPrefixOf operation until all bits in X.hug have been converted back to their uncompressed form</li>
+</ul>
+</li>
+</ul>
+<h2 id="compression-theory">Compression Theory</h2>
+<h3 id="compression-algorithms-general">Compression Algorithms (General)</h3>
+<ul>
+<li>The big idea in Huffman Coding is representing common symbols with small numbers of bits</li>
+<li>Many other approaches:
+<ul>
+<li>Run-length encoding: Replace each character by itself concatenated with the number of occurrences</li>
+<li>LZW: Search for common repeated patterns in the input</li>
+</ul>
+</li>
+<li>General idea: Exploit redundancy and existing order inside the sequence
+<ul>
+<li>Sequences with no existing redundancy or order may actually get enlarged</li>
+</ul>
+</li>
+</ul>
+<h3 id="comparing-compression-algorithms">Comparing Compression Algorithms</h3>
+<ul>
+<li>Different compression algorithms achieve different compression ratios on different files</li>
+</ul>
+<h3 id="universal-compression-an-impossible-idea">Universal Compression: An Impossible Idea</h3>
+<ul>
+<li>There is no universal compression algorithm
+<ul>
+<li>Intuitive idea: There are far fewer short bitstreams than long ones</li>
+</ul>
+</li>
+</ul>
+<h3 id="a-sneaky-situation">A Sneaky Situation</h3>
+<ul>
+<li>Universal compression is impossible, but comparing compression algorithms could still be quite difficult</li>
+</ul>
+<h3 id="compression-model-2-self-extracting-bits">Compression Model #2: Self-Extracting Bits</h3>
+<ul>
+<li>As a model for the decompression process, let's treat the algorithm and the compressed bitstream as a single sequence of bits
+<ul>
+<li>Can think of the algorithm + compressed bitstream as an input to an interpreter. Interpreter somehow executes those bits
+<ul>
+<li>At the very &quot;bottom&quot; of these abstractions is some kind of physical machine</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</body>
+</html>

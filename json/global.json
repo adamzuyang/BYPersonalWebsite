@@ -23,6 +23,10 @@
             "link": "/sorter"
         },
         {
+            "text": "CSM CS 61B",
+            "link": "/cs61b"
+        },
+        {
             "text": "Contact",
             "link": "/#contact"
         }

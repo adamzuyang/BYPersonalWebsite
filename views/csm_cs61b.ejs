@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Barnett Yang</title>
+    <meta name="description" content="Barnett Yang's Personal Portfolio" />
+
+    <%- include('partials/head.ejs') %>
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/markdown.css" rel="stylesheet">
+</head>
+
+<body>
+    <%- include('partials/navbar.ejs') %>
+    <div class="container py-md-3">
+        <div class="row">
+            <div class="col-sm-8 mx-auto text-center">
+                <h2 style="font-size: 4rem; font-weight:250">CS 61B: Data Structures</h2>
+                <h4 style="font-size: 1.3rem; font-weight:250">CS 61B contains content regarding data structures (e.g. lists, queues, trees, etc.) and algorithms for sorting and searching. The course also offers an introduction to the Java programming language. Below are the notes that I compiled from when I took CS 61B at UC Berkeley.</h4>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container-fluid">
+        <button type="button" class="collapsible">Lecture 1: Welcome to CS 61B</button>
+        <div class="content">
+            <%- include('partials/cs61b/Lecture01.ejs') %>
+        </div>
+        <button type="button" class="collapsible">Lecture 2: Defining and Using Java Classes</button>
+        <div class="content">
+            <%- include('partials/cs61b/Lecture02.ejs') %>
+        </div>
+        <button type="button" class="collapsible">Lecture 3: References, Recursion, and Lists</button>
+        <div class="content">
+            <%- include('partials/cs61b/Lecture03.ejs') %>
+        </div>
+        <button type="button" class="collapsible">Lecture 4: SLLists, Nested Classes, Sentinel Nodes</button>
+        <div class="content">
+            <%- include('partials/cs61b/Lecture04.ejs') %>
+        </div>
+        <button type="button" class="collapsible">Lecture 5: DLLists, Arrays</button>
+        <div class="content">
+            <%- include('partials/cs61b/Lecture05.ejs') %>
+        </div>
+        <button type="button" class="collapsible">Lecture 6: ALists, Resizing, vs. SLists</button>
+        <div class="content">
+            <%- include('partials/cs61b/Lecture06.ejs') %>
+        </div>
+        <button type="button" class="collapsible">Lecture 7: Testing</button>
+        <div class="content">
+            <%- include('partials/cs61b/Lecture07.ejs') %>
+        </div>
+        <button type="button" class="collapsible">Lecture 8: Inheritance, Implements</button>
+        <div class="content">
+            <%- include('partials/cs61b/Lecture08.ejs') %>
+        </div>
+        <button type="button" class="collapsible">Lecture 9: Extends, Casting, Higher Order Functions</button>
+        <div class="content">
+            <%- include('partials/cs61b/Lecture09.ejs') %>
+        </div>
+        <button type="button" class="collapsible">Lecture 10: Subtype Polymorphism vs. Higher Order Functions</button>
+        <div class="content">
+            <%- include('partials/cs61b/Lecture10.ejs') %>
+        </div>
+        <button type="button" class="collapsible">Lecture 11: Exceptions, Iterators, Object Methods</button>
+        <div class="content">
+            <%- include('partials/cs61b/Lecture11.ejs') %>
+        </div>
+        <button type="button" class="collapsible">Lecture 13: Asymptotics Part I</button>
+        <div class="content">
+            <%- include('partials/cs61b/Lecture13.ejs') %>
+        </div>
+        <button type="button" class="collapsible">Lecture 14: Disjoint Sets</button>
+        <div class="content">
+            <%- include('partials/cs61b/Lecture14.ejs') %>
+        </div>
+        <button type="button" class="collapsible">Lecture 15: Asymptotics Part II</button>
+        <div class="content">
+            <%- include('partials/cs61b/Lecture15.ejs') %>
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <%- include('partials/scripts.ejs') %>
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+        
+        for (i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight){
+              content.style.maxHeight = null;
+            } else {
+              content.style.maxHeight = content.scrollHeight + "px";
+            } 
+          });
+        }
+    </script>
+</body>

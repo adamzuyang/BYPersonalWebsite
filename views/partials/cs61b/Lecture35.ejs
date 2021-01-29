@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture35.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-35-counting-sort-and-radix-sorts">Lecture 35: Counting Sort and Radix Sorts</h1>
+<h4 id="11182020">11/18/2020</h4>
+<h3 id="comparison-based-sorting">Comparison Based Sorting</h3>
+<ul>
+<li>The key idea from our previous sorting lecture: Sorting requires Omega(N log N) compares in the worst case
+<ul>
+<li>Thus, the ultimate comparison based sorting algorithm has a worst case runtime of Theta(N log N)</li>
+</ul>
+</li>
+<li>What about sorts that don't use comparisons</li>
+</ul>
+<h3 id="example-1-sleep-sort-for-sorting-integers-not-actually-good">Example 1: Sleep Sort (for sorting integers) (not actually good)</h3>
+<ul>
+<li>For each integer x in array A, start a new program that:
+<ul>
+<li>Sleeps for x seconds</li>
+<li>Prints x</li>
+</ul>
+</li>
+<li>All start at the same time</li>
+<li>Runtime:
+<ul>
+<li>N + max(A)</li>
+</ul>
+</li>
+<li>The catch: On real machines, scheduling execution of programs must be done by operating system. In practice requires list of running programs sorted by sleep time</li>
+</ul>
+<h3 id="example-2-counting-sort-exploiting-space-instead-of-time">Example 2: Counting Sort: Exploiting Space Instead of Time</h3>
+<ul>
+<li>Assuming keys are unique integers 0 to 11</li>
+<li>Idea:
+<ul>
+<li>Create a new array</li>
+<li>Copy item with key i into ith entry of new array</li>
+</ul>
+</li>
+</ul>
+<h3 id="generalizing-counting-sort">Generalizing Counting Sort</h3>
+<ul>
+<li>We just sorted N items in Theta(N) worst case time
+<ul>
+<li>Avoiding yes/no questions lets us dodge our lower bound based on puppy, cat, dog</li>
+</ul>
+</li>
+<li>Simplest case:
+<ul>
+<li>Keys are unique integers from 0 to N-1</li>
+</ul>
+</li>
+<li>More complex cases:
+<ul>
+<li>Non-unique keys</li>
+<li>Non-consecutive keys</li>
+<li>Non-numerical keys</li>
+</ul>
+</li>
+</ul>
+<h3 id="implementing-counting-sort-with-counting-arrays">Implementing Counting Sort with Counting Arrays</h3>
+<ul>
+<li>Counting sort:
+<ul>
+<li>Count number of occurrences of each item</li>
+<li>Iterate through list, using count array to decide where to put everything</li>
+</ul>
+</li>
+<li>Bottom line, we can use counting sort to sort N objects in Theta(N) time</li>
+</ul>
+<h2 id="counting-sort-runtime">Counting Sort Runtime</h2>
+<h3 id="counting-sort-vs-quicksort">Counting Sort vs. Quicksort</h3>
+<ul>
+<li>For sorting an array of the 100 largest cities by population, which sort do you think has a better expected worst case runtime in seconds?
+<ul>
+<li>Quicksort is better</li>
+<li>Counting sort requires building an array of size 37832892 (population of Tokyo)</li>
+</ul>
+</li>
+</ul>
+<h3 id="counting-sort-runtime-analysis">Counting Sort Runtime Analysis</h3>
+<ul>
+<li>What is the runtime for counting sort on N keys with alphabet of size R?
+<ul>
+<li>Treat R as a variable, not a constant</li>
+</ul>
+</li>
+<li>Total runtime on N keys with alphabet of size R: Theta(N + R)
+<ul>
+<li>Create an array of size R to store counts: Theta(R)</li>
+<li>Counting number of each item: Theta(N)</li>
+<li>Calculating target positions of each item: Theta(R)</li>
+<li>Creating an array of size N to store ordered data: Theta(N)</li>
+<li>Copying items from original array to ordered array: Do N items:
+<ul>
+<li>Check target position: Theta(1)</li>
+<li>Update target position: Theta(1)</li>
+</ul>
+</li>
+<li>Copying items from ordered array back to original array: Theta(N)</li>
+</ul>
+</li>
+<li>Memory usage: Theta(N + R)
+<ul>
+<li>N is for ordered array</li>
+<li>R is for counts and starting points</li>
+</ul>
+</li>
+<li>Bottom line: If N is &gt;= R, then we expect reasonable performance
+<ul>
+<li>Empirical experiments needed to compare vs. Quicksort on practical inputs</li>
+</ul>
+</li>
+</ul>
+<h3 id="counting-sort-vs-quicksort">Counting Sort vs. Quicksort</h3>
+<ul>
+<li>For sorting really really big collections of items from some alphabet, which algorithm will be fastest?
+<ul>
+<li>Counting Sort: Theta(N + R) (vs. Quicksort's Theta(N log N))</li>
+</ul>
+</li>
+<li>For sufficiently large collections, counting sort will simply be faster</li>
+</ul>
+<h3 id="sort-summary">Sort Summary</h3>
+<ul>
+<li>Counting sort is nice, but alphabetic restriction limits usefulness
+<ul>
+<li>No obvious way to sort hard-to-count things like Strings</li>
+</ul>
+</li>
+<li>Counting sort is also stable</li>
+</ul>
+<p><img src="images/35.1.png" alt=""></p>
+<h2 id="lsd-radix-sort">LSD Radix Sort</h2>
+<h3 id="radix-sort">Radix Sort</h3>
+<ul>
+<li>Not all keys belong to finite alphabets, e.g. Strings
+<ul>
+<li>However, Strings consist of characters from a finite alphabet</li>
+</ul>
+</li>
+</ul>
+<h3 id="lsd-least-significant-digit-sort">LSD (Least Significant Digit) Sort</h3>
+<ul>
+<li>Sort each digit independently from rightmost digit towards left
+<ul>
+<li>i.e. start from least significant digit and work towards left</li>
+</ul>
+</li>
+</ul>
+<h3 id="lsd-runtime">LSD Runtime</h3>
+<ul>
+<li>What is the runtime of LSD sort?
+<ul>
+<li>Theta(WN + WR)
+<ul>
+<li>N: Number of items</li>
+<li>R: Size of alphabet</li>
+<li>W: Width of each item in number of digits</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="non-equal-key-lengths">Non-equal Key Lengths</h3>
+<ul>
+<li>After processing least significant digit, we may have keys that aren't of the same length. Now what?
+<ul>
+<li>When keys are of different lengths, can treat empty spaces as less than all other characters</li>
+</ul>
+</li>
+</ul>
+<h3 id="sorting-summary">Sorting Summary</h3>
+<ul>
+<li>W passes of counting sort: Theta(WN + WR) runtime
+<ul>
+<li>Annoying feature: Runtime depends on length of longest key</li>
+</ul>
+</li>
+</ul>
+<p><img src="images/35.2.png" alt=""></p>
+<h2 id="msd-radix-sort">MSD Radix Sort</h2>
+<h3 id="msd-most-significant-digit-radix-sort">MSD (Most Significant Digit) Radix Sort</h3>
+<ul>
+<li>Basic idea: Just like LSD, but sort from leftmost digit towards the right</li>
+<li>However, it requires a few modifications from LSD radix sort
+<ul>
+<li>Key idea: Sort each subproblem separately</li>
+</ul>
+</li>
+</ul>
+<p><img src="images/35.3.png" alt=""></p>
+<h3 id="runtime-of-msd">Runtime of MSD</h3>
+<ul>
+<li>What is the Best Case of MSD sort (in terms of N, W, R)?
+<ul>
+<li>We finish in one counting sort pass, looking only at the top digit: Theta(N + R)</li>
+</ul>
+</li>
+<li>What is the Worst Case of MSD sort (in terms of N, W, R)?
+<ul>
+<li>We have to look at every character, degenerating to LSD sort: Theta(WN + WR)</li>
+</ul>
+</li>
+</ul>
+<h3 id="sorting-runtime-analysis">Sorting Runtime Analysis</h3>
+<p><img src="images/35.4.png" alt=""></p>
+
+</body>
+</html>

@@ -3,7 +3,7 @@ h1, h2, h3, h5 {
 }
 
 h1 {
-    font-size: 4.5rem;
+    font-size: 4rem;
 }
 
 h2 {
@@ -41,7 +41,7 @@ h5 {
     margin-right: 5%;
     width: 90%;
     position: absolute;
-    transform: translate(0, 50vh);
+    transform: translate(0, 47vh);
     color:white !important;
 }
 

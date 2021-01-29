@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture01.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-1-welcome-to-61b">Lecture 1: Welcome to 61B</h1>
+<h4 id="8262020">8/26/2020</h4>
+<h2 id="hello-world">Hello World</h2>
+<pre class="hljs"><code><div># In Python
+print(&quot;hello world&quot;)
+
+// In Java
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println(&quot;hello world&quot;);
+    }
+}
+
+// Output:
+hello world
+</div></code></pre>
+<ul>
+<li>In Java, all code must be part of a class</li>
+<li>Classes are defined with <code>public class CLASSNAME</code></li>
+<li>We use <code>{ }</code> to delineate the beginning and ending of things</li>
+<li>We must end lines with a semicolon</li>
+<li>The code we want to run must be inside <code>public static void main(String[] args)</code></li>
+</ul>
+<pre class="hljs"><code><div># In Python
+x = 0
+while x &lt; 10:
+    print(x)
+    x = x + 1
+
+// In Java
+public class HelloNumbers {
+    public static void main(String[] args) {
+        int x = 0;  // Must declare variables, variable types can never change
+        while (x &lt; 10) {
+            System.out.println(x);
+            x = x + 1;
+        }
+    }
+}
+</div></code></pre>
+<ul>
+<li>Before Java variables can be used, they must be declared</li>
+<li>Java variables must have a specific type</li>
+<li>Java variable types can never change</li>
+<li>Types are verified before the code even runs!!!</li>
+</ul>
+<pre class="hljs"><code><div># In Python
+def larger(x, y):
+    &quot;&quot;&quot;Returns the larger of x and y&quot;&quot;&quot;
+    if (x &gt; y):
+        return x
+    return y
+
+print (larger(-5, 10))
+
+
+// In Java
+public class LargerDemo {
+    /** Returns the larger of x and y. */
+    public static larger(int x, int y) {
+        if (x &gt; y) {
+            return x;
+        }
+        return y;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(larger(-5, 10));
+    }
+}
+</div></code></pre>
+<ul>
+<li>Functions must be declared as part of a class in Java. A function that is part of a class is called a &quot;method&quot;. So in Java, all functions are methods.</li>
+<li>To define a function in Java, we use &quot;public static&quot;. We will see alternate ways of defining functions later.</li>
+<li>ALL parameters of a function must have a declared type, and the return value of a function must have a declared type.</li>
+<li>Functions in Java return only one value!</li>
+</ul>
+<h3 id="java-and-object-orientation">Java and Object Orientation</h3>
+<ul>
+<li>Java is an object oriented language with strict requirements:
+<ul>
+<li>Every Java file must contain a class declaration</li>
+<li>All code lives inside a class, even helper functions, global constants, etc.</li>
+<li>To run a java program, you typically define a min method using <code>public static void main(String[] args)</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="java-and-static-typing">Java and Static Typing</h3>
+<ul>
+<li>Java is statically typed!
+<ul>
+<li>All variables, parameter,s and methods must have a declared type</li>
+<li>That type can never change</li>
+<li>Expressions also have a type</li>
+<li>The compiler checks that all the types in your program are compatible before the program ever runs!
+<ul>
+<li>This is unlike Python, where type checks are performed DURING execution</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="reflections-on-static-typing">Reflections on Static Typing</h3>
+<ul>
+<li>The Good:
+<ul>
+<li>Catches certain types of errors, making debugging easier</li>
+<li>Type errors can (almost) never occur on the end user's computer</li>
+<li>Makes it easier to read and reason about code</li>
+<li>Code can run more efficiently, e.g. no need to do expensive runtime type checks</li>
+</ul>
+</li>
+<li>The Bad:
+<ul>
+<li>Code is more verbose</li>
+<li>Code is less general (functions can only be applied to inputs of certain types)
+<ul>
+<li>There is a way around this in Java (generics)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="welcome-to-61b-2019">Welcome to 61B 2019</h2>
+<h3 id="what-is-61b-about">What is 61B About?</h3>
+<ul>
+<li>Writing code that runs efficiently
+<ul>
+<li>Good algorithms</li>
+<li>Good data structures</li>
+</ul>
+</li>
+<li>Writing code efficiently
+<ul>
+<li>Designing, building, testing, and debugging large programs</li>
+<li>Use of programming tools
+<ul>
+<li>git, IntelliJ, JUnit</li>
+</ul>
+</li>
+<li>Java</li>
+</ul>
+</li>
+</ul>
+<h3 id="why-study-algorithms-or-data-structures">Why Study Algorithms or Data Structures?</h3>
+<ul>
+<li>Daily life is supported by them</li>
+</ul>
+<h3 id="why-study-algorithms-or-data-structures">Why Study Algorithms or Data Structures?</h3>
+<ul>
+<li>Major driver of current progress of our civilization</li>
+<li>Self-driving cars</li>
+<li>AlphaGo</li>
+<li>To become a better programmer</li>
+<li>Being an efficient programmer means using the right data structures and algorithms for the job</li>
+</ul>
+<h3 id="why-study-algorithms-or-data-structures">Why Study Algorithms or Data Structures?</h3>
+<ul>
+<li>To understand the universe. Science is increasingly about simulation and complex data analysis rather than simple observations and clean equations.</li>
+<li>To create beautiful things</li>
+<li>As an end unto itself</li>
+</ul>
+
+</body>
+</html>

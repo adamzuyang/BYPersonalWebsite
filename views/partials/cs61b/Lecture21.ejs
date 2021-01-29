@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture21.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-21-heaps-and-pqs">Lecture 21: Heaps and PQs</h1>
+<h4 id="10142020">10/14/2020</h4>
+<h2 id="the-priority-queue-interface">The Priority Queue Interface</h2>
+<h3 id="the-priority-queue-interface">The Priority Queue Interface</h3>
+<pre class="hljs"><code><div>/** (Min) Priority Queue: Allowing tracking and removal of the
+  * smallest item in a priority queue */
+public interface MinQP&lt;Item&gt; {
+    // Adds the item to the priority queue
+    public void add(Item x);
+
+    // Returns the smallest item in the priority queue
+    public Item getSmallest();
+
+    // Removes the smallest item from the priority queue
+    public Item removeSmallest();
+
+    // Returns the size of the priority queue
+    public int size();
+}
+</div></code></pre>
+<ul>
+<li>Useful if you want to keep track of the &quot;smallest&quot;, &quot;largest&quot;, &quot;best&quot; etc. seen so far</li>
+</ul>
+<h3 id="usage-example-unharmonious-text">Usage example: Unharmonious Text</h3>
+<ul>
+<li>Imagine that you're part of the US Happiness Enhancement team
+<ul>
+<li>Your job: Monitor text messages of the citizens to make sure they are not having any unharmonious conversations</li>
+<li>Prepare a report of M messages that seem most unharmonious</li>
+</ul>
+</li>
+<li>Naive approach: Create a list of all messages sent for the entire day. Sort it using your comparator. Return the M messages that are largest</li>
+</ul>
+<h3 id="naive-implementation-store-and-sort">Naive Implementation: Store and Sort</h3>
+<ul>
+<li>Potentially uses a huge amount of memory Theta(N), where N is number of texts
+<ul>
+<li>Goal: Do this in Theta(M) memory using a MinPQ</li>
+<li><code>MinPQ&lt;String&gt; unharmoniousTexts = new HeapMinPQ&lt;Transaction&gt;(cmptr);</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="better-implementation-track-the-m-best">Better Implementation: Track the M Best</h3>
+<ul>
+<li>Can track top M transactions using only M memory. API for MinPQ also makes code very simple (don't need to do explicit comparisons)</li>
+</ul>
+<h3 id="how-would-we-implement-a-minpq">How Would we Implement a MinPQ?</h3>
+<ul>
+<li>Some possibilities:
+<ul>
+<li>Ordered Array
+<ul>
+<li>add: Theta(N)</li>
+<li>getSmallest: Theta(1)</li>
+<li>removeSmallest: Theta(N)</li>
+</ul>
+</li>
+<li>Bushy BST: Maintaining bushiness is annoying. Handling duplicate priorities is awkward
+<ul>
+<li>add: Theta(log N)</li>
+<li>getSmallest: Theta(log N)</li>
+<li>removeSmallest: Theta(log N)</li>
+</ul>
+</li>
+<li>HashTable: No good! Items go into random places</li>
+</ul>
+</li>
+</ul>
+<h2 id="heaps">Heaps</h2>
+<h3 id="introducing-the-heap">Introducing the Heap</h3>
+<ul>
+<li>BSTs would work, but need to be kept bushy and duplicates are awkward</li>
+<li>Binary min-heap: Binary tree that is <strong>complete</strong> and obeys <strong>min-heap property</strong>
+<ul>
+<li>Min-heap: Every node is less than or equal to both of its children</li>
+<li>Complete: Missing items only at the bottom level (if any), all nodes are as far left as possible</li>
+</ul>
+</li>
+</ul>
+<p><img src="images/21.1.png" alt=""></p>
+<h3 id="what-good-are-heaps">What Good are Heaps?</h3>
+<ul>
+<li>Heaps lend themselves very naturally to implementation of a priority queue</li>
+<li>Questions:
+<ul>
+<li>How would you support <code>getSmallest()</code>
+<ul>
+<li>Return the root</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="how-do-we-add-to-a-heap">How Do We Add to a Heap?</h3>
+<ul>
+<li>Challenge: Come up with an algorithm for <code>add(x)</code>
+<ul>
+<li>How would we insert 3?
+<img src="images/21.2.png" alt="">
+<ul>
+<li>Add to end of heap temporarily</li>
+<li>Swim up to the hierarchy to rightful place
+<img src="images/21.3.png" alt=""></li>
+</ul>
+</li>
+<li>Delete min
+<ul>
+<li>Swap the last item in the heap into the root</li>
+<li>Then sink your way down the hierarchy, yielding to the most &quot;qualified&quot; items</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="heap-operations-summary">Heap Operations Summary</h3>
+<ul>
+<li>Given a heap, how do we implement PQ operations?
+<ul>
+<li><code>getSmallest()</code> - return the item in the root node</li>
+<li><code>add(x)</code> - place the new employee in the last position, and promote as high as possible</li>
+<li><code>removeSmallest()</code> - assassinate the president (of the company), promote the rightmost person in the company to president. Then demote repeatedly, always taking the &quot;better&quot;successor</li>
+</ul>
+</li>
+</ul>
+<h2 id="tree-representations">Tree Representations</h2>
+<h3 id="how-do-we-represent-a-tree-in-java">How do we represent a tree in Java?</h3>
+<ul>
+<li>Approach 1a, 1b, and 1c: Create mapping from node to children</li>
+</ul>
+<pre class="hljs"><code><div>public class Tree1A&lt;Key&gt; {
+    Key k;
+    Tree1A left;
+    Tree1A middle;
+    Tree1A right;
+}
+</div></code></pre>
+<pre class="hljs"><code><div>public class Tree1B&lt;Key&gt; {
+    Key k;
+    Tree1B[] children;
+    ...
+}
+</div></code></pre>
+<pre class="hljs"><code><div>// Sibling tree
+public class Tree1C&lt;Key&gt; {
+    // Nodes at the same level point to each other's siblings
+    Key k;
+    Tree1C favoredChild;
+    Tree1C sibling;
+}
+</div></code></pre>
+<ul>
+<li>Approach 2: Store keys in an array. Store parentIDs in an array
+<ul>
+<li>Similar to what we did with disjointSets</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>public class Tree2&lt;Key&gt; {
+    Key[] keys;
+    int[] parents;
+    ...
+}
+</div></code></pre>
+<p><img src="images/21.4.png" alt=""></p>
+<ul>
+<li>Approach 3: Store keys in an array. Don't store structure anywhere
+<ul>
+<li>To interpret array: Simply assume tree is complete</li>
+<li>Obviously only works for &quot;complete&quot; trees</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>public class Tree3&lt;Key&gt; {
+    Key[] keys;
+}
+</div></code></pre>
+<p><img src="images/21.5.png" alt=""></p>
+<h3 id="a-deep-look-at-approach-3">A Deep Look at Approach 3</h3>
+<ul>
+<li>Write the <code>parent(k)</code> method for approach 3</li>
+</ul>
+<pre class="hljs"><code><div>public void swim(int k) {
+    if (keys[parent(k)] &gt; keys[k]) {
+        swap(k, parent(k));
+        swim(parent(k));
+    }
+}
+</div></code></pre>
+<pre class="hljs"><code><div>public int parent(int k) {
+    if (k == 0) {
+        return 0;
+    }
+    return (k - 1) / 2;
+}
+</div></code></pre>
+<h3 id="approach-3b-book-implementation-leaving-one-empty-spot-in-the-front">Approach 3B (book implementation): Leaving One Empty Spot in the Front</h3>
+<ul>
+<li>Approach 3b: Store keys in an array. Offset everything by 1 spot
+<ul>
+<li>Same as 3, but leave spot 0 empty</li>
+<li>Makes computation of children/parents &quot;nicer&quot;
+<ul>
+<li>leftChild(k) = k * 2</li>
+<li>rightChild(k) = k * 2 + 1</li>
+<li>parent(k) = k / 2</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="images/21.6.png" alt=""></p>
+<h3 id="heap-implementation-of-a-priority-queue">Heap Implementation of a Priority Queue</h3>
+<ul>
+<li>Heap
+<ul>
+<li>add: Theta(log N)</li>
+<li>getSmallest: Theta(1)</li>
+<li>removeSmallest: Theta(log N)</li>
+</ul>
+</li>
+<li>Notes:
+<ul>
+<li>Why &quot;priority queue&quot;? Can think of position in tree as its &quot;priority&quot;</li>
+<li>Heap is log N time AMORTIZED (some resizes, but no big deal)</li>
+<li>BST can have constant getSmallest if you keep a pointer to smallest</li>
+<li>Heaps handle duplicate priorities much more naturally than BSTs</li>
+<li>Array based heaps take less memory (very roughly about 1/3) the memory of representing a tree with approach 1a)</li>
+</ul>
+</li>
+</ul>
+<h3 id="some-implementation-questions">Some Implementation Questions</h3>
+<ul>
+<li>How does a PQ know how to determine which item in a PQ is larger?
+<ul>
+<li>What could we change so that there is a default comparison?</li>
+</ul>
+</li>
+<li>What constructors are needed to allow for different orderings?</li>
+</ul>
+<h2 id="data-structures-summary">Data Structures Summary</h2>
+<h3 id="the-search-problem">The Search Problem</h3>
+<ul>
+<li>Given a stream of data, retrieve information of interest
+<ul>
+<li>Examples:
+<ul>
+<li>Website users post to personal page. Serve content only to friends</li>
+<li>Given logs for thousands of weather stations, display weather map for specified date and time</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="search-data-structures-the-particularly-abstract-ones">Search Data Structures (The particularly abstract ones)</h3>
+<p><img src="images/21.7.png" alt="">
+<img src="images/21.8.png" alt=""></p>
+<ul>
+<li>Abstraction often happens in layers!
+<ul>
+<li>PQ -&gt; Heap Ordered Tree -&gt; Tree -&gt; {Approach 1A, 1B, 1C, 2, 3, 3B}</li>
+<li>External Chaining HT -&gt; Array of Buckets -&gt; Bucket -&gt; {ArrayList, Resizing Array, LinkedList, BST (requires comparable items)}</li>
+</ul>
+</li>
+<li>Specialized searching data structures:
+<img src="images/21.9.png" alt=""></li>
+</ul>
+<h3 id="data-structures">Data Structures</h3>
+<ul>
+<li>Data Structure: A particular way of organizing data
+<ul>
+<li>We've covered many of the most fundamental abstract data types, their common implementations, and the tradeoffs thereof</li>
+</ul>
+</li>
+</ul>
+<h2 id="summary">Summary</h2>
+<h3 id="discussion-summary-heaps">Discussion Summary: Heaps</h3>
+<ul>
+<li><strong>Heaps</strong> are special trees that follow a few basic rules:
+<ul>
+<li>Heaps are <strong>complete</strong> - the only empty parts of a heap are in the bottom row, to the right</li>
+<li>In a min-heap, each node must be <em>smaller</em> than all of its child nodes. The opposite is true for max-heaps</li>
+</ul>
+</li>
+</ul>
+
+</body>
+</html>

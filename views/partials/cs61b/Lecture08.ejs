@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture08.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-8-inheritance-implements">Lecture 8: Inheritance, Implements</h1>
+<h4 id="9142020">9/14/2020</h4>
+<h2 id="the-desire-for-generality">The Desire for Generality</h2>
+<h3 id="alist-and-slist">AList and SList</h3>
+<ul>
+<li>After adding the insert methods from discussion 3, our AList and SLList classes have the following methods (exact same method signatures for both classes)</li>
+</ul>
+<h3 id="using-alists-and-slists-wordutilsjava">Using ALists and SLists: WordUtils.java</h3>
+<ul>
+<li>Suppose we're writing a library to manipulate lists of words. Might want to write a function that finds the longest word from a list</li>
+<li>Suppose we also want to be able to handle ALists. What should we change?</li>
+<li>What if we want to be able to handle both?</li>
+</ul>
+<h3 id="method-overloading-in-java">Method Overloading in Java</h3>
+<ul>
+<li>Java allows multiple methods with the same name, but with different parameters
+<ul>
+<li>This is called method <strong>overloading</strong></li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>public static String longest(AList&lt;String&gt; list) {
+    ...
+}
+public static String longest(SLList&lt;String&gt; list) {
+    ...
+}
+</div></code></pre>
+<h3 id="the-downsides">The Downsides</h3>
+<ul>
+<li>While overloading works, it is a bad idea in the case of <code>longest</code>
+<ul>
+<li>Source code files are unnecessary long</li>
+<li>Repeating yourself is aesthetically gross</li>
+<li><strong>More code to maintain</strong>
+<ul>
+<li>Any change made to one, must be made to another</li>
+<li>Including bug fixes!</li>
+</ul>
+</li>
+<li>suppose we make another list someday, we'll need yet another function</li>
+</ul>
+</li>
+</ul>
+<h2 id="hypernyms-hyponyms-and-interface-inheritance">Hypernyms, Hyponyms, and Interface Inheritance</h2>
+<h3 id="hypernyms">Hypernyms</h3>
+<ul>
+<li>Washing your poodle:
+<ul>
+<li>Brush your poodle before a bath</li>
+<li>Use lukewarm water</li>
+<li>Talk to your poodle in a calm voice</li>
+<li>Use poodle shampoo</li>
+<li>Rinse well</li>
+<li>Air-dry</li>
+<li>Reward your poodle</li>
+</ul>
+</li>
+<li>Washing your malamute
+<ul>
+<li>Brush your malamute before a bath</li>
+<li>Use lukewarm water</li>
+<li>Talk to your malamute in a calm voice</li>
+<li>Use malamute shampoo</li>
+<li>Rinse well</li>
+<li>Air-dry</li>
+<li>Reward your malamute</li>
+</ul>
+</li>
+<li>In natural languages (e.g. English), we have a concept known as &quot;hypernym&quot; to deal with this problem
+<ul>
+<li>Dog is a &quot;hypernym&quot; of poodle, malamute, yorkie, etc.</li>
+</ul>
+</li>
+</ul>
+<h3 id="hypernym-and-hyponym">Hypernym and Hyponym</h3>
+<ul>
+<li>We use the word hyponym for the opposite type of relationship
+<ul>
+<li>&quot;dog&quot;: Hypernym of &quot;poodle&quot;, &quot;malamute&quot;</li>
+<li>&quot;poodle&quot;: Hyponym of &quot;dog&quot;</li>
+</ul>
+</li>
+<li>Hypernyms and hyponyms compose a hierarchy
+<ul>
+<li>A dog &quot;is-a&quot; canine</li>
+<li>A canine &quot;is-a&quot; carnivore</li>
+</ul>
+</li>
+</ul>
+<h3 id="simple-hyponymic-relationships-in-java">Simple Hyponymic Relationships in Java</h3>
+<ul>
+<li>SLLists and ALists are both clearly some kind of &quot;list&quot;
+<ul>
+<li>List is a hypernym of SLList and AList</li>
+</ul>
+</li>
+<li>Expressing this in Java is a two-step process:
+<ul>
+<li>Define a reference type for our hypernym (List61B.java)</li>
+<li>Specify that SLLists and ALists are hyponyms of that type</li>
+</ul>
+</li>
+</ul>
+<h3 id="step-1-defining-a-list61bjava">Step 1: Defining a List61B.java</h3>
+<ul>
+<li>We'll use the new keyword <strong>interface</strong> instead of <strong>class</strong> to define a List61B
+<ul>
+<li>Idea: Interface is a specification of what a List is able to do, not how to do it</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>public interface List61B&lt;Item&gt; {
+    public void addLast(Item x);
+    public Item getLast();
+    public Item get(int i);
+    public int size();
+    public Item removeLast();
+    public void insert(Item x, int position);
+    public Item getFirst();
+}
+</div></code></pre>
+<h3 id="step-2-implementing-the-list61b-interface">Step 2: Implementing the List61B Interface</h3>
+<ul>
+<li>We'll now:
+<ul>
+<li>Use the new <strong>implements</strong> keyword to tell the Java compiler that SLList and AList are hyponyms of List61B</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>public class AList&lt;Item&gt; implements List61B&lt;Item&gt; {
+    ...
+}
+
+public class SLList&lt;Item&gt; implements List61B&lt;Item&gt; {
+    ...
+}
+</div></code></pre>
+<pre class="hljs"><code><div>public class WordUtils {
+    public static String longest(List61B&lt;String&gt; list) {
+        ...
+    }
+}
+</div></code></pre>
+<h2 id="overriding-vs-overloading">Overriding vs. Overloading</h2>
+<h3 id="method-overriding">Method Overriding</h3>
+<ul>
+<li>If a &quot;subclass&quot; has a method with the exact same signature as in the &quot;superclass&quot;, we say the subclass <strong>overrides</strong> the method
+<ul>
+<li>e.g. AList <strong>overrides</strong> addLast(Item)</li>
+<li>Methods with the same name but different signatures are <strong>overloaded</strong></li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>public class Math {
+    public int abs(int a)
+    public double abs(double a)
+}
+</div></code></pre>
+<ul>
+<li>abs is <strong>overloaded</strong></li>
+</ul>
+<h3 id="optional-step-2b-adding-the-override-annotation">Optional Step 2B: Adding the @Override Annotation</h3>
+<ul>
+<li>In 61B, we'll always mark every overriding method with the <code>@Override</code> annotation
+<ul>
+<li>Example: Mark AList.java's overriding methods with <code>@Override</code></li>
+<li>The only effect of this tag is that the code won't compile if it is not actually an overriding method</li>
+</ul>
+</li>
+<li>Why use <code>@Override</code>?
+<ul>
+<li>Main reason: Protects against typos
+<ul>
+<li>If you say <code>@Override</code>, but the method isn't actually overriding anything, you'll get a compile error</li>
+<li>e.g. <code>public void addLast(Item x)</code></li>
+</ul>
+</li>
+<li>Reminds programmer that method definition came from somewhere higher up in the inheritance hierarchy
+e.g.</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>public class AList&lt;Item&gt; implements List61B&lt;Item&gt; {
+    @Override
+    public Item getItem(int a) {
+        ...
+    }
+}
+</div></code></pre>
+<h2 id="interface-inheritance">Interface Inheritance</h2>
+<h3 id="interface-inheritance">Interface Inheritance</h3>
+<ul>
+<li>Specifying the capabilities of a subclass using the <strong>implements</strong> keyword is known as <strong>interface inheritance</strong>
+<ul>
+<li>Interface: The list of al method signatures</li>
+<li>Inheritance: The subclass &quot;inherits&quot; the interface from a superclass</li>
+<li>Specifies what the subclass can do, but not how</li>
+<li>Subclasses <strong>must</strong> override all of these methods!
+<ul>
+<li>Will fail to compile otherwise</li>
+</ul>
+</li>
+<li>Such relationships can be multi-generational
+<ul>
+<li>Figure: Interfaces in white, classes in green</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Interface inheritance is a powerful tool for generalizing code
+<ul>
+<li>WordUtils.longest works on SLLists, ALists, and even lists that have not yet been invented</li>
+</ul>
+</li>
+</ul>
+<h3 id="copying-the-bits">Copying the Bits</h3>
+<ul>
+<li>Two seemingly contradictory facts:
+<ul>
+<li>#1: When you set <code>x = y</code> or pass a parameter, you're just copying the bits</li>
+<li>#2: A memory box can only hold 64 bit addresses for the appropriate type</li>
+</ul>
+</li>
+<li>Answer: If X is a superclass of , then memory boxes for X may contain Y
+<ul>
+<li>An <code>AList</code> is-a List</li>
+<li>Therefore <code>List</code> variables can hold <code>ALList</code> addresses</li>
+</ul>
+</li>
+<li>e.g. the following works just fine:</li>
+</ul>
+<pre class="hljs"><code><div>public static void main(String[] args) {
+    List61B&lt;String&gt; someList = new SLList&lt;&gt;();
+    someList.addFirst(&quot;elk&quot;);
+}
+</div></code></pre>
+<h2 id="implementation-inheritance-default-methods">Implementation Inheritance: Default Methods</h2>
+<h3 id="implementation-inheritance">Implementation Inheritance</h3>
+<ul>
+<li>Interface Inheritance:
+<ul>
+<li>Subclass inherits signatures, but NOT implementation</li>
+</ul>
+</li>
+<li>Java also allows <strong>implementation inheritance</strong>
+<ul>
+<li>Subclasses can inherit signatures AND implementation</li>
+</ul>
+</li>
+<li>Use the <strong>default</strong> keyword to specify a method that subclasses should inherit from an <strong>interface</strong>
+<ul>
+<li>Ex. add a default <code>print()</code> to List61B</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>public interface List61B&lt;Item&gt; {
+    public void addLast(Item x);
+    public Item getLast();
+    public Item get(int i);
+    public int size();
+    public Item removeLast();
+    public void insert(Item x, int position);
+    public Item getFirst();
+
+    /** Prints out the entire List. */
+    default public void print() {
+        for (int i = 0; i &lt; size(); i += 1) {
+            System.out.print(get(i) + ' ');
+        }
+        System.out.println();
+    }
+}
+</div></code></pre>
+<h3 id="is-the-print-method-efficient">Is the print() method efficient?</h3>
+<ul>
+<li>print() is efficient for AList and inefficient for SLList
+<ul>
+<li>See the <code>get</code> method for both classes</li>
+</ul>
+</li>
+</ul>
+<h2 id="overriding-default-methods">Overriding Default Methods</h2>
+<h3 id="overriding-default-methods">Overriding Default Methods</h3>
+<ul>
+<li>If you don't like the default method, you can override it
+<ul>
+<li>Any call to <code>print()</code> on an SList will use this method instead of default</li>
+<li>Use <code>@Override</code> to cate typos like <code>public void pirnt()</code></li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>public class SLList&lt;Item&gt; {
+    @Override
+    public void print() {
+        for (Node p = sentinel.next; p != null; p = p.next) {
+            System.out.print(p.item + ' ');
+        }
+    }
+}
+</div></code></pre>
+<h2 id="dynamic-method-selection">Dynamic Method Selection</h2>
+<h3 id="static-type-vs-dynamic-type">Static Type vs. Dynamic Type</h3>
+<ul>
+<li>Every variable in Java has a &quot;compile-time type&quot;, aka &quot;static type&quot;
+<ul>
+<li>This is the type specified at <strong>declaration</strong>. Never changes!</li>
+</ul>
+</li>
+<li>Variables also have a &quot;run-time type&quot;, aka &quot;dynamic type&quot;
+<ul>
+<li>This is the type specified at <strong>instantiation</strong> (e.g. when using <code>new</code>)</li>
+<li>Equal to the type of the object being pointed at</li>
+</ul>
+</li>
+</ul>
+<h3 id="dynamic-method-selection-for-overridden-methods">Dynamic Method Selection For Overridden Methods</h3>
+<ul>
+<li>Suppose we call a method of an object using a variable with:
+<ul>
+<li>compile-time type X</li>
+<li>run-time type Y</li>
+</ul>
+</li>
+<li>Then if Y <strong>overrides</strong> the method, Y's method is used instead
+<ul>
+<li>This is known as &quot;dynamic method selection&quot;</li>
+</ul>
+</li>
+</ul>
+<h2 id="more-dynamic-method-selection-overloading-vs-overriding">More Dynamic Method Selection, Overloading vs. Overriding</h2>
+<h3 id="the-method-selection-algorithm">The Method Selection Algorithm</h3>
+<ul>
+<li>Consider the function called <code>foo.bar(x1)</code> where <code>foo</code> has static type <code>TPrime</code>, and <code>x1</code> has static type <code>T1</code></li>
+<li>At compile time, the compiler verifies that <code>TPrime</code> has a method that can handle <code>T1</code>. It then records the signature of this method
+<ul>
+<li>Note: If there are multiple methods that can handle <code>T1</code>, the compiler records the &quot;most specific&quot; one.</li>
+</ul>
+</li>
+<li>At runtime, if <code>foo</code>'s dynamic type overrides the <strong>recorded signature</strong>, use the overridden method. Otherwise, use <code>TPrime</code>'s version of the method</li>
+</ul>
+<h2 id="is-a-vs-has-a-interface-vs-implementation-inheritances">Is a vs Has a, Interface vs Implementation Inheritances</h2>
+<h3 id="interface-vs-implementation-inheritance">Interface vs. Implementation Inheritance</h3>
+<ul>
+<li>Interface inheritance (aka what):
+<ul>
+<li>Allows you to generalize code in a powerful, simple way</li>
+</ul>
+</li>
+<li>Implementation Inheritance (aka how):
+<ul>
+<li>Allows code-reuse: Subclasses can rely on superclasses or interfaces
+<ul>
+<li>Example: <code>print()</code> implemented in List61B.java</li>
+<li>Gives another dimension of control to subclass designers: Can decide whether or not to override default implementations</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Important: In both cases, we specify &quot;is-a&quot; relationships, not &quot;has-a&quot;
+<ul>
+<li>Good: Dog implements Animal, SLList implements List61B</li>
+<li>Bad: Cat implements Claw, Set implements SLList</li>
+</ul>
+</li>
+</ul>
+<h3 id="dangers-of-implementation-inheritance">Dangers of Implementation Inheritance</h3>
+<ul>
+<li>Particular dangers of implementation inheritance
+<ul>
+<li>makes it harder to keep track of where something was actually implemented</li>
+<li>Rules for resolving conflicts can be arcane
+<ul>
+<li>Ex: What if two interfaces both give conflicting default methods?</li>
+</ul>
+</li>
+<li>Encourages overly complex code
+<ul>
+<li>Common mistake: Has-a vs Is-a!</li>
+</ul>
+</li>
+<li>Breaks encapsulation!</li>
+</ul>
+</li>
+</ul>
+
+</body>
+</html>

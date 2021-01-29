@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture07.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-7-testing">Lecture 7: Testing</h1>
+<h4 id="9112020">9/11/2020</h4>
+<h2 id="a-new-way">A New Way</h2>
+<h3 id="how-does-a-programmer-know-that-their-code-works">How Does a Programmer Know That Their Code Works?</h3>
+<ul>
+<li>Running main and seeing if the code behaves as expected</li>
+<li>The Autograder</li>
+<li>In the real world, programmers believe their code works because of <strong>tests they write themselves</strong>
+<ul>
+<li>Knowing that it works for sure is usually impossible</li>
+<li>This will be our new way</li>
+</ul>
+</li>
+</ul>
+<h3 id="sorting-the-mcguffin-for-our-testing-adventure">Sorting: The McGuffin for Our Testing Adventure</h3>
+<ul>
+<li>To try out this new way, we need a task to complete
+<ul>
+<li>Let's try to write a method that sorts arrays of Strings</li>
+</ul>
+</li>
+</ul>
+<h3 id="the-new-way">The New Way</h3>
+<ul>
+<li>We will write our test for TestSort first</li>
+</ul>
+<h2 id="ad-hoc-testing-vs-junit">Ad Hoc Testing vs. JUnit</h2>
+<h3 id="ad-hoc-test">Ad Hoc Test</h3>
+<pre class="hljs"><code><div>public class TestSort {
+    /** Test the Sort.sort method */
+    public static void testSort() {
+        String[] input = {&quot;i&quot;, &quot;have&quot;, &quot;an&quot;, &quot;egg&quot;};
+        String[] expected = {&quot;an&quot;, &quot;egg&quot;, &quot;have&quot;, &quot;i&quot;};
+
+        Sort.sort(input);
+
+        for (int i = 0; i &lt; input.length; i += 1) {
+            if (!input[i].equals(expected[i])) {
+                System.out.println(&quot;Mismatch in position &quot; + i);
+                return;
+            }
+        }
+
+        if (java.utils.Arrays.equals(input, expected)) {
+            System.out.println(&quot;Error! There seems to be a problem with Sort.sort.&quot;);
+        }
+    }
+
+    public static void main(String[] args) {
+        testSort();
+    }
+}
+</div></code></pre>
+<h3 id="junit-a-library-for-making-testing-easier">JUnit: A Library for Making Testing Easier</h3>
+<ul>
+<li>Ad Hoc Testing is tedious, use JUnit library instead</li>
+</ul>
+<pre class="hljs"><code><div>public class TestSort {
+    /** Test the Sort.sort method */
+    public static void testSort() {
+        String[] input = {&quot;i&quot;, &quot;have&quot;, &quot;an&quot;, &quot;egg&quot;};
+        String[] expected = {&quot;an&quot;, &quot;egg&quot;, &quot;have&quot;, &quot;i&quot;};
+
+        Sort.sort(input);
+
+        org.junit.Assert.assertArrayEquals(expected, input);
+    }
+
+    public static void main(String[] args) {
+        testSort();
+    }
+}
+</div></code></pre>
+<h2 id="selection-sort">Selection Sort</h2>
+<h3 id="back-to-sorting-selection-sort">Back to Sorting: Selection Sort</h3>
+<ul>
+<li>Selection sorting a list of N items:
+<ul>
+<li>Find the smallest item</li>
+<li>Move (or swap it) it to the front</li>
+<li>Selection sort the remaining N-1 items (without touching front item!)</li>
+</ul>
+</li>
+<li>Let's try implementing this
+<ul>
+<li>I'll try to simulate as closely as possible how I think students might approach this problem to show how TDD helps</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>public class Sort {
+    /** Sorts strings recursively */
+    public static void sort(String[] x) {
+        // Find the smallest item
+        // Move it to the front
+        // Selection sort the rest
+        int smallestIndex = findSmallest(x);
+        swap(x, 0, smallestIndex);
+    }
+
+    /** Swap item a with b */
+    public static void swap(String[] x, int a, int b) {
+        String temp = x[a];
+        x[a] = x[b];
+        x[b] = temp;
+    }
+
+    /** Returns the index of the smallest String in x */
+    public static int findSmallest(String[] x) {
+        int smallestIndex = 0;
+        for (int i = 0; i &lt; x.length; i += 1) {
+            int cmp = x[i].compareTo(x[smallestIndex]);
+            if (cmp &lt; 0) {
+                smallestIndex = i;
+            }
+            return smallestIndex;
+        }
+    }
+}
+
+public class TestSort {
+    /** Test the Sort.sort method */
+    public static void testSort() {
+        String[] input = {&quot;i&quot;, &quot;have&quot;, &quot;an&quot;, &quot;egg&quot;};
+        String[] expected = {&quot;an&quot;, &quot;egg&quot;, &quot;have&quot;, &quot;i&quot;};
+
+        Sort.sort(input);
+
+        org.junit.Assert.assertArrayEquals(expected, input);
+    }
+
+    /** Test the Sort.findSmallest method */
+    public static void testFindSmallest() {
+        String[] input = {&quot;i&quot;, &quot;have&quot;, &quot;an&quot;, &quot;egg&quot;};
+        int expected = 2;
+
+        int actual = Sort.findSmallest(input);
+        org.junit.Assert.assertEquals(expected, actual);
+
+        String[] input2 = {&quot;there&quot;, &quot;are&quot;, &quot;many&quot;, &quot;pigs&quot;};
+        int expected2 = 1;
+
+        int actual = Sort.findSmallest(input2);
+        org.junit.Assert.assertEquals(expected2, actual2);
+    }
+
+    public static void testSwap() {
+        String[] input = {&quot;i&quot;, &quot;have&quot;, &quot;an&quot;, &quot;egg&quot;};
+        int a = 0;
+        int b = 2;
+        String[] expected = {&quot;an&quot;, &quot;have&quot;, &quot;i&quot;, &quot;egg&quot;};
+
+        Sort.swap(input, input, b);
+        org.junit.Assert.assertArrayEquals(expected, input);
+    }
+
+    public static void main(String[] args) {
+        testSwap();
+        testFindSmallest();
+        testSort();
+    }
+}
+</div></code></pre>
+<h3 id="the-evolution-of-our-design">The Evolution of Our Design</h3>
+<ul>
+<li>Created testSort</li>
+<li>Created a sort skeleton</li>
+<li>Created testFindSmallest</li>
+<li>Created findSmallest</li>
+<li>Created testSwap</li>
+<li>Created swap</li>
+<li>Changed findSmallest</li>
+<li>Now we have all the helper methods we need, as well as tests that make us pretty sure that they work
+<ul>
+<li>All that's left is to write the sort method itself.</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>public class Sort {
+    /** Sorts strings recursively */
+    public static void sort(String[] x) {
+        sort(x, 0);
+    }
+
+    /** Sorts x starting at position start */
+    private static void sort(String[] x, int start) {
+        if (start == x.length) {
+            return;
+        }
+        int smallestIndex = findSmallest(x, start);
+        swap(x, start, smallestIndex);
+        sort(x, start + 1);
+    }
+
+    /** Swap item a with b */
+    public static void swap(String[] x, int a, int b) {
+        String temp = x[a];
+        x[a] = x[b];
+        x[b] = temp;
+    }
+
+    /** Returns the index of the smallest String in x. Starting at start */
+    public static int findSmallest(String[] x, int start) {
+        int smallestIndex = start;
+        for (int i = start; i &lt; x.length; i += 1) {
+            int cmp = x[i].compareTo(x[smallestIndex]);
+            if (cmp &lt; 0) {
+                smallestIndex = i;
+            }
+            return smallestIndex;
+        }
+    }
+}
+
+public class TestSort {
+    /** Test the Sort.sort method */
+    public static void testSort() {
+        String[] input = {&quot;i&quot;, &quot;have&quot;, &quot;an&quot;, &quot;egg&quot;};
+        String[] expected = {&quot;an&quot;, &quot;egg&quot;, &quot;have&quot;, &quot;i&quot;};
+
+        Sort.sort(input);
+
+        org.junit.Assert.assertArrayEquals(expected, input);
+    }
+
+    /** Test the Sort.findSmallest method */
+    public static void testFindSmallest() {
+        String[] input = {&quot;i&quot;, &quot;have&quot;, &quot;an&quot;, &quot;egg&quot;};
+        int expected = 2;
+
+        int actual = Sort.findSmallest(input, 0);
+        org.junit.Assert.assertEquals(expected, actual);
+
+        String[] input2 = {&quot;there&quot;, &quot;are&quot;, &quot;many&quot;, &quot;pigs&quot;};
+        int expected2 = 2;
+
+        int actual2 = Sort.findSmallest(input2, 2);
+        org.junit.Assert.assertEquals(expected2, actual2);
+    }
+
+    /** Test the Sort.swap method */
+    public static void testSwap() {
+        String[] input = {&quot;i&quot;, &quot;have&quot;, &quot;an&quot;, &quot;egg&quot;};
+        int a = 0;
+        int b = 2;
+        String[] expected = {&quot;an&quot;, &quot;have&quot;, &quot;i&quot;, &quot;egg&quot;};
+
+        Sort.swap(input, input, b);
+        org.junit.Assert.assertArrayEquals(expected, input);
+    }
+
+    public static void main(String[] args) {
+        testSwap();
+        testFindSmallest();
+        testSort();
+    }
+}
+</div></code></pre>
+<h3 id="the-evolution-of-our-design">The Evolution of Our Design</h3>
+<ul>
+<li>Created testSort</li>
+<li>Created a sort skeleton</li>
+<li>Created testFindSmallest</li>
+<li>Created findSmallest</li>
+<li>Created testSwap</li>
+<li>Created swap</li>
+<li>Changed findSmallest</li>
+<li>Now we have all the helper methods we need, as well as tests that make us pretty sure that they work
+<ul>
+<li>All that's left is to write the sort method itself.</li>
+</ul>
+</li>
+<li>Modified findSmallest</li>
+</ul>
+<h2 id="reflections-on-the-process">Reflections on the Process</h2>
+<h3 id="and-were-done">And We're Done!</h3>
+<ul>
+<li>Often, development is an incremental process that involves lots of task switching and on the fly design modification</li>
+<li>Tests provide stability and scaffolding
+<ul>
+<li>Provide confidence in basic units and mitigate possibility of breaking them</li>
+<li>Help you focus on one task at a time</li>
+</ul>
+</li>
+<li>In larger projects, tests also allow you to safely <strong>refactor</strong>! Sometimes code gets ugly, necessitating redesign and rewrites</li>
+<li>One remaining problem: Sure was annoying to have to constantly edit which tests were running. Let's take care of that</li>
+</ul>
+<h2 id="simpler-junit-tests">Simpler JUnit Tests</h2>
+<h3 id="simple-junit">Simple JUnit</h3>
+<ul>
+<li>New Syntax #1: <code>org.junit.Assert.assertEquals(expected, actual);</code>
+<ul>
+<li>Tests that expected equals actual</li>
+<li>If not, program terminates with verbose message</li>
+</ul>
+</li>
+<li>JUnit does much more
+<ul>
+<li><code>assertEquals</code>, <code>assertFalse</code>, <code>assertNotNull</code>, etc.</li>
+<li>Other more complex behavior to support more sophisticated testing</li>
+</ul>
+</li>
+</ul>
+<h3 id="better-junit">Better JUnit</h3>
+<ul>
+<li>The messages output by JUnit are ugly</li>
+<li>New Syntax #2
+<ul>
+<li>Annotate each test with <code>@org.junit.Test</code></li>
+<li>Change all test methods to non-static</li>
+<li>Use a JUnit runner to run all tests and tabulate results
+<ul>
+<li>Intellij provides a default runner/renderer. OK to delete <code>main</code></li>
+<li>Rendered output is easier to read, no need to manually invoke tests</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="even-better-junit">Even Better JUnit</h3>
+<ul>
+<li>It is annoying to type out the name of the library repeatedly</li>
+<li>New Syntax #3: To avoid this we'll start every test file with:
+<ul>
+<li><code>import org.junit.Test;</code></li>
+<li><code>import static org.junit.Assert.*</code></li>
+</ul>
+</li>
+<li>This will eliminate the need to type <code>org.junit</code> or <code>org.junit.Assert</code></li>
+</ul>
+<pre class="hljs"><code><div>public class Sort {
+    /** Sorts strings recursively */
+    public static void sort(String[] x) {
+        sort(x, 0);
+    }
+
+    /** Sorts x starting at position start */
+    private static void sort(String[] x, int start) {
+        if (start == x.length) {
+            return;
+        }
+        int smallestIndex = findSmallest(x, start);
+        swap(x, start, smallestIndex);
+        sort(x, start + 1);
+    }
+
+    /** Swap item a with b */
+    public static void swap(String[] x, int a, int b) {
+        String temp = x[a];
+        x[a] = x[b];
+        x[b] = temp;
+    }
+
+    /** Returns the index of the smallest String in x. Starting at start */
+    public static int findSmallest(String[] x, int start) {
+        int smallestIndex = start;
+        for (int i = start; i &lt; x.length; i += 1) {
+            int cmp = x[i].compareTo(x[smallestIndex]);
+            if (cmp &lt; 0) {
+                smallestIndex = i;
+            }
+            return smallestIndex;
+        }
+    }
+}
+
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class TestSort {
+    /** Test the Sort.sort method */
+    @org.junit.Test
+    public void testSort() {
+        String[] input = {&quot;i&quot;, &quot;have&quot;, &quot;an&quot;, &quot;egg&quot;};
+        String[] expected = {&quot;an&quot;, &quot;egg&quot;, &quot;have&quot;, &quot;i&quot;};
+
+        Sort.sort(input);
+
+        assertArrayEquals(expected, input);
+    }
+
+    /** Test the Sort.findSmallest method */
+    @org.junit.Test
+    public void testFindSmallest() {
+        String[] input = {&quot;i&quot;, &quot;have&quot;, &quot;an&quot;, &quot;egg&quot;};
+        int expected = 2;
+
+        int actual = Sort.findSmallest(input, 0);
+        assertEquals(expected, actual);
+
+        String[] input2 = {&quot;there&quot;, &quot;are&quot;, &quot;many&quot;, &quot;pigs&quot;};
+        int expected2 = 2;
+
+        int actual2 = Sort.findSmallest(input2, 2);
+        assertEquals(expected2, actual2);
+    }
+
+    /** Test the Sort.swap method */
+    @org.junit.Test
+    public void testSwap() {
+        String[] input = {&quot;i&quot;, &quot;have&quot;, &quot;an&quot;, &quot;egg&quot;};
+        int a = 0;
+        int b = 2;
+        String[] expected = {&quot;an&quot;, &quot;have&quot;, &quot;i&quot;, &quot;egg&quot;};
+
+        Sort.swap(input, input, b);
+        assertArrayEquals(expected, input);
+    }
+}
+</div></code></pre>
+<h2 id="testing-philosophy">Testing Philosophy</h2>
+<h3 id="correctness-tool-1-autograder">Correctness Tool #1: Autograder</h3>
+<ul>
+<li>Idea: Magic autograder tells you code works
+<ul>
+<li>We use JUnit + jh61b libraries</li>
+</ul>
+</li>
+<li>Why?
+<ul>
+<li>Less time wasted on &quot;boring&quot; stuff</li>
+<li>Determines your grade</li>
+<li>Gamifies correctness</li>
+</ul>
+</li>
+<li>Why not?
+<ul>
+<li>Autograders don't exist in real world</li>
+<li>Errors may be hard to understand</li>
+<li>Slow workflow</li>
+<li>No control if grader breaks/misbehaves</li>
+</ul>
+</li>
+</ul>
+<h3 id="autograder-driven-development-add">Autograder Driven Development (ADD)</h3>
+<ul>
+<li>The worst way to approach programming:
+<ul>
+<li>Read and (mostly) understand the spec</li>
+<li>Write entire program</li>
+<li>Compile. Fix all compilation errors</li>
+<li>Send to autograder. Get many errors</li>
+<li>Until correct, repeat randomly
+<ul>
+<li>Run autograder</li>
+<li>Add print statements to zero in on the bug</li>
+<li>Make changes to code to try to fix bug</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>This workflow is slow and unsafe!</li>
+</ul>
+<h3 id="correctness-tool-2-unit-tests">Correctness Tool #2: Unit Tests</h3>
+<ul>
+<li>Idea: Write tests for every &quot;unit&quot;
+<ul>
+<li>JUnit makes this easy!</li>
+</ul>
+</li>
+<li>Why?
+<ul>
+<li>Build confidence in basic modules</li>
+<li>Decrease debugging time</li>
+<li>Clarify the task</li>
+</ul>
+</li>
+<li>Why not?
+<ul>
+<li>Building tests take time</li>
+<li>May provide false confidence</li>
+<li>Hard to test untis that rely on others
+<ul>
+<li>e.g. how do you test <code>addFirst</code>?</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="test-driven-development-tdd">Test-Driven Development (TDD)</h3>
+<ul>
+<li>Steps to developing according to TDD:
+<ul>
+<li>Identify a new feature</li>
+<li>Write a unit test for that feature</li>
+<li>Run the test. It should fail</li>
+<li>Write code that passes test
+<ul>
+<li>Implementation is certifiably good</li>
+</ul>
+</li>
+<li>Optional: Refactor code to make it faster, cleaner, etc.</li>
+</ul>
+</li>
+</ul>
+<h3 id="a-tale-of-two-workflows">A Tale of Two Workflows</h3>
+<ul>
+<li>TDD is an extreme departure from the naive workflow
+<ul>
+<li>What's best for you is probably in the middle</li>
+</ul>
+</li>
+</ul>
+<h3 id="correctness-tool-3-integration-testing">Correctness Tool #3: Integration Testing</h3>
+<ul>
+<li>Idea: Tests cover many units at once
+<ul>
+<li>Not JUnit's focus, but JUnit can do this</li>
+</ul>
+</li>
+<li>Why?
+<ul>
+<li>Unit testing is not enough to ensure modules interact properly or that system works as expected</li>
+</ul>
+</li>
+<li>Why not?
+<ul>
+<li>Can be tedious to do manually</li>
+<li>Can be challenging to automate</li>
+<li>Testing at highest level of abstraction may miss subtle or rare errors</li>
+</ul>
+</li>
+</ul>
+<h3 id="parting-thoughts">Parting Thoughts</h3>
+<ul>
+<li>JUnit makes testing easy</li>
+<li>You should write tests
+<ul>
+<li>But not too many</li>
+<li>Only when they might be useful!</li>
+<li>Write tests first when it feels appropriate</li>
+<li>Most of the class won't require writing lots of tests (to save you time)</li>
+</ul>
+</li>
+<li>Some people really like TDD. Feel free to use it in 61B.</li>
+</ul>
+
+</body>
+</html>

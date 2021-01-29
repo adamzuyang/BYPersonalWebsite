@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture36.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-36-radix-vs-comparison-sorting-sorting-and-data-structures-conclusion">Lecture 36: Radix vs. Comparison Sorting, Sorting and Data Structures Conclusion</h1>
+<h4 id="11202020">11/20/2020</h4>
+<h2 id="intuitive-radix-sort-vs-comparison-sorting">Intuitive: Radix Sort vs. Comparison Sorting</h2>
+<h3 id="merge-sort-runtime">Merge Sort Runtime</h3>
+<ul>
+<li>Merge Sort requires Theta(N log N) compares</li>
+<li>What is Merge Sort's runtime on strings of length W?
+<ul>
+<li>It depends!
+<ul>
+<li>Theta(N log N) if each comparison takes constant time
+<ul>
+<li>Example: Strings are all different in top character</li>
+</ul>
+</li>
+<li>Theta(WN log N) if each comparison takes Theta(W) time
+<ul>
+<li>Example: Strings are all equal</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="lsd-vs-merge-sort">LSD vs. Merge Sort</h3>
+<ul>
+<li>The facts
+<ul>
+<li>Treating alphabet size as constant, LSD Sort has runtime Theta(WN)</li>
+<li>Merge Sort has runtime between Theta(N log N) and Theta(WN log N)</li>
+</ul>
+</li>
+<li>Which is better? It depends
+<ul>
+<li>When might LSD sort be faster
+<ul>
+<li>Sufficiently large N</li>
+<li>If strings are very similar to each other
+<ul>
+<li>Each Merge Sort comparison costs Theta(W) time</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>When might Merge Sort be faster?
+<ul>
+<li>If strings are highly dissimilar from each other
+<ul>
+<li>Each Merge Sort comparison is very fast</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="cost-model-radix-sort-vs-comparison-sorting">Cost Model: Radix Sort vs. Comparison Sorting</h2>
+<h3 id="alternate-approach-picking-a-cost-model">Alternate Approach: Picking a Cost Model</h3>
+<ul>
+<li>An alternate approach is to pick a cost model
+<ul>
+<li>We'll use number of characters examined</li>
+<li>By &quot;examined&quot;, we mean:
+<ul>
+<li>Radix Sort: Calling charAt in order to count occurrences of each character</li>
+<li>Merge Sort: Calling charAt in order to compare two Strings</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="msd-vs-mergesort">MSD vs. Mergesort</h3>
+<ul>
+<li>Suppose we have 100 strings of 1000 characters each
+<ul>
+<li>Estimate the total number of characters examined by MSD Radix Sort if <strong>all strings are equal</strong>
+<ul>
+<li>For MSD Radix Sort, in the worst case (all strings equal), every character is examined exactly once. Thus we have exactly 100,000 total character examinations</li>
+</ul>
+</li>
+<li>Estimate the total number of characters examined by Merge Sort <strong>if all strings are equal</strong>
+<ul>
+<li>Merging 100 items, assuming equal items results in always picking left
+<ul>
+<li>Total characters examined in a single merge operation: 50 * 2000 = 100,000 (= N/2 * 2000 = 1000N)</li>
+</ul>
+</li>
+<li>In total, we must examine approximately 1000Nlog_2(N) total characters
+<ul>
+<li>100000 + 50000*2 + 25000*4 + ... = ~660,000</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="msd-vs-mergesort-character-examinations">MSD vs. Mergesort Character Examinations</h3>
+<ul>
+<li>For N equal strings of length 1000, we found that:
+<ul>
+<li>MSD radix sort will examine ~1000N characters</li>
+<li>Mergesort will examine ~1000Nlog_2(N) characters</li>
+</ul>
+</li>
+<li>If character examination are an appropriate cost model, we'd expect Merge Sort to be slower by a factor of log_2(N)</li>
+</ul>
+<h2 id="empirical-study-radix-sort-vs-comparison-sorting">Empirical Study: Radix Sort vs. Comparison Sorting</h2>
+<h3 id="computational-experiment-results">Computational Experiment Results</h3>
+<ul>
+<li>Computational experiment for W = 100
+<ul>
+<li>As we expected, Merge sort considers log_2(N) times as many characters</li>
+<li>But empirically, Mergesort is MUCH faster than MSD sort
+<ul>
+<li>Our cost model isn't representative of everything that is happening</li>
+<li>One particularly thorny issue: The &quot;Just In Time&quot; (JIT) Compiler</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="an-unexpected-factor-the-just-in-time-compiler">An Unexpected Factor: The Just-In-Time Compiler</h3>
+<ul>
+<li>Java's Just-In-Time COmpiler secretly optimizes your code when it runs
+<ul>
+<li>The code you write is not necessarily the code that executes!</li>
+<li>As your code runs, the &quot;interpreter&quot; is watching everything that happens
+<ul>
+<li>If some segment of code is called many times, the interpreter actually studies and re-implements your code based on what it learned by watching WHILE ITS RUNNING (!!)
+<ul>
+<li>Example: Performing calculations whose results are unused</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="rerunning-our-empirical-study-without-jit">Rerunning Our Empirical Study Without JIT</h2>
+<h3 id="computational-experiments-results-with-jit-disabled">Computational Experiments Results with JIT disabled</h3>
+<ul>
+<li>Results with JIT disabled (using the -Xint option)
+<ul>
+<li>Both sorts are MUCH slower than before</li>
+<li>Merge sort is slower than MSD (though not by as much we predicted)</li>
+<li>What this tells us: The JIT was somehow able to massively optimize the compareTo calls
+<ul>
+<li>Makes some intuitive sense: Comparing &quot;AAA...A&quot; to &quot;AAA...A&quot; over and over is redundant</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="so-which-is-better-msd-or-mergesort">So Which is Better? MSD or MergeSort?</h3>
+<ul>
+<li>We showed that if the JIT is enabled, merge sort is much faster for the case of equal strings, and slower if JIT is disabled
+<ul>
+<li>Since JIT is usually on, I'd say merge sort is better for this case</li>
+</ul>
+</li>
+<li>Many other possible cases to consider:
+<ul>
+<li>Almost equal strings (maybe the trick used by the JIT won't work?)</li>
+<li>Randomized strings</li>
+<li>Real world data from some dataset of interest</li>
+</ul>
+</li>
+<li>In real world applications, you'd profile different implementations of real data and pick one</li>
+</ul>
+<h3 id="bottom-line-algorithms-can-be-hard-to-compare">Bottom Line: Algorithms Can be Hard to Compare</h3>
+<ul>
+<li>Comparing algorithms that have the same order of growth is challenging
+<ul>
+<li>Have to perform computational experiments</li>
+<li>Experiments can be tricky due to optimizations like the JIT in Java</li>
+</ul>
+</li>
+<li>Note: There's always the chance that some small optimization to an algorithm can make it significantly faster</li>
+</ul>
+<h2 id="radix-sorting-integers-61c-preview">Radix Sorting Integers (61C Preview)</h2>
+<h3 id="linear-time-sorting">Linear Time Sorting</h3>
+<ul>
+<li>As we've seen, estimating radix sort vs. comparison sort performance is very hard
+<ul>
+<li>But in the very large N limit, it's easy. Radix sort is simply faster!
+<ul>
+<li>Treating alphabet size as constant, LSD Sort has runtime Theta(WN)</li>
+<li>Comparison sorts have runtime Theta(N log N) in the worst case</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Issue: We don't have a charAt method for integers
+<ul>
+<li>How would you LSD radix sort an array of integers
+<ul>
+<li>Convert into a String and treat as a base 10 number. Since the maximum Java int is 2,000,000,000, W is also 10</li>
+<li>Could modify LSD radix sort to work natively on integers
+<ul>
+<li>Instead of using charAt, maybe write a helper method like getDthDigit(int D, int d). Example: getDthDigit(15009, 2) = 5</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="lsd-radix-sort-on-integers">LSD Radix Sort on Integers</h3>
+<ul>
+<li>Note: There's no reason to stick with base 10!
+<ul>
+<li>Could instead treat as a base 16, base 256, base 65536 number</li>
+<li>Ex: 512,312 in base 16 is a 5 digit number</li>
+<li>Ex: 512,312 in base 256 is a 3 digit number</li>
+</ul>
+</li>
+</ul>
+<h3 id="relationship-between-base-and-max--digits">Relationship Between Base and Max # Digits</h3>
+<ul>
+<li>For Java integers:
+<ul>
+<li>R=10, treat as a base 10 number. Up to 10 digits</li>
+<li>R=256, treat as a base 256 number. Up to 4 digits</li>
+<li>$ = 65335, treat as a base 65536 number. Up to 2 digits</li>
+</ul>
+</li>
+<li>Interesting fact: Runtime depends on the alphabet size
+<ul>
+<li>As we saw with the city sorting last time, R = 2147483647 will result in a very slow radix sort (since it's just counting sort)</li>
+</ul>
+</li>
+</ul>
+<h3 id="another-counting-sort">Another Counting Sort</h3>
+<ul>
+<li>Results of a computational experiment:
+<ul>
+<li>Treating as a base 256 (4 digits), LSD radix sorting integers easily defeats Quicksort</li>
+</ul>
+</li>
+</ul>
+<h2 id="sorting-summary">Sorting Summary</h2>
+<h3 id="sorting-landscape">Sorting Landscape</h3>
+<ul>
+<li>Three basic flavors: Comparison, Alphabet, and Radix based
+<ul>
+<li>Comparison based algorithms:
+<ul>
+<li>Selection -&gt; If heapify first -&gt; Heapsort</li>
+<li>Merge</li>
+<li>Partition</li>
+<li>Insertion -&gt; If insert into BST, equiv. to Partition</li>
+</ul>
+</li>
+<li>Small-Alphabet (e.g. Integer) algorithms:
+<ul>
+<li>Counting</li>
+</ul>
+</li>
+<li>Radix Sorting algorithms (require a sorting subroutine)
+<ul>
+<li>LSD and MSD use Counting as a subroutine</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Each can be used in different circumstances, but the important part was the analysis and the deep thought!</li>
+</ul>
+<h3 id="sorting-vs-searching">Sorting vs. Searching</h3>
+<ul>
+<li>We've now concluded our study of the &quot;sort problem&quot;
+<ul>
+<li>During the data structures part of the class, we studied what we called the &quot;search problem&quot;: Retrieve data of interest</li>
+<li>There are some interesting connections between the two</li>
+</ul>
+</li>
+<li>Search-By-Key-Identity Data Structures
+<ul>
+<li>Sets and Maps:
+<ul>
+<li>2-3 Tree (Uses compareTo(), Analogous to Comparison-Based)</li>
+<li>RedBlack Tree (Uses compareTo(), Analogous to Comparison-Based)</li>
+<li>Separate Chaining (Searches using hashCode() and equals(), Roughly Analogous to Integer Sorting)</li>
+<li>Tries (searches digit-by-digit Roughly Analogous to Radix Sorting)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</body>
+</html>

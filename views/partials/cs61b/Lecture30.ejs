@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture30.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-30-quicksort">Lecture 30: Quicksort</h1>
+<h4 id="1142020">11/4/2020</h4>
+<h2 id="backstory-partitioning">Backstory, Partitioning</h2>
+<h3 id="sorting-so-far">Sorting So Far</h3>
+<ul>
+<li>Core ideas:
+<ul>
+<li>Selection sort: Find the smallest item and put it at the front
+<ul>
+<li>Heapsort variant: Use MaxPQ to find max element and put at the back</li>
+</ul>
+</li>
+<li>Merge sort: Merge two sorted halves into one sorted whole</li>
+<li>Insertion sort: Figure out where to insert the current item</li>
+</ul>
+</li>
+<li>Quicksort:
+<ul>
+<li>Much stranger core idea: Partitioning</li>
+</ul>
+</li>
+</ul>
+<h3 id="context-for-quicksorts-invention">Context for Quicksort's Invention</h3>
+<ul>
+<li>1960: Tony Hoare was working on a crude automated translation program for Russian and English</li>
+<li>How would you do this?
+<ul>
+<li>Binary search for each word
+<ul>
+<li>Find each word in log D time</li>
+</ul>
+</li>
+<li>Total time to find N words: N log D</li>
+</ul>
+</li>
+<li>Algorithm: N binary searches of D length dictionary
+<ul>
+<li>Total runtime: N log D</li>
+<li>ASSUMES log time binary search</li>
+</ul>
+</li>
+<li>Limitation at the time:
+<ul>
+<li>Dictionary stored on long piece of tape, sentence is an array in RAM
+<ul>
+<li>Binary search of tape is not log time (requires physical movement!)</li>
+</ul>
+</li>
+<li>Better: <strong>Sort the sentence</strong> and scan dictionary tape once. Dictionary is sorted. Takes N log N + D time
+<ul>
+<li>But Tony had to figure out how to sort an array</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="the-core-idea-of-tonys-sort-partitioning">The Core Idea of Tony's Sort: Partitioning</h3>
+<ul>
+<li>To partition an array a[] on element x = a[i] is to rearrange a[] so that:
+<ul>
+<li>x moves to position j (may be the same as i)</li>
+<li>All entries to the left of x are &lt;= x</li>
+<li>All entries to the right of x are &gt;= x</li>
+</ul>
+</li>
+</ul>
+<h3 id="interview-question">Interview Question</h3>
+<ul>
+<li>Given an array of colors where the 0th element is white, and the remaining elements are red (less) or blue (greater), rearrange the array so that all red squares are to the left of the white square, and all blue squares are to the right. Your algorithm must complete in Θ(N) time (no space restriction).
+<ul>
+<li>Relative order of red and blues does NOT need to stay the same</li>
+</ul>
+</li>
+</ul>
+<h3 id="simplest-but-not-fastest-answer-3-scan-approach">Simplest (but not fastest) Answer: 3 Scan Approach</h3>
+<ul>
+<li>Algorithm: Create another array. Scan and copy all the red items to the first R spaces. Then scan for and copy the white item. Then scan and copy the blue items to the last B spaces.</li>
+</ul>
+<h2 id="quicksort">Quicksort</h2>
+<h3 id="partition-sort-aka-quicksort">Partition Sort, a.k.a. Quicksort</h3>
+<ul>
+<li>Observations:
+<ul>
+<li>The partitioning object is &quot;in its place&quot;. Exactly where it'd be if the array were sorted</li>
+<li>Can sort two halves separately, e.g. through recursive use of partitioning</li>
+</ul>
+</li>
+<li>Quicksorting N items:
+<ul>
+<li>Partition on leftmost item</li>
+<li>Quicksort left half</li>
+<li>Quicksort right half</li>
+</ul>
+</li>
+</ul>
+<h3 id="quicksort">Quicksort</h3>
+<ul>
+<li>Quicksort was the name chosen by Tony Hoare for partition sort
+<ul>
+<li>For most common situations, it is empirically the fastest sort</li>
+</ul>
+</li>
+<li>How fast is Quicksort? Need to count number and difficulty of partition operations</li>
+<li>Theoretical analysis:
+<ul>
+<li>Partitioning costs Theta(K) time, where Theta(K) is the number of elements being partitioned</li>
+<li>The interesting twist: Overall runtime will depend crucially on where pivot ends up</li>
+</ul>
+</li>
+</ul>
+<h2 id="quicksort-runtime">Quicksort Runtime</h2>
+<h3 id="best-case-pivot-always-lands-in-the-middle">Best Case: Pivot Always Lands in the Middle</h3>
+<ul>
+<li>What is the best case runtime?
+<ul>
+<li>Total work at each &quot;level&quot;: N</li>
+<li>Number of &quot;levels&quot;: H = Theta(log N)</li>
+<li>So overall runtime is Theta(HN) = Theta(N log N)</li>
+</ul>
+</li>
+</ul>
+<h3 id="worst-case-pivot-always-lands-at-beginning-of-array">Worst Case: Pivot Always Lands at Beginning of Array</h3>
+<ul>
+<li>What is the worst case runtime?
+<ul>
+<li>Total work at each &quot;level&quot;: N</li>
+<li>Number of &quot;levels&quot;: N</li>
+<li>So overall runtime is N^2</li>
+</ul>
+</li>
+</ul>
+<h3 id="quicksort-performance">Quicksort Performance</h3>
+<ul>
+<li>Theoretical analysis:
+<ul>
+<li>Best case: Theta(N log N)</li>
+<li>Worst case: Theta(N^2)</li>
+</ul>
+</li>
+<li>Compare this to Mergesort
+<ul>
+<li>Best case: Theta(N log N)</li>
+<li>Worst case: Theta(N log N)</li>
+</ul>
+</li>
+<li>Recall that Theta(N log N) vs. Theta(N^2) is a really big deal. So how can Quicksort be the fastest sort empirically? Because on average it is Theta(N log N) (proof requires probability theory and calculus)</li>
+</ul>
+<h3 id="intuitive-argument-1-for-average-runtime-10-case">(Intuitive) Argument #1 for Average Runtime: 10% Case</h3>
+<ul>
+<li>Suppose pivot always ends up at least 10% from either edge</li>
+<li>Work at each level: O(N)
+<ul>
+<li>Runtime is O(NH) (H = number of levels)
+<ul>
+<li>H is approximately log_{10/9}N = O(log N)</li>
+</ul>
+</li>
+<li>Overall: O(N log N)</li>
+</ul>
+</li>
+<li>Even if you're unlucky enough to have a pivot that never lands in the middle, but at least always 10% from the edge, runtime is still O(N log N)</li>
+</ul>
+<h3 id="intuitive-argument-2-quicksort-is-bst-sort">(Intuitive) Argument #2: Quicksort is BST Sort</h3>
+<ul>
+<li>Key idea: compareTo calls are same for BST insert and Quicksort
+<ul>
+<li>Every number gets compared to the partitioning number in both</li>
+</ul>
+</li>
+<li>Reminder: Random insertion into a BST takes O(N log N) time</li>
+</ul>
+<h3 id="empirical-quicksort-runtimes">Empirical Quicksort Runtimes</h3>
+<ul>
+<li>For N items:
+<ul>
+<li>Mean number of compares to complete Quicksort: ~2N ln N</li>
+<li>Standard deviation is about 0.6482776N</li>
+<li>Very few arrays take a ridiculous number of comparisons</li>
+</ul>
+</li>
+</ul>
+<h3 id="quicksort-performance">Quicksort Performance</h3>
+<ul>
+<li>Theoretical analysis:
+<ul>
+<li>Best case: Theta(N log N)</li>
+<li>Worst case: Theta(N^2)</li>
+<li>Randomly chosen array case: Theta(N log N) expected</li>
+</ul>
+</li>
+<li>Compare this to Mergesort
+<ul>
+<li>Best case: Theta(N log N)</li>
+<li>Worst case: Theta(N log N)</li>
+</ul>
+</li>
+<li>Why is it faster than mergesort?
+<ul>
+<li>Requires empirical analysis. No obvious reason why</li>
+</ul>
+</li>
+</ul>
+<h3 id="sorting-summary-so-far">Sorting Summary (so far)</h3>
+<ul>
+<li>Listed by mechanism:
+<ul>
+<li>Selection sort: Find the smallest item and put it at the front</li>
+<li>Insertion sort: Figure out where to insert the current item</li>
+<li>Merge sort: Merge two halves into one sorted whole</li>
+<li>Partition (quick) sort: Partition items around a pivot</li>
+</ul>
+</li>
+</ul>
+<h2 id="avoiding-the-quicksort-worst-case">Avoiding the Quicksort Worst Case</h2>
+<h3 id="quicksort-performance">Quicksort Performance</h3>
+<ul>
+<li>The performance of Quicksort (both order of growth and constant factors) depend critically on:
+<ul>
+<li>How you select your pivot</li>
+<li>How you partition around that pivot</li>
+</ul>
+</li>
+<li>Bad choices can be ver bad indeed, resulting in Theta(N^2) runtimes</li>
+</ul>
+<h3 id="avoiding-the-worst-case">Avoiding the Worst Case</h3>
+<ul>
+<li>If pivot always lands somewhere &quot;good&quot;, Quicksort is Theta(N log N). However, the very rare Theta(N^2) cases do happen in practice, e.g.
+<ul>
+<li>Bad ordering: Array already in sorted order (or almost sorted order)</li>
+<li>Bad elements: Array with all duplicates</li>
+</ul>
+</li>
+<li>Recall our version of Quicksort has the following properties:
+<ul>
+<li>Leftmost item is always chosen as the pivot</li>
+<li>Out partitioning algorithm preserves the relative order of &lt;= and &gt;= items</li>
+</ul>
+</li>
+<li>How can we avoid worst case behavior?
+<ul>
+<li>Always use the median as the pivot</li>
+<li>Shuffle before quicksorting</li>
+</ul>
+</li>
+</ul>
+
+</body>
+</html>

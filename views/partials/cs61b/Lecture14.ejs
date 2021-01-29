@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture14.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-14-disjoint-sets">Lecture 14: Disjoint Sets</h1>
+<h4 id="9282020">9/28/2020</h4>
+<h2 id="intro-to-disjoint-sets">Intro to Disjoint Sets</h2>
+<h3 id="meta-goals-of-the-coming-lectures-data-structure-refinement">Meta-goals of the Coming Lectures: Data Structure Refinement</h3>
+<ul>
+<li>Today: Deriving the &quot;Disjoint Sets&quot; data structure for solving the &quot;Dynamic Connectivity&quot; problem. We will see:
+<ul>
+<li>How a data structure design can evolve from basic to sophisticated</li>
+<li>How our choice of underlying abstraction can affect asymptotic runtime and code complexity</li>
+</ul>
+</li>
+</ul>
+<h3 id="the-disjoint-sets-data-structure">The Disjoint Sets Data Structure</h3>
+<ul>
+<li>The Disjoint Sets data structure has two operations:
+<ul>
+<li><code>connect(x, y)</code>: Connects x and y</li>
+<li><code>isConnected(x, y)</code>: Returns true if x and y are connected. Connections can be transitive, i.e. they don't need to be direct</li>
+</ul>
+</li>
+<li>Useful for many purposes
+<ul>
+<li>Percolation theory:
+<ul>
+<li>Computational chemistry</li>
+</ul>
+</li>
+<li>Implementation of other algorithms
+<ul>
+<li>Kruskal's algorithm</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="disjoint-sets-on-integers">Disjoint Sets on Integers</h3>
+<ul>
+<li>To keep things simple, we're going to:
+<ul>
+<li>Force all items to be integers instead of arbitrary data</li>
+<li>Declare the number of items in advance, everything is disconnected at start</li>
+</ul>
+</li>
+</ul>
+<h3 id="the-disjoint-sets-interface">The Disjoint Sets Interface</h3>
+<pre class="hljs"><code><div>public interface DisjointSets {
+    /** Connects two items P and Q */
+    void connect(int p, int q);
+
+    /** Checks to see if two items are connected */
+    boolean isConnected(int p, int q);
+}
+</div></code></pre>
+<ul>
+<li>Goal: Design an efficient DisjointSets implementation
+<ul>
+<li>Number of elements N can be huge</li>
+<li>Number of method calls M can be huge</li>
+<li>Calls to methods may be interspersed (e.g. can't assume it's only connect operations followed by only isConnected operations)</li>
+</ul>
+</li>
+</ul>
+<h3 id="the-naive-approach">The Naive Approach</h3>
+<ul>
+<li>Naive approach:
+<ul>
+<li>Connect two things: Record every single connecting line in some data structure</li>
+<li>Checking connectedness: Do some sort of iteration over the lines to see if one thing can be reached from the other</li>
+</ul>
+</li>
+</ul>
+<h3 id="a-better-approach-connected-components">A Better Approach: Connected Components</h3>
+<ul>
+<li>Rather than manually writing out every single connecting line, only record the sets that each item belongs to</li>
+<li>For each item, its <strong>connected component</strong> is the set of all items that are connected to that item</li>
+<li>Better approach: Model connectedness in terms of sets
+<ul>
+<li>How things are connected isn't something we need to know</li>
+<li>Only need to keep track of which connected component each item belongs to</li>
+</ul>
+</li>
+</ul>
+<h2 id="quick-find">Quick Find</h2>
+<h3 id="performance-summary">Performance Summary</h3>
+<ul>
+<li>ListOfSetsDS
+<ul>
+<li>Constructor: Theta(N)</li>
+<li>Connect: Theta(N)</li>
+<li>isConnected: O(N)</li>
+</ul>
+</li>
+<li>ListofSetsDS is complicated and slow
+<ul>
+<li>Operations are linear when number of connections are small
+<ul>
+<li>Have to iterate over all sets</li>
+</ul>
+</li>
+<li>Important point: By deciding to use List of Sets, we have doomed ourselves to complexity and bad performance</li>
+</ul>
+</li>
+</ul>
+<h3 id="my-approach-just-use-a-list-of-integers">My Approach: Just use a list of integers</h3>
+<ul>
+<li>Idea #2: List of integers where ith entry gives set number (aka &quot;id&quot;) of item i
+<ul>
+<li><code>connect(p, q)</code>: Change entries that equal <code>id[p]</code> and <code>id[q]</code></li>
+</ul>
+</li>
+<li>QuickFindDS
+<ul>
+<li>Constructor: Theta(N)</li>
+<li>Connect: Theta(N)</li>
+<li>isConnected: Theta(1)</li>
+</ul>
+</li>
+</ul>
+<h2 id="quick-union">Quick Union</h2>
+<h3 id="improving-the-connect-operation">Improving the Connect Operation</h3>
+<ul>
+<li>Next approach (Quick Union): We will still represent everything as connected components, and we will still represent connected components as a list of integers. However, values will be chosen so that connect is fast</li>
+<li>How could we change our set representation so that combining two sets into their union requires changing <strong>one</strong> value?
+<ul>
+<li>Idea: Assign each item a parents (instead of an id). Results in a tree-like shape</li>
+<li>An innocuous sounding, seemingly arbitrary solution</li>
+</ul>
+</li>
+<li>Ex: <code>connect(5, 2)</code>
+<ul>
+<li>Find <code>root(5)</code></li>
+<li>Find <code>root(2)</code></li>
+<li>Set <code>root(5)</code>'s value equal to <code>root(2)</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="set-union-using-rooted-tree-representation">Set Union Using Rooted-Tree Representation</h3>
+<ul>
+<li>What are some potential performance issues with this approach
+<ul>
+<li>Tree can get too tall! <code>root(x)</code> becomes expensive</li>
+<li>For N items, this means a worst case runtime of Theta(N)</li>
+</ul>
+</li>
+<li>QuickUnionDS
+<ul>
+<li>Constructor: Theta(N)</li>
+<li>Connect: O(N)</li>
+<li>isConnected: O(N)</li>
+</ul>
+</li>
+<li>QuickUnion defect: Trees can get tall. Results in potentially even worse performance than QuickFind if tree is imbalanced
+<ul>
+<li>Observation: Things would be fine if we just kept our tree balanced</li>
+</ul>
+</li>
+</ul>
+<h2 id="weighted-quick-union">Weighted Quick Union</h2>
+<h3 id="weighted-quick-union">Weighted Quick Union</h3>
+<ul>
+<li>Modify quick-union to avoid tall trees
+<ul>
+<li>Track tree size (number of elements)</li>
+<li>New rule: Always link root of <strong>smaller</strong> tree to <strong>larger</strong> tree</li>
+<li>Note: this rule is based on <strong>weight</strong>, not height</li>
+</ul>
+</li>
+</ul>
+<h3 id="implementing-weightedquickunion">Implementing WeightedQuickUnion</h3>
+<ul>
+<li>Minimal changes needed
+<ul>
+<li>Use parent[] array as before</li>
+<li><code>isConnected(int p, int q)</code> requires no changes</li>
+<li><code>connect(int p, int q)</code> needs to somehow keep track of sizes
+<ul>
+<li>Two common approaches:
+<ul>
+<li>Use values other than -1 in parent array for root nodes to track size</li>
+<li>Create a separate size array</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="weighted-quick-union-performance">Weighted Quick Union Performance</h3>
+<ul>
+<li>Consider the worst case where the tree height grows as fast as possible
+<ul>
+<li>The height increases logarithmically with respect to the number of elements</li>
+<li>Worst case tree height is Theta(log N)
+<img src="images/csm_cs61b/14.1.png" alt=""></li>
+</ul>
+</li>
+</ul>
+<h3 id="performance-summary">Performance Summary</h3>
+<ul>
+<li>WeightedQuickUnionDS
+<ul>
+<li>Constructor: Theta(N)</li>
+<li>Connect: O(log N)</li>
+<li>isConnected(log N)</li>
+</ul>
+</li>
+<li>QuickUnion's runtimes are O(H), and WeightedQuickUnionDS height is given by H = O(log N). THerefore connect and isConnected are both O(log N)</li>
+<li>By tweaking QuickUnionDS we've achieved logarithmic time performance</li>
+</ul>
+<h3 id="why-weights-instead-of-heights">Why Weights Instead of Heights?</h3>
+<ul>
+<li>We used the number of items in a tree to decide upon the root
+<ul>
+<li>Why not use the height of the tree?
+<ul>
+<li>Worst case performance for HeightedQuickUnionDS is asymptotically the same! Both are Theta(log N)</li>
+<li>Resulting code is complicated with no performance gain</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="path-compression-cs-170-spoiler-can-we-do-better">Path Compression (CS 170 Spoiler) (Can we do better?)</h2>
+<h3 id="what-weve-achieved">What We've Achieved</h3>
+<ul>
+<li>Performing M operations on a DisjointSet object with N elements:
+<ul>
+<li>For our naive implementation, runtime is O(MN)</li>
+<li>For our best implementation, runtime is O(N + M log N)</li>
+<li>Key point: Good data structure unlocks solutions to problems that could otherwise not be solved!</li>
+<li>Good enough for all practical uses, but could we theoretically do better?</li>
+</ul>
+</li>
+</ul>
+<h3 id="cs-170-spoiler-path-compression-a-clever-idea">CS 170 Spoiler: Path Compression: A Clever Idea</h3>
+<ul>
+<li>Below is the topology of the worst case if we use WeightedQuickUnion
+<ul>
+<li>Clever Idea: When we do isConnected(15, 10), tie all nodes seen to the root
+<ul>
+<li>Additional cost is insignificant (same order of growth)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="images/csm_cs61b/14.2.png" alt="">
+<img src="images/csm_cs61b/14.3.png" alt=""></p>
+<ul>
+<li>Path compression results in a union/connected operations that are very very close to amortized constant time
+<ul>
+<li>M operations on N nodes is O(N + M lg* N) - you will see this in CS 170</li>
+<li>lg* is less than 5 for any realistic input</li>
+<li>A tighter bound: O(N + M \alpha(N)), where \alpha is the inverse Ackermann function</li>
+<li>The inverse Ackermann function is less than 5 for all practical inputs!</li>
+</ul>
+</li>
+</ul>
+<h3 id="a-summary-of-our-iterative-design-process">A Summary of Our Iterative Design Process</h3>
+<ul>
+<li>And we're done! The end result of our iterative design process is the standard way disjoint sets are implemented today - quick union and path compression</li>
+<li>The ideas that made our implementation efficient:
+<ul>
+<li>Represent sets as connected components (don't track individual connections)
+<ul>
+<li><strong>ListofSetsDS</strong>: Store connected components as a List of Sets (slow, complicated)</li>
+<li><strong>QuickFindDS</strong>: Store connected components as set ids</li>
+<li><strong>QuickUnionDS</strong>: Store connected components as parent ids
+<ul>
+<li><strong>WeightedQuickUnionDS</strong>: Also track the size of each set, and use size to decide on a new tree root
+<ul>
+<li><strong>WeightedQuickUnionWithPathCompressionDS</strong>: On calls to connect and isConnected, set parent id to the root for all items seen</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="summary-from-discussion">Summary From Discussion</h2>
+<h3 id="disjoint-sets">Disjoint Sets</h3>
+<ul>
+<li><strong>QuickFind</strong> uses an array of integers to track which set each element belongs to</li>
+<li><strong>QuickUnion</strong> stores the parent of each node rather than the set to which it belongs sto and merges sets by setting the parent of one root to the other</li>
+<li><strong>WeightedQuickUnion</strong> does the same as QuickUnion except it decides which set is merged into which by size, reducing the likelihood of large trees</li>
+<li><strong>WeightedQuickUnion with Path Compression</strong> sets the parent of each node to the set's root whenever <code>find()</code> is called on it</li>
+</ul>
+
+</body>
+</html>

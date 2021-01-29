@@ -52,7 +52,7 @@ app.get('/resume', (req, res) => {
     let data = mergeJSON.merge(mergeJSON.merge(maindata, projectdata), globaldata);
     
     res.render('resume', data);
-})
+});
 
 app.get('/sorter', (req, res) => {
     let maindata = JSON.parse(fs.readFileSync('json/main.json'));
@@ -61,7 +61,15 @@ app.get('/sorter', (req, res) => {
 
     let data = mergeJSON.merge(mergeJSON.merge(maindata, sorterdata), globaldata);
     res.render('sorter', data);
-})
+});
+
+app.get('/cs61b', (req, res) => {
+    let maindata = JSON.parse(fs.readFileSync('json/main.json'));
+    let globaldata = JSON.parse(fs.readFileSync('json/global.json'));
+
+    let data = mergeJSON.merge(maindata, globaldata);
+    res.render('csm_cs61b', data);
+});
 
 app.listen(PORT, () => {
     console.log(`App listening on port 3000`)

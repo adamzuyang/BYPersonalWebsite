@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture02.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-02-defining-and-using-classes">Lecture 2: Defining and Using Classes</h1>
+<h4 id="8282020">8/28/2020</h4>
+<h2 id="compilation">Compilation</h2>
+<pre class="hljs"><code><div>Compiling and running code from the terminal:
+
+$ javac HelloWorld.java
+$ ls
+HelloWorld.java    HelloWorld.class
+$ java HelloWorld
+Hello World!
+</div></code></pre>
+<h3 id="compilation">Compilation</h3>
+<ul>
+<li>The standard tools for executing Java programs use a two step process:
+<ul>
+<li>Hello.java -&gt; javac compiler -&gt; Hello.class -&gt; java interpreter -&gt; program runs</li>
+<li>This is not the only way to run Java code</li>
+</ul>
+</li>
+<li>Why make a class file at all?
+<ul>
+<li>.class file has been type checked. Distributed code is safer.</li>
+<li>.class files are 'simpler' for the machine to execute. Distributed code is faster.</li>
+<li>Minor benefit: Protects your intellectual property. No need to give out source.</li>
+</ul>
+</li>
+</ul>
+<h2 id="defining-and-instantiating-classes">Defining and Instantiating Classes</h2>
+<pre class="hljs"><code><div>/** Dog.java file */
+public class Dog {
+    public static void makeNoise() {
+        System.out.println(&quot;Bark!&quot;);
+    }
+}
+/** Can't be run directly, no main method */
+
+/** DogLauncher.java file */
+/** The DogLauncher class will test drive the Dog class */
+public class DogLauncher {
+    public static void main(String[] args) {
+        Dog.makeNoise();
+    }
+}
+$ java DogLauncher
+Bark!
+</div></code></pre>
+<h3 id="dog">Dog</h3>
+<ul>
+<li>Every method is associated with some class</li>
+<li>To run a class, we must define a main method
+<ul>
+<li>Not all classes have a main method!</li>
+</ul>
+</li>
+</ul>
+<h3 id="object-instantiation">Object Instantiation</h3>
+<ul>
+<li>We could create a separate class for every single dog out there, but his is going to get redundant very quickly</li>
+<li>Classes can contain not just functions (aka methods) but also data</li>
+<li>Classes can be instantiated as objects
+<ul>
+<li>We'll create a single Dog class, and then create instances of this Dog</li>
+<li>This class provides a blueprint that all Dog objects will follow</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>public class Dog {
+    public int weightInPounds;  // An instance variable
+
+    /** One integer constructor for dogs. */
+    public Dog(int w) {  // Constructor (similar to __init__)
+        weightInPounds = w;
+    }
+
+    public void makeNoise() {  // Non-static method, instance method
+        if (weightInPounds &lt; 10) {
+            System.out.println(&quot;yip!&quot;);
+        } else if (weightInPounds &lt; 30) {
+            System.out.println(&quot;bark.&quot;);
+        } else {
+            System.out.println(&quot;wooooof!&quot;);
+        }
+    }
+}
+
+/** DogLauncher.java file */
+/** The DogLauncher class will test drive the Dog class */
+public class DogLauncher {
+    public static void main(String[] args) {
+        Dog smallDog;  // Declaration of a Dog instance
+        new Dog(20);   // Instantiation of a Dog instance
+        smallDog = new Dog(5);  // Instantiation and Assignment
+        Dog mediumDog = new Dog(25);  // Declaration, Instantiation, and Assignment
+        d.makeNoise();  // Invocation of the 25 lb Dog's makeNoise method
+    }
+}
+$ java DogLauncher
+bark.
+</div></code></pre>
+<h3 id="defining-a-typical-class-terminology">Defining a Typical Class (Terminology)</h3>
+<ul>
+<li><strong>Instance variable</strong>: Can have as many of these as you want</li>
+<li><strong>Constructor</strong>: Similar to a method (but not a method), determines how to instantiate the class</li>
+<li><strong>Non-static method</strong>: a.k.a., instance method. Idea: If the method is going to be invoked by an instance of the class, then it should be non-static
+<ul>
+<li>Roughly speaking: If the method needs to use &quot;<strong>my</strong> instance variables&quot;, the method must be non-static</li>
+</ul>
+</li>
+</ul>
+<h3 id="arrays-of-objects">Arrays of Objects</h3>
+<ul>
+<li>To create an array of objects:
+<ul>
+<li>First use the new keyword to create the array</li>
+<li>Then use new again for each object you want to put in the array</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>Dog[] dogs = new Dog[2];  // Creates an array of Dogs of size 2
+dogs[0] = new Dog(8);
+dogs[1] = new Dog(20);
+dogs[0].makeNoise();  // Yipping occurs
+</div></code></pre>
+<h2 id="static-vs-instance-methods">Static vs Instance Methods</h2>
+<h3 id="static-vs-non-static">Static vs Non-static</h3>
+<ul>
+<li>Key differences between static and non-static (a.k.a. instance) methods
+<ul>
+<li>Static methods are invoked using the class name, e.g. <code>Dog.makeNoise();</code></li>
+<li>Instance methods are invoked using an instance name, e.g. <code>maya.makeNoise();</code></li>
+<li>Static methods can't access &quot;my&quot; instance variables, because there is no &quot;me&quot;</li>
+</ul>
+</li>
+</ul>
+<h3 id="why-static-methods">Why Static Methods?</h3>
+<ul>
+<li>Some classes are never instantiated. For example, Math.
+<ul>
+<li><code>x = Math.round(5.6);</code></li>
+</ul>
+</li>
+<li>Sometimes, classes may have a mix of static and non-static methods</li>
+</ul>
+<pre class="hljs"><code><div>public class Dog {
+    public int weightInPounds;  // An instance variable
+
+    /** A static variable that applies to all dog instances */
+    public static String binomen = &quot;Canis familiaris&quot;;  
+
+    /** One integer constructor for dogs. */
+    public Dog(int w) {  // Constructor (similar to __init__)
+        weightInPounds = w;
+    }
+
+    public void makeNoise() {  // Non-static method, instance method
+        if (weightInPounds &lt; 10) {
+            System.out.println(&quot;yip!&quot;);
+        } else if (weightInPounds &lt; 30) {
+            System.out.println(&quot;bark.&quot;);
+        } else {
+            System.out.println(&quot;wooooof!&quot;);
+        }
+    }
+
+    public static Dog maxDog(Dog d1, Dog d2) {
+        if (d1.weightInPounds &gt; d2.weightInPounds) {
+            return d1;
+        }
+        return d2;
+    }
+
+    public Dog maxDog(Dog d2) {
+        if (this.weightInPounds &gt; d2.weightInPounds) {
+            return this;
+        }
+        return d2;
+    }
+}
+
+public class DogLauncher {
+    public static void main(String[] args) {
+        Dog d = new Dog(15);
+
+        Dog d2 = new Dog(100);
+
+        Dog bigger = Dog.maxDog(d, d2);
+        bigger.makeNoise();
+
+        Dog bigger2 = d.maxDog(d2);
+        bigger2.makeNoise();
+
+        System.out.println(d.binomen);
+        System.out.println(Dog.binomen);
+    }
+}
+
+$ java DogLauncher
+woooooof!
+woooooof!
+Canis familiaris
+Canis familiaris
+</div></code></pre>
+<h3 id="static-vs-non-static">Static vs. Non-static</h3>
+<ul>
+<li>A class may have a mix of static and non-static members
+<ul>
+<li>A variable or method defined in a class is also called a member of that class</li>
+<li>Static members are accessed using class name, e.g. <code>Dog.binomen;</code></li>
+<li>Non-static members <strong>cannot</strong> be invoked using class name</li>
+<li>Static methods must access instance variables via a specific instance of the class, e.g. <code>d2</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="public-static-void-mainstring-args">public static void main(String[] args)</h2>
+<ul>
+<li>We already know what <code>public, static, void</code> means</li>
+</ul>
+<h3 id="one-special-role-for-string-command-line-arguments">One Special Role for String: Command Line Arguments</h3>
+<pre class="hljs"><code><div>public class ArgsDemo {
+    /** Prints out the -th command line argument. */
+    public static void main(String[] args) {
+        System.out.println(args[0]);
+    }
+}
+$ java ArgsDemo hello some args
+hello
+</div></code></pre>
+<h3 id="argssum-exercise">ArgsSum Exercise</h3>
+<pre class="hljs"><code><div>public class ArgsSum {
+    public static void main(String[] args) {
+        int N = args.length;
+        int i = 0;
+        int sum = 0;
+        while (i &lt; N) {
+            sum = sums + Integer.parseInt(args[i]);
+            i = i + 1;
+        }
+    }
+}
+</div></code></pre>
+<h2 id="using-libraries-eg-stddraw-in">Using Libraries (e.g. StdDraw, In)</h2>
+<h3 id="java-libraries">Java Libraries</h3>
+<ul>
+<li>There are tons of Java libraries out there
+<ul>
+<li>In 61B, we will provide all needed libraries including:
+<ul>
+<li>Built-in Java libraries</li>
+<li>Princeton standard library</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>As a programmer, you'll want to leverage existing libraries whenever possible
+<ul>
+<li>Saves you the trouble of writing code</li>
+<li>Existing widely using libraries are (probably) will probably be less buggy</li>
+<li>... but you'll have to spend some time getting acquainted with the library</li>
+</ul>
+</li>
+<li>Best ways to learn how to use an unfamiliar library:
+<ul>
+<li>Find a tutorial online</li>
+<li>Read the documentation for the library (Java docs)</li>
+<li>Look at example code snippets that use the library</li>
+</ul>
+</li>
+</ul>
+
+</body>
+</html>

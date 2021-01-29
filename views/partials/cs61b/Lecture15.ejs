@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture15.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-15-asymptotics-2">Lecture 15: Asymptotics 2</h1>
+<h4 id="9302020">9/30/2020</h4>
+<h2 id="loops">Loops</h2>
+<h3 id="loops-example-1-based-on-exact-count">Loops Example 1: Based on Exact Count</h3>
+<ul>
+<li>Find order of growth of worst case runtime:</li>
+</ul>
+<pre class="hljs"><code><div>int N = A.length;
+for (int i = 0; i &lt; N; i += 1)
+    for (int j = i + 1; j &lt; N; j += 1)
+        if (A[i] == A[j])
+            return true;
+return false;
+</div></code></pre>
+<ul>
+<li>Worst case number of <code>==</code> operations:
+<ul>
+<li>Given by area of right triangle of side length N-1</li>
+<li>Area is Theta(N^2)</li>
+</ul>
+</li>
+</ul>
+<h3 id="loops-example-2">Loops Example 2</h3>
+<pre class="hljs"><code><div>int N = A.length;
+for (int i = 1; i &lt; N; i = i * 2)
+    for (int j = 0; j &lt; i; j += 1)
+        System.out.println(&quot;hello&quot;);
+        int ZUG = 1 + 1;
+return false;
+</div></code></pre>
+<ul>
+<li>C(N) = 1 + 2 + 4 + ... + N = 2N - 1, if N is a power of 2</li>
+<li>Number of prints lies between 0.5N and 2N</li>
+<li>The runtime complexity is, in fact, Theta(N)</li>
+</ul>
+<h2 id="no-magic-shortcut">No Magic Shortcut</h2>
+<h3 id="repeat-after-me">Repeat After Me...</h3>
+<ul>
+<li>There is no magic shortcut for these problems (well... usually)
+<ul>
+<li>Runtime analysis often requires careful thought</li>
+<li>CS70 and CS170 will cover this in much more detail</li>
+<li>This is not a math class, we expect you to know these:
+<ul>
+<li>1 + 2 + 3 + ... + N = N(N+1)/2 = Theta(N^2)</li>
+<li>1 + 2 + 4 + ... + N = 2N - 1 = Theta(N) (Where N is a power of 2)</li>
+</ul>
+</li>
+<li>Strategies:
+<ul>
+<li>Find exact sum</li>
+<li>Write out examples</li>
+<li>Draw pictures</li>
+<li>Use geometric intuition</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="recursion">Recursion</h2>
+<h3 id="recursion-intuitive">Recursion (Intuitive)</h3>
+<pre class="hljs"><code><div>public static int f3(int n) {
+    if (n &lt;= 1)
+        return 1;
+    return f3(n-1) + f3(n-1);
+}
+</div></code></pre>
+<ul>
+<li>Our time complexity is Theta(2^N)</li>
+<li>Every time we increase N by 1, we double the work!</li>
+</ul>
+<h3 id="recursion-and-exact-counting">Recursion and Exact Counting</h3>
+<ul>
+<li>Another approach: count number of calls to f3, given by C(N)
+<ul>
+<li>C(1) = 1</li>
+<li>C(2) = 1 + 2</li>
+<li>C(N) = 1 + 2 + 4 + ... + 2^(N-1) = 2(2^(N-1)) - 1 = 2^N - 1</li>
+</ul>
+</li>
+<li>Since work during each call is constant:
+<ul>
+<li>R(N) = Theta(2^N)</li>
+</ul>
+</li>
+</ul>
+<h3 id="recursion-and-recurrence-relations">Recursion and Recurrence Relations</h3>
+<ul>
+<li>Count number of calls to f3, by a &quot;recurrence relation&quot;
+<ul>
+<li>C(1) = 1</li>
+<li>C(N) = 2C(N-1) + 1</li>
+</ul>
+</li>
+<li>More technical to solve. Won't do this in our course</li>
+</ul>
+<h2 id="binary-search">Binary Search</h2>
+<h3 id="binary-search-intuitive">Binary Search Intuitive</h3>
+<ul>
+<li>Finding a key in a sorted array
+<ul>
+<li>Compare key against middle entry
+<ul>
+<li>Too small, go left</li>
+<li>Too big, go right</li>
+<li>Equal, found</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>The runtime of binary search is Theta(log_2(N))</li>
+<li>Why? Problem size halves over and over until it gets down to 1</li>
+</ul>
+<h3 id="binary-search-exact-count">Binary Search Exact Count</h3>
+<ul>
+<li>Find worst case runtime for binary search
+<ul>
+<li>What is C(6), number of total calls for N = 6?
+<ul>
+<li>3</li>
+</ul>
+</li>
+<li>Three total calls, where N = 6, N = 3, and N = 1</li>
+<li>C(N) = floor(log_2(N)) + 1</li>
+<li>Since compares take constant time, R(N) = Theta(floor(log_2(N)))
+<ul>
+<li>This f(N) is way too complicated. Let's simplify.
+<ul>
+<li>Three useful properties:
+<ul>
+<li>floor(f(N)) = Theta(f(N))
+<ul>
+<li>The floor of f has the same order of growth as f</li>
+</ul>
+</li>
+<li>ceiling(f(N)) = Theta(f(N))
+<ul>
+<li>The ceiling of f has the same order of growth as f</li>
+</ul>
+</li>
+<li>log_p(N) = Theta(log_q(N))
+<ul>
+<li>logarithm base does not affect order of growth</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Hence, floor(log_2(N)) = Theta(log N)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Since each call takes constant time, R(N) = Theta(log N)</li>
+</ul>
+<h3 id="binary-search-using-recurrence-relations">Binary Search (using Recurrence Relations)</h3>
+<ul>
+<li>C(0) = 0</li>
+<li>C(1) = 1</li>
+<li>C(N) = 1 + C((N-1)/2)</li>
+</ul>
+<h3 id="log-time-is-really-terribly-fast">Log Time is Really Terribly Fast</h3>
+<ul>
+<li>In practice, logarithm time algorithms have almost constant runtimes
+<ul>
+<li>Even for incredibly huge datasets, practically equivalent to constant time</li>
+</ul>
+</li>
+</ul>
+<h2 id="merge-sort">Merge Sort</h2>
+<h3 id="selection-sort-a-prelude-to-mergesort">Selection Sort: A Prelude to Mergesort</h3>
+<ul>
+<li>Earlier in class we discussed a sort called selection sort:
+<ul>
+<li>Find the smallest unfixed item, move it to the front, and &quot;fix&quot; it</li>
+<li>Sort the remaining unfixed items using selection sort</li>
+</ul>
+</li>
+<li>Runtime of selection sort is Theta(N^2)
+<ul>
+<li>Look at all N unfixed items to find smallest</li>
+<li>The look at N-1 remaining unfixed</li>
+<li>...</li>
+<li>Look at last two unfixed items</li>
+<li>Done, sum 2+3+4+5+...+N = Theta(N^2)</li>
+</ul>
+</li>
+<li>Given that runtime is quadratic, for N = 64, we might say the runtime for selection sort is 2048 arbitrary units of time (AU)</li>
+</ul>
+<h3 id="the-merge-operation">The Merge Operation</h3>
+<ul>
+<li>Given two sorted arrays, the merge operation combines them into a single sorted array by successively copying the smallest item from the two arrays into a target array</li>
+<li>What is the time complexity of the merge operation?
+<ul>
+<li>Theta(N)</li>
+<li>Why? Use array writes as cost model, merge does exactly N writes</li>
+</ul>
+</li>
+</ul>
+<h3 id="using-merge-to-speed-up-the-sorting-process">Using Merge to Speed Up the Sorting Process</h3>
+<ul>
+<li>Merging can give us an improvement over vanilla selection sort:
+<ul>
+<li>Selection sort the left half: Theta(N^2)</li>
+<li>Selection sort the right half: Theta(N^2)</li>
+<li>Merge the results: Theta(N)</li>
+</ul>
+</li>
+<li>N = 64: ~1088 AU
+<ul>
+<li>Merge: ~64 AU</li>
+<li>Selection sort: ~2*512 = ~1024 AU</li>
+</ul>
+</li>
+<li>Still Theta(N^2), but faster since N + 2*(N/2)^2 &lt; N^2
+<ul>
+<li>1088 vs 2048 AU for N=64</li>
+</ul>
+</li>
+</ul>
+<h3 id="two-merge-layers">Two Merge Layers</h3>
+<ul>
+<li>Can do even better by adding a second layer of merges
+<ul>
+<li>Two layers of merges: ~640 AU</li>
+</ul>
+</li>
+</ul>
+<h3 id="example-5-mergesort">Example 5: Mergesort</h3>
+<ul>
+<li>Mergesort does merges all the way down (no selection sort):
+<ul>
+<li>If array is of size 1, return</li>
+<li>Mergesort the left half</li>
+<li>Mergesort the right half</li>
+<li>Merge the results</li>
+</ul>
+</li>
+<li>Total runtime to merge all the way down: ~384 AU
+<ul>
+<li>Top layer: ~64 = 64 AU</li>
+<li>Second layer: ~32 * 2 = 64 AU</li>
+<li>Third layer: ~16 * 4 = 64 AU</li>
+<li>Overall runtime in AU is ~64k, where k is the number of layers</li>
+<li>k = log_2(64) = 6, so ~384 total AU</li>
+</ul>
+</li>
+</ul>
+<h3 id="mergesort-order-of-growth">Mergesort Order of Growth</h3>
+<ul>
+<li>Mergesort has worst case runtime = Theta(N log N)
+<ul>
+<li>Every level takes ~N AU
+<ul>
+<li>Top level takes ~N AU</li>
+<li>Top level takes ~N/2 + N/2 = ~N</li>
+<li>etc. etc.</li>
+</ul>
+</li>
+<li>Thus, total runtime is ~Nk, where k is the number of levels
+<ul>
+<li>Note that k = log_2(N)</li>
+</ul>
+</li>
+<li>Overall runtime is Theta(N log N)</li>
+</ul>
+</li>
+</ul>
+<h3 id="linear-vs-linearithmic-n-log-n-vs-quadratic">Linear vs. Linearithmic (N log N) vs Quadratic</h3>
+<ul>
+<li>N log N is basically as good as N, and is vastly better than N^2
+<ul>
+<li>For N = 1000000, the log N is only 20</li>
+</ul>
+</li>
+</ul>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>Theoretical analysis of algorithm performance requires <strong>careful thought</strong>
+<ul>
+<li>There are <strong>no magic shortcuts</strong> for analyzing code</li>
+<li>In our course, it's OK to do exact counting or intuitive analysis
+<ul>
+<li>Know how to sum 1 + 2 + 3 + ... + N and 1 + 2 + 3 + ... + N</li>
+<li>We won't be writing mathematical proofs in this class</li>
+</ul>
+</li>
+<li>Many runtime problems you'll do in this class resemble one of the five problems from today. See textbook, study guide, and discussion for more practice</li>
+<li>This topic has one of the highest skill ceilings of all topics in the course</li>
+</ul>
+</li>
+<li>Different solutions to the same problem may have different runtimes
+<ul>
+<li>N^2 vs. N log N is an enormous difference</li>
+<li>Going from N log N to N is nice, but not a radical change</li>
+</ul>
+</li>
+</ul>
+
+</body>
+</html>
