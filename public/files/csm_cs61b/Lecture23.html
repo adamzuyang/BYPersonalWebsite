@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture23.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-23-tree-and-graph-traversals">Lecture 23: Tree and Graph Traversals</h1>
+<h4 id="10192020">10/19/2020</h4>
+<h2 id="trees-and-traversals">Trees and Traversals</h2>
+<h3 id="tree-definition">Tree Definition</h3>
+<ul>
+<li>A tree consists of:
+<ul>
+<li>A set of nodes</li>
+<li>A set of edges that connect those nodes
+<ul>
+<li>Constraint: There is exactly one path between any two nodes</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="rooted-trees-definition">Rooted Trees Definition</h3>
+<ul>
+<li>A rooted tree is a tree where we've chosen one node as the &quot;root&quot;
+<ul>
+<li>Every node N except the root has exactly one parent, defined as the first node on the path from N to the root</li>
+<li>A node with no child is called a leaf</li>
+</ul>
+</li>
+</ul>
+<h3 id="trees">Trees</h3>
+<ul>
+<li>Trees are a more general concept
+<ul>
+<li>Organizational charts</li>
+<li>Family lineages</li>
+</ul>
+</li>
+</ul>
+<h3 id="example-file-tree-system">Example: File Tree System</h3>
+<ul>
+<li>Sometimes you want to iterate over a tree. For example, suppose you want to find the total size of all files in a folder called 61b
+<ul>
+<li>What one might call &quot;tree iteration&quot; is actually called &quot;tree traversal&quot;</li>
+<li>Unlike lists, there are many orders in which we might visit the nodes
+<ul>
+<li>Each ordering is useful in different ways</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="tree-traversal-orderings">Tree Traversal Orderings</h3>
+<ul>
+<li>Level Order
+<ul>
+<li>Visit top-to-bottom, left-to-right (like reading in English)</li>
+</ul>
+</li>
+<li>Depth First Traversals
+<ul>
+<li>3 types: Preorder, Inorder, Postorder</li>
+<li>Basic (rough) idea: Traverse &quot;deep nodes&quot; before shallow ones</li>
+<li>Note: Traversing a node is different than &quot;visiting&quot; a node</li>
+</ul>
+</li>
+</ul>
+<h3 id="depth-first-traversals">Depth First Traversals</h3>
+<pre class="hljs"><code><div>preOrder(BSTNode x) {
+    if (x == null) return;
+    print(x.key)
+    preOrder(x.left)
+    preOrder(x.right)
+}
+</div></code></pre>
+<ul>
+<li>Preorder traversal: &quot;Visit&quot; a node, then traverse its children</li>
+</ul>
+<pre class="hljs"><code><div>inOrder(BSTNode x) {
+    if (x == null) return;
+    inOrder(x.left)
+    print(x.key)
+    inOrder(x.right)
+}
+</div></code></pre>
+<ul>
+<li>Inorder traversal: Traverse left child, visit, then traverse right child</li>
+</ul>
+<pre class="hljs"><code><div>postOrder(BSTNode x) {
+    if (x == null) return;
+    postOrder(x.left)
+    postOrder(x.right)
+    print(x.key)
+}
+</div></code></pre>
+<ul>
+<li>Postorder traversal: Traverse left, traverse right, then visit</li>
+</ul>
+<h3 id="a-useful-visual-trick-for-humans-not-algorithms">A Useful Visual Trick (for Humans, not algorithms)</h3>
+<ul>
+<li>Preorder traversal: We trave a path around the graph, from the top going counter-clockwise. &quot;Visit&quot; every time we pass the LEFT of a node</li>
+<li>Inorder traversal: &quot;Visit&quot; when you cross the bottom of a node</li>
+<li>Postorder traversal: &quot;Visit&quot; when you cross the right of a node</li>
+</ul>
+<h3 id="what-good-are-all-these-traversals">What Good are all These Traversals</h3>
+<ul>
+<li>Example: Preorder Traversal is natural for printing directory listings</li>
+<li>Example: Postorder Traversal for gathering file sizes</li>
+</ul>
+<h2 id="graphs">Graphs</h2>
+<h3 id="trees-and-hierarchical-relationships">Trees and Hierarchical Relationships</h3>
+<ul>
+<li>Trees are fantastic for representing strict hierarchical relationships
+<ul>
+<li>But not every relationship is hierarchical</li>
+<li>Example: Paris Metro map</li>
+</ul>
+</li>
+<li>The Paris Metro map is not a tree: It contains cycles!</li>
+</ul>
+<h3 id="graph-definition">Graph Definition</h3>
+<ul>
+<li>A graph consists of:
+<ul>
+<li>A set of nodes</li>
+<li>A set of zero or more edges, each of which connects two nodes</li>
+<li>Note, all trees are graphs</li>
+</ul>
+</li>
+<li>A simple graph is a graph with:
+<ul>
+<li>No edges that connect a vertex to itself, i.e. no &quot;loops&quot;</li>
+<li>No two edges that connect the same vertices, i.e. no &quot;parallel edges&quot;</li>
+</ul>
+</li>
+<li>In 61B, &quot;graph&quot; refers to &quot;simple graph&quot; unless otherwise stated</li>
+</ul>
+<h3 id="graph-type">Graph Type</h3>
+<ul>
+<li>Directed Graph
+<ul>
+<li>Each edge has a &quot;directionality&quot;</li>
+</ul>
+</li>
+<li>Undirected Graph
+<ul>
+<li>Each edge is undirected</li>
+</ul>
+</li>
+<li>Acyclic Graph:
+<ul>
+<li>A tree. A graph with no cycles</li>
+</ul>
+</li>
+<li>Cyclic:
+<ul>
+<li>A graph that contains a cycle</li>
+</ul>
+</li>
+<li>With Edge Labels</li>
+</ul>
+<h3 id="graph-terminology">Graph Terminology</h3>
+<ul>
+<li>Graph
+<ul>
+<li>Set of <strong>vertices</strong>, aka <strong>nodes</strong></li>
+<li>Set of <strong>edges</strong>: Pair of vertices</li>
+<li>Vertices with an edge between them are <strong>adjacent</strong></li>
+<li>Vertices or edges may have <strong>labels</strong> (or <strong>weights</strong>)</li>
+</ul>
+</li>
+<li>A <strong>path</strong> is a sequence of vertices connected by edges</li>
+<li>A <strong>cycle</strong> is a path whose first and last vertices are the same
+<ul>
+<li>A graph with a cycle is &quot;cyclic&quot;</li>
+</ul>
+</li>
+<li>Two vertices are <strong>connected</strong> if there is a path between them. If all vertices are connected, we say the graph is connected</li>
+</ul>
+<h2 id="graph-problems">Graph Problems</h2>
+<h3 id="graph-queries">Graph Queries</h3>
+<ul>
+<li>There are lots of interesting questions we can ask about a graph:
+<ul>
+<li>Shortest path between two nodes</li>
+<li>Longest path between two nodes without cycles</li>
+<li>Is there a tour that uses each node exactly once?</li>
+<li>Is there a tour that uses each edge exactly once?</li>
+</ul>
+</li>
+</ul>
+<h3 id="graph-queries-more-theoretically">Graph Queries More Theoretically</h3>
+<ul>
+<li>Some well known graph problems and their common names:
+<ul>
+<li><strong>s-t Path</strong>. Is there a path between vertices s and t?</li>
+<li><strong>Connectivity</strong>. Is the graph connected, i.e. is there a path between all vertices?</li>
+<li><strong>Biconnectivity</strong>. Is there a vertex whose removal disconnects the graph?</li>
+<li><strong>Shortest s-t Path</strong>. What is the shortest path between vertices s and t?</li>
+<li><strong>Cycle Detection</strong>. Does the graph contain any cycles?</li>
+<li><strong>Euler Tour</strong>. Is there a cycle that uses every edge exactly once?</li>
+<li><strong>Hamilton Tour</strong>. Is there a cycle that uses every vertex exactly once?</li>
+<li><strong>Planarity</strong>. Can you draw the graph on paper with no crossing edges?</li>
+<li><strong>Isomorphism</strong>. Are two graphs isomorphic?</li>
+</ul>
+</li>
+<li>Often can't tell how difficult a graph problem is without very deep consideration</li>
+</ul>
+<h3 id="graph-problem-difficulty">Graph Problem Difficulty</h3>
+<ul>
+<li>Some well known graph problems
+<ul>
+<li><strong>Euler Tour</strong></li>
+<li><strong>Hamilton Tour</strong></li>
+</ul>
+</li>
+<li>Difficulty can be deceiving
+<ul>
+<li>An efficient Euler tour algorithm O(# edges) was found as early as 1873</li>
+<li>Despite decades of intense study, no efficient algorithm for a Hamilton tour exists. Best algorithms are exponential time</li>
+</ul>
+</li>
+</ul>
+<h2 id="depth-first-traversal">Depth-First Traversal</h2>
+<h3 id="s-t-connectivity">s-t Connectivity</h3>
+<ul>
+<li>Let's solve a classic graph problem called the s-t connectivity problem
+<ul>
+<li>Given source vertex s and a target vertex t, is there a path between s and t?</li>
+</ul>
+</li>
+<li>Requires us to traverse the graph somehow</li>
+<li>One possible recursive algorithm for connected(s, t)
+<ul>
+<li>Does s == t? If so, return true</li>
+<li>Otherwise, if connected(v, t) for any neighbor v of s, return true</li>
+<li>Return false</li>
+</ul>
+</li>
+<li>What is wrong with it? Can get caught in an infinite loop</li>
+<li>How do we fix it?
+<ul>
+<li>Mark s</li>
+<li>Does s == t? If so, return true</li>
+<li>Otherwise, if connected(v, t) for any unmarked neighbor v of s, return true</li>
+<li>Return false</li>
+</ul>
+</li>
+<li>Basic idea is same as before, but visit each vertex at most once
+<ul>
+<li>Marking nodes prevents multiple visits</li>
+</ul>
+</li>
+</ul>
+<h3 id="depth-first-traversal">Depth First Traversal</h3>
+<ul>
+<li>This idea of exploring a neighbor's entire subgraph before moving on to the next neighbor is known as Depth First Traversal
+<ul>
+<li>Called &quot;depth first&quot; because you go as deep as possible</li>
+</ul>
+</li>
+</ul>
+<h3 id="the-power-of-depth-first-search">The Power of Depth First Search</h3>
+<ul>
+<li>DFS is a very powerful technique that can be used for many types of graph problems</li>
+<li>Another example:
+<ul>
+<li>Let's discuss an algorithm that computes a path to every vertex</li>
+<li>Let's call this algorithm DepthFirstPaths</li>
+</ul>
+</li>
+</ul>
+<h3 id="depthfirstpaths">DepthFirstPaths</h3>
+<ul>
+<li>Gaol: Find a path from s to every other reachable vertex, visiting each vertex at most once. dfs(v) is as follows:
+<ul>
+<li>Mark v.</li>
+<li>For each unmarked adjacent vertex w:
+<ul>
+<li>set edgeTo[w] = v</li>
+<li>dfs(w)</li>
+</ul>
+</li>
+<li>Now you're left with an artifact to compute paths from s to every other reachable vertex</li>
+</ul>
+</li>
+</ul>
+<h2 id="tree-vs-graph-traversals">Tree Vs. Graph Traversals</h2>
+<h3 id="tree-traversals">Tree Traversals</h3>
+<ul>
+<li>There are many tree traversals
+<ul>
+<li>Preorder</li>
+<li>Inorder</li>
+<li>Postorder</li>
+<li>Level order (non depth-first traversal)</li>
+</ul>
+</li>
+</ul>
+<h3 id="graph-traversal">Graph Traversal</h3>
+<ul>
+<li>What we just did in DepthFirstPaths is called &quot;<strong>DFS Preorder</strong>&quot;
+<ul>
+<li><strong>DFS Preorder: Action</strong> is <strong>before DFS</strong> calls to neighbors
+<ul>
+<li>Our action was setting edgeTo</li>
+<li>Preorders are equivalent to the order of dfs calls</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Could also do actions in <strong>DFS Postorder</strong>
+<ul>
+<li><strong>DFS Postorder: Action</strong> is <strong>after DFS</strong> calls to neighbors
+<ul>
+<li>Equivalent to the order of dfs returns</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>There are also many graph traversals, given some source:
+<ul>
+<li>DFS Preorder</li>
+<li>DFS PostOrder</li>
+<li>BFS order: (Breadth first search) Act in order of distance from s
+<ul>
+<li>Analogous to &quot;level order&quot;. Search is wide, not deep</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="summary">Summary</h2>
+<h3 id="summary">Summary</h3>
+<ul>
+<li>Graphs are a more general idea than a tree
+<ul>
+<li>A tree is a graph where there are no cycles and every vertex is connected</li>
+<li>Key graph terms: Directed, Undirected, Cyclic, Acyclic, Path, Cycle</li>
+</ul>
+</li>
+<li>Graph problems vary widely in difficulty
+<ul>
+<li>Common tool for solving almost all graph problems is traversal</li>
+<li>A traversal is an order in which you visit / act upon vertices</li>
+<li>Tree traversals:
+<ul>
+<li>Preorder, inorder, postorder, level order</li>
+</ul>
+</li>
+<li>Graph traversals:
+<ul>
+<li>DFS preorder, DFS postorder, BFS</li>
+</ul>
+</li>
+<li>By performing actions / setting instance variables during a graph (or tree) traversal, you can solve problems like s-t connectivity or path finding</li>
+</ul>
+</li>
+</ul>
+
+</body>
+</html>

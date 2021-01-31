@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture16.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-16-adts-sets-maps-binary-search-trees">Lecture 16: ADTs, Sets, Maps, Binary Search Trees</h1>
+<h4 id="1022020">10/2/2020</h4>
+<h2 id="abstract-data-types">Abstract Data Types</h2>
+<h3 id="abstract-data-types-adt">Abstract Data Types (ADT)</h3>
+<ul>
+<li>An <strong>Abstract Data Type (ADT)</strong> is defined only by its operations, not by its implementation</li>
+<li>Deque ADT:
+<ul>
+<li>addFirst</li>
+<li>addLast</li>
+<li>isEmpty</li>
+<li>size</li>
+<li>printDeque</li>
+<li>removeFirst</li>
+<li>removeLast</li>
+<li>get</li>
+</ul>
+</li>
+</ul>
+<h3 id="another-example-of-an-adt-the-stack">Another example of an ADT: The Stack</h3>
+<ul>
+<li>The Stack ADT supports the following operations
+<ul>
+<li>push(int x): Puts x on top of the stack</li>
+<li>int pop(): Removes and returns the top item from the stack</li>
+</ul>
+</li>
+<li>Which implementation do you think would result in faster overall performance?
+<ul>
+<li>Linked List</li>
+<li>Array</li>
+</ul>
+</li>
+<li>Both are about hte same. No resizing for linked lists, so probably a little faster</li>
+</ul>
+<h3 id="grabbag-adt">GrabBag ADT</h3>
+<ul>
+<li>The GrabBag ADT supports the following operations:
+<ul>
+<li>insert(int x): Inserts x into the grab bag</li>
+<li>int remove(): Removes a random item from the bag</li>
+<li>int sample(): Samples a random item from the bag</li>
+<li>int size(): Number of items in the bag</li>
+</ul>
+</li>
+<li>In this case, Array will result in faster performance than Linked List</li>
+</ul>
+<h3 id="abstract-data-types-in-java">Abstract Data Types in Java</h3>
+<ul>
+<li>Syntax differentiation between abstract data types and implementations
+<ul>
+<li>Interfaces in Java aren't purely abstract and can contain some implementation details, e.g. default methods</li>
+</ul>
+</li>
+<li>Example: <code>List&lt;Integer&gt; L = new ArrayList&lt;&gt;();</code></li>
+</ul>
+<h3 id="collections">Collections</h3>
+<ul>
+<li>Among the most important features in java.util library are those that extend the Collection interface
+<ul>
+<li>Lists of things</li>
+<li>Sets of things</li>
+<li>Mappings between items
+<ul>
+<li>Maps also known as associate arrays, associative lists, symbol tables, dictionaries</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="java-libraries">Java Libraries</h3>
+<ul>
+<li>The built-in java.util package provides a number of useful:
+<ul>
+<li>Interfaces: ADTs (lists, sets, maps, priority queues, etc)</li>
+<li>Implementations: Concrete classes you can use</li>
+</ul>
+</li>
+</ul>
+<h2 id="binary-search-trees">Binary Search Trees</h2>
+<h3 id="anlysis-of-an-orderedlinkedlistsetcharacter">AnLysis of an OrderedLinkedListSet<Character></h3>
+<ul>
+<li>We implemented a set based on unordered arrays. For the <strong>order linked list</strong> set implementation, name an operation that takes worst case linear time, i.e. Theta(N)
+<ul>
+<li>Both <code>contains</code> and <code>add</code> will take linear time</li>
+</ul>
+</li>
+</ul>
+<h3 id="optimization-extra-links">Optimization: Extra Links</h3>
+<ul>
+<li>Fundamental Problem: Slow search, even though it's in order
+<ul>
+<li>Add (random) express lanes. Skip List (won't discuss in 61B)</li>
+</ul>
+</li>
+</ul>
+<h3 id="optimization-change-the-entry-point">Optimization: Change the Entry Point</h3>
+<ul>
+<li>Fundamental Problem: Slow search, even though it's in order
+<ul>
+<li>Move pointer to middle and flip left links. Halved search time!</li>
+<img src="images/csm_cs61b/16.1.png" alt="" style="width:400px">
+<li>How do we do even better?</li>
+<img src="images/csm_cs61b/16.2.png" alt="" style="width:400px">
+</ul>
+</li>
+</ul>
+<h2 id="bst-definitions">BST Definitions</h2>
+<h3 id="tree">Tree</h3>
+<ul>
+<li>A tree consists of
+<ul>
+<li>A set of nodes</li>
+<li>A set of edges that connect those nodes
+<ul>
+<li>Constraint: There is exactly one path between any two nodes</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="rooted-trees-and-rooted-binary-trees">Rooted Trees and Rooted Binary Trees</h3>
+<ul>
+<li>In a rooted tree, we call one node the root
+<ul>
+<li>Every node N except the root has exactly one parent, defined as the first node on the path from N to the root</li>
+<li>A node with no child is called a leaf</li>
+</ul>
+</li>
+<li>In a rooted binary tree, every node has either 0, 1, or 2 children (subtrees)</li>
+</ul>
+<h3 id="binary-search-trees">Binary Search Trees</h3>
+<ul>
+<li>A binary search tree is a rooted binary tree with the BST property</li>
+<li><strong>BST Property</strong>. For every node X in the tree
+<ul>
+<li>Every key in the <strong>left</strong> subtree is <strong>less</strong> than X's key</li>
+<li>Every key in the <strong>right</strong> subtree is <strong>greater</strong> than X's tree</li>
+</ul>
+</li>
+<li>Ordering must be complete, transitive, and antisymmetric. Given keys p and q:
+<ul>
+<li>Exactly one of p &lt; q and q &lt; p are true</li>
+<li>p &lt; q and q &lt; r implies p &lt; r</li>
+</ul>
+</li>
+<li>One consequence of these rules: No duplicate keys allowed!
+<ul>
+<li>Keep things simple. Most real world implementations follow this rule</li>
+</ul>
+</li>
+</ul>
+<h2 id="bst-operations-search">BST Operations: Search</h2>
+<h3 id="finding-a-searchkey-in-a-bst">Finding a searchKey in a BST</h3>
+<ul>
+<li>If searchKey returns T.key, return
+<ul>
+<li>If searchKey &lt; T.key, search T.left</li>
+<li>If searchKey &gt; T.key, search T.right</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>static BST find(BST T, key sk) {
+    if (T == null)
+        return null;
+    if (sk.equals(T.key))
+        return T;
+    else if (sk &lt; T.key)
+        return find(T.left, sk);
+    else
+        return find(T.right, sk);
+}
+</div></code></pre>
+<ul>
+<li>What is the runtime to complete a search on a &quot;bushy&quot; BST in the worst case, where N is the number of nodes?
+<ul>
+<li>Answer is Theta(log N)</li>
+<li>Height of the tree is ~log_2(N)</li>
+</ul>
+</li>
+</ul>
+<h3 id="bsts">BSTs</h3>
+<ul>
+<li>Bushy BSTs are extremely fast</li>
+<li>Much computation is dedicated towards finding things in response to queries
+<ul>
+<li>It's a good thing that we can do such queries almost for free</li>
+</ul>
+</li>
+</ul>
+<h2 id="bst-operations-insert">BST Operations: Insert</h2>
+<h3 id="inserting-a-new-key-into-a-bst">Inserting a new key into a BST</h3>
+<ul>
+<li>Search for key
+<ul>
+<li>If found, do nothing</li>
+<li>If not found
+<ul>
+<li>Create a new node</li>
+<li>Set appropriate link</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>static BST insert(BST T, Key ik) {
+    if (T == null)
+        return new BST(ik);
+    if (ik &lt; T.key)
+        T.left = insert(T.left, ik);
+    else if (ik &gt; T.key)
+        T.right = insert(T.right, ik);
+    return T;
+}
+</div></code></pre>
+<h2 id="bst-operation-delete">BST Operation: Delete</h2>
+<h3 id="deleting-from-a-bst">Deleting from a BST</h3>
+<ul>
+<li>3 Cases:
+<ul>
+<li>Deletion key has no children</li>
+<li>Deletion key has one child</li>
+<li>Deletion key has two children</li>
+</ul>
+</li>
+</ul>
+<h3 id="case-1-deleting-from-a-bst-key-with-no-children">Case 1: Deleting from a BST: Key with no Children</h3>
+<ul>
+<li>Deletion key has no children
+<ul>
+<li>Just sever hte parent's link</li>
+<li>Garbage collected</li>
+</ul>
+</li>
+</ul>
+<h3 id="case-2-deleting-from-a-bst-key-with-one-child">Case 2: Deleting from a BST: Key with one Child</h3>
+<ul>
+<li>Goal: Maintain BST property
+<ul>
+<li>Key's child definitely larger than parent
+<ul>
+<li>Safe to just move that child into key's spot</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Thus: Move key's parent's pointer to key's child
+<ul>
+<li>Key will be garbage collected (along with its instance variables)</li>
+</ul>
+</li>
+</ul>
+<h3 id="case-3-deleting-from-a-bst-deletion-with-two-children">Case 3: Deleting from a BST: Deletion with two Children</h3>
+<ul>
+<li>Goal:
+<ul>
+<li>Find a new root node</li>
+<li>Must be &gt; than everything in left subtree</li>
+<li>Must be &lt; than everything in right subtree</li>
+</ul>
+</li>
+<li>Choose either predecessor or successor
+<ul>
+<li>Delete predecessor (the largest key smaller than the removed key) or successor (the smallest key larger than the removed key), and stick new copy in the root position
+<ul>
+<li>This deletion guaranteed to be either case 1 or 2</li>
+</ul>
+</li>
+<li>This strategy is sometimes known as &quot;Hibbard deletion&quot;</li>
+</ul>
+</li>
+</ul>
+<h2 id="sets-vs-maps-summary">Sets vs. Maps, Summary</h2>
+<h3 id="sets-vs-maps">Sets vs. Maps</h3>
+<ul>
+<li>Can think of the BST as representing a Set</li>
+<li>But what if we wanted to represent a mapping of word counts?</li>
+<li>To represent maps, just have each BST node store key/value pairs</li>
+<li>Note: No efficient way to look up by value
+<ul>
+<li>Example: Cannot find all the keys with value = 1 without iterating over ALL nodes. This is fine.</li>
+</ul>
+</li>
+</ul>
+<h3 id="summary">Summary</h3>
+<ul>
+<li>Abstract data types are defined in terms of operations, not implementation</li>
+<li>Several useful ADTs: Disjoint Sets, Map, Set, List
+<ul>
+<li>Java provides Map, Set, List interfaces, along with several implementations</li>
+</ul>
+</li>
+<li>We've seen two ways to implement a Set (or Map): ArraySet and using a BST
+<ul>
+<li>ArraySet: Theta(N) operations in the worst case</li>
+<li>BST: Theta(log N) operations if tree is balanced</li>
+</ul>
+</li>
+<li>BST implementations:
+<ul>
+<li>Search and insert are straightforward (but insert is a little tricky)</li>
+<li>Deletion is more challenging. Typical approach is &quot;Hibbard deletion&quot;</li>
+</ul>
+</li>
+</ul>
+<h2 id="bst-implementation-tips">BST Implementation Tips</h2>
+<h3 id="tips-for-bst-lab">Tips for BST Lab</h3>
+<ul>
+<li>Code from class was &quot;naked recursion&quot;. Your BSTMap will not be</li>
+<li>For each public method, e.g. put(K key, V value), create a private recursive method, e.g. put(K key, V value, Node n)</li>
+<li>When inserting, always set left/right pointers, even if nothing is actually changing</li>
+<li>Avoid &quot;arms length base cases&quot;. Don't check if left or right is null!</li>
+</ul>
+<h2 id="csm-review">CSM Review</h2>
+<ul>
+<li>A <strong>list</strong> is an ordered sequence of items: like an array, but without worrying about the length or size</li>
+</ul>
+<pre class="hljs"><code><div>interface List&lt;E&gt; {
+  boolean add(E element);
+  void add(int index, E element);
+  E get(int index);
+  int size();
+}
+</div></code></pre>
+<ul>
+<li>Maps (Dictionary)
+<ul>
+<li>Notes:
+<ul>
+<li>Keys are unique</li>
+<li>Values don't have to be unique</li>
+<li>Key lookup: O(1)</li>
+</ul>
+</li>
+<li>A <strong>map</strong> is a collection of key-value mappings, like a dictionary in Python</li>
+<li>Like a set, the keys in a map are unique</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>interface Map&lt;K, V&gt; {
+  V put(K key, V value);
+  V get(K key);
+  boolean containsKey(Object key);
+  Set&lt;K&gt; keySet();
+}
+</div></code></pre>
+<ul>
+<li>Sets
+<ul>
+<li>Notes:
+<ul>
+<li>Unordered collection of <em>unique</em> items</li>
+<li>Set operations are O(1)</li>
+</ul>
+</li>
+<li>A <strong>set</strong> is an unordered collection of unique elements</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>interface Set&lt;E&gt; {
+  boolean add(E element);
+  boolean contains(Object object);
+  int size();
+  boolean remove(Object object);
+}
+</div></code></pre>
+<ul>
+<li>Stacks and Queues
+<ul>
+<li>Stack
+<ul>
+<li>&quot;First in Last out&quot;</li>
+</ul>
+</li>
+<li>Queue
+<ul>
+<li>&quot;First in First out&quot;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture31.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-31-software-engineering-2">Lecture 31: Software Engineering 2</h1>
+<h4 id="1162020">11/6/2020</h4>
+<h2 id="build-your-world">Build Your World</h2>
+<h3 id="part-1-world-generation">Part 1: World Generation</h3>
+<ul>
+<li>Given a random seed (long), generate a 2D world (TetTile[][]) with rooms and hallways
+<ul>
+<li>N: Create new world</li>
+<li>343434: Random seed</li>
+<li>S: End of seed marker</li>
+</ul>
+</li>
+</ul>
+<h3 id="part-2-interactivity">Part 2: Interactivity</h3>
+<ul>
+<li>In part 2, you'll add:
+<ul>
+<li>An interactive keyboard mode</li>
+<li>The ability for the avatar to move around in the world
+<ul>
+<li>Must also be able to handle movements given via <code>interactWithInputString</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="ousterhouts-take-on-complexity">Ousterhout's Take on Complexity</h3>
+<ul>
+<li>There are two primary sources of complexity:
+<ul>
+<li><strong>Dependencies</strong>: When a piece of code cannot be read, understood, and modified independently</li>
+<li><strong>Obscurity</strong>: When important information is not obvious</li>
+</ul>
+</li>
+</ul>
+<h2 id="modular-design">Modular Design</h2>
+<h3 id="hiding-complexity">Hiding Complexity</h3>
+<ul>
+<li>One powerful tool for managing complexity is to design your system so that programmer is only thinking about some of the complexity at once
+<ul>
+<li>Using helper methods (i.e. <code>getNeighbor(WEST)</code> and helper classes (<code>InputDevice</code>)) hide complexity</li>
+</ul>
+</li>
+</ul>
+<h3 id="modular-design">Modular Design</h3>
+<ul>
+<li>In an ideal world, system would be broken down into modules, where every module would be totally independent
+<ul>
+<li>Here, &quot;module&quot; is an informal term referring to a class, package, or other unit of code</li>
+<li>Not possible for modules to be entirely independent, because code from each module has to call other modules
+<ul>
+<li>e.g. need to known signature of methods to call them</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>In modular design, out goal is to minimize dependencies between modules</li>
+</ul>
+<h3 id="interface-vs-implementation">Interface vs. Implementation</h3>
+<ul>
+<li>As we've seen, there is an important distinction between Interface and Implementation
+<ul>
+<li>Map is an interface</li>
+<li>HashMap, TreeMap, etc. are implementations</li>
+</ul>
+</li>
+<li>&quot;The best modules are those whose interfaces are much simpler than their implementation&quot;
+<ul>
+<li>A simple interface minimizes the complexity the module can cause elsewhere
+<ul>
+<li>If you only have a <code>getNext()</code> method, that's all someone can do</li>
+</ul>
+</li>
+<li>If a module's interface is simple, we can change an implementation of that module without affecting the interface
+<ul>
+<li>If <code>List</code> had an <code>arraySize</code> method, this would mean you'd be stuck only being able to build array based lists</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="interface">Interface</h3>
+<ul>
+<li>A Java interface has both a formal and an informal part:
+<ul>
+<li>Formal: The list of method signatures</li>
+<li>Informal: Rules for using the interface that are not enforced by the compiler
+<ul>
+<li>Example: If your iterator requires hasNext to be called before next in order to work properly, that is an informal part of the interface</li>
+<li>Example: If your add method throws an exception on null inputs, that is an informal part of the interface</li>
+<li>Example: Runtime for a specific method, e.g. <code>add</code> in <code>ArrayList</code></li>
+<li>Can only be specified in comments</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Be wary of the informal rules of your modules as you build project 3</li>
+</ul>
+<h3 id="modules-should-be-deep">Modules Should be Deep</h3>
+<ul>
+<li>Ousterhout: &quot;The best modules are those that provide powerful functionality yet have simple interfaces. I use the term <em>deep</em> to describe such modules&quot;</li>
+<li>For example, the KdTree is a deep module
+<ul>
+<li>Simple interface:
+<ul>
+<li>Constructor takes a list of inputs</li>
+<li><code>nearest</code> method that takes a point and returns closest point in set</li>
+<li>Nothing informal the user needs to know</li>
+</ul>
+</li>
+<li>Powerful functionality:
+<ul>
+<li>List converted into a complex searchable binary tree</li>
+<li>Nearest method has complex and subtle pruning rules for efficiency</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="information-hiding">Information Hiding</h3>
+<ul>
+<li>The most important way to make your modules deep is to practice &quot;information hiding&quot;
+<ul>
+<li>Embed knowledge and design decision in the module itself, without exposing them to the outside world</li>
+</ul>
+</li>
+<li>Reduces complexity in two ways:
+<ul>
+<li>Simplifies interface</li>
+<li>Makes it easier to modify the system</li>
+</ul>
+</li>
+</ul>
+<h3 id="information-leakage">Information Leakage</h3>
+<ul>
+<li>The opposite of <strong>information hiding</strong> is <strong>information leakage</strong>
+<ul>
+<li>Occurs when design decision is reflected in multiple modules
+<ul>
+<li>Any change to one requires a change to all</li>
+<li>Information is embodied in two places, i.e. it has &quot;leaked&quot;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Ousterhout:
+<ul>
+<li>&quot;Information leakage is one of the most important red flags in software design&quot;</li>
+</ul>
+</li>
+</ul>
+<h3 id="temporal-decomposition">Temporal Decomposition</h3>
+<ul>
+<li>One of the biggest causes of information leakage is &quot;temporal decomposition&quot;</li>
+<li>In temporal decomposition, the structure of your system reflects the order in which events occur</li>
+</ul>
+<h3 id="byow-suggestions">BYOW Suggestions</h3>
+<ul>
+<li>Some suggestions for BYOW:
+<ul>
+<li>Build classes that provide functionality needed in many places in your code</li>
+<li>Create &quot;deep modules&quot;, e.g. classes with simple interfaces that do complicated things</li>
+<li>Avoid over-reliance on &quot;temporal decomposition&quot; where your decomposition is driven primarily by the order in which things occur
+<ul>
+<li>It's OK to use some temporal decomposition, but try to fix any information leakage that occurs</li>
+</ul>
+</li>
+<li>Be strategic, not tactical</li>
+<li>Most importantly: Hide information from yourself when unneeded!</li>
+</ul>
+</li>
+</ul>
+<h2 id="teamwork">Teamwork</h2>
+<h3 id="project-3">Project 3</h3>
+<ul>
+<li>Project 3 is a team project</li>
+<li>Two main reasons:
+<ul>
+<li>Get practice working on a team</li>
+<li>Get more creativity into the project since it's so open ended</li>
+</ul>
+</li>
+</ul>
+<h3 id="teamwork">Teamwork</h3>
+<ul>
+<li>In the real world, some tasks are much too large to be handled by a single person</li>
+<li>When faced with the same task, some teams succeed, where others may fail</li>
+</ul>
+<h3 id="individual-intelligence">Individual Intelligence</h3>
+<ul>
+<li>In 1904, Spearman very famously demonstrated the existence of an &quot;intelligence&quot; factor in humans:
+<ul>
+<li>&quot;People who do well on mental task tend to do well on most others, despite large variations in the tests' contents and methods of administration.&quot; This mysterious factor is called &quot;intelligence&quot;</li>
+<li>Intelligence can be quickly measured (less than an hour)</li>
+<li>Intelligence reliably predicts important life outcomes over a long period of time, including:
+<ul>
+<li>Grades in school</li>
+<li>Success in occupations</li>
+<li>Life expectancy</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Note: There is nothing in Spearman's work that says this factor is genetic</li>
+</ul>
+<h3 id="group-intelligence">Group Intelligence</h3>
+<ul>
+<li>Wooley et. al investigated the success of teams of humans on various tasks</li>
+<li>They found that performance on a wide variety of tasks is correlated, i.e. groups that do well on any specific task tend to do very well on the others
+<ul>
+<li>This suggests that groups do have &quot;group intelligence&quot; analogous to individual intelligence</li>
+</ul>
+</li>
+<li>Studying individual group members, Wooley et. al found that:
+<ul>
+<li>Collective intelligence is not significantly correlated with average or max intelligence of each group</li>
+<li>Instead, collective intelligence was correlated with three things:
+<ul>
+<li>Average social sensitivity of group members as measured using the &quot;Reading the Mind in the Eyes Test&quot;</li>
+<li>How equally distributed the group was in conversational turn-taking, e.g. groups where one person dominated did poorly</li>
+<li>Percentage of females in the group (paper suggests this is due to correlation with greater social sensitivity)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="teamwork-and-project-3">Teamwork and Project 3</h3>
+<ul>
+<li>Presumably, learning habits that lead to greater group intelligence is possible</li>
+<li>Recognize that teamwork is also about relationships!
+<ul>
+<li>Treat each other with respect</li>
+<li>Be open and honest with each other</li>
+<li>Make sure to set clear expectations</li>
+<li>...and if those expectations are not met, confront this fact head on</li>
+</ul>
+</li>
+</ul>
+<h3 id="reflexivity">Reflexivity</h3>
+<ul>
+<li>Important part of teamwork is &quot;reflexivity&quot;
+<ul>
+<li>&quot;A group's ability to collectively reflect upon team objectives, strategies, and processes, and to adapt to them accordingly&quot;</li>
+<li>Recommended to &quot;cultivate a collaborative environment in which giving and receiving feedback on an ongoing basis is seen as a mechanism for reflection and learning&quot;</li>
+</ul>
+</li>
+</ul>
+<h3 id="feedback-is-hard-negativity">Feedback is Hard: Negativity</h3>
+<ul>
+<li>Most of us have received feedback from someone which felt judgmental or in bad faith
+<ul>
+<li>Thus, we're afraid to given even constructive negative feedback for fear that our feedback will be misconstrued as an attack</li>
+<li>And we're conditioned to watch out for negative feedback that is ill-intentioned</li>
+</ul>
+</li>
+</ul>
+<h3 id="feedback-is-hard-can-seem-like-a-waste-of-time">Feedback is Hard: Can Seem Like a Waste of Time</h3>
+<ul>
+<li>Feedback also can feel like a waste of time:
+<ul>
+<li>You may find it a pointless exercise to rate each other twice during the project. What does that have to do with a programming class?</li>
+<li>In the real world, the same thing happens. Your team has limited time to figure out &quot;what&quot; to do, so why stop and waste time reflecting on &quot;how&quot; you're working together?</li>
+</ul>
+</li>
+</ul>
+<h3 id="feedback-is-hard-coming-up-with-feedback-is-tough">Feedback is Hard: Coming Up With Feedback is Tough</h3>
+<ul>
+<li>Feedback can simply difficult to produce
+<ul>
+<li>You may build incredible technical skills, but learning to provide useful feedback is hard!</li>
+<li>Without confidence in ability to provide feedback, you may wait until you are forced to do so by annual reviews or other structured time to provide it
+<ul>
+<li>If you feel like your partnership could be better, try to talk about it without waiting until you have to review each other at the end of next week</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="team-reflection">Team Reflection</h3>
+<ul>
+<li>We are going to have you reflect on your team's success twice:
+<ul>
+<li>This partnership has worked well for me</li>
+<li>This partnership has worked well for my partner</li>
+<li>Estimate the balance of work between you and your partner
+<ul>
+<li>Contribution in a more general sense</li>
+</ul>
+</li>
+<li>If applicable, give a particularly great moment from your partnership</li>
+<li>What's something you could do better?</li>
+<li>What's something your partner could do better?</li>
+</ul>
+</li>
+<li>In extreme cases, we will not be penalizing partners who contributed less</li>
+</ul>
+
+</body>
+</html>

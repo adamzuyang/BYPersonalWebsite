@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture05.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-5-dllists-arrays">Lecture 5: DLLists, Arrays</h1>
+<h4 id="942020">9/4/2020</h4>
+<h2 id="summary-of-sllists-so-far">Summary of SLLists So Far</h2>
+<h3 id="one-downside-of-sllists">One Downside of SLLists</h3>
+<ul>
+<li>Inserting at the back of an SLList is much slower than the front</li>
+</ul>
+<h3 id="improvement-7-fast-addlast">Improvement #7: Fast addLast</h3>
+<ul>
+<li>Suppose we want to support add, get, and remove operations, will having a <code>last</code> pointer result for fast operations on long lists?</li>
+</ul>
+<h2 id="why-a-last-pointer-isnt-enough">Why a Last Pointer Isn't Enough</h2>
+<h3 id="last-is-not-enough"><code>.last</code> is not enough</h3>
+<ul>
+<li>The <code>remove</code> operation will still be slow. Requires setting the second to last node's pointer to null, and <code>last</code> to the second to last node</li>
+</ul>
+<h3 id="improvement-7-last-and">Improvement #7: .last and ???</h3>
+<ul>
+<li>We added .last. What other changes might we make so that remove is also fast?
+<ul>
+<li>Add backwards links from every node</li>
+<li>This yields a &quot;doubly linked list&quot; or DLList, as opposed to our earlier &quot;singly linked list&quot; or SLList</li>
+</ul>
+</li>
+</ul>
+<h3 id="doubly-linked-lists-naive">Doubly Linked Lists (Naive)</h3>
+<ul>
+<li>Reverse pointers allow all operations (add, get, remove) to be fast
+<ul>
+<li>We call such a list a &quot;doubly linked list&quot; or DLList</li>
+</ul>
+</li>
+<li>This approach has an annoying special case: <code>last</code> sometimes points to the sentinel, and sometimes points at a &quot;real&quot; node</li>
+</ul>
+<h3 id="doubly-linked-lists-double-sentinel">Doubly Linked Lists (Double Sentinel)</h3>
+<ul>
+<li>One solution: have two sentinels
+<ul>
+<li>One that is always at the front and one that is always at the back</li>
+</ul>
+</li>
+</ul>
+<h3 id="doubly-linked-lists-circular-sentinel">Doubly Linked Lists (Circular Sentinel)</h3>
+<ul>
+<li>A single sentinel is both at the front <strong>and</strong> and the back</li>
+</ul>
+<h3 id="improvement-8-fancier-sentinel-nodes">Improvement #8: Fancier Sentinel Nodes</h3>
+<ul>
+<li>While fast, adding <code>.last</code> and <code>.prev</code> introduces lots of special cases</li>
+<li>To avoid these, either:
+<ul>
+<li>Add an additional <code>sentBack</code> sentinel at the end of the list</li>
+<li>Make your linked list circular (highly recommended for project 1), with a single sentinel in the middle</li>
+</ul>
+</li>
+</ul>
+<h2 id="generic-lists">Generic Lists</h2>
+<h3 id="integer-only-lists">Integer Only Lists</h3>
+<ul>
+<li>One issue with our list classes: They only support integers</li>
+</ul>
+<pre class="hljs"><code><div>public class SLList&lt;LochNess&gt; {
+    private class StuffNode {
+        public LochNess item;
+        public StuffNode next;
+
+        public StuffNode(LochNess i, StuffNode n) {
+            item = i;
+            next = n;
+        }
+    }
+
+    private StuffNode first;
+    private int size;
+
+    ...
+    ...
+    ...
+}
+
+public class SLListLauncher {
+    public static void main(String[] args) {
+        SLList&lt;String&gt; s1 = new SLList&lt;&gt;(&quot;bone&quot;);
+        s1.addFirst(&quot;thugs&quot;);
+    }
+}
+</div></code></pre>
+<h3 id="slists">SLists</h3>
+<ul>
+<li>Java allows us to defer type selection until declaration</li>
+</ul>
+<h3 id="generics">Generics</h3>
+<ul>
+<li>Rules for project 1
+<ul>
+<li>In the .java file implementing your data structure, specify your &quot;generic type&quot; only once at the very top of the file</li>
+<li>In the .java files that use your data structure, specify desired type once:
+<ul>
+<li>Write out desired type during declaration</li>
+<li>Use the empty diamond operator &lt;&gt; during instantiation</li>
+</ul>
+</li>
+<li>When declaring or instantiating your data structure, use the reference type:
+<ul>
+<li>int: Integer</li>
+<li>double: Double</li>
+<li>char: Character</li>
+<li>boolean: Boolean</li>
+<li>long: Long</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="array-overview">Array Overview</h2>
+<h3 id="getting-memory-boxes">Getting Memory Boxes</h3>
+<ul>
+<li>To store information, we need memory boxes, which we can get in Java by declaring variables or instantiating objects. Examples:
+<ul>
+<li><code>int x;</code></li>
+<li><code>Walrus w1;</code></li>
+<li><code>Walrus w2 = new Walrus(30, 5.6);</code></li>
+</ul>
+</li>
+<li>Arrays are a special kind of object which consists of a <strong>numbered</strong> sequence of memory boxes
+<ul>
+<li>To get ith item of array A, use A[i]</li>
+<li>Unlike <strong>class</strong> instances which have <strong>named</strong> memory boxes</li>
+</ul>
+</li>
+</ul>
+<h3 id="arrays">Arrays</h3>
+<ul>
+<li>Arrays consist of:
+<ul>
+<li>A fixed integer <strong>length</strong></li>
+<li>A sequence of N memory boxes where <strong>N=length</strong> such that:
+<ul>
+<li>All of the boxes hold the same type of value (and have the same # of bits)</li>
+<li>The boxes are numbered 0 through length-1</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Like instances of class:
+<ul>
+<li>You get one reference when it's created</li>
+<li>If you reassign all variables containing that reference, you can never get the array back</li>
+</ul>
+</li>
+<li>Unlike classes, arrays do not have methods</li>
+</ul>
+<h3 id="arrays">Arrays</h3>
+<ul>
+<li>Like classes, arrays are instantiated with <code>new</code></li>
+<li>Three valid notations:
+<ul>
+<li><code>y = new int[3];</code>
+<ul>
+<li>Creates array containing 3 int boxes (32 x 3 = 96 bits total)</li>
+<li>Each container gets a default value
+<ul>
+<li>The default value for <code>int</code> is <code>0</code></li>
+<li>The default value for <code>String</code>  is <code>null</code> (holds string references)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>x = new int[]{1, 2, 3, 4, 5};</code></li>
+<li><code>int[] w = {9, 10, 11, 12, 13};</code>
+<ul>
+<li>Can omit the new if you are also declaring a variable</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>All three notations create an array, which we saw on the last side comprises:
+<ul>
+<li>A <strong>length</strong> field</li>
+<li>A sequence of <strong>No boxes</strong> where <strong>N = length</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="array-basics">Array Basics:</h3>
+<pre class="hljs"><code><div>int[] z = null;
+int[] x, y;
+x = new int[]{1, 2, 3, 4, 5};
+y = x;
+x = new int[]{-1, 2, 5, 4, 99};
+y = new int[3];
+z = new int[0];
+int xL = x.length;
+
+String[] s = new String[6];
+s[4] = &quot;ketchup&quot;;
+s[x[3] - x[1]] = &quot;muffins&quot;;
+
+int[] b = {9, 10, 11};
+System.arraycopy(b, 0, x, 3, 2);
+</div></code></pre>
+<h3 id="array-copy">Array Copy</h3>
+<ul>
+<li>Two ways to copy arrays:
+<ul>
+<li>Item by item using a loop</li>
+<li>Using arraycopy. Takes 5 parameters:
+<ul>
+<li>Source array</li>
+<li>Start position in source</li>
+<li>Target array</li>
+<li>Start position in target</li>
+<li>Number to copy</li>
+</ul>
+<pre class="hljs"><code><div>System.arraycopy(b, 0, x, 3, 2);
+(In Python): x[3:5] = b[0:2]
+</div></code></pre>
+</li>
+</ul>
+</li>
+<li>arraycopy is (likely to be) faster, particularly for larger arrays. Comre compact code
+<ul>
+<li>Code is (arguably) harder to read</li>
+</ul>
+</li>
+</ul>
+<h2 id="2d-arrays">2D Arrays</h2>
+<h3 id="arrays-of-array-addresses">Arrays of Array Addresses</h3>
+<pre class="hljs"><code><div>int[][] pascalsTriangle;
+pascalsTriangle = new int[4][];
+int[] rowZero = pascalsTriangle[0];
+		
+pascalsTriangle[0] = new int[]{1};
+pascalsTriangle[1] = new int[]{1, 1};
+pascalsTriangle[2] = new int[]{1, 2, 1};
+pascalsTriangle[3] = new int[]{1, 3, 3, 1};
+int[] rowTwo = pascalsTriangle[2];
+rowTwo[1] = -5;
+
+int[][] matrix;
+matrix = new int[4][];
+matrix = new int[4][4];
+
+int[][] pascalAgain = new int[][]{{1}, {1, 1}, {1, 2, 1}, {1, 3, 3, 1}};
+</div></code></pre>
+<ul>
+<li>Syntax for arrays of arrays can be a bit confounding. You'll learn through practice</li>
+<li><code>int[][] pascalsTriangle;</code>
+<ul>
+<li>Array of int array references</li>
+</ul>
+</li>
+<li><code>pascalsTriangle = new int[4][];</code>
+<ul>
+<li>Create four boxes, each can store an int array reference</li>
+</ul>
+</li>
+<li><code>pascalsTriangle[2] = new int[]{1, 2, 1};</code>
+<ul>
+<li>Create a new array with three boxes, storing integers 1, 2, 1, respectively. Store a reference to this array in pascalsTriangle in box #2</li>
+</ul>
+</li>
+<li><code>matrix = new int[4][];</code>
+<ul>
+<li>Creates 1 total array</li>
+</ul>
+</li>
+<li><code>matrix = new int[4][4];</code>
+<ul>
+<li>Creates 5 total arrays</li>
+</ul>
+</li>
+</ul>
+<h2 id="arrays-vs-classes">Arrays vs. Classes</h2>
+<h3 id="arrays-vs-classes">Arrays vs. Classes</h3>
+<ul>
+<li>Arrays and Classes can both be used to organize a bunch of memory boxes
+<ul>
+<li>Array boxes are accessed using [] notation</li>
+<li>Class boxes are accessed using dot notation</li>
+<li>Array boxes must all be of the same type</li>
+<li>Class boxes may be of different types</li>
+<li>Both have a fixed number of boxes</li>
+</ul>
+</li>
+<li>Array indices can be computed at runtime</li>
+<li>Class member variable names CANNOT be computed and used at runtime
+<ul>
+<li>Dot notation does not work</li>
+<li>[] notation also does not work</li>
+</ul>
+</li>
+</ul>
+<h3 id="another-view">Another view</h3>
+<ul>
+<li>The only (easy) way to access a member of a class is with hard-coded dot notation</li>
+</ul>
+<pre class="hljs"><code><div>int k = x[indexOfInterest];
+
+double m = p.fieldOfInterest;  // Won't work
+double z = p[fieldOfInterest];  // Won't work
+// No (sane) way to use field of interest
+
+double w = p.mass;  // Works fine
+</div></code></pre>
+
+</body>
+</html>

@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture03.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-3-references-recursion-and-lists">Lecture 3: References, Recursion, and Lists</h1>
+<h4 id="8312020">8/31/2020</h4>
+<h2 id="primitive-types">Primitive Types</h2>
+<h3 id="variables-in-java">Variables in Java</h3>
+<pre class="hljs"><code><div>Walrus a = new Walrus(1000, 8.3);
+Walrus b;
+b = a;
+b.weight = 5;
+System.out.println(a);
+System.out.println(b);
+
+Result:
+5
+5
+</div></code></pre>
+<ul>
+<li>The change to b will affect a</li>
+</ul>
+<pre class="hljs"><code><div>int x = 5;
+int y;
+y = x;
+x = 2;
+System.out.println(x);
+System.out.println(y);
+
+Result:
+2
+5
+</div></code></pre>
+<ul>
+<li>The change to x will not affect y</li>
+</ul>
+<h3 id="bits">Bits</h3>
+<ul>
+<li>Your computer stores information in &quot;memory&quot;
+<ul>
+<li>Information is stored in memory as a sequence of ones and zeros
+<ul>
+<li>Example: 72 stored as 01001000</li>
+<li>Example: Letter H stored as 01001000 (same as the number 72)</li>
+<li>Example: True stored as 00000001</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Each Java type has a different way to interpret the bits:
+<ul>
+<li>8 primitive types in Java:
+<ul>
+<li>byte</li>
+<li>short</li>
+<li>int</li>
+<li>long</li>
+<li>float</li>
+<li>double</li>
+<li>boolean</li>
+<li>char</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="declaring-a-variable-simplified">Declaring a Variable (simplified)</h3>
+<pre class="hljs"><code><div>int x;
+double y;
+x = -1431195969;
+y = 567213.112
+</div></code></pre>
+<ul>
+<li>When you declare a variable of a certain type in Java:
+<ul>
+<li>Your computer sets aside exactly enough bits to hold a thing of that type
+<ul>
+<li>Ex: Declaring an int sets aside a &quot;box&quot; of 32 bits</li>
+<li>Ex: Declaring a double sets aside a box of 64 bits</li>
+</ul>
+</li>
+<li>Java creates an internal table that maps each variable name to a location</li>
+<li>Java does NOT write anything into the reserved boxes
+<ul>
+<li>For safety, Java will not let access a variable that is uninitialized</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="simplified-box-notation">Simplified Box Notation</h3>
+<ul>
+<li>We'll use simplified box notation
+<ul>
+<li>Instead of writing memory box contents in binary, we'll write them in human readable code</li>
+</ul>
+</li>
+</ul>
+<h3 id="the-golden-rule-of-equals-groe">The Golden Rule of Equals (GRoE)</h3>
+<ul>
+<li>Given variables y and x:
+<ul>
+<li><code>y = x</code> <strong>copies</strong> all the bits from x into y</li>
+</ul>
+</li>
+</ul>
+<h2 id="reference-types">Reference Types</h2>
+<h3 id="reference-types">Reference Types</h3>
+<ul>
+<li>There are 8 primitive types in Java</li>
+<li>Everything else, including arrays, is a <strong>reference type</strong></li>
+</ul>
+<h3 id="class-instantiations">Class Instantiations</h3>
+<ul>
+<li>When we instantiate an Object
+<ul>
+<li>Java first allocates a box of bits for each instance variable of the class and fills them with a default value (e.g. 0, null)</li>
+<li>The constructor then usually fills every box with some other value</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>public class Walrus {
+    public int weight;
+    public double tuskSize;
+
+    public Walrus(int w, double ts) {
+        weight = w;
+        tuskSize = ts;
+    }
+}
+</div></code></pre>
+<ul>
+<li>Can think of <code>new</code> as returning the address of the newly created object
+<ul>
+<li>Addresses in Java are 64 bits</li>
+<li>Example: If object is created in memory location 111111111, then new returns 1111111111</li>
+</ul>
+</li>
+</ul>
+<h3 id="reference-type-variable-declarations">Reference Type Variable Declarations</h3>
+<ul>
+<li>When we declare a variable of any reference type:
+<ul>
+<li>Java allocates exactly a box of size 64 bits, no matter what type of object</li>
+<li>These bits can be either set to:
+<ul>
+<li>Null (all zeros)<pre class="hljs"><code><div>Walrus someWalrus;
+someWalrus = null;
+</div></code></pre>
+</li>
+<li>The 64 bit &quot;address&quot; of a specific instance of that class (returned by <code>new</code>)<pre class="hljs"><code><div>Walrus someWalrus;
+someWalrus = new Walrus(1000, 8.3);
+</div></code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>The 64 bit addresses are meaningless to us as humans, so we'll represent:
+<ul>
+<li>All zero addresses with &quot;null&quot;</li>
+<li>Non-zero addresses as arrows</li>
+<li>Basically, the box-and-pointer notation from CS 61A</li>
+</ul>
+</li>
+</ul>
+<h3 id="reference-types-obey-the-golden-rule-of-equals">Reference Types Obey the Golden Rule of Equals</h3>
+<ul>
+<li>Just as with primitive types, the equals sign copies the bits
+<ul>
+<li>In terms of our visual metaphor, we &quot;copy&quot; the arrow by making the arrow in the b box point at the same instance as a
+<ul>
+<li>a and b are 64 bits</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="images/csm_cs61b/3.1.png" alt="" style="width: 400px"></p>
+<h2 id="parameter-passing">Parameter Passing</h2>
+<h3 id="the-golden-rule-of-equals-and-parameter-passing">The Golden Rule of Equals (and Parameter Passing)</h3>
+<ul>
+<li>Given variables b and a:
+<ul>
+<li><code>b = a</code> copies all the bits from a into b</li>
+</ul>
+</li>
+<li>Passing parameters obeys the same rule: Simply <strong>copy the bits</strong> to the new scope (parameters are &quot;passed by value&quot;)</li>
+</ul>
+<pre class="hljs"><code><div>public static double average(double a, double b) {
+    return (a + b) / 2;
+}
+
+public static void main(String[] args) {
+    double x = 5.5;
+    double y = 10.5;
+    double avg = average(x, y);
+}
+</div></code></pre>
+<p><img src="images/csm_cs61b/3.2.png" alt="" style="height: 250px"></p>
+<h3 id="the-golden-rule-summary">The Golden Rule: Summary</h3>
+<ul>
+<li>There are - types of variables in Java:
+<ul>
+<li>8 primitive types</li>
+<li>The 9th type is references to Objects (an arrow). References may be null</li>
+</ul>
+</li>
+<li>In box-and-pointer notation, each variable is drawn as a labeled box and values are shown in the box
+<ul>
+<li>Addresses are represented by arrows to object instances</li>
+</ul>
+</li>
+<li>The golden rule:
+<ul>
+<li><code>b = a</code> <strong>copies the bits</strong> from a into b</li>
+<li>Passing parameters <strong>copies the bits</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="instantiation-of-arrays">Instantiation of Arrays</h2>
+<h3 id="declaration-and-instantiation-of-arrays">Declaration and Instantiation of Arrays</h3>
+<ul>
+<li>Arrays are also Objects. As we've seen, objects are instantiated using the <code>new</code> keyword
+<ul>
+<li><code>int[] x = new int[]{0, 1, 2, 95, 4};</code></li>
+</ul>
+</li>
+<li><code>int[] a;</code>: Declaration
+<ul>
+<li>Declaration creates a 64 bit box intended only for storing a reference to an int array. <strong>No object is instantiated</strong></li>
+</ul>
+</li>
+<li><code>new int[]{0, 1, 2, 95, 4};</code>: Instantiation
+<ul>
+<li>Instantiates a new Object, in this case an int array</li>
+<li>Object is anonymous!</li>
+</ul>
+</li>
+</ul>
+<h3 id="assignment-of-arrays">Assignment of Arrays</h3>
+<ul>
+<li><code>int[] x = new int[]{0, 1, 2, 95, 4};</code>
+<ul>
+<li>Creates a 64 bit box for storing an int array address</li>
+<li>Creates a new Object, in this case an int array (Instantiation)</li>
+<li>Puts the address of this new Object into the 64 bit box named a (assignment)</li>
+</ul>
+</li>
+<li>Note: Instantiated objects can be lost!
+<ul>
+<li>If we were to reassign a to something else, we'd never be able to get the original Object back!</li>
+</ul>
+</li>
+</ul>
+<h2 id="intlist-and-linked-data-structures">IntList and Linked Data Structures</h2>
+<h3 id="intlist">IntList</h3>
+<ul>
+<li>Let's define an InstList as an object containing two member variables:
+<ul>
+<li><code>int first;</code></li>
+<li><code>IntList rest;</code></li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>public class IntList {
+    public int first;
+    public IntList rest;
+
+    public IntList(int f, IntList r) {
+        first = f;
+        rest = r;
+    }
+
+    public static void main(String[] args) {
+        IntList L = new IntList(15, null);
+        L = new IntList(10, L);
+        L = new IntList(5, L);
+    }
+}
+</div></code></pre>
+<p><img src="images/csm_cs61b/3.3.png" alt="" style="width: 400px"></p>
+<h3 id="intlist">IntList</h3>
+<ul>
+<li>And define two versions of the same method:
+<ul>
+<li><code>size()</code></li>
+<li><code>iterativeSize()</code></li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>public class IntList {
+    public int first;
+    public IntList rest;
+
+    public IntList(int f, IntList r) {
+        first = f;
+        rest = r;
+    }
+
+    public int size() {
+        // Return the size of the list using... recursion!
+        if (rest == null) {
+            return 1;
+        }
+        return 1 + this.rest.size();
+    }
+
+    public int iterativeSize() {
+        // Return the size of the list using no recursion
+        IntList p = this;
+        int totalSize = 0;
+        while (p != null) {
+            totalSize += 1;
+            p = p.rest;
+        }
+        return totalSize;
+    }
+
+    public static void main(String[] args) {
+        IntList L = new IntList(15, null);
+        L = new IntList(10, L);
+        L = new IntList(5, L);
+    }
+}
+</div></code></pre>
+<h3 id="challenge">Challenge</h3>
+<ul>
+<li>Write a method <code>int get(int i)</code> that returns the ith item in the list
+<ul>
+<li>Assume the item exists</li>
+<li>Front item is the 0th item</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>public class IntList {
+    public int first;
+    public IntList rest;
+
+    public IntList(int f, IntList r) {
+        first = f;
+        rest = r;
+    }
+
+    public int size() {
+        // Return the size of the list using... recursion!
+        if (rest == null) {
+            return 1;
+        }
+        return 1 + this.rest.size();
+    }
+
+    public int iterativeSize() {
+        // Return the size of the list using no recursion
+        IntList p = this;
+        int totalSize = 0;
+        while (p != null) {
+            totalSize += 1;
+            p = p.rest;
+        }
+        return totalSize;
+    }
+
+    public int get(int i) {
+        // Returns the ith item of this IntList
+        if (i == 0) {
+            return first;
+        }
+        return rest.get(i - 1);
+    }
+
+    public static void main(String[] args) {
+        IntList L = new IntList(15, null);
+        L = new IntList(10, L);
+        L = new IntList(5, L);
+    }
+}
+</div></code></pre>
+
+</body>
+</html>

@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture22.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="prefix-operations-and-tries">Prefix Operations and Tries</h1>
+<h4 id="10162020">10/16/2020</h4>
+<h2 id="tries">Tries</h2>
+<h3 id="abstract-data-types-vs-specific-implementations">Abstract Data Types vs. Specific Implementations</h3>
+<ul>
+<li>There are many ways to implement an abstract data type
+<ul>
+<li>Today we'll talk about a new way to build a set/map</li>
+</ul>
+</li>
+</ul>
+<h3 id="bst-and-hash-table-set-runtimes">BST and Hash Table Set Runtimes</h3>
+<ul>
+<li>Runtimes for our balanced search tree and has table implementations were very fast</li>
+<li>If we know that our keys all have some common special property, we can sometimes get even better implementations</li>
+<li>Suppose we know that our keys are always single ASCII characters</li>
+</ul>
+<h3 id="special-case-1-character-keyed-map">Special Case 1: Character Keyed Map</h3>
+<ul>
+<li>Suppose we know that our keys are always ASCII characters
+<ul>
+<li>Can just use an array!</li>
+<li>Simple and fast</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>public class DataIndexedCharMap&lt;V&gt; {
+    private V[] items;
+    public DataIndexedCharMap(int R) {
+        items = (V[]) new Object[R];
+    }
+    public void put(char c, V val) {
+        items[c] = val;
+    }
+    public V get(char c) {
+        return items[c];
+    }
+}
+</div></code></pre>
+<ul>
+<li>Constant time for both <code>get</code> and <code>add</code></li>
+</ul>
+<h3 id="special-case-2-string-keyed-map">Special Case 2: String Keyed Map</h3>
+<ul>
+<li>Suppose we know that our keys are always strings
+<ul>
+<li>Can use a special data structure known as a Trie</li>
+<li>Basic idea: Store each letter of the string as a node in a tree</li>
+</ul>
+</li>
+<li>Tries will have great performance on:
+<ul>
+<li>get</li>
+<li>add</li>
+<li>special string operations</li>
+</ul>
+</li>
+</ul>
+<h3 id="sets-of-strings">Sets of Strings</h3>
+<ul>
+<li>For String keys, we can use a &quot;Trie&quot;. Key ideas:
+<ul>
+<li>Every node stores only one letter</li>
+<li>Nodes can be shared by multiple keys</li>
+<img src="images/csm_cs61b/22.1.png" alt="" style="width:400px">
+</ul>
+</li>
+</ul>
+<h3 id="tries-search-hits-and-misses">Tries: Search Hits and Misses</h3>
+<ul>
+<li>How does contains work?
+<ul>
+<li>contains(&quot;sam&quot;): true, blue node (hit)</li>
+<li>contains(&quot;sa&quot;): false, white node (miss)</li>
+<li>contains(&quot;a&quot;): true, blue node (hit)</li>
+<li>contains(&quot;saq&quot;): false, fell off tree (miss)</li>
+</ul>
+</li>
+<li>Two ways to have a search &quot;miss&quot;:
+<ul>
+<li>If the final node is white</li>
+<li>If we fall off the tree, e.g. contains(&quot;sax&quot;)</li>
+</ul>
+</li>
+</ul>
+<h3 id="trie-maps">Trie Maps</h3>
+<ul>
+<li>Tries can also be maps, of course</li>
+</ul>
+<h3 id="tries">Tries</h3>
+<ul>
+<li>Trie:
+<ul>
+<li>Short for Re<strong>trie</strong>val Tree</li>
+<li>Inventor Edward Fredkin suggested it should be pronounced &quot;tree&quot;, but almost everyone pronounces it like &quot;try&quot;</li>
+</ul>
+</li>
+</ul>
+<h2 id="trie-implementation-and-performance">Trie Implementation and Performance</h2>
+<h3 id="very-basic-trie-implementation">Very Basic Trie Implementation</h3>
+<ul>
+<li>The first approach might look something like the code below
+<ul>
+<li>Each node stores a letter, a map from c to all child nodes, and a color</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>public class TrieSet {
+    private static final int R = 128;  // ASCII
+    private Node root;  // root of trie
+
+    private static class Node {
+        private char ch;  // Actually don't need this variable
+        private boolean isKey;
+        private DataIndexedCharMap next;
+        private Node(char c, boolean b, int R) {
+            ch = c; isKey = b;
+            next = new DataIndexedCharMap&lt;Node&gt;(R);
+        }
+    }
+}
+</div></code></pre>
+<ul>
+<li>For each node in DataIndexedCharMap, there are 128 links</li>
+</ul>
+<h3 id="trie-performance-in-terms-of-n">Trie Performance in Terms of N</h3>
+<ul>
+<li>Given a Trie with N keys. What is the:
+<ul>
+<li>Add runtime?
+<ul>
+<li>Theta(1)</li>
+</ul>
+</li>
+<li>Contains runtime?
+<ul>
+<li>Theta(1)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Runtimes independent of number of keys!</li>
+<li>Or in terms of L, the length of the key:
+<ul>
+<li>Add: Theta(L)</li>
+<li>Contains: O(L)
+<ul>
+<li>May fall off the tree</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>When our keys are strings, Tries give us slightly better performance on contains and add</li>
+<li>One downside of the DictCharKey based Trie is the huge memory cost of storing R links per node (most of which are null)
+<ul>
+<li>Wasteful because most links are not used in real world usage</li>
+</ul>
+</li>
+</ul>
+<h2 id="alternate-child-tracking-strategies">Alternate Child Tracking Strategies</h2>
+<h3 id="dataindexedcharmap-trie">DataIndexedCharMap Trie</h3>
+<ul>
+<li>Can use ANY kind of map from character to node, e.g.
+<ul>
+<li>BST</li>
+<li>Hash Table</li>
+</ul>
+</li>
+<li>Fundamental problem, our arrays are &quot;sparse&quot;, wasted memory boxes</li>
+</ul>
+<h3 id="alternate-idea-1-the-hash-table-based-trie">Alternate Idea #1: The Hash-Table Based Trie</h3>
+<p><img src="images/csm_cs61b/22.2.png" alt="" style="width:900px"></p>
+<h3 id="alternate-idea-2-the-bst-based-trie">Alternate Idea #2: The BST-Based Trie</h3>
+<p><img src="images/csm_cs61b/22.3.png" alt="" style="width:900px"></p>
+<h3 id="the-three-trie-implementations">The Three Trie Implementations</h3>
+<ul>
+<li>When we implement a Trie, we have to pick a map to our children
+<ul>
+<li>DataIndexedCharMap: Very fast, but memory hungry</li>
+<li>Hash Table: Almost as fast, uses less memory</li>
+<li>Balanced BST: A little slower than Hash Table, uses similar amount of memory</li>
+</ul>
+</li>
+</ul>
+<h3 id="performance-of-the-dataindexedcharmap-bst-and-hash-table">Performance of the DataIndexedCharMap, BST, and Hash Table</h3>
+<ul>
+<li>Using a BST or a Hash Map to store links to children will usually use less memory
+<ul>
+<li>DataIndexedCharMap: 128 links per node</li>
+<li>BST: C links per node, where C is the number of children</li>
+<li>Hash Table: C links per node</li>
+<li>Note: Cost per link is higher in BST and Hash Table</li>
+</ul>
+</li>
+<li>Using a BST or a Hash Table will take slightly more time
+<ul>
+<li>DataIndexedCharMap is Theta(1)</li>
+<li>BST is O(log R), where R is size of alphabet</li>
+<li>Hash Table is O(R), where R is size of alphabet</li>
+</ul>
+</li>
+<li>Since R is fixed (e.g. 128), can think of all 3 as Theta(1)</li>
+</ul>
+<h3 id="trie-performance-in-terms-of-n">Trie Performance in Terms of N</h3>
+<ul>
+<li>When our keys are strings, Tries give us slightly better performance on contains and add
+<ul>
+<li>Using BST or Hash Table will be slightly slower, but more memory efficient</li>
+<li>Would have to do computational experiments to see which is best for your application</li>
+</ul>
+</li>
+<li>...but where Tries really shine is their efficiency with special string operations!</li>
+</ul>
+<h2 id="trie-string-operations">Trie String Operations</h2>
+<h3 id="string-specific-operations">String Specific Operations</h3>
+<ul>
+<li>Theoretical asymptotic speed improvement is nice. But the <strong>main appeal of tries</strong> is their ability to efficiently support string specific operations like <strong>prefix matching</strong>
+<ul>
+<li>Finding all keys that match a given prefix: keysWithPrefix(&quot;sa&quot;)</li>
+<li>Finding the longest prefix of a string: longestPrefixOf(&quot;sample&quot;)</li>
+</ul>
+</li>
+</ul>
+<h3 id="collecting-trie-keys">Collecting Trie Keys</h3>
+<ul>
+<li>Give an algorithm for collecting all the keys in a Trie</li>
+<li>collect():
+<ul>
+<li>Create an empty list of results x</li>
+<li>For character c in root.next.keys():
+<ul>
+<li>Call colHelp(&quot;c&quot;, x, root.next.get(c))</li>
+</ul>
+</li>
+<li>Return x</li>
+</ul>
+</li>
+<li>Create colHelp
+<ul>
+<li>colHelp(String s, List<String> x, Node n)</li>
+<li>If n.isKey, then x.add(s)</li>
+<li>For character c in n.next.keys():
+<ul>
+<li>Call colHelp(s + c, x, n.next.get(c))</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="usages-of-tries">Usages of Tries</h3>
+<ul>
+<li>Give an algorithm for keysWithPrefix</li>
+<li>keysWithPrefix(prefix):
+<ul>
+<li>Find the node A corresponding to the string</li>
+<li>Create an empty list x</li>
+<li>For character c in A.next.keys():
+<ul>
+<li>Call colHelp(prefix + c, x, A.next.get(c))</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Another common operation: LongestPrefixOf</li>
+</ul>
+<h2 id="autocomplete">Autocomplete</h2>
+<h3 id="the-autocomplete-problem">The Autocomplete Problem</h3>
+<ul>
+<li>One way to do this is to create a Trie based map from strings to values
+<ul>
+<li>Value represents how important Google thinks that string is</li>
+<li>Can store billions of strings efficiently since they share nodes</li>
+<li>When a user types in a string &quot;hello&quot;, we:
+<ul>
+<li>Call <code>keysWithPrefix(&quot;hello&quot;)</code></li>
+<li>Return the 10 strings with the highest value</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>The approach has one major flaw. If we enter a short string, the number of keys with the appropriate prefix will be too big</li>
+</ul>
+<h3 id="a-more-efficient-autocomplete">A More Efficient Autocomplete</h3>
+<ul>
+<li>One way to address this issue:
+<ul>
+<li>Each node stores its own value, as well as the value of its best substring</li>
+</ul>
+</li>
+<li>Search will consider nodes in the order of &quot;best&quot;
+<ul>
+<li>Can stop when top 3 matches are all better than best remaining</li>
+</ul>
+</li>
+<li>Details left as an exercise. Hint: Use a PQ! See Bear Maps gold points for more</li>
+</ul>
+<h3 id="even-more-efficient-autocomplete">Even More Efficient Autocomplete</h3>
+<ul>
+<li>Can also merge nodes that are redundant where there's no branching!
+<ul>
+<li>This version of trie is known as a &quot;radix tree&quot; or &quot;radix trie&quot;</li>
+<li>Won't discuss</li>
+</ul>
+</li>
+</ul>
+<h2 id="trie-summary">Trie Summary</h2>
+<h3 id="tries">Tries</h3>
+<ul>
+<li>When your key is a string, you can use a Trie:
+<ul>
+<li>Theoretically better performance than hash table or search tree</li>
+<li>Have to decide on a mapping from letter to node. Three natural choices:
+<ul>
+<li>DataIndexedCharMap, i.e. an array of all possible child links</li>
+<li>Bushy BST</li>
+<li>Hash Table</li>
+</ul>
+</li>
+<li>All three choices are fine, though hash table is probably the most natural</li>
+<li>Supports special string operations like longestPrefixOf and keysWithPRefix
+<ul>
+<li>keysWithPrefix is the heart of important technology like autocomplete</li>
+<li>Optimal implementation of Autocomplete involves use of a priority queue!</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="domain-specific-sets-and-maps">Domain Specific Sets and Maps</h3>
+<ul>
+<li>More generally, we can sometimes take special advantage of our key type to improve our sets and maps
+<ul>
+<li>Example: Tries handle String keys. Allow for fast string specific operations</li>
+<li>Note: There are many other types of string sets/maps out there</li>
+</ul>
+</li>
+</ul>
+<h3 id="discussion-summary-tries">Discussion Summary: Tries</h3>
+<ul>
+<li>Tries are special trees mostly used for language tasks</li>
+<li>Each node in a trie is marked as being a word-end or not, so you can quickly check whether a word exists within your structure</li>
+</ul>
+
+</body>
+</html>

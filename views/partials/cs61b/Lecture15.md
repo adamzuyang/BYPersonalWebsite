@@ -1,4 +1,4 @@
-# Lecture 15: Asymptotics 2
+# Lecture 15: Asymptotics II
 #### 9/30/2020
 
 

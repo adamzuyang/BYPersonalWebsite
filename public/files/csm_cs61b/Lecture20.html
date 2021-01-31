@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture20.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-20-hash-tables">Lecture 20: Hash Tables</h1>
+<h4 id="10122020">10/12/2020</h4>
+<h2 id="data-indexed-arrays">Data Indexed Arrays</h2>
+<h3 id="limits-of-search-tree-based-sets">Limits of Search Tree Based Sets</h3>
+<ul>
+<li>Our search tree sets require items to be comparable
+<ul>
+<li>Need to be able to ask &quot;is X &lt; Y?&quot; Not true of all types</li>
+<li>Could we somehow avoid the need for objects to be comparable</li>
+</ul>
+</li>
+<li>Search tree sets have excellent performance, but could maybe be better
+<ul>
+<li>Could we somehow do better than Theta(log N)?</li>
+</ul>
+</li>
+</ul>
+<h3 id="using-data-as-an-index">Using Data as an Index</h3>
+<ul>
+<li>One extreme approach: Create an array of booleans indexed by data!
+<ul>
+<li>Initially all values are false</li>
+<li>When an item is added, set the appropriate index to true
+<ul>
+<li>i.e. 1F 2F 3T 4F 5F 6T 7F 8F ... is a set containing 3 and 6</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>public class DataIndexedIntegerSet {
+    private boolean[] present;
+
+    public DataIndexedIntegerSet() {
+        present = new boolean[2000000000];
+    }
+
+    public add(int i) {
+        present[i] = true;
+    }
+
+    public contains(int i) {
+        return present[i];
+    }
+}
+</div></code></pre>
+<ul>
+<li>Everything runs in constant time</li>
+<li>Downsides of this approach:
+<ul>
+<li>Extremely wasteful of memory. To support checking presence of all positive integers</li>
+<li>Need some way to generalize beyond integers</li>
+</ul>
+</li>
+</ul>
+<h2 id="dataindexedenglishwordset">DataIndexedEnglishWordSet</h2>
+<h3 id="generalizing-the-dataindexedintegerset-idea">Generalizing the DataIndexedIntegerSet Idea</h3>
+<ul>
+<li>Ideally, we want a data indexed set that can store arbitrary types</li>
+<li>The previous idea only supports integers!
+<ul>
+<li>Let's talk about storing Strings. We'll go into generics later</li>
+</ul>
+</li>
+<li>Suppose we want to add (&quot;cat&quot;)</li>
+<li>The key question:
+<ul>
+<li>What is the cat'th element of a list?</li>
+<li>One idea: Use the first letter of the word as an index</li>
+</ul>
+</li>
+<li>What's wrong with this approach?
+<ul>
+<li>Other words start with c
+<ul>
+<li>contains(&quot;chupacabra&quot;): true (&quot;chupacabra&quot; collides with &quot;cat&quot;)</li>
+</ul>
+</li>
+<li>Can't store &quot;=98tu4it92&quot;</li>
+</ul>
+</li>
+</ul>
+<h3 id="avoiding-collisions">Avoiding Collisions</h3>
+<ul>
+<li>Use all digits by multiplying each by a a power of 27
+<ul>
+<li>Thus, the index of &quot;cat&quot; is (3 x 27^2) + (1 x 27^1) + (20 x 27^0) = 2234</li>
+</ul>
+</li>
+<li>Why this specific pattern?
+<ul>
+<li>Let's review how numbers are represented in decimal</li>
+</ul>
+</li>
+</ul>
+<h3 id="the-decimal-number-system-vs-our-own-system-for-strings">THe Decimal Number System vs. Our Own System for Strings</h3>
+<ul>
+<li>In the decimal number system, we have 10 digits</li>
+<li>Want numbers larger than 9? Use a sequence of digits</li>
+<li>Our system for strings is almost the same, but with letters</li>
+</ul>
+<h3 id="uniqueness">Uniqueness</h3>
+<ul>
+<li>As long as we pick a base &gt;= 26, this algorithm is guaranteed to give each lowercase English word a unique number!
+<ul>
+<li>Using base 27, no words will get the number 1598</li>
+</ul>
+</li>
+<li>In other words: Guaranteed that we will never have a collision</li>
+</ul>
+<pre class="hljs"><code><div>public class DataIndexedEnglishWordSet {
+    private boolean[] present;
+
+    public DataIndexedEnglishWordSet() {
+        present = new boolean[2000000000];
+    }
+
+    public add(String s) {
+        present[englishToInt(s)] = true;
+    }
+
+    public contains(String s) {
+        return present[englishToInt(s)];
+    }
+}
+</div></code></pre>
+<h2 id="dataindexedstringset">DataIndexedStringSet</h2>
+<h3 id="dataindexedstringset">DataIndexedStringSet</h3>
+<ul>
+<li>Using only lowercase English characters is too restrictive
+<ul>
+<li>To understand what value we need to use for our base, let's discuss briefly the ASCII standard</li>
+<li>Maximum possible value for english-only text including punctuation is 126, so let's use 126 as our base in order to ensure unique values for possible strings</li>
+</ul>
+</li>
+</ul>
+<h3 id="ascii-characters">ASCII Characters</h3>
+<ul>
+<li>THe most basic character set used by most computers is ASCII format
+<ul>
+<li>Each possible character is assigned a value between 0 and 127</li>
+<li>Characters 33-126 are &quot;printable&quot;, and are shown below</li>
+<li>For example, <code>char c = 'D'</code> is equivalent to <code>char c = 68</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="implementing-asciitoint">Implementing asciiToInt</h3>
+<ul>
+<li>The corresponding integer conversion function is actually even simpler than <code>englishToInt</code>. Using the raw character value means we avoid the need for a helper method</li>
+</ul>
+<h3 id="going-beyond-ascii">Going Beyond ASCII</h3>
+<ul>
+<li>chars in Java also support character sets for other languages like Chinese
+<ul>
+<li>This encoding is known as Unicode. Table is too big to list</li>
+</ul>
+</li>
+</ul>
+<h3 id="example-computing-unique-representations-of-chinese">Example: Computing Unique Representations of Chinese</h3>
+<ul>
+<li>The largest possible value for chinese characters is 40959, so we'd need to use this as our base if we want to have a unique representation for all possible strings of Chinese characters</li>
+</ul>
+<h2 id="integer-overflow-and-hash-codes">Integer Overflow and Hash Codes</h2>
+<h3 id="major-problem-integer-overflow">Major Problem: Integer Overflow</h3>
+<ul>
+<li>In Java, the largest possible integer is 2147483647
+<ul>
+<li>If you go over this limit, you overflow, starting back over at the smallest integer, which is -2147483647</li>
+</ul>
+</li>
+</ul>
+<h3 id="consequence-of-overflow-collisions">Consequence of Overflow: Collisions</h3>
+<ul>
+<li>Because Java has a maximum integer, we won't get the numbers we expect
+<ul>
+<li>With base 126, we will run into overflow even for short strings
+<ul>
+<li>Example: omens = 28196917171, which is much greater than the maximum integer</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Overflow can result in collisions, causing incorrect answers</li>
+</ul>
+<h3 id="hash-codes-and-the-pigeonhole-principle">Hash Codes and the Pigeonhole Principle</h3>
+<ul>
+<li>The official term for the number we're computing is &quot;hash code&quot;
+<ul>
+<li>A has code &quot;projects a value from a set with many (or even an infinite number of) members to a value from a set with a fixed number of (fewer) members&quot;</li>
+<li>Here, our target set is the set of Java integers, which is of size 4294967296</li>
+</ul>
+</li>
+<li>Pigeonhole principle tells us that if there are more than 4294967296 possible items, multiple items will share the same hash code</li>
+<li>Hence, collisions are inevitable</li>
+</ul>
+<h3 id="two-fundamental-challenges">Two Fundamental Challenges</h3>
+<ul>
+<li>Two Fundamental Challenges
+<ul>
+<li>How do we resolve hashCode collisions
+<ul>
+<li>We'll call this <strong>collision handling</strong></li>
+</ul>
+</li>
+<li>How do we compute a hash code for arbitrary objects?
+<ul>
+<li>We'll call this <strong>computing a hashCode</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="hash-tables-handling-collisions">Hash Tables: Handling Collisions</h2>
+<h3 id="resolving-ambiguity">Resolving Ambiguity</h3>
+<ul>
+<li>Pigeonhole principle tells us that collisions are inevitable due to integer overflow</li>
+<li>Suppose N items have the same numerical representation h:
+<ul>
+<li>Instead of storing true in position h, store a &quot;bucket&quot; of these N items at position h</li>
+</ul>
+</li>
+<li>How to implement a &quot;bucket&quot;?
+<ul>
+<li>Any type of list or set or data structure</li>
+</ul>
+</li>
+</ul>
+<h3 id="the-separate-chaining-data-indexed-array">The Separate Chaining Data Indexed Array</h3>
+<ul>
+<li>Each bucket in our array is initially empty. When an item x gets added at index h:
+<ul>
+<li>If bucket h is empty, we create a new list containing x and store it at index h</li>
+<li>If bucket h is already a list, we add x to this list if it is not already present</li>
+</ul>
+</li>
+<li>We might call this a &quot;separate chaining data indexed array&quot;
+<ul>
+<li>Bucket #h is a &quot;separate chain&quot; of all items that have hash code h</li>
+</ul>
+</li>
+</ul>
+<h3 id="separate-chaining-performance">Separate Chaining Performance</h3>
+<ul>
+<li>Observation: Worst case runtime will be proportional to length of longest list
+<ul>
+<li>contains: Theta(Q)</li>
+<li>insert: Theta(Q)</li>
+<li>Q: Length of longest list</li>
+</ul>
+</li>
+</ul>
+<h3 id="saving-memory-using-separate-chaining">Saving Memory Using Separate Chaining</h3>
+<ul>
+<li>Observation: We don't really need billions of buckets
+<ul>
+<li>If we use just 10 buckets, where should our items go?</li>
+</ul>
+</li>
+<li>Observation: Can use modulus of hashcode to reduce bucket count
+<ul>
+<li>Put in bucket = hashCode % 10</li>
+<li>Downside: Lists will be longer</li>
+</ul>
+</li>
+</ul>
+<p><img src="images/csm_cs61b/20.1.png" alt="" style="width: 800px"></p>
+<h3 id="the-hash-table">The Hash Table</h3>
+<ul>
+<li>What we've just created here is called a <strong>hash table</strong>
+<ul>
+<li>Data is converted by a <strong>hash function</strong> into an integer representation called a <strong>hash code</strong></li>
+<li>The <strong>hash code</strong> is then reduced to a valid index, usually using the modulus operator, e.g. 2348762878 % 10 = 8</li>
+</ul>
+</li>
+</ul>
+<h2 id="hash-table-performance">Hash Table Performance</h2>
+<h3 id="hash-table-runtime">Hash Table Runtime</h3>
+<ul>
+<li>The good news: We use way less memory and can now handle arbitrary data</li>
+<li>The bad news: Worst case runtime (for both contains and insert) is now Theta(Q), where Q is the length of the longest list</li>
+<li>For the has table with 5 buckets, the order of growth of Q with respect to N is Theta(N)
+<ul>
+<li>In the best case, the length of the longest list will be N/5. IN the worst case, it will be N. In both cases, Q(N) is Theta(N)</li>
+</ul>
+</li>
+</ul>
+<h3 id="improving-the-hash-table">Improving the Hash Table</h3>
+<ul>
+<li>Suppose we have:
+<ul>
+<li>A fixed number of buckets M</li>
+<li>An increasing number of items N</li>
+</ul>
+</li>
+<li>Major problem: Even if items are spread out evenly, lists are of length Q = N/M
+<ul>
+<li>How can we improve our design to guarantee that N/M is Theta(1)</li>
+</ul>
+</li>
+</ul>
+<h3 id="hash-table-runtime">Hash Table Runtime</h3>
+<ul>
+<li>A solution:
+<ul>
+<li>An increasing number of buckets M</li>
+<li>An increasing number of items N</li>
+</ul>
+</li>
+<li>One example strategy: When N/M is &gt;= 1.5, then double M
+<ul>
+<li>We often call this process of increasing M &quot;resizing&quot;</li>
+<li>N/M is often called the &quot;load factor&quot;. It represents how full the hash table is</li>
+</ul>
+</li>
+</ul>
+<h3 id="resizing-hash-table-runtime">Resizing Hash Table Runtime</h3>
+<ul>
+<li>As long as M = Theta(N), then O(N/M) = O(1)</li>
+<li>Assuming items are evenly distributed, lists will be approximately N/M items long, resulting in Theta(N/M) runtimes
+<ul>
+<li>Our doubling strategy ensures that N/M = O(1)</li>
+<li>Thus, worst case runtime for all operations if Theta(N/M) = Theta(1)
+<ul>
+<li>... unless that operation causes a resize</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>One important thing to consider is the cost of the resize operation
+<ul>
+<li>Resizing takes Theta(N) time. Have to redistribute all items</li>
+<li>Most add operations will be Theta(1). SOme will be Theta(N) time (to resize)
+<ul>
+<li>Similar to our ALists, as long as we resize by a multiplicative factor, the average runtime will still be Theta(1)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="has-table-runtime">Has Table Runtime</h3>
+<ul>
+<li>Hash table operations are on average constant time if:
+<ul>
+<li>We double M to ensure constant average bucket length</li>
+<li>Items are evenly distributed</li>
+<li>contains: Theta(1) (Assuming all items are even spaced)</li>
+<li>add: Theta(1) (On average)</li>
+</ul>
+</li>
+</ul>
+<h3 id="regarding-even-distribution">Regarding Even Distribution</h3>
+<ul>
+<li>Even distribution of items is critical for good hash table performance</li>
+<li>We will need to discuss how to ensure even distribution</li>
+</ul>
+<h2 id="hash-tables-in-java">Hash Tables in Java</h2>
+<h3 id="the-ubiquity-of-hash-tables">The Ubiquity of Hash Tables</h3>
+<ul>
+<li>Has tables are the most popular implementation for sets and maps
+<ul>
+<li>Great performance in practice</li>
+<li>Don't require items to be comparable</li>
+<li>Implementations often relatively simple</li>
+<li>Python dictionaries are just hash tables in disguise</li>
+</ul>
+</li>
+<li>In Java, implemented as java.util.HashMap and java.util.HashSet
+<ul>
+<li>How does a HashMap know how to compute each object's hash code?
+<ul>
+<li>Good news: It's not &quot;implements Hashable&quot;</li>
+<li>Instead, all objects in Java must implement a <code>.hashCode()</code> method</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="objects">Objects</h3>
+<ul>
+<li>All classes are hyponyms of Object
+<ul>
+<li><code>int hashCode()</code> (Default implementation simply returns the memory address of the object)</li>
+</ul>
+</li>
+</ul>
+<h3 id="examples-of-real-java-hashcodes">Examples of Real Java HashCodes</h3>
+<ul>
+<li>We can see that Strings in Java override hasCode, doing something vaguely like what we did earlier
+<ul>
+<li>Will see the actual hashCode() function later</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>&quot;a&quot;.hashCode()  // 97
+&quot;bee&quot;.hashCode()  // 97410
+</div></code></pre>
+<h3 id="using-negative-hash-codes">Using Negative hash codes</h3>
+<ul>
+<li>Suppose that we have a hash code as -1
+<ul>
+<li>Given a hash table of length 4, we should put this object in bucket 3</li>
+<li>Unfortunately, -1 % 4 = -1. Will result in index errors!</li>
+<li>Use <strong>Math.floorMod</strong> instead</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>-1 % 4  // -1
+Math.floorMod(-1, 4)  // 3
+</div></code></pre>
+<h3 id="hash-tables-in-java">Hash Tables in Java</h3>
+<ul>
+<li>Java hash tables:
+<ul>
+<li>Data is converted by the <strong>hashCode</strong> method an integer representation called a <strong>hash code</strong></li>
+<li>The <strong>hash code</strong> is then <strong>reduced</strong> to a valid index, using something like the floorMod function</li>
+</ul>
+</li>
+</ul>
+<h3 id="two-important-warnings-when-using-hashmapshashsets">Two Important Warnings When Using HashMaps/HashSets</h3>
+<ul>
+<li>Warning #1: Never store objects that can change in a HashSet or HashMap!
+<ul>
+<li>If an object's variables changes, then its hasCode changes. May result in items getting lost.</li>
+</ul>
+</li>
+<li>Warning #2: Never override equals without also overriding hashCode
+<ul>
+<li>Can also lead to items getting lost and generally weird behavior</li>
+<li>HasMaps and HashSets use equals to determine if an item exists in a particular bucket</li>
+</ul>
+</li>
+</ul>
+<h2 id="good-hashcodes">Good HashCodes</h2>
+<h3 id="what-makes-a-good-hashcode">What Makes a good hashCode()?</h3>
+<ul>
+<li>Goal: We want has tables that are evenly distributed
+<ul>
+<li>Want a hasCode that spreads things out nicely on real data
+<ul>
+<li>Returning string treated as a base B number can be good</li>
+</ul>
+</li>
+<li>Writing a good hashCode() method <strong>can be tricky</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="hashbrowns-and-hash-codes">Hashbrowns and Hash Codes</h3>
+<ul>
+<li>How do you make hashbrowns?
+<ul>
+<li>Chopping a potato into nice predictable segments? No way!</li>
+<li>Similarly, adding up the characters is not nearly &quot;random&quot; enough</li>
+</ul>
+</li>
+<li>Can think of multiplying data by powers of some base as ensuring that all the data gets scrambled together into a seemingly random integer</li>
+</ul>
+<h3 id="example-hascode-function">Example hasCode Function</h3>
+<ul>
+<li>The Java 8 hash code for strings. Two major differences from our hash codes:
+<ul>
+<li>Represents strings as a base 31 number
+<ul>
+<li>Why such a small base? Real hash codes don't care about uniqueness</li>
+</ul>
+</li>
+<li>Stores (caches) calculated has code so future hashCode calls are faster</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>@Override
+public int hasCode() {
+    int h = cachedHashValue;
+    if (h == 0 &amp;&amp; this.length() &gt; 0) {
+        for (int i = 0; i &lt; this.length; i++) {
+            h = 31 * h + this.charAt(i);
+        }
+        cachedHasValue = h;
+    }
+    return h;
+}
+</div></code></pre>
+<h3 id="example-choosing-a-base">Example: Choosing a Base</h3>
+<ul>
+<li>Which is better? ASCII's base 126 or Java's base 31
+<ul>
+<li>Might seem like 126 is better. Ignoring overflow, this ensures a unique numerical representation for all ASCII strings</li>
+<li>... but overflow is a particularly bad problem for base 126!
+<ul>
+<li>Any string that ends in the same last 32 characters has the same has code
+<ul>
+<li>Why? Because of overflow</li>
+<li>Basic issue is that 126^32 = 126^33 = 126^34 = ... = 0
+<ul>
+<li>Thus upper characters are all multiplied by zero</li>
+<li>See CS61C for more</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="typical-base">Typical Base</h3>
+<ul>
+<li>A typical hash code base is a small prime
+<ul>
+<li>Why prime?
+<ul>
+<li>Never even: Avoids the overflow issue on previous slide</li>
+<li>Lower chance of resulting hasCode having a bad relationship with the number of buckets</li>
+</ul>
+</li>
+<li>Why small?
+<ul>
+<li>Lower cost to compute</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="hashbrowns-and-hash-codes">Hashbrowns and Hash Codes</h3>
+<ul>
+<li>Using a prime base yields better &quot;randomness&quot; than using something like base 126</li>
+</ul>
+<h3 id="example-hashing-a-collection">Example: Hashing a Collection</h3>
+<ul>
+<li>Lists are a lot like strings: Collection of items each with its own hashCode:</li>
+</ul>
+<pre class="hljs"><code><div>@Override
+public int hashCode() {
+    int hashCode = 1;
+    for (Object o : this) {
+        hashCode = hashCode * 31;  // elevate/smear the current hash code
+        hashCode = hashCode + o.hashCode();  // add new item's hash code
+    }
+    return hashCode
+}
+</div></code></pre>
+<ul>
+<li>To save time hashing: Look at only first few items
+<ul>
+<li>Higher chance of collisions but things will still work</li>
+</ul>
+</li>
+</ul>
+<h3 id="example-hashing-a-recursive-data-structure">Example: Hashing a Recursive Data Structure</h3>
+<ul>
+<li>Computation of the hashCode of a recursive data structure involves recursive computation
+<ul>
+<li>For example, binary tree hashCode (assuming sentinel leaves):</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>@Override
+public int hashCode() {
+    if (this.value == null) {
+        return 0;
+    }
+    return this.value.hashCode() + 
+    31 * this.left.hashCode() + 
+    31 * 31 * this.right.hashCode();
+}
+</div></code></pre>
+<h2 id="summary">Summary</h2>
+<h3 id="hash-tables-in-java">Hash Tables in Java</h3>
+<ul>
+<li>Hash tables:
+<ul>
+<li>Data is converted into a hash code</li>
+<li>The hash code is then reduced to a valid index</li>
+<li>Data is then stored in a bucket corresponding to that index</li>
+<li>Resize when load factor N/M exceeds some constant</li>
+<li>If items are spread out nicely, you get Theta(1) average runtime</li>
+</ul>
+</li>
+</ul>
+
+</body>
+</html>

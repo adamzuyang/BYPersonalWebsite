@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture19.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-19-multidimensional-data">Lecture 19: Multidimensional Data</h1>
+<h4 id="1092020">10/9/2020</h4>
+<h2 id="range-finding-and-nearest">Range-Finding and Nearest</h2>
+<h3 id="search-trees">Search Trees</h3>
+<ul>
+<li>We've seen three different implementations of a Map
+<ul>
+<li>BST</li>
+<li>2-3 / B-Tree</li>
+<li>Red Black Tree</li>
+</ul>
+</li>
+<li>&quot;search tree&quot; data structures support very fast insert, remove, and delete operations for arbitrary amounts of data
+<ul>
+<li>Requires that data can be compared to each other with some total order</li>
+<li>We used the &quot;Comparable&quot; interface as our comparison engine</li>
+</ul>
+</li>
+</ul>
+<h3 id="expanding-the-power-of-our-set">Expanding the Power of our Set</h3>
+<ul>
+<li>There are other operations we might want to include:
+<ul>
+<li><code>select(int i)</code>: Returns the ith smallest element in the set</li>
+<li><code>rank(T x)</code>: Returns the &quot;rank&quot; of x</li>
+<li><code>subSet(T from, T to)</code>: returns all items between <code>from</code> and <code>to</code></li>
+<li><code>nearest(T x)</code>: Returns the value closest to x</li>
+</ul>
+</li>
+</ul>
+<h3 id="implementing-fancier-set-operations-with-a-bst">Implementing Fancier Set Operations with a BST</h3>
+<ul>
+<li>It turns out that a BST can efficiently support the <code>select</code>, <code>rank</code>, <code>subSet</code>, and <code>nearest</code></li>
+<li>How would you find <code>nearest(N)</code>?
+<ul>
+<li>Just search for <code>N</code> and record closest item seen</li>
+<li>Exploits the BST structure</li>
+</ul>
+</li>
+</ul>
+<h3 id="sets-and-maps-on-2d-data">Sets and Maps on 2D Data</h3>
+<ul>
+<li>So far we've only discussed &quot;one dimensional data&quot;. That is, all data could be compared under some total order</li>
+<li>But not all data can be compared along a single dimension
+<ul>
+<li>We'll see that search trees require some design tweaks to function efficiently on multi-dimensional data</li>
+</ul>
+</li>
+</ul>
+<h2 id="multi-dimensional-data">Multi-Dimensional Data</h2>
+<h3 id="motivation-2d-range-finding-and-nearest-neighbors">Motivation: 2D Range Finding and Nearest Neighbors</h3>
+<ul>
+<li>Suppose we want to perform operations on a set of Body objects in 2D space
+<ul>
+<li>2D range searching: How many objects are in a highlighted rectangle</li>
+<li>Nearest: What is the closest object?</li>
+</ul>
+</li>
+<li>Ideally, we'd like to store our data in a format that allows more efficient approaches than just iterating over all objects</li>
+<li>It's difficult to build a BST of 2 dimensional data
+<ul>
+<li>Difficult to compare objects, lose some information about ordering</li>
+</ul>
+</li>
+</ul>
+<h2 id="quadtrees">QuadTrees</h2>
+<h3 id="the-quadtree">The QuadTree</h3>
+<ul>
+<li>A QuadTree is the simplest solution conceptually
+<ul>
+<li>Every Node <strong>four</strong> children
+<ul>
+<li>Top left (northwest)</li>
+<li>Top right (northeast)</li>
+<li>Bottom left (southwest)</li>
+<li>Bottom right (southeast)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Just like a BST, insertion order determines the topology of a QuadTree</li>
+</ul>
+<h3 id="quadtrees">QuadTrees</h3>
+<ul>
+<li>Quadtrees are a form of &quot;spatial partitioning&quot;
+<ul>
+<li>Quadtrees: Each node &quot;owns&quot; 4 subspaces
+<ul>
+<li>Space is more finely divided in regions where there are more points</li>
+<li>Results in better runtime in many circumstances</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="quadtree-range-search">QuadTree Range Search</h3>
+<ul>
+<li>Quadtrees allow us to prune when performing a rectangle search
+<ul>
+<li>Simple idea: Prune subspaces that don't intersect the query rectangle</li>
+</ul>
+</li>
+</ul>
+<h2 id="higher-dimensional-data">Higher Dimensional Data</h2>
+<h3 id="3d-data">3D Data</h3>
+<ul>
+<li>Suppose we want to store objects in 3D space
+<ul>
+<li>Quadtrees have only four directions, but in 3D, there are 8</li>
+</ul>
+</li>
+<li>One approach: Use an Oct-tree or Octree
+<ul>
+<li>Very widely used in practice</li>
+</ul>
+</li>
+</ul>
+<h3 id="even-higher-dimensional-space">Even Higher Dimensional Space</h3>
+<ul>
+<li>You may want to organize data on a larger number of dimensions</li>
+<li>In these cases, one somewhat common solution is a k-d tree
+<ul>
+<li>Fascinating data structure that handles arbitrary numbers of dimensions
+<ul>
+<li>k-d means &quot;k dimensional&quot;</li>
+</ul>
+</li>
+<li>For the sake of simplicity, we'll use 2D data, but the idea generalizes naturally</li>
+</ul>
+</li>
+</ul>
+<h3 id="k-d-trees">K-d Trees</h3>
+<ul>
+<li>k-d tree example for 2-d
+<ul>
+<li>Basic idea, root node partitions entire space into left and right (by x)</li>
+<li>All depth 1 nodes partition subspace into up and down (by y)</li>
+<li>All depth 2 nodes partition subspace into left and right (by x)</li>
+<li>And continue alternating down the depth of the tree</li>
+<li>To break ties, we'll say items that are equal in one dimension go off to the right (or up) child of each node</li>
+</ul>
+</li>
+<li>Each point owns 2 subspaces
+<ul>
+<li>Similar to a quadtree</li>
+</ul>
+</li>
+</ul>
+<h3 id="k-d-trees-and-nearest-neighbor">K-d Trees and Nearest Neighbor</h3>
+<ul>
+<li>You can simplify code by only measuring the length of vertical/horizontal lines instead of diagonal hypotenuses.
+<ul>
+<li>Optimization: Do not explore subspaces that can't possibly have a better answer than your current best</li>
+</ul>
+</li>
+</ul>
+<h3 id="nearest-pseudocode">Nearest Pseudocode</h3>
+<ul>
+<li>nearest(Node n, Point goal, Node best):
+<ul>
+<li>If n is null, return best</li>
+<li>If n.distance(goal) &lt; best.distance(goal), best = n</li>
+<li>If goal &lt; n (according to n's comparator):
+<ul>
+<li>goodSide = n.&quot;left&quot;Child</li>
+<li>badSide = n.&quot;right&quot;Child</li>
+<li>else:
+<ul>
+<li>goodSide = n.&quot;right&quot;Child</li>
+<li>badSide = n.&quot;left&quot;Child</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>best = nearest(goodSide, goal, best)</li>
+<li>If bad side could still have something useful
+<ul>
+<li>best = nearest(badSide, goal, best)</li>
+</ul>
+</li>
+<li>return best</li>
+</ul>
+</li>
+</ul>
+<h2 id="uniform-partitioning">Uniform Partitioning</h2>
+<h3 id="uniform-partitioning">Uniform Partitioning</h3>
+<ul>
+<li>Not based on a tree at all</li>
+<li>Simplest idea: Partition space into uniform rectangular buckets (also called &quot;bins&quot;)</li>
+<li>Algorithm is still Theta(N), but it's faster than iterating over all the points</li>
+</ul>
+<h3 id="uniform-vs-hierarchical-partitioning">Uniform vs. Hierarchical Partitioning</h3>
+<ul>
+<li>All of our approaches today boil down to spatial partitioning
+<ul>
+<li>Uniform partitioning (perfect grid of rectangles)</li>
+<li>Quadtrees and KdTrees: Hierarchical partitioning
+<ul>
+<li>Each node &quot;owns&quot; 4 and 2 subspaces, respectively</li>
+<li>Space is more finely divided into subspaces when there are more points</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="uniform-partitioning-vs-quadtrees-and-kd-trees">Uniform Partitioning vs. Quadtrees and Kd-Trees</h3>
+<ul>
+<li>Uniform partitioning is easier to implement than a QuadTree or Kd-Tree
+<ul>
+<li>May be good enough for many applications</li>
+</ul>
+</li>
+</ul>
+<h2 id="summary-and-applications">Summary and Applications</h2>
+<h3 id="multi-dimensional-data-summary">Multi-Dimensional Data Summary</h3>
+<ul>
+<li>Multidimensional data has interesting operations:
+<ul>
+<li><strong>Range Finding</strong></li>
+<li><strong>Nearest</strong></li>
+</ul>
+</li>
+<li>The most common approach is <strong>spatial partitioning</strong>:
+<ul>
+<li><strong>Uniform Partitioning</strong>: Analogous to hashing</li>
+<li><strong>QuadTree</strong>: Generalized 2D BST where each node &quot;owns&quot; 4 subspaces</li>
+<li><strong>K-d Tree</strong>: Generalized k-d BST where each node &quot;owns&quot; 2 subspaces
+<ul>
+<li>Dimension of ownership cycles with each level of depth in tree</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Spatial partitioning allows for <strong>pruning</strong> of the search space</li>
+</ul>
+
+</body>
+</html>

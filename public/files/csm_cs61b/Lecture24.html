@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture24.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-24-graph-traversals-and-implementations">Lecture 24: Graph Traversals and Implementations</h1>
+<h4 id="10212020">10/21/2020</h4>
+<h3 id="note">Note</h3>
+<ul>
+<li>Not in scope for 2020 midterm</li>
+</ul>
+<h3 id="graph-traversals">Graph Traversals</h3>
+<ul>
+<li>DFS Preorder</li>
+<li>DFS Postorder</li>
+<li>BFS order: Act in order of distance from a vertex</li>
+<li>Graph traversals are, in general, not unique</li>
+</ul>
+<h3 id="shortest-path-problem">Shortest Path Problem</h3>
+<ul>
+<li>Goal: Find the shortest path between s and every other vertex</li>
+<li><strong>Breadth First Search</strong>
+<ul>
+<li>Initialize a queue with a starting vertex s and mark that vertex
+<ul>
+<li>A queue is a list that has two operations: enqueue (aka addLast) and dequeue (aka removeFirst)</li>
+<li>Let's call this queue our <strong>fringe</strong></li>
+</ul>
+</li>
+<li>Repeat until queue is empty:
+<ul>
+<li>Remove vertex v from the front of the queue</li>
+<li>For each unmarked neighbor n of v:
+<ul>
+<li>Mark n</li>
+<li>Set edgeTo[n] = v (and distTo[n] = distTo[v] + 1)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="breadthfirstsearch-for-google-maps">BreadthFirstSearch for Google Maps</h3>
+<ul>
+<li>Would breadth first search be a good algorithm for a navigation tool (e.g. Google Maps)?
+<ul>
+<li>Assume vertices are intersection and edges are roads connecting intersections</li>
+</ul>
+</li>
+<li>Some roads are longer than others
+<ul>
+<li>BAD!</li>
+</ul>
+</li>
+</ul>
+<h2 id="graph-api">Graph API</h2>
+<h3 id="graph-representations">Graph Representations</h3>
+<ul>
+<li>To implement our graph algorithms like BreadthFirstPaths and DepthFirstPaths, we need:
+<ul>
+<li><strong>An API</strong> (Application Programming Interface) for graphs
+<ul>
+<li>Graph methods, including their signatures nad behaviors</li>
+<li>Defines how Graph client programmers must think</li>
+</ul>
+</li>
+<li>An underlying data structure to represent our graph</li>
+</ul>
+</li>
+<li>Our choices have profound implications on:
+<ul>
+<li>Runtime</li>
+<li>Memory usage</li>
+<li>Difficulty of implementing algorithms</li>
+</ul>
+</li>
+</ul>
+<h3 id="graph-api-decision-1-integer-vertices">Graph API Decision #1: Integer Vertices</h3>
+<ul>
+<li>Common convention: Number nodes irrespective of &quot;label&quot;, and use number throughout the graph implementation. To lookup a vertex by label, you'd need to use a Map&lt;Label, Integer&gt;</li>
+</ul>
+<h3 id="graph-api">Graph API</h3>
+<ul>
+<li>The Graph API from the textbook:</li>
+</ul>
+<pre class="hljs"><code><div>public class Graph {
+    public Graph(int V);  // Create empty graph with v vertices
+    public void addEdge(int v, int w);  // add an edge v-w
+    Iterable&lt;Integer&gt; adj(int v);  // vertices adjacent to v
+    int V();  // number of vertices
+    int E();  // number of edges
+}
+</div></code></pre>
+<ul>
+<li>Some features:
+<ul>
+<li>Number of vertices must be specified in advance</li>
+<li>Does not support weights (labels) on nodes or edges</li>
+<li>Has no method for getting the number of edges for a vertex (i.e. its degree)</li>
+</ul>
+</li>
+<li>Example client:</li>
+</ul>
+<pre class="hljs"><code><div>/** degree of vertex v in graph G */
+public static int degree(Graph G, int v) {
+    int degree = 0;
+    for (int w : G.adj(v)) {
+        degree += 1;
+    }
+    return degree;
+}
+</div></code></pre>
+<pre class="hljs"><code><div>/** Prints out all the edges in a graph */
+public static void print(Graph G) {
+    for (int v = 0; v &lt; G.V(); v += 1) {
+        for (int w : G.adj(v)) {
+            System.out.println(v + &quot;-&quot; + w);
+        }
+    }
+}
+</div></code></pre>
+<h3 id="graph-api-and-depthfirstpaths">Graph API and DepthFirstPaths</h3>
+<ul>
+<li>Our choice of Graph API has deep implications on the implementations of DepthFirstPaths, BreadthFirstPath, print, and other graph &quot;clients&quot;</li>
+</ul>
+<h2 id="graph-representation-and-graph-algorithm-runtimes">Graph Representation and Graph Algorithm Runtimes</h2>
+<h3 id="graph-representations">Graph Representations</h3>
+<ul>
+<li>To implement our graph algorithms like BreadthFirstPaths and DepthFirst Paths, we needed an underlying data structure to represent our graphs
+<ul>
+<li>Our choices have implications on:
+<ul>
+<li>Runtime</li>
+<li>Memory usage</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>There are many possible implementations we could choose for our graphs</li>
+<li>Graph Representation 1: Adjacency Matrix
+<ul>
+<li>Represent each edge as a 2-D matrix</li>
+<img src="images/csm_cs61b/24.1.png" alt="" style="width:400px">
+<li>For undirected graph:
+<ul>
+<li>Each edge is represented twice in the matrix</li>
+</ul>
+</li>
+<li>G.adj(2) would return an iterator where we can call next() and get its adjacent vertices</li>
+<li>Total runtime to iterate over all neighbors of v is Theta(V)
+<ul>
+<li>Underlying code has to iterate through the entire array to handle next() and hasNext() calls (iterates through an entire row/column of our 2-D matrix)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="graph-printing-runtime">Graph Printing Runtime</h3>
+<ul>
+<li>What is the runtime of the print client we wrote if the graph uses an <strong>adjacency-matrix</strong> representation, where V is the umber of vertices, and E is the total number of edges
+<ul>
+<li>Theta(V^2)
+<ul>
+<li>Runtime to iterate over v's neighbors is Theta(V)</li>
+<li>and we consider V vertices</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="more-graph-representations">More Graph Representations</h3>
+<ul>
+<li>Representation 2: Edge Sets: Collection of all edges
+<ul>
+<li>Example: HashSet<Edge>, where each Edge is a pair of ints</li>
+<li><code>{(0, 1), (0, 2), (1, 2)}</code></li>
+</ul>
+</li>
+<li>Representation 3: Adjacency lists (most popular approach)
+<ul>
+<li>Common approach: Maintain array of lists indexed by vertex number</li>
+<li>Most popular approach for representing graphs</li>
+</ul>
+</li>
+</ul>
+<h3 id="graph-printing-runtime">Graph Printing Runtime</h3>
+<ul>
+<li>What is the runtime of the print client we wrote if the graph uses an <strong>adjacency-list</strong> representation, where V is the umber of vertices, and E is the total number of edges
+<ul>
+<li>Theta(V + E)
+<ul>
+<li>Create V iterators and print E times</li>
+<li>Runtime to iterate over v's neighbors?
+<ul>
+<li>Omega(1), O(V)</li>
+</ul>
+</li>
+<li>How many vertices do we consider?
+<ul>
+<li>V</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Best case: Theta(V)</li>
+<li>Worst case: Theta(V^2)</li>
+</ul>
+</li>
+<li>How to interpret: No matter what &quot;shape&quot; of increasingly complex graphs we generate, as V and E grow, the runtime will always grow exactly as Theta(V + E)
+<ul>
+<li>Example shape 1: Very sparse graph where E grows ver slowly, e.g. every vertex is connected to its square:
+<ul>
+<li>E is Theta(sqrt(V)). Runtime is Theta(V + sqrt(V)), which is just Theta(V)</li>
+</ul>
+</li>
+<li>Example shape 2: Very dense graph where E grows very quickly, e.g. a complete graph
+<ul>
+<li>E is Theta(V^2). Runtime is Theta(V + V^2), which is just Theta(V^2)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Runtime of some basic operations for each representation:</li>
+<img src="images/csm_cs61b/24.2.png" alt="" style="width:900px">
+<li>In practice, adjacency lists are most common
+<ul>
+<li>Many graph algorithms rely heavily on adj(s)</li>
+<li>Most graphs are sparse (not many edges in each bucket)</li>
+</ul>
+</li>
+</ul>
+<h3 id="barebones-undirected-graph-implementation">Barebones Undirected Graph Implementation</h3>
+<pre class="hljs"><code><div>public class Graph {
+    private final int V; 
+    private List&lt;Integer&gt;[] adj;
+
+    public Graph(int V) {
+        this.V = V;
+        adj = (List&lt;Integer&gt;[]) new ArrayList[V];
+        for (int v = 0; v &lt; V; v++) {
+            adj[v] = new ArrayList&lt;Integer&gt;();
+        }
+    }
+
+    public void addEdge(int v, int w) {
+        adj[v].add(w); 
+        adj[w].add(v);
+    }
+
+    public Iterable&lt;Integer&gt; adj(int v) {
+        return adj[v];
+    }
+}
+</div></code></pre>
+<h2 id="graph-traversal-implementations-and-runtime">Graph Traversal Implementations and Runtime</h2>
+<h3 id="depth-fist-search-implementation">Depth Fist Search Implementation</h3>
+<ul>
+<li>Common design pattern in graph algorithms: Decouple type from processing algorithm
+<ul>
+<li>Create a graph object</li>
+<li>Pass the graph to a graph-processing method (or constructor) in a client class</li>
+<li>Query the client class for information</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>public class Paths {
+    public Paths(Graph G, int s);  // Find all paths from G
+    boolean hasPathTo(int v);  // is there a path from s to v?
+    Iterable&lt;Integer&gt; pathTo(int v);  // path from s to v (if any)
+}
+</div></code></pre>
+<h3 id="depthfirstpaths-demo">DepthFirstPaths Demo</h3>
+<ul>
+<li>Goal: Find a path from so to every other reachable vertex, visiting each vertex at most once. dfs(v) is as follows:
+<ul>
+<li>Mark v</li>
+<li>For each unmarked adjacent vertex w:
+<ul>
+<li>set edgeTo[w] = v</li>
+<li>dfs(w)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="depthfirstpaths-recursive-implementation">DepthFirstPaths, Recursive Implementation</h3>
+<pre class="hljs"><code><div>public class DepthFirstPaths {
+    private boolean[] marked;
+    private int[] edgeTo;
+    private int s;
+
+    public DepthFirstPaths(Graph G, int s) {
+        ...
+        dfs(G, s);
+    }
+
+    public void dfs(Graph G, int v) {
+        marked[v] = true;
+        for (int w : G.adj(v)) {
+            if (!marked[w]) {
+                edgeTo[w] = v;
+                dfs(G, w);
+            }
+        }
+    }
+
+    public boolean hasPathTo(int v) {
+        return marked[v];
+    }
+
+    public Iterable&lt;Integer&gt; pathTo(int v) {
+        if (!hasPathTo(v)) return null;
+        List&lt;Integer&gt; path = new ArrayList&lt;&gt;();
+        for (int x = v; x !=s; x = edgeTo[x]) {
+            path.add(x);
+        }
+        path.add(s);
+        Collections.reverse(path);
+        return path;
+    }
+}
+</div></code></pre>
+<h3 id="runtime-for-depthfirst-paths">Runtime for DepthFirst Paths</h3>
+<ul>
+<li>Give a big O bound for the runtime for the DepthFirstPaths constructor (assume graph uses adjacency list)
+<ul>
+<li>O(V + E)
+<ul>
+<li>Each vertex is visited at most once (O(V))
+<ul>
+<li>Vertex visits (no more than V calls)</li>
+</ul>
+</li>
+<li>Each edge is considered at most twice (O(E))
+<ul>
+<li>edge considerations (no more than 2E calls)</li>
+</ul>
+</li>
+<li>Cost model in analysis above is the sum of:
+<ul>
+<li>Number of dfs calls</li>
+<li>marked[w] checks</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="runtime-for-depthfirstpaths">Runtime for DepthFirstPaths</h3>
+<ul>
+<li>Very hard question: Could we say the runtime is O(E)?
+<ul>
+<li>Argument: Can only visit a vertex if there is an edge to it
+<ul>
+<li>Number of DFS calls is bounded above by E</li>
+<li>So why not just say O(E)?</li>
+</ul>
+</li>
+<li>Can't say O(E)!
+<ul>
+<li>Constructor has to create an all false <code>marked</code> array</li>
+<li>This marking of all vertices as false takes Theta(V) time</li>
+</ul>
+</li>
+<li>Our cost model earlier (dfs calls + marked checks) does not provide a tight bound</li>
+</ul>
+</li>
+</ul>
+<h3 id="breadthfirstpaths-implementation">BreadthFirstPaths Implementation</h3>
+<pre class="hljs"><code><div>public class BreadthFirstPaths {
+    private boolean[] marked;
+    private int[] edgeTo;
+    ...
+
+    private void bfs(Graph G, int s) {
+        Queue&lt;Integer&gt; fringe = new Queue&lt;Integer&gt;();
+        fringe.enqueue(s);
+        marked[s] = true;
+        while (!fringe.isEmpty()) {
+            int v = fringe.dequeue();
+            for (int w : G.adj(v)) {
+                if (!marked[w]) {
+                    fringe.enqueue(w);
+                    marked[w] = true;
+                    edgeTo[w] = v;
+                }
+            }
+        }
+    }
+}
+</div></code></pre>
+<ul>
+<li>Runtime for shortest paths is also O(V + E)
+<ul>
+<li>Based on cost model: O(V) .next() calls and O(E) marked[w] checks</li>
+<li>Note, can't say Theta(V+E), example: Graph with no edges touching source</li>
+</ul>
+</li>
+<li>Space is Theta(V)
+<ul>
+<li>Need arrays of length V to store information</li>
+</ul>
+</li>
+</ul>
+<h2 id="layers-of-abstraction">Layers of Abstraction</h2>
+<h3 id="clients-and-our-graph-api">Clients and Our Graph API</h3>
+<ul>
+<li>Our choice of Graph API has deep implications on the implementation of DepthFirstPaths, BreadthFirstPaths, etc.</li>
+<li>Our choice of how to implement the Graph API has profound implications on runtime</li>
+</ul>
+<h3 id="runtime-for-depthfirstpaths">Runtime for DepthFirstPaths</h3>
+<ul>
+<li>Give a tight O bound for the runtime for the DepthFirstPaths constructor
+<ul>
+<li>O(V^2)</li>
+</ul>
+</li>
+</ul>
+<h2 id="summary">Summary</h2>
+<h3 id="summary">Summary</h3>
+<ul>
+<li>BFS: Uses a queue instead of recursion to track what work needs to be done</li>
+<li>Graph API: We used the Princeton Algorithms book API today</li>
+<li>Graph Implementations: Saw three ways to implement our graph API
+<ul>
+<li>Adjacency matrix</li>
+<li>List of edges</li>
+<li>Adjacency list (most common in practice)</li>
+</ul>
+</li>
+<li>Choice of implementation has big impact on runtime and memory usage!
+<ul>
+<li>DFS and BFS runtime with adjacency list: O(V + E)</li>
+<li>DFS and BFS runtime with adjacency matrix: O(V^2)</li>
+</ul>
+</li>
+</ul>
+<h2 id="discussion-review">Discussion Review</h2>
+<h3 id="graphs">Graphs</h3>
+<ul>
+<li><strong>Graphs</strong> are structures that contain <em>nodes</em> and <em>edges</em></li>
+<li>Graphs can be directed or undirected</li>
+</ul>
+<h3 id="graph-representations">Graph Representations</h3>
+<ul>
+<li><strong>Adjacency lists</strong> list out all the nodes connected to each node in our graph
+<ul>
+<li>In the example below, edges are directed</li>
+</ul>
+<pre class="hljs"><code><div>A: B, C
+B: E
+C: F
+D: B
+E:
+F: D
+</div></code></pre>
+<ul>
+<li>Slightly inefficient if graph is more complete</li>
+</ul>
+</li>
+<li><strong>Adjacency matrices</strong> are true if there is a line going from node A to B and false otherwise (can be used for directed graphs)
+<ul>
+<li>Indexing into a matrix is very fast</li>
+<li>However, we have to traverse though all possible children every single time</li>
+<img src="images/csm_cs61b/24.3.png" alt="" style="width:400px">
+</ul>
+</li>
+</ul>
+<h3 id="graph-searches">Graph Searches</h3>
+<ul>
+<li><strong>Breadth First Search</strong> goes in order of how far each node is form the starting node. Programatically this is done using a queue</li>
+<li><strong>Depth First Search</strong> goes all the way down one path before exploring others. Programatically this is done using a stack</li>
+</ul>
+<h3 id="dijkstras-algorithm">Dijkstra's Algorithm</h3>
+<ul>
+<li><strong>Dijkstra's algorithm</strong> is a method of finding the shortest path from one node to every other node in the graph. You use a priority queue that sorts points based off of their distance to the root node</li>
+<li>Steps:
+<ul>
+<li>Pop node from the top of the queue - this is the current node</li>
+<li>Add/update distance of all of the children of the current node</li>
+<li>Re-sort the priority queue</li>
+<li>Finalize the distance to the current node from the root</li>
+<li>Repeat</li>
+</ul>
+</li>
+</ul>
+<h3 id="a">A*</h3>
+<ul>
+<li><strong>A*</strong> is a method of finding the shortest path from one node to a specific other node in the graph. It operates similarly to Dijkstra's except for the fact that we use a (given) heuristic to which path is the best to our goal point</li>
+<li>Steps:
+<ul>
+<li>Pop node from the top of the queue - this is the current node</li>
+<li>Add/update distances of all of the children fo the current node. This distance will be the sum of the distance up to that child node and our guess of how far away the goal node is (our heuristic)</li>
+<li>Re-sort the priority queue</li>
+<li>Check if we've hit the goal node (if so we stop)</li>
+<li>Repeat</li>
+</ul>
+</li>
+<li>The only constraints on our heuristic is that it must be less than or equal to the true distance to the goal node</li>
+</ul>
+
+</body>
+</html>

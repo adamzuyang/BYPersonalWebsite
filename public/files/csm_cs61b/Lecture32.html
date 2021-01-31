@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture32.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-32-more-quick-sort-sorting-summary">Lecture 32: More Quick Sort, Sorting Summary</h1>
+<h4 id="11102020">11/10/2020</h4>
+<h3 id="partition-sort-aka-quicksort">Partition Sort a.k.a. Quicksort</h3>
+<ul>
+<li>Quicksorting N items:
+<ul>
+<li>Partition on leftmost item</li>
+<li>Quicksort left half</li>
+<li>Quicksort right half</li>
+</ul>
+</li>
+<li>Run time is Theta(N log N) in the best case, Theta(N^2) in the worst case, and Theta(N log N) in the average case</li>
+</ul>
+<h3 id="avoiding-the-worst-case">Avoiding the Worst Case</h3>
+<ul>
+<li>Four philosophies:
+<ul>
+<li><strong>Randomness</strong>: Pick a random pivot or shuffle before sorting</li>
+<li><strong>Smarter pivot selection</strong>: Calculate or approximate the median</li>
+<li><strong>Introspection</strong>: Switch to a safer sort if recursion goes too deep</li>
+<li><strong>Preprocess the array</strong>: Could analyze array to see if Quicksort will be slow. No obvious way to do this, though</li>
+</ul>
+</li>
+</ul>
+<h3 id="philosophy-1-randomness-preferred-approach">Philosophy 1: Randomness (Preferred Approach)</h3>
+<ul>
+<li>If pivot always lands somewhere &quot;good&quot;, Quicksort is Theta(N log N). However, the ver rare Theta(N^2) cases do happen in practice
+<ul>
+<li>Bad ordering: Array already in sorted order</li>
+<li>Bad elements: Array with all duplicates</li>
+</ul>
+</li>
+<li>Deal with bad ordering:
+<ul>
+<li>Strategy 1: Pick pivots randomly</li>
+<li>Strategy 2: Shuffle before sorting</li>
+</ul>
+</li>
+<li>THe second strategy requires care in partitioning code to avoid Theta(N^2) behavior on arrays of duplicates
+<ul>
+<li>Common bug in textbooks!</li>
+</ul>
+</li>
+</ul>
+<h3 id="philosophy-2a-smarter-pivot-selection-constant-time-pivot-pick">Philosophy 2a: Smarter Pivot Selection (constant time pivot pick)</h3>
+<ul>
+<li>Randomness is necessary for best Quicksort performance! For any pivot selection procedure that is:
+<ul>
+<li>Deterministic</li>
+<li>Constant time</li>
+</ul>
+</li>
+<li>The resulting Quicksort has a family of dangerous inputs that an adversary could easily generate</li>
+</ul>
+<h3 id="philosophy-2b-smarter-pivot-selection-linear-time-pivot-pick">Philosophy 2b: Smarter Pivot Selection (linear time pivot pick)</h3>
+<ul>
+<li>Could calculate the actual median in linear time
+<ul>
+<li>&quot;Exact median Quicksort&quot; is safe: Worst case Theta(N log N), but it is slower than Mergesort</li>
+</ul>
+</li>
+<li>Raises interesting question though: How do you compute the median or an array? Will talk about how to do this later today</li>
+</ul>
+<h3 id="philosophy-3-introspection">Philosophy 3: Introspection</h3>
+<ul>
+<li>Can also simply watch your recursion depth
+<ul>
+<li>If it exceeds some critical value (say 10 ln N), switch to mergesort</li>
+</ul>
+</li>
+</ul>
+<h3 id="sorting-summary-so-far">Sorting Summary (so far)</h3>
+<ul>
+<li>Listed by mechanism:
+<ul>
+<li>Selection sort: Find smallest item and put it at the front</li>
+<li>Insertion sort: Figure out where to insert the current item</li>
+<li>Merge sort: Merge two sorted halves into one sorted whole</li>
+<li>Partition (quick) sort: Partition items around a pivot</li>
+<img src="images/csm_cs61b/32.1.png" alt="" style="width:700px">
+</ul>
+</li>
+</ul>
+<h3 id="quicksort-flavors">Quicksort Flavors</h3>
+<ul>
+<li>Quicksort is the fastest, but only if we make the right decisions about:
+<ul>
+<li>Pivot selection</li>
+<li>Partition algorithm</li>
+<li>How we deal with avoiding the worst case</li>
+</ul>
+</li>
+</ul>
+<h3 id="tony-hoares-in-place-partitioning-scheme">Tony Hoare's In-place Partitioning Scheme</h3>
+<ul>
+<li>Proposed scheme where two pointers walk towards each other
+<ul>
+<li>Left pointer loves small items and hates large or equal items</li>
+<li>Right pointer loves large items and hates small or equal items</li>
+<li>Big idea: Walk pointers toward each other, stopping on a hated item
+<ul>
+<li>When both pointers have stopped, swap and move pointers by one towards each other</li>
+<li>End result is that things on left are &quot;small&quot; and things on the right are &quot;large&quot;</li>
+</ul>
+</li>
+<li>When pointers cross, you are done</li>
+<li>Swap pivot where right pointer ends up</li>
+</ul>
+</li>
+<li>This partitioning scheme yields a very fast Quicksort and is faster than mergesort
+<ul>
+<li>Though faster schemes have been found since
+<ul>
+<li>Best known Quicksort uses a two-pivot scheme</li>
+</ul>
+</li>
+<li>Overall runtime still depends crucially on pivot selection strategy!</li>
+</ul>
+</li>
+</ul>
+<h3 id="what-if-we-dont-want-randomness">What if we don't want randomness?</h3>
+<ul>
+<li>Another approach: Use the median (or an approximation)
+<ul>
+<li>The best possible pivot is the median
+<ul>
+<li>Splits problem into two problems of size N/2</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="median-identification">Median Identification</h3>
+<ul>
+<li>Is it possible to find the median in Theta(N) time?
+<ul>
+<li>Yes! Use 'BFPRT' (called PICK in original paper)</li>
+<li>In practice, rarely used</li>
+</ul>
+</li>
+<li>However, while runtime is still Theta(N log N) this makes quicksort much slower than mergesort</li>
+</ul>
+<h2 id="quick-select">Quick Select</h2>
+<h3 id="the-selection-problem">The Selection Problem</h3>
+<ul>
+<li>Computing the exact median would be great for picking an item to partition around. Gives us a &quot;safe quick sort&quot;
+<ul>
+<li>Unfortunately, it turns out that exact median computation is too slow</li>
+</ul>
+</li>
+<li>However, it turns out that partitioning can be used to find the exact median
+<ul>
+<li>The resulting algorithm is the best known median identification algorithm</li>
+</ul>
+</li>
+</ul>
+<h3 id="quick-select">Quick Select</h3>
+<ul>
+<li>Goal, find the median</li>
+<li>Keep partitioning until the pivot lands in the exact middle of the array
+<ul>
+<li>Only need to partition the half that contains the middle index of the array</li>
+</ul>
+</li>
+</ul>
+<h3 id="worst-case-performance-of-quick-select">Worst Case Performance of Quick Select</h3>
+<ul>
+<li>Worst asymptotic performance Theta(N^2) occurs if array is in sorted order
+<ul>
+<li>Can mostly negate this using shuffling</li>
+</ul>
+</li>
+</ul>
+<h3 id="expected-performance">Expected Performance</h3>
+<ul>
+<li>On average, Quick Select will take Theta(N) time</li>
+<li>On average, pivot ends up about halfway:
+<ul>
+<li>Number of compares: N + N/2 + N/8 + ... + 1 ~~ Theta(N)</li>
+</ul>
+</li>
+</ul>
+<h3 id="quicksort-with-quickselect">Quicksort with Quickselect</h3>
+<ul>
+<li>What if we used Quickselect to find the exact median?
+<ul>
+<li>Resulting algorithm is still quite slow. Also: a little strange to do a bunch of partitions to identify the optimal item to partition around</li>
+</ul>
+</li>
+</ul>
+<h2 id="stability-adaptiveness-optimization">Stability, Adaptiveness, Optimization</h2>
+<h3 id="other-desirable-sorting-properties-stability">Other Desirable Sorting Properties: Stability</h3>
+<ul>
+<li>A sort is said to be stable if order of equivalent items is preserved</li>
+<li>Equivalent items don't &quot;cross over&quot; when being stably sorted</li>
+</ul>
+<h3 id="sorting-stability">Sorting Stability</h3>
+<ul>
+<li>Is insertion sort stable?
+<ul>
+<li>Yes</li>
+<li>Equivalent items never move past their equivalent elements</li>
+</ul>
+</li>
+<li>Is Quicksort stable?
+<ul>
+<li>Depends on partitioning strategy</li>
+<li>Three array partitioning will be stable</li>
+<li>Hoare partitioning may not be stable (we may swap equivalent items)</li>
+</ul>
+</li>
+</ul>
+<h3 id="stability">Stability</h3>
+<p><img src="images/csm_cs61b/32.2.png" alt="" style="width:800px"></p>
+<h3 id="optimizing-sorts">Optimizing Sorts</h3>
+<ul>
+<li>Additional tricks we can play:
+<ul>
+<li>Switch to insertion sort:
+<ul>
+<li>When a subproblem reaches size 15 or lower, use insertion sort</li>
+</ul>
+</li>
+<li>Make sort <strong>adaptive</strong>: Exploit existing order in array (Insertion Sort, SmoothSort, TimSort)</li>
+<li>Exploit restrictions on set of keys. If number of keys is some constant, can sort faster</li>
+<li>For Quicksort: Make the algorithm introspective, switching to a different sorting method if recursion goes too deep. Only a problem for deterministic flavors of Quicksort</li>
+</ul>
+</li>
+</ul>
+<h3 id="arrayssort">Arrays.sort</h3>
+<ul>
+<li>In Java, Arrays.sort(someArray) uses:
+<ul>
+<li>Mergesort if someArray consists of objects</li>
+<li>Quicksort if someArray consists of primitives</li>
+</ul>
+</li>
+</ul>
+<h2 id="sorting-summary">Sorting Summary</h2>
+<h3 id="sorting-landscape">Sorting Landscape</h3>
+<ul>
+<li>The landscape of the sorting algorithms we've studied
+<ul>
+<li>Three basic flavors: Comparison, Alphabet, and Radix based</li>
+<li>Each can be used in different circumstances, important part was the analysis and the deep thought</li>
+</ul>
+</li>
+</ul>
+<h3 id="sorting-vs-searching">Sorting vs Searching</h3>
+<ul>
+<li>During the data structures part of the class, we studied what we called the &quot;search problem&quot;: Retrieve data of interest</li>
+<li>There are some interesting connections between the two</li>
+</ul>
+
+</body>
+</html>

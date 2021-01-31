@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture34.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-34-sorting-and-algorithmic-bounds">Lecture 34: Sorting and Algorithmic Bounds</h1>
+<h4 id="11162020">11/16/2020</h4>
+<h3 id="sorting">Sorting</h3>
+<ul>
+<li>Sorting is a foundational problem
+<ul>
+<li>Useful for putting things in order</li>
+<li>But can be used to solve other tasks, sometimes in non-trivial ways
+<ul>
+<li>Sorting improves duplicate finding from a naive N^2 to N log N</li>
+<li>Sorting improves 3SUM from a naive N^3 to N^2</li>
+</ul>
+</li>
+<li>There are many ways to sort an array, each with its own interesting tradeoffs and algorithmic features</li>
+</ul>
+</li>
+<li>Today we'll discuss the fundamental nature of the sorting problem itself: How hard is it to sort?</li>
+</ul>
+<h3 id="sorts-summary">Sorts Summary</h3>
+<p><img src="images/csm_cs61b/34.1.png" alt="" style="width:800px"></p>
+<h2 id="math-problems-out-of-nowhere">Math Problems out of Nowhere</h2>
+<h3 id="a-math-problem-out-of-nowhere">A Math Problem out of Nowhere</h3>
+<ul>
+<li>Consider the functions N! and (N/2)^(N/2)</li>
+<li>Is N! \in Omega((N/2)^(N/2))?
+<ul>
+<li>Can experiment and find that the above statement is true</li>
+</ul>
+</li>
+</ul>
+<h3 id="another-math-problem">Another Math Problem</h3>
+<ul>
+<li>Given that N! &gt; (N/2)^(N/2), show that log(N!) \in Omega(N log N)
+<ul>
+<li>We have that N! &gt; (N/2)^(N/2)</li>
+<li>Taking the log of both sides, we can show the above statement</li>
+</ul>
+</li>
+<li>In other words, log(N!) grows at least as quickly as N log N</li>
+</ul>
+<h3 id="last-math-problem">Last Math Problem</h3>
+<ul>
+<li>Show that N log N \in Omega(log(N!))
+<ul>
+<li>log(N!) = log(N) + log(N-1) + log(N-2) + ... + log(1)</li>
+<li>N log N = log(N) + log(N) + log(N) + ... + log(N)</li>
+<li>Hence, N log N \in Omega(log(N!))</li>
+</ul>
+</li>
+</ul>
+<h3 id="omega-and-theta">Omega and Theta</h3>
+<ul>
+<li>Given:
+<ul>
+<li>log(N!) \in Omega(N log N)</li>
+<li>N log N \in Omega(log(N!))</li>
+</ul>
+</li>
+<li>We can conclude that:
+<ul>
+<li>log(N!) \in Theta(N log N) AND</li>
+<li>N log N \in Theta(log(N!))</li>
+</ul>
+</li>
+</ul>
+<h2 id="theoretical-bounds-on-sorting">Theoretical Bounds on Sorting</h2>
+<h3 id="sorting">Sorting</h3>
+<ul>
+<li>We have shown several sorts to require Theta(N log N) worst case time
+<ul>
+<li>Can we build a better sorting algorithm?</li>
+</ul>
+</li>
+<li>Let the ultimate comparison sort (TUCS) be the asymptotically fastest possible comparison sorting algorithm, possibly yet to be discovered, and let R(N) be its worst case runtime in Theta notation
+<ul>
+<li>Comparison sort means that it uses the compareTo method in Java to make decisions</li>
+<li>Worst case rn-time of TUCS, R(N), is O(N log N)
+<ul>
+<li>We already have algorithms that take Theta(N log N) worst case</li>
+</ul>
+</li>
+<li>Worst case run-time of TUCS, R(N) is Omega(1)
+<ul>
+<li>Obvious: Problem doesn't get easier than N</li>
+<li>Can we make a stronger statement than Omega(1)?</li>
+</ul>
+</li>
+<li>Worst case run-time of TUCS, R(N), is also Omega(N)
+<ul>
+<li>Have to at least look at every item</li>
+</ul>
+</li>
+<li>But, with a clever argument, we can see that the lower bound will turn out to be Omega(N log N)
+<ul>
+<li>This lower bound means that across the infinite space of all possible ideas that any human might ever have for sorting using sequential comparisons, NONE has a worst case runtime that is better than N log N</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="the-game-of-puppy-cat-dog">The Game of Puppy, Cat, Dog</h3>
+<ul>
+<li>Suppose we have a puppy, a cat, and a dog, each in an opaque soundproof box labeled A, B, and C. We want to figure out which is which using a scale</li>
+<img src="images/csm_cs61b/34.2.png" alt="" style="width:600px">
+<ul>
+<li>We have to weigh a and c to resolve the final ambiguity</li>
+</ul>
+</li>
+</ul>
+<h3 id="puppy-cat-dog---a-graphical-picture-of-n--3">Puppy, Cat, Dog - A Graphical Picture of N = 3</h3>
+<ul>
+<li>The full decision tree for puppy, cat, dog:</li>
+<img src="images/csm_cs61b/34.3.png" alt="" style="width:600px">
+</ul>
+<h3 id="the-game-of-puppy-cat-dog">The Game of Puppy, Cat, Dog</h3>
+<ul>
+<li>How many questions would you need to ask to definitely solve the &quot;puppy, cat, dog, walrus&quot; question?
+<ul>
+<li>If N = 4, we have 4! = 24 permutations of puppy, cat, dog, walrus</li>
+<li>So we need a binary tree with 24 leaves
+<ul>
+<li>How many levels minimum? log_2(24) = 4.5, so 5 is the minimum</li>
+</ul>
+</li>
+<li>So at least 5 questions</li>
+</ul>
+</li>
+</ul>
+<h3 id="generalized-puppy-cat-dog">Generalized Puppy, Cat, Dog</h3>
+<ul>
+<li>How many questions would you need to ask to definitely solve the generalized &quot;puppy, cat, dog&quot; problem for N items?
+<ul>
+<li>Give your answer in big Omega notation</li>
+</ul>
+</li>
+<li>Answer: Omega(log(N!))
+<ul>
+<li>For N, we have the following argument:
+<ul>
+<li>Decision tree needs N! leaves</li>
+<li>So we need log_2(N!) rounded up levels, which is Omega(log(N!))</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="generalizing-puppy-cat-dog">Generalizing Puppy, Cat, Dog</h3>
+<ul>
+<li>Finding an optimal decision tree for the generalized version of puppy, cat, dog is an open problem in mathematics</li>
+<li>Deriving a sequence of yes/no questions to identify puppy, cat, dog is hard. An alternate approach to solving the puppy, cat, dog algorithm
+<ul>
+<li>Sort the boxes using any generic sorting algorithm
+<ul>
+<li>Leftmost box is puppy</li>
+<li>Middle box is cat</li>
+<li>Right box is dog</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="sorting-puppies-cats-and-dogs">Sorting, Puppies, Cats, and Dogs</h3>
+<ul>
+<li>A solution to the sorting problem also provides a solution to puppy, cat, dog
+<ul>
+<li>In other words, puppy, cat, dog <strong>reduces</strong> to sorting</li>
+<li>Thus, any lower bound on difficulty of puppy, cat, dog must ALSO apply to sorting</li>
+</ul>
+</li>
+</ul>
+<h3 id="sorting-lower-bound">Sorting Lower Bound</h3>
+<ul>
+<li>We have a lower bound on puppy, cat, dog, namely it takes Omega(log(N!)) comparisons to solve such a puzzle</li>
+<li>Since sorting with comparisons can be used to solve puppy, cat, dog, then sorting also takes Omega(log(N!)) comparisons</li>
+<li>Or in other words:
+<ul>
+<li>Any sorting algorithm using comparisons, no matter how clever, must use at least k = log_2(N!) compares to find the correct permutation. So even TUCS takes at least log_2(N!) comparisons</li>
+<li>log_2(N!) is trivially Omega(log(N!)), so TUCS must take Omega(log(N!)) time</li>
+</ul>
+</li>
+<li>Earlier, we showed the log(N!) \in Theta(N log N), so we have that TUCS is Omega(N log N)
+<ul>
+<li><strong>Any comparison based sort requires at least order N log N comparisons</strong></li>
+</ul>
+</li>
+<li>Proof summary:
+<ul>
+<li>Puppy, cat, dog is Omega(log_2(N!)), i.e. requires log_2(N!) comparisons</li>
+<li>TUCS can solve puppy, cat, dog, and thus takes Omega(log_2(N!)) compares</li>
+<li>log_2(N!) is Omega(N log N)
+<ul>
+<li>This was because N! is Omega((N/2)^(N/2))</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="optimality">Optimality</h3>
+<ul>
+<li>The punchline:
+<ul>
+<li>Our best sorts have achieved absolute asymptotic optimality
+<ul>
+<li>Mathematically impossible to sort using fewer comparisons</li>
+<li>Note: Randomized quicksort is only probabilistically optimal, but the probability is extremely high for even modest N. So don't worry about quicksort</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture25.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-25-shortest-paths">Lecture 25: Shortest Paths</h1>
+<h4 id="10232020">10/23/2020</h4>
+<h3 id="graph-problems">Graph Problems</h3>
+<ul>
+<li>Which is better?
+<ul>
+<li>DFS or BFS</li>
+</ul>
+</li>
+</ul>
+<h3 id="bfs-vs-dfs-for-path-finding">BFS vs. DFS for Path Finding</h3>
+<ul>
+<li>Possible considerations:
+<ul>
+<li><strong>Correctness</strong>. Do both work for all graphs?
+<ul>
+<li>Yes</li>
+</ul>
+</li>
+<li><strong>Output Quality</strong>. Does one give better results?
+<ul>
+<li>BFS is a 2-for-1 deal, not only do you get paths, but your paths are also guaranteed to be shortest</li>
+</ul>
+</li>
+<li><strong>Time Efficiency</strong>. Is one more efficient than the other?
+<ul>
+<li>Should be very similar. Both consider all edges twice</li>
+</ul>
+</li>
+<li><strong>Space Efficiency</strong>. Is one more efficient than the other?
+<ul>
+<li>DFS is worse for spindly graphs
+<ul>
+<li>Call stack gets very deep</li>
+<li>Computer needs Theta(V) memory to remember recursive calls</li>
+</ul>
+</li>
+<li>BFS is worse for absurdly &quot;bushy&quot; graphs
+<ul>
+<li>Queue gets very large. In worst case, queue will require Theta(V) memory</li>
+</ul>
+</li>
+<li>Note: In our implementations, we have to spend Theta(V) memory anyway to track distTo and edgeTo arrays</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="breadth-firstsearch-for-google-maps">Breadth FirstSearch for Google Maps</h3>
+<ul>
+<li>BFS would not be a good choice for a google maps style navigation application
+<ul>
+<li>We need an algorithm that takes into account edge distances, also known as &quot;edge weights&quot;</li>
+</ul>
+</li>
+</ul>
+<h2 id="dijkstras-algorithm">Dijkstra's Algorithm</h2>
+<h3 id="single-source-single-target-shortest-paths">Single Source Single Target Shortest Paths</h3>
+<ul>
+<li>Observation: Solution will always be a path with no cycles (assuming non-negative weights)</li>
+</ul>
+<h3 id="problem-single-source-shortest-paths">Problem: Single Source Shortest Paths</h3>
+<ul>
+<li>Goal: Find the shortest paths from <strong>source</strong> vertex s to every other vertex</li>
+<li>Observation: Solution will always be a <strong>tree</strong>
+<ul>
+<li>Can think of as the union of the shortest paths to all vertices</li>
+</ul>
+</li>
+</ul>
+<h3 id="edge-count">Edge Count</h3>
+<ul>
+<li>If G is a connected edge-weighted graph with V vertices and E edges, how many edges are in the <strong>Shortest Paths Tree</strong> (SPT) of G? [assume every vertex is reachable]
+<ul>
+<li>Since the solution is a tree, there are V-1 edges</li>
+</ul>
+</li>
+</ul>
+<h3 id="creating-an-algorithm">Creating an Algorithm</h3>
+<ul>
+<li>Start with a bad algorithm
+<ul>
+<li>Algorithm begins with all vertices unmarked and all distance infinite. No edges in the shortest paths tree (SPT)</li>
+</ul>
+</li>
+<li>Bad algorithm #1: Perform a depth first search. When you visit v:
+<ul>
+<li>For each edge from v to w, if w is not already part of SPT, add the edge
+<ul>
+<li>Note: This WILL NOT WORK</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Bad algorithm #2: Perform a depth first search. When you visit v:
+<ul>
+<li>For each edge from v to w, add edge to the SPT <strong>only if that edge yields better distance</strong> (we'll call this process &quot;edge <strong>relaxation</strong>&quot;)</li>
+<li>Improvements:
+<ul>
+<li>Use better edges if found</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="dijkstras-algorithm">Dijkstra's Algorithm</h3>
+<ul>
+<li>Perform a <strong>best first search</strong> (closest first). When you visit v:
+<ul>
+<li>For each v to w, <strong>relax that edge</strong></li>
+<li>Improvements:
+<ul>
+<li>Use better edges if found</li>
+<li>Traverse &quot;best first&quot;</li>
+</ul>
+</li>
+<li>Insert all vertices into fringe PQ (e.g. use a heap), storing vertices in order of distance from source</li>
+<li>Repeat: Remove (closest) vertex v from PQ, and relax all edges pointing from v</li>
+<li>Note: If non-negative weights, <strong>impossible for any inactive vertex (i.e. already visited and not on the fringe) to be improved</strong>
+<ul>
+<li>Would result in a cycle if it does</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="images/csm_cs61b/25.1.png" alt="" style="width:900px">
+<img src="images/csm_cs61b/25.2.png" alt="" style="width:900px"></p>
+<h2 id="dijkstras-correctness-and-runtime">Dijkstra's Correctness and Runtime</h2>
+<h3 id="dijkstras-algorithm-pseudocode">Dijkstra's Algorithm Pseudocode</h3>
+<ul>
+<li>Dijkstra's:
+<ul>
+<li>PQ.add(source, 0)</li>
+<li>For other vertices v, PQ.add(v, infinity)</li>
+<li>While PQ is not empty:
+<ul>
+<li>p = PQ.removeSmallest()</li>
+<li>Relax all edges from p</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Relaxing</strong> and edge p -&gt; q with weight w:
+<ul>
+<li>If distTo[p] + w &lt; distTo[q]:
+<ul>
+<li>distTo[q] = distTo[p] + w</li>
+<li>edgeTo[q] = p</li>
+<li>PQ.changePriority(q, distTo[q])</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Key invariants:
+<ul>
+<li>edgeTo[v] is the best known predecessor of v</li>
+<li>distTo[v] is the best known total distance from source to v</li>
+<li>PQ contains all unvisited vertices in order of distTo</li>
+</ul>
+</li>
+<li>Important properties:
+<ul>
+<li>Always visits vertices in order of total distance from source</li>
+<li>Relaxation always fails on edges to visited (white) vertices</li>
+</ul>
+</li>
+</ul>
+<h3 id="guaranteed-optimality">Guaranteed Optimality</h3>
+<ul>
+<li>Dijkstra's Algorithm
+<ul>
+<li>Visit vertices in <strong>order of best-known distance</strong> from source. On visit, <strong>relax</strong> every edge from the visited source</li>
+</ul>
+</li>
+<li>Guaranteed to return a correct result if all edges are non-negative
+<ul>
+<li>Proof relies on the property that relaxation always fails on edges to visited vertices</li>
+</ul>
+</li>
+<li>Proof sketch: Assume all edges have non-negative weights
+<ul>
+<li>At start, distTo[source] = 0, which is optimal</li>
+<li>After relaxing all edges from source, let vertex v1 be the vertex with minimum weight, i.e. that is closest to the source. Claim: distTo[v1] is optimal, and thus future relaxations will fail. Why?
+<ul>
+<li>distTo[p] &gt;= distTo[v1] for all p, therefore</li>
+<li>distTo[p] + w &gt;= distTo[v1]</li>
+</ul>
+</li>
+<li>Can use induction to prove that this holds for all vertices after dequeuing</li>
+</ul>
+</li>
+</ul>
+<h3 id="negative-edges">Negative Edges</h3>
+<ul>
+<li>Dijkstra's Algorithm
+<ul>
+<li>Visit vertices in <strong>order of best-known distance</strong> from source. On visit, <strong>relax</strong> every edge from the visited vertex</li>
+</ul>
+</li>
+<li>Dijkstra's can fail if graph has negative weight edges
+<ul>
+<li>Relaxation of already visited edges can succeed</li>
+</ul>
+</li>
+</ul>
+<h3 id="dijkstras-algorithm-runtime">Dijkstra's Algorithm Runtime</h3>
+<ul>
+<li>Priority Queue operation count, assuming binary heap based PQ:
+<ul>
+<li>add: V, each costing O(log V) time</li>
+<li>removeSmallest: V, each costing O(log V) time</li>
+<li>changePriority: E, each costing O(log V) time</li>
+</ul>
+</li>
+<li>Overall runtime: O(V*log(V) + V*log(V) + E*log(V))
+<ul>
+<li>Assuming E &gt; V, this is just O(E log V) for a connected graph</li>
+</ul>
+</li>
+</ul>
+<h2 id="a">A*</h2>
+<h3 id="single-target-dijkstras">Single Target Dijkstra's</h3>
+<ul>
+<li>Is this a good algorithm for a navigation application
+<ul>
+<li>Will it find the shortest path?
+<ul>
+<li>Yes!</li>
+</ul>
+</li>
+<li>Will it be efficient
+<ul>
+<li>No. It will look for shortest path to other places</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="the-problem-with-dijkstras">The Problem with Dijkstra's</h3>
+<ul>
+<li>We have only a <strong>single target</strong> in mind, so we need a different algorithm. How can we do better?</li>
+</ul>
+<h3 id="how-can-we-do-better">How can we do better?</h3>
+<ul>
+<li>Explore one direction first?</li>
+</ul>
+<h3 id="introducing-a">Introducing A*</h3>
+<ul>
+<li>Simple idea:
+<ul>
+<li>Visit vertices in order of d(Denver, v) + h(v, goal), where h(v, goal) is an estimate of the distance from v to our goal NYC</li>
+<li>In other words, look at some location if:
+<ul>
+<li>We already know the fastest way to reach v</li>
+<li>AND we suspect that v is also the fastest way to NYC taking into account the time to get to v</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Observations:
+<ul>
+<li>Not every vertex gets visited</li>
+<li>Result is not a shortest paths tree for a vertex, but that's OK since we only care about a path to a single vertex</li>
+</ul>
+</li>
+</ul>
+<h3 id="a-heuristic-example">A* Heuristic Example</h3>
+<ul>
+<li>How do we get our estimate?
+<ul>
+<li>Estimate is an arbitrary <strong>heuristic</strong> h(v, goal)</li>
+<li>heuristic: &quot;using experience to learn and improve&quot;</li>
+<li>Doesn't have to be perfect</li>
+</ul>
+</li>
+</ul>
+<h2 id="a-heuristics-not-covered-in-this-class">A* Heuristics (Not covered in this class)</h2>
+<h3 id="heuristics-and-correctness">Heuristics and Correctness</h3>
+<ul>
+<li>Four our version of A* to give the correct answer, out A heuristic must be:
+<ul>
+<li><strong>Admissible</strong>: h(v, NYV) &lt;= true distance from v to NYC</li>
+<li><strong>Consistent</strong>: For each neighbor of w:
+<ul>
+<li>h(v, NYV) &lt;= dist(v, w) + h(w, NYC)</li>
+<li>Where dist(v, w) is the weight of the edge from v to w</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="consistency-and-admissibility-beyond-scope">Consistency and Admissibility (Beyond scope)</h3>
+<ul>
+<li>All consistent heuristics are admissible
+<ul>
+<li>&quot;Admissible&quot; means that the heuristic never overestimates</li>
+</ul>
+</li>
+</ul>
+<h2 id="summary">Summary</h2>
+<h3 id="summary-shortest-paths-problems">Summary: Shortest Paths Problems</h3>
+<ul>
+<li>Single source, multiple targets:
+<ul>
+<li>Can represent shortest path from start to every vertex as a shortest paths tree with V-1 edges</li>
+<li>Can find the SPT using Dijkstra's algorithm</li>
+</ul>
+</li>
+<li>Single source, single target:
+<ul>
+<li>Dijkstra's is inefficient (searches useless parts of the graph)</li>
+<li>Can represent shortest path as path (with up to V-1 vertices, but probably far fewer)</li>
+<li>A* is potentially much faster than Dijkstra's
+<ul>
+<li>Consistent heuristic guarantees correct solution</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</body>
+</html>

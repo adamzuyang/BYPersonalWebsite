@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture10.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-10-subtype-polymorphism-vs-hofs">Lecture 10: Subtype Polymorphism vs. HoFs</h1>
+<h4 id="9182020">9/18/2020</h4>
+<h2 id="static-methods-variables-and-inheritance">Static Methods, Variables, and Inheritance</h2>
+<ul>
+<li>You may find questions on old 61B exams, worksheets, etc. that consider:
+<ul>
+<li>What if a subclass has variables with the same name as a superclass?</li>
+<li>What if subclass has a static method with the same signature as a superclass method?
+<ul>
+<li>For static methods, we do not use the term overriding for this</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>These two practices above are called &quot;hiding&quot;
+<ul>
+<li>Bad style</li>
+<li>There is no good reason to ever do this</li>
+<li>The rules for resolving the conflict are a bit confusing to learn</li>
+<li>Will not be taught or tested in 61B</li>
+</ul>
+</li>
+</ul>
+<h2 id="subtype-polymorphism">Subtype Polymorphism</h2>
+<h3 id="subtype-polymorphism">Subtype Polymorphism</h3>
+<ul>
+<li>The biggest idea of the last couple of lectures: <strong>subtype polymorphism</strong>
+<ul>
+<li>Polymorphism: &quot;providing a single interface to entities of different types&quot;</li>
+</ul>
+</li>
+<li>Consider a variable <code>deque</code> of static type <code>Deque</code>:
+<ul>
+<li>When you call <code>deque.addFirst()</code>, the actual behavior is based on the dynamic type</li>
+<li>Java automatically selects the right behavior using what is sometimes called &quot;dynamic method selection&quot;</li>
+</ul>
+</li>
+</ul>
+<h3 id="subtype-polymorphism-vs-explicit-higher-order-functions">Subtype Polymorphism vs. Explicit Higher Order Functions</h3>
+<ul>
+<li>Suppose we want to write a program that prints a string representation of the larger of two objects</li>
+<li>Explicit HoF Approach</li>
+</ul>
+<pre class="hljs"><code><div>def print_larger(x, y, compare, stringify):
+    if compare(x, y):
+        return stringify(x)
+    return stringify(x)
+</div></code></pre>
+<ul>
+<li>Subtype Polymorphism Approach</li>
+</ul>
+<pre class="hljs"><code><div>def print_larger(x, y):
+    if x.largerThan(y):
+        return x.str()
+    return y.str()
+</div></code></pre>
+<h2 id="diy-comparison">DIY Comparison</h2>
+<h3 id="shoutkeycomtba">shoutkey.com/TBA</h3>
+<ul>
+<li>Suppose we want to write a function <code>max()</code> that returns the max of any array, regardless of type</li>
+</ul>
+<h3 id="writing-a-general-max-function-the-fundamental-problem">Writing a General Max Function: The Fundamental Problem</h3>
+<ul>
+<li>Objects cannot be compared to objects with <code>&gt;</code>
+<ul>
+<li>One (bad) way to fix this: Write a max method in the Dog class</li>
+<li>What is the disadvantage of this?
+<ul>
+<li>Given up dream of one true <code>max</code> function</li>
+<li>You will need a <code>max</code> function for each new class</li>
+<li>Redundant code</li>
+</ul>
+</li>
+<li>How could we fix our Maximizer class using inheritance / HoFs?</li>
+</ul>
+</li>
+</ul>
+<h3 id="solution">Solution</h3>
+<ul>
+<li>Create an interface that guarantees a comparison method
+<ul>
+<li>Have Dog implement this interface</li>
+<li>Write Maximizer class in terms of this interface</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>public static OurComparable max(OurComparable[] items) {...}
+</div></code></pre>
+<pre class="hljs"><code><div>public interface OurComparable {
+    /** Return negative number if this is less than o
+     * Return 0 if this is equal to o
+     * Return positive number if this if greater than o
+     */
+    public int compareTo(Object obj);
+}
+
+public class Dog implements OurComparable {
+    private String name;
+    private int size;
+
+    public Dog(String n, int s) {
+        name = n;
+        size = s;
+    }
+
+    public void bark() {
+        System.out.println(name + &quot; says: bark&quot;);
+    }
+
+    // Returns negative number if this dog is less than the dog pointed by o, and so forth
+    public int compareTo(Object o) {
+        Dog otherDog = (Dog) o;
+        return this.size - otherDog.size;
+    }
+}
+
+public class Maximizer {
+    public static OurComparable max(OurComparable[] items) {
+        int maxDex = 0;
+        for (int i = 0; i &lt; items.length; i += 1) {
+            int cmp = items[i].compareTo(items[maxDex])
+            if (cmp &gt; 0) {
+                maxDex = i;
+            }
+        }
+        return items[maxDex];
+    }
+}
+</div></code></pre>
+<h3 id="the-ourcomparable-interface">The OurComparable Interface</h3>
+<ul>
+<li>Specification, returns:
+<ul>
+<li>Negative number if <strong>this</strong> is less than obj</li>
+<li>0 if <strong>this</strong> is equal to object</li>
+<li>Positive number if <strong>this</strong> is greater than obj</li>
+</ul>
+</li>
+</ul>
+<h3 id="general-maximization-function-through-inheritance">General Maximization Function Through Inheritance</h3>
+<ul>
+<li>Benefits of this approach
+<ul>
+<li>No need for array maximization code in every custom type (i.e. no Dog.maxDog(Dog[]) function required)</li>
+<li>Code that operates on multiple types (mostly) gracefully</li>
+</ul>
+</li>
+</ul>
+<h2 id="comparables">Comparables</h2>
+<h3 id="the-issues-with-ourcomparable">The Issues with OurComparable</h3>
+<ul>
+<li>Two issues:
+<ul>
+<li>Awkward casting to/from Objects</li>
+<li>We made it up
+<ul>
+<li>No existing classes implement OurComparable (e.g. string, etc)</li>
+<li>No existing classes use OurComparable (e.g. no built-in max function that uses OurComparable)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>The industrial strength approach: Use the built-in Comparable interface
+<ul>
+<li>Already defined nad used by tons of libraries. Uses generics.</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>public class Dog implements Comparable&lt;Dog&gt; {
+
+    ...
+
+    // Returns negative number if this dog is less than the dog pointed by o, and so forth
+    public int compareTo(Dog otherDog) {
+        return this.size - otherDog.size;
+    }
+}
+
+public class Maximizer {
+    public static Comparable max(Comparable[] items) {
+        int maxDex = 0;
+        for (int i = 0; i &lt; items.length; i += 1) {
+            int cmp = items[i].compareTo(items[maxDex])
+            if (cmp &gt; 0) {
+                maxDex = i;
+            }
+        }
+        return items[maxDex];
+    }
+}
+</div></code></pre>
+<h3 id="comparable-advantages">Comparable Advantages</h3>
+<ul>
+<li>Lots of built in classes implement Comparable (e.g. String)</li>
+<li>Lots of libraries use the Comparable interface (e.g. Arrays.sort)</li>
+<li>Avoids need for casts</li>
+</ul>
+<h2 id="comparators">Comparators</h2>
+<h3 id="natural-order">Natural Order</h3>
+<ul>
+<li>The term &quot;Natural Order&quot; is used to refer to the ordering implied by a <code>Comparable</code>'s <code>compareTo</code> method
+<ul>
+<li>Example: Dog objects (as we've defined them) have a natural order given by their size</li>
+</ul>
+</li>
+<li>May wish to order objects in a different way
+<ul>
+<li>Example: by name</li>
+</ul>
+</li>
+</ul>
+<h3 id="additional-orders-in-java">Additional Orders in Java</h3>
+<ul>
+<li>The standard Java approach: Create <code>sizeComparator</code> and <code>nameComparator</code> classes that implement the <code>Comparator</code> interface
+<ul>
+<li>Requires methods that also take Comparator arguments</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>import java.util.Comparator;
+
+public class Dog implements OurComparable {
+
+    ...
+
+    // Returns negative number if this dog is less than the dog pointed by o, and so forth
+    public int compareTo(Object o) {
+        Dog otherDog = (Dog) o;
+        return this.size - otherDog.size;
+    }
+
+    private static class NameComparator implements Comparator&lt;Dog&gt; {
+        public int compare(Dog a, Dog b) {
+            return a.name.compareTo(b.name);
+        }
+    }
+
+    public static Comparator&lt;Dog&gt; getNameComparator() {
+        return new NameComparator();
+    }
+}
+
+
+import java.util.Comparator;
+
+public class DogLauncher {
+    public static void main(String[] args) {
+
+        ...
+
+        Comparator&lt;Dog&gt; nc = new Dog.getNameComparator();
+        if (nc.compare(d1, d3) &gt; 0) {
+            d1.bark();
+        } else {
+            d2.bark();
+        }
+    }
+}
+</div></code></pre>
+<h3 id="comparable-and-comparator-summary">Comparable and Comparator Summary</h3>
+<ul>
+<li>Interfaces provide us with the ability to make <strong>callbacks</strong>
+<ul>
+<li>Sometimes a function needs the help of another function that might not have been written yet
+<ul>
+<li>Example: <code>max</code> needs <code>compareTo</code></li>
+<li>The helping function is sometimes called a &quot;callback&quot;</li>
+</ul>
+</li>
+<li>Some languages handle this using explicit function passing</li>
+<li>In Java, we do this by wrapping up the needed function in an interface (e.g. <code>Arrays.sort</code> needs <code>compare</code> which lives inside the <code>comparator</code> interface)</li>
+<li><code>Arrays.sort</code> &quot;call back&quot; whenever it needs a comparison
+<ul>
+<li>Similar to giving your number to someone if they need information</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</body>
+</html>

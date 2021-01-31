@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture09.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-9-extends-casting-higher-order-functions">Lecture 9: Extends, Casting, Higher Order Functions</h1>
+<h4 id="9162020">9/16/2020</h4>
+<h2 id="implementation-inheritance-extends">Implementation Inheritance: Extends</h2>
+<h3 id="the-extends-keyword">The Extends Keyword</h3>
+<ul>
+<li>When a class is a hyponym of an interface, we use <strong>implements</strong></li>
+<li>If you want one class to be a hyponym of another <em>class</em> (instead of interface), you use <strong>extends</strong></li>
+<li>We'd like to build a RotatingSLList that can perform any SLList operation as well as:
+<ul>
+<li><code>rotateRight()</code>: Moves back item to the front</li>
+</ul>
+</li>
+</ul>
+<h3 id="rotatingsllist">RotatingSLList</h3>
+<ul>
+<li>Because of <strong>extends</strong>, RotatingSLList inherits all members of SLList:
+<ul>
+<li>All instance and static variables</li>
+<li>All methods</li>
+<li>All nested classes</li>
+</ul>
+</li>
+<li>Constructors are not inherited</li>
+</ul>
+<pre class="hljs"><code><div>public class RotatingSLList&lt;Item&gt; extends SLList&lt;Item&gt; {
+    // Rotates list to the right
+    public void rotateRight() {
+        Item x = removeLast();
+        addFirst(x);
+    }
+}
+</div></code></pre>
+<h3 id="another-example-vengefulsllist">Another Example: VengefulSLList</h3>
+<ul>
+<li>Suppose we want to build an SLList that:
+<ul>
+<li>Remembers all items that have been destroyed by <code>removeLast</code></li>
+<li>Has an additional method <code>printLostItems()</code>, which prints all deleted items</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>public class VengefulSLList&lt;Item&gt; extends SLList&lt;Item&gt; {
+    SLList&lt;Item&gt; deletedItems;
+
+    public VengefulSLList() {
+        super();  // Optional line
+        deletedItems = new SLList&lt;Item&gt;();
+    }
+    
+    @Override
+    public Item removeLast() {
+        Item x = super.removeLast();  // Calls Superclass's version of removeLast()
+        deletedItems.addLast(x);
+        return x;
+    }
+
+    // Prints deleted items
+    public void printLostItems() {
+        deletedItems.print();
+    }
+}
+</div></code></pre>
+<h3 id="constructor-behavior-is-slightly-weird">Constructor Behavior is Slightly Weird</h3>
+<ul>
+<li>Constructors are not inherited. However, the rules of Java say that <strong>all constructors must start with a call to one of the super class's constructor</strong>
+<ul>
+<li>Idea: If every VengefulSLList is-an SLList, every VengefulSLList must be set up like an SLList
+<ul>
+<li>If you didn't call SLList constructor, sentinel would be null. Very bad.</li>
+</ul>
+</li>
+<li>You can explicitly call the constructor with the keyword super (no dot)</li>
+<li>If you do not explicitly call the constructor, Java will automatically do so for you</li>
+</ul>
+</li>
+</ul>
+<h3 id="calling-other-constructors">Calling Other Constructors</h3>
+<ul>
+<li>If you want to use a super constructor other than the no-argument constructor, can give parameters to super</li>
+</ul>
+<pre class="hljs"><code><div>public class VengefulSLList&lt;Item&gt; extends SLList&lt;Item&gt; {
+    SLList&lt;Item&gt; deletedItems;
+
+    public VengefulSLList() {
+        super();  // Optional line
+        deletedItems = new SLList&lt;Item&gt;();
+    }
+    
+    public VengefulSLList(Item x) {
+        super(x);  // NOT OPTIONAL! (calls no-argument constructor otherwise)
+        deletedItems = new SLList&lt;Item&gt;();
+    }
+}
+</div></code></pre>
+<h3 id="the-object-class">The Object Class</h3>
+<ul>
+<li>As it happens, every type in Java is a descendant of the Object class
+<ul>
+<li>VengefulSLList extends SLList</li>
+<li>SLList extends Object (implicitly)</li>
+</ul>
+</li>
+<li>Interfaces do not extend the object class</li>
+</ul>
+<h3 id="is-a-vs-has-a">Is-a vs. Has-A</h3>
+<ul>
+<li>Important Note: extends should only be used for <strong>is-a</strong> (hypernymic) relationships</li>
+<li>Common mistake is to use it for &quot;<strong>has-a</strong>&quot; relationships</li>
+</ul>
+<h2 id="encapsulation">Encapsulation</h2>
+<h3 id="complexity-the-enemy">Complexity: The Enemy</h3>
+<ul>
+<li>When building large programs, our enemy is complexity</li>
+<li>Some tools for managing complexity
+<ul>
+<li>Hierarchical abstraction
+<ul>
+<li>Create <strong>layers of abstraction</strong>, with clear abstraction barriers</li>
+</ul>
+</li>
+<li>&quot;Design for change&quot; (D. Parnas)
+<ul>
+<li>Organize program around objects</li>
+<li>Let objects decide how things are done</li>
+<li><strong>Hide information</strong> others don't need</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Managing complexity supremely important for large projects (e.g. project 2)</li>
+</ul>
+<h3 id="modules-and-encapsulation">Modules and Encapsulation</h3>
+<ul>
+<li><strong>Module</strong>: A set of methods that work together as a whole to perform some task or set of related tasks</li>
+<li>A module is said to be <strong>encapsulated</strong> if its implementation is <em>completely hidden</em>, and it can be accessed only through a documented interface
+<ul>
+<li>Instance variable private. Methods like <code>resize</code> private</li>
+</ul>
+</li>
+</ul>
+<h3 id="a-cautionary-tale">A Cautionary Tale</h3>
+<ul>
+<li>Interesting questions from project 1B
+<ul>
+<li>How can we check the length of StudentArrayDeque?</li>
+<li>Private access in given classes</li>
+<li>Can we assume these things about StudentArrayDeque?</li>
+</ul>
+</li>
+</ul>
+<h3 id="abstraction-barriers">Abstraction Barriers</h3>
+<ul>
+<li>As the user of an ArrayDeque, you cannot observe its internals
+<ul>
+<li>Even when writing tests, you don't (usually) want to peer inside</li>
+</ul>
+</li>
+<li>Java is a great language for enforcing abstraction barriers with syntax</li>
+</ul>
+<h3 id="implementation-inheritance-breaks-encapsulation">Implementation Inheritance Breaks Encapsulation</h3>
+<ul>
+<li>What would vd.barkMany(3) output? (vd is a VerboseDog)
+<ul>
+<li>An infinite loop!</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>public void bark() {
+    barkMany(1);
+}
+public void barkMany(int N) {
+    for (int i = 0; i &lt; N; i += 1) {
+        System.out.println(&quot;bark&quot;);
+    }
+}
+
+@Override
+public void barkMany(int N) {
+    System.out.println(&quot;As a dog, I say: &quot;) {
+        for (int i = 0; i &lt; N; i += 1) {
+            bark();  // calls inherited bark method
+        }
+    }
+}
+</div></code></pre>
+<h2 id="type-checking-and-casting">Type Checking and Casting</h2>
+<h3 id="reminder-dynamic-method-selection">Reminder: Dynamic Method Selection</h3>
+<ul>
+<li>If overridden, decide which method to call based on <strong>run-time</strong> type (dynamic type) of variable</li>
+</ul>
+<h3 id="compile-time-type-checking">Compile-Time Type Checking</h3>
+<ul>
+<li>Compiler allows method calls based on <strong>compile-time</strong> type (static type) of variable</li>
+<li>Compiler also allows assignments based on compile-time types
+<ul>
+<li>Compiler plays it as safe as possible with type checking</li>
+</ul>
+</li>
+</ul>
+<h3 id="compile-time-types-and-expressions">Compile-Time Types and Expressions</h3>
+<ul>
+<li>Expressions have compile-time types
+<ul>
+<li>An expression using the new keyword has the specified compile-time type</li>
+</ul>
+</li>
+<li><code>SLList&lt;Integer&gt; s1 = new VengefulSLList&lt;Integer&gt;();</code>
+<ul>
+<li>Compile-time type of right hand side (RHS) expression is VengefulSLList</li>
+<li>A VengefulSLList is-an SLList, so assignment is allowed</li>
+</ul>
+</li>
+<li><code>VengefulSLList&lt;Integer&gt; vs1 = new SLList&lt;Integer&gt;();</code>
+<ul>
+<li>Compile-time type of RHS expression is SLList</li>
+<li>An SLList is not necessarily a VengefulSLList, so compilation error results</li>
+</ul>
+</li>
+</ul>
+<h3 id="compile-type-types-and-expressions">Compile-Type Types and Expressions</h3>
+<ul>
+<li>Expressions have compile-time types
+<ul>
+<li>Method class have compile-time type equal to their declared type</li>
+</ul>
+</li>
+<li><code>public static Dog maxDog(Dog d1, Dog d2) {...}</code>
+<ul>
+<li>Any call to maxDog will have compile-time type Dog!</li>
+</ul>
+</li>
+<li>Example:</li>
+</ul>
+<pre class="hljs"><code><div>Poodle frank = new Poodle(&quot;Frank&quot;, 5);
+Poodle frankJr = new Poodle(&quot;Frank Jr.&quot; 15);
+
+dog largerDog = maxDog(frank, frankJr);
+Poodle largerPoodle = maxDog(frank, frankJr);  // Compilation Error!
+// RHS has compile-time type Dog
+</div></code></pre>
+<h3 id="casting">Casting</h3>
+<ul>
+<li>Java has a special syntax for forcing the compile-time type of any expression
+<ul>
+<li>Put desired type in parenthesis before expression</li>
+<li>Examples:
+<ul>
+<li>Compile-time type Dog: <code>maxDog(frank, frankJr);</code></li>
+<li>Compile-time type Poodle: <code>(Poodle) maxDog(frank, frankJr);</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Think of it as a way to trick the compiler</li>
+</ul>
+<pre class="hljs"><code><div>Poodle frank = new Poodle(&quot;Frank&quot;, 5);
+Poodle frankJr = new Poodle(&quot;Frank Jr.&quot; 15);
+
+dog largerDog = maxDog(frank, frankJr);
+Poodle largerPoodle = (Poodle) maxDog(frank, frankJr);  // Compilation OK!
+// RHS has compile-time type Poodle
+</div></code></pre>
+<ul>
+<li>Casting is a powerful but dangerous tool
+<ul>
+<li>Tells Java to treat an expression as having a different compile-time type</li>
+<li>Effectively tells the compiler to ignore its type checking duties</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>Poodle frank = new Poodle(&quot;Frank&quot;, 5);
+Malamute frankSr = new Malamute(&quot;Frank Sr.&quot;, 100);
+
+Poodle largerPoodle = (Poodle) maxDog(frank, frankSr);
+</div></code></pre>
+<ul>
+<li>If we run the code above, we get a ClassCastException at runtime</li>
+</ul>
+<h2 id="higher-order-functions-a-first-look">Higher Order Functions (A First Look)</h2>
+<h3 id="higher-order-functions">Higher Order Functions</h3>
+<ul>
+<li>Higher Order Function: A function that treats another function as data
+<ul>
+<li>e.g takes a function as input</li>
+</ul>
+</li>
+<li>Example in Python:</li>
+</ul>
+<pre class="hljs"><code><div>def tenX(x):
+    return 10*x
+
+def do_twice(f, x):
+    return f(f(x))
+
+print(do_twice(tenX, 2))
+</div></code></pre>
+<h3 id="higher-order-functions-in-java-7">Higher Order Functions in Java 7</h3>
+<ul>
+<li>Old School (Java 7 and earlier)
+<ul>
+<li>Fundamental issue: Memory boxes (variables) cannot contain pointers to functions</li>
+</ul>
+</li>
+<li>Can use an interface instead. Let's try it out</li>
+</ul>
+<pre class="hljs"><code><div>// Represents a function that takes in an integer, and returns an integer
+public interface IntUnaryFunction {
+    int apply(int x);
+}
+</div></code></pre>
+<pre class="hljs"><code><div>public class TenX implements IntUnaryFunction {
+    /** Returns ten times the argument */
+    public int apply(int x) {
+        return 10 * x;
+    }
+}
+</div></code></pre>
+<pre class="hljs"><code><div>// Demonstrates higher order functions in Java
+public class HofDemo {
+    public static int doTwice(IntUnaryFunction f, int x) {
+        return f.apply(f.apply(x));
+    }
+
+    public static void main(String[] args) {
+        IntUnaryFunction tenX = new TenX();
+        System.out.println(doTwice(tenX, 2));
+    }
+}
+</div></code></pre>
+<ul>
+<li>Very verbose</li>
+</ul>
+<h3 id="implementation-inheritance-cheatsheet">Implementation Inheritance Cheatsheet</h3>
+<ul>
+<li>VengefulSLList extends SLList means a VengefulSLList is-an SLList. Inherits all members!
+<ul>
+<li>Variables, methods, nested classes</li>
+<li>Not constructors</li>
+<li>Subclass constructor must invoke superclass constructor first</li>
+<li>Use super to invoke overridden superclass methods and constructors</li>
+</ul>
+</li>
+<li>Invocation of overridden methods follows two simple rules:
+<ul>
+<li>Compiler plays it safe and only lets us do things allowed by <strong>static</strong> type</li>
+<li>For overridden methods the actual method invoked is based on <strong>dynamic</strong> type of invoking expressions
+<ul>
+<li>Does not apply to <strong>overloaded</strong> methods!</li>
+</ul>
+</li>
+<li>Can use casting to overrule compiler type checking.</li>
+</ul>
+</li>
+</ul>
+
+</body>
+</html>

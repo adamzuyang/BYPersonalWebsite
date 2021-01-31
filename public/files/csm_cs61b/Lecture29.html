@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lecture29.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="lecture-29-basic-sorts">Lecture 29: Basic Sorts</h1>
+<h4 id="1142020">11/4/2020</h4>
+<h3 id="sorting-definitions">Sorting Definitions</h3>
+<ul>
+<li>An <strong>ordering relation</strong> &lt; for keys a, b, and c has the following properties:
+<ul>
+<li>Law of Trichotomy: Exactly one of a &lt; b, a = b, b &lt; a is true</li>
+<li>Law of Transitivity: If a &lt; b, and a &lt; c, then a &lt; c</li>
+</ul>
+</li>
+<li>An ordering relation with the properties above is known as a &quot;total order&quot;</li>
+<li>A <strong>sort</strong> is a permutation (re-arrangement) of a sequence of elements that puts the keys into non-decreasing order relative to a given ordering relation</li>
+</ul>
+<h3 id="java-note">Java Note</h3>
+<ul>
+<li>Ordering relations are typically given in the form of compareTo or compare methods</li>
+</ul>
+<pre class="hljs"><code><div>import java.util.Comparator;
+
+public class LengthComparator implements Comparator&lt;String&gt; {
+    public int compare(String x, String b) {
+        return x.length() - b.length();
+    }
+}
+</div></code></pre>
+<h3 id="sorting-an-alternate-viewpoint">Sorting: An Alternate Viewpoint</h3>
+<ul>
+<li>An <strong>inversion</strong> is a pair of elements that are out of order with respect to &lt;.
+<ul>
+<li>e,g, 0 1 1 2 3 4 8 6 9 5 7 has 6 inversions out of 55 max</li>
+</ul>
+</li>
+<li>Another way to state the goal of sorting:
+<ul>
+<li>Given a sequence of elements with Z inversions</li>
+<li>Perform a sequence of operations that reduces inversions to 0</li>
+</ul>
+</li>
+</ul>
+<h3 id="performance-definitions">Performance Definitions</h3>
+<ul>
+<li>Characterizations of the runtime efficiency are sometimes called the <strong>time complexity</strong> of an algorithm. Example:
+<ul>
+<li>Dijkstra's has time complexity O(E log V)</li>
+</ul>
+</li>
+<li>Characterizations of the &quot;extra&quot; memory usage of an algorithm is sometimes called the <strong>space complexity</strong> of an algorithm
+<ul>
+<li>Dijkstra's has space complexity Theta(V) (for queue, distTo, edgeTo)
+<ul>
+<li>Note that the graph takes up space Theta(V + E), but we don't count this as part of the space complexity of Dijkstra since the graph itself already exists and is an input to Dijkstra's</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="selection-sort-and-heapsort">Selection Sort and Heapsort</h2>
+<h3 id="selection-sort">Selection Sort</h3>
+<ul>
+<li>We've seen this already
+<ul>
+<li>Find smallest item</li>
+<li>Swap this item to the front and &quot;fix&quot; it</li>
+<li>Repeat for unfixed items until all items are fixed</li>
+</ul>
+</li>
+<li>Selection sorting N item:
+<ul>
+<li>Find the smallest item in the unsorted portion of the array</li>
+<li>Move it to the end of the sorted portion of the array</li>
+<li>Selection sort the remaining unsorted items</li>
+</ul>
+</li>
+<li>Sort properties:
+<ul>
+<li>Theta(N^2) time if we use an array (or similar data structure)</li>
+</ul>
+</li>
+<li>Seems inefficient: We look through entire remaining array every time to find the minimum</li>
+</ul>
+<h3 id="naive-heapsort-leveraging-a-max-oriented-heap">Naive Heapsort: Leveraging a Max-Oriented Heap</h3>
+<ul>
+<li>Idea: Instead of rescanning entire array looking for minimum, maintain a heap so that getting the minimum is fast!</li>
+<li>We'll use a max-oriented heap</li>
+<li>Naive heapsorting N items:
+<ul>
+<li>Insert all items into a max heap, and discard input array. Create output array</li>
+<li>Repeat N times:
+<ul>
+<li>Delete largest item from the max heap</li>
+<li>Put the largest item at the end of the unused part of the output array</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Heapsort runtime and memory:
+<ul>
+<li>Runtime is O(N log N)
+<ul>
+<li>Getting items into the heap O(N log N) time</li>
+<li>Selecting largest item: Theta(1)</li>
+<li>Removing largest item: O(log N)</li>
+</ul>
+</li>
+<li>Memory usage is Theta(N) to build the additional copy of all of our data
+<ul>
+<li>Worse than selection sort</li>
+<li>Can eliminate this extra memory cost with some fancy trickery</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="in-place-heapsort">In-place Heapsort</h3>
+<ul>
+<li>Alternate approach, treat input array as a heap
+<ul>
+<li>Rather than inserting into a new array of length N + 1, use a process known as &quot;bottom-up heapification&quot; to convert the array into a heap
+<ul>
+<li>To bottom-up heapify, just sink nodes in reverse level order</li>
+</ul>
+</li>
+<li>Avoids need for extra copy of all data</li>
+<li>Once heapified, algorithm is almost the same as naive heap sort</li>
+</ul>
+</li>
+<li>Heap sorting N items:
+<ul>
+<li>Bottom-up heapify input array:
+<ul>
+<li>Sink nodes in reverse level order: sink(k)</li>
+<li>After sinking, guaranteed that tree rooted at position k is a heap</li>
+<li>Repeat N times:
+<ul>
+<li>Delete largest item from the max heap, swapping root with last item in the heap</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Since tree rooted at position 0 is the root of a heap, then entire array is a heap</li>
+</ul>
+</li>
+<li>In-place Heapsort runtime and memory:
+<ul>
+<li>
+<p>Runtime is O(N log N), same as regular heapsort</p>
+<ul>
+<li>Best case runtime of Theta(N)
+<ul>
+<li>An array of all duplicates will yield linear runtime</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Extra: the bottom-up heapification is Theta(N) in the worst case</p>
+</li>
+<li>
+<p>Memory complexity is Theta(1)</p>
+<ul>
+<li>Reuse the same array</li>
+<li>The only extra memory we need is a constant number of instance variables (e.g. size)</li>
+<li>Unimportant: If we employ recursion to implement various heap operations, space complexity is Theta(log N) due to need to track recursive calls. The difference between Theta(log N) and Theta(1) space is effectively nothing</li>
+</ul>
+</li>
+<li>
+<p>Has bad cache performance</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="mergesort">Mergesort</h2>
+<h3 id="mergesort">Mergesort</h3>
+<ul>
+<li>Mergesort
+<ul>
+<li>Split items into 2 roughly even pieces</li>
+<li>Mergesort each half (recursively)</li>
+<li>Merge the two sorted halves to form the final result</li>
+</ul>
+</li>
+<li>Time complexity: Theta(N log N) runtime
+<ul>
+<li>Space complexity with auxiliary array: Costs theta(N) memory</li>
+</ul>
+</li>
+<li>Also possible to do in-place merge sort, but algorithm is very complicated, and runtime performance suffers by a significant constant factor</li>
+</ul>
+<h2 id="insertion-sort">Insertion Sort</h2>
+<h3 id="insertion-sort">Insertion Sort</h3>
+<ul>
+<li>General strategy:
+<ul>
+<li>Starting with an empty output sequence</li>
+<li>Add each item from input, inserting into output at right point</li>
+</ul>
+</li>
+<li>Naive approach, build entirely new output
+<ul>
+<li>For naive approach, if output sequence contains k items, worst cost to insert a single item is k
+<ul>
+<li>Might need to move everything over</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>More efficient method:
+<ul>
+<li>Do everything in place using swapping</li>
+</ul>
+</li>
+</ul>
+<h3 id="in-place-insertion-sort">In-place Insertion Sort</h3>
+<ul>
+<li>General strategy:
+<ul>
+<li>Repeat for i = 0 to N - 1:
+<ul>
+<li>Designate item i as the traveling item</li>
+<li>Swap item backwards until traveller is in the right place among all previously examined items</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Runtime analysis:
+<ul>
+<li>Omega(N), O(N^2)
+<ul>
+<li>Runtime is at least linear since every item is considered as the &quot;traveler&quot; at least once</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="observation-insertion-sort-on-almost-sorted-arrays">Observation: Insertion Sort on Almost Sorted Arrays</h3>
+<ul>
+<li>For arrays that are almost sorted, insertion sort does very little work</li>
+<li>Runtime is equal (proportional) to the number of inversions</li>
+</ul>
+<h3 id="insertion-sort-sweet-spots">Insertion Sort Sweet Spots</h3>
+<ul>
+<li>On arrays with a small number of inversions, insertion sort is extremely fast
+<ul>
+<li>One exchange per inversion (and number of comparisons is similar)
+<ul>
+<li>Runtime is Theta(N + K) where K is number of inversions</li>
+</ul>
+</li>
+<li>Define an <strong>almost sorted</strong> array as one in which number of inversions &lt;= cN for some c. Insertion sort is excellent on these arrays</li>
+</ul>
+</li>
+<li>Less obvious: For small arrays (N &lt; 15 or so), insertion sort is fastest
+<ul>
+<li>More of an empirical fact than a theoretical one</li>
+<li>Theoretical analysis beyond scope of the course</li>
+<li>Rough idea: Divide and conquer algorithms like heapsort/mergesort spend too much time dividing, but insertion sort goes straight to the conquest</li>
+<li>The Java implementation of mergesort does this</li>
+</ul>
+</li>
+</ul>
+<h2 id="sorts-table">Sorts Table</h2>
+<p><img src="images/csm_cs61b/29.1.png" alt="" style="width:800px"></p>
+
+</body>
+</html>
