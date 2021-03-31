@@ -13,5 +13,5 @@ The sorting visualizer currently features six comparison-based algorithms (Selec
 - The EJS file for the pathfinding visualizer is located at `views/pathfinder.ejs`
 
 The website features 36 lecture notes from CS 61B Fall 2020, when the course was taught by professor Hug.
-- The EJS and Markdown files for the 26 lecture notes can be found at `views/partials/cs61b`
+- The EJS and Markdown files for the 36 lecture notes can be found at `views/partials/cs61b`
 - The PDF files for the 36 lecture notes can be found at `public/files/csm_cs61b`
