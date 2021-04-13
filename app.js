@@ -71,6 +71,10 @@ app.get('/cs61b', (req, res) => {
     res.render('csm_cs61b', data);
 });
 
+app.get('/files/:file', (req, res) => {
+    res.sendFile(`./public/files/${req.params.file}`);
+})
+
 app.listen(PORT, () => {
     console.log(`App listening on port 3000`)
 });
