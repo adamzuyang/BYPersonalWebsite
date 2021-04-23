@@ -109,10 +109,12 @@ class Visualizer {
         // Animation Speeds
         this.visFast = 25;
         this.pathFast = 25;
-        this.visNormal = 45;
-        this.pathNormal = 45;
-        this.visSlow = 65;
-        this.pathSlow = 65;
+        this.visNormal = 50;
+        this.pathNormal = 50;
+        this.visSlow = 80;
+        this.pathSlow = 80;
+        this.visExtraSlow = 150;
+        this.pathExtraSlow = 150;
         // Default speed
         this.visSpeed = this.visNormal;
         this.pathSpeed = this.pathNormal;
@@ -1168,6 +1170,7 @@ function main() {
     let selectFast = document.getElementById('fast');
     let selectNormal = document.getElementById('normal');
     let selectSlow = document.getElementById('slow');
+    let selectExtraSlow = document.getElementById('extra-slow');
 
     let myVis = new Visualizer();
 
@@ -1254,6 +1257,11 @@ function main() {
         myVis.visSpeed = myVis.visSlow;
         myVis.pathSpeed = myVis.pathSlow;
         speed.innerHTML = "Speed: Slow";
+    });
+    selectExtraSlow.addEventListener('click', e => {
+        myVis.visSpeed = myVis.visExtraSlow;
+        myVis.pathSpeed = myVis.pathExtraSlow;
+        speed.innerHTML = "Speed: Extra Slow";
     });
 
     // Create patterns;
