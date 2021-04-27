@@ -188,6 +188,8 @@ class Visualizer {
             if (node.status != 'end' && node.status != 'start' && node.status != 'wall' && node.status != 'weighted') {
                 document.getElementById(node.id).className = 'node';
                 node.status = 'node';
+            } else if (node.status == 'weighted') {
+                document.getElementById(node.id).className = 'weighted';
             } else {
                 document.getElementById(node.id).className = 'node ' + 'node-to-' + node.status;
             }
