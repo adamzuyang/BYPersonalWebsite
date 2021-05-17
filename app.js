@@ -28,6 +28,24 @@ app.get('/pathfinder', (req, res) => {
     res.render('pathfinder', data);
 });
 
+app.get('/sorter', (req, res) => {
+    let maindata = JSON.parse(fs.readFileSync('json/main.json'));
+    let globaldata = JSON.parse(fs.readFileSync('json/global.json'));
+    let sorterdata = JSON.parse(fs.readFileSync('json/sorter.json'));
+
+    let data = mergeJSON.merge(mergeJSON.merge(maindata, sorterdata), globaldata);
+    res.render('sorter', data);
+});
+
+app.get('/tracer', (req, res) => {
+    let maindata = JSON.parse(fs.readFileSync('json/main.json'));
+    let globaldata = JSON.parse(fs.readFileSync('json/global.json'));
+    let tracerdata = JSON.parse(fs.readFileSync('json/tracer.json'));
+
+    let data = mergeJSON.merge(mergeJSON.merge(maindata, tracerdata), globaldata);
+    res.render('tracer', data);
+});
+
 app.get('/project', (req, res) => {
     const slug = req.query.slug;
     var projects = JSON.parse(fs.readFileSync('json/projects.json')).projects;
@@ -52,15 +70,6 @@ app.get('/resume', (req, res) => {
     let data = mergeJSON.merge(mergeJSON.merge(maindata, projectdata), globaldata);
     
     res.render('resume', data);
-});
-
-app.get('/sorter', (req, res) => {
-    let maindata = JSON.parse(fs.readFileSync('json/main.json'));
-    let globaldata = JSON.parse(fs.readFileSync('json/global.json'));
-    let sorterdata = JSON.parse(fs.readFileSync('json/sorter.json'));
-
-    let data = mergeJSON.merge(mergeJSON.merge(maindata, sorterdata), globaldata);
-    res.render('sorter', data);
 });
 
 app.get('/cs61b', (req, res) => {

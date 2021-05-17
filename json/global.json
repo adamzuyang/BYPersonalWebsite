@@ -23,6 +23,10 @@
             "link": "/sorter"
         },
         {
+            "text": "Tracer",
+            "link": "/tracer"
+        },
+        {
             "text": "CSM CS 61B",
             "link": "/cs61b"
         },

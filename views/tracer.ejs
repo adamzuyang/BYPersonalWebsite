@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Fourier Transform Visualizer</title>
+    <meta name="description" content="Barnett Yang's Personal Portfolio" />
+
+    <%- include('partials/head.ejs') %>
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/tracer.css" rel="stylesheet">
+</head>
+
+<body>
+    <%- include('partials/navbar.ejs') %>
+    
+    <div class="navbar" id="vis-buttons" style="width: 90vw; margin-right: 5vw; margin-left: 5vw">
+        <!--Buttons to control the visualizer-->
+        <div class="not-in-dropdown">
+            <a class="menu-link vis-fancy-link" id="intro">Intro</a>
+        </div>
+        <div class="not-in-dropdown">
+            <a class="menu-link vis-fancy-link" id="start-vis">Visualize</a>
+        </div>
+        <div class="not-in-dropdown">
+            <a class="menu-link vis-fancy-link" id="reset">Reset</a>
+        </div>
+        <!-- <div class="btn-group">
+            <button type="button" class="btn dropdown-toggle shadow-none" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="menu-link vis-fancy-link" id="speed">Speed: Normal</a>
+            </button>
+            <ul class="dropdown dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li class="menu-link"><a class="dropdown-item" id="fast">Fast</a></li>
+                <li class="menu-link"><a class="dropdown-item" id="normal">Normal</a></li>
+                <li class="menu-link"><a class="dropdown-item" id="slow">Slow</a></li>
+                <li class="menu-link"><a class="dropdown-item" id="extra-slow">Extra Slow</a></li>
+            </ul>
+        </div> -->
+    </div>
+
+    <div class="container-fluid" style="">
+        <div class="row" style="width: 100vw">
+            <!--HTML canvas used for visualizer-->
+            <canvas id="visualizer"></canvas>
+        </div>
+    </div>
+
+    <!-- The Modal -->
+    <div id="vismodal" class="modal">
+        <div class="modal-content" style="">
+            <span class="close">&times;</span>
+            <section class="section">
+                <div class="container">
+                    <div class="row block-header">
+                        <div class="col-sm-8 mx-auto text-center">
+                            <h1 class="display-4 mt-1 section-title" style="font-size: 36px;"><%= tracer_welcome %></h1>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-md-12 mb-4">
+                            <ul>
+                                <% instructions.forEach(function(item){ %>
+                                    <li><%= item.text %>
+                                        <ul>
+                                            <% item.list.forEach(function(subitem){ %>
+                                                <li><%= subitem.text %></li>
+                                            <% }); %>
+                                        </ul>
+                                    </li>
+                                <% }); %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <%- include('partials/scripts.ejs') %>
+    <script src="js/tracer.js"></script>
+</body>
+
+</html>

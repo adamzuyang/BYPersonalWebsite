@@ -1,0 +1,18 @@
+{
+    "tracer_welcome": "Welcome to my Discrete Fourier Transform Visualizer!",
+    
+    "instructions": [
+        {
+            "text": "This visualizer gives a visual interpretation of discrete Fourier transforms, a mathematical algorithm that converts a finite sequence of equally-spaced samples of a function into a sum of sine functions. Discrete Fourier transforms are extremely important in computer science and electrical engineering and are used to perform Fourier analysis in many practical applications, such as digital signal processing. However, discrete Fourier transforms have another unexpected application: drawing!",
+            "list": []
+        },
+        {
+            "text": "To get started, sketch whatever you want on the screen.",
+            "list": []
+        },
+        {
+            "text": "Then click \"Visualize\" and watch a sequence of rotation circles trace your drawing!",
+            "list": []
+        }
+    ]
+}
