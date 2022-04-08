@@ -25,24 +25,25 @@ h5 {
 .hero {
     height: calc(100vh - 50px);
     background-size: cover;
-    background-position: center;
+    background-position: center -10vh;
+    background-repeat: no-repeat;
+    /*background-size: clamp(1000px, 100%, 1400px) auto;*/
 }
 
 .hero-content-wrapper {
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(0,0,0,0) 45%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0.7));
+    /* background: linear-gradient(rgba(0,0,0,0) 45%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0.7)); */
     position: relative;
 }
 
 .hero-content {
     text-align: center;
-    margin-left: 5%;
-    margin-right: 5%;
-    width: 90%;
+    width: 100%;
     position: absolute;
-    transform: translate(0, 47vh);
+    transform: translate(0, 45vh);
     color:white !important;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .project {
