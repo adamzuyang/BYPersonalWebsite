@@ -1,6 +1,26 @@
 {
     "projects": [
         {
+            "name": "HICSS-56 Bayesian Networks",
+            "slug": "hicss-56",
+            "image": "/images/projects/hicss.png",
+            "description": "<p>During my internship at Sandia National Labs, I first-authored a research paper under the supervision of Matthew Hoffman and Nathanael Brown within the Mathematical Analysis and Decision Science organization. This paper discusses novel methods in feature selection, random forest MDI discretization, and structural learning for Bayesian network (BN) training and development in the context of cybersecurity attack detection. My research was then published and presented at the 2023 Hawaii International Conference on System Sciences. The abstract and link to download the publication can be found <a href='https://hdl.handle.net/10125/102784' target='_blank'>here</a>.</p><p>As part of the research, I constructed a Scikit-learn compatible Java to Python extension library that streamlined BN and dynamic BN training and testing pipelines, with applications and use across multiple labs at Sandia.</p>",
+            "link": "https://hdl.handle.net/10125/102784",
+            "client_name":"",
+            "client_company":"",
+            "client_feedback":"",
+            "schema":"project",
+            "dateString":"Tuesday, January 3, 2023",
+            "timestamp":{},
+            "_id":"AkiYIyXkTSMvCthe",
+            "category":"Machine Learning",
+            "opts":null,
+            "preview":"",
+            "client":"",
+            "dateRange":"2023"
+        },
+
+        {
             "name":"UrsaTech Study",
             "slug":"ursatech-study",
             "image":"/images/projects/ursatech_study.png",
@@ -78,26 +98,6 @@
             "preview":"",
             "client":"",
             "dateRange":"2021"
-        },
-        
-        {
-            "name":"Bearmaps",
-            "slug":"bearmaps",
-            "image":"/images/projects/bearmaps.png",
-            "description":"<p>Bearmaps is a web mapping application I developed while taking CS 61B at UC Berkeley. It makes use of several data structures and algorithms to create a comprehensive and interactive map of the Berkeley area that is capable of giving detailed routing instructions and plotting directions on a map. Data structures such as tries are used to autocomplete search queries, algorithms such as A* are used for direction routing, and rastering is used to generate the map interface. (Note, when using this app, make sure to constrain map dimensions to solve issues with zooming out.)</p>",
-            "link":"http://bybearmaps.herokuapp.com/map.html",
-            "client_name":"",
-            "client_company":"",
-            "client_feedback":"",
-            "schema":"project",
-            "dateString":"Sunday, December 27, 2020",
-            "timestamp":{},
-            "_id":"EJviSPwvrlLSUCnl",
-            "category":"Data Structures and Algorithms",
-            "opts":null,
-            "preview":"",
-            "client":"",
-            "dateRange":"2020"
         },
         
         {
