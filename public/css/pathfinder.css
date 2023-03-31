@@ -304,7 +304,8 @@ table, td {
 
       100% {
         transform: scale(1);
-        background: radial-gradient(ellipse at center,  #000000cb 0%,#000000cb 47%,#000000cb 47%,#000000cb 47%,#ffffff 48%);
+        /* A bit of a hacky fix to have borders appear around weighted nodes */
+        background: radial-gradient(ellipse at center,  #000000cb 0%,#000000cb 47%,#000000cb 47%,#000000cb 47%,rgba(255,255,255,0) 48%);
       }
 }
 
