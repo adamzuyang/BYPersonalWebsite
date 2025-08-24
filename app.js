@@ -94,7 +94,6 @@ app.get('/cs61b', (req, res) => {
 // });
 
 app.get('/files/:file', (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
     res.sendFile(`./public/files/${req.params.file}`);
 })
 
@@ -104,6 +103,7 @@ app.get('/pathDepartures', async (req, res) => {
     const pathDepartureURL = "https://www.panynj.gov/bin/portauthority/ridepath.json"
     const response = await fetch(`${pathDepartureURL}?timeStamp=${req.params.timeStamp}`);
     const data = await response.json();
+    res.header("Access-Control-Allow-Origin", "*");
     res.json(data);
 })
 
