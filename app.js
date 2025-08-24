@@ -10,6 +10,8 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+// Front-end page routes
+
 app.get('/', (req, res) => {
     let maindata = JSON.parse(fs.readFileSync('json/main.json'));
     let projectdata = JSON.parse(fs.readFileSync('json/projects.json'));
@@ -82,6 +84,15 @@ app.get('/cs61b', (req, res) => {
 
 app.get('/files/:file', (req, res) => {
     res.sendFile(`./public/files/${req.params.file}`);
+})
+
+// Back-end routes
+
+app.get('/pathDepartures', async (req, res) => {
+    const pathDepartureURL = "https://www.panynj.gov/bin/portauthority/ridepath.json"
+    const response = await fetch(`${pathDepartureURL}?timeStamp=${req.params.timeStamp}`);
+    const data = await response.json();
+    res.json(data);
 })
 
 app.listen(PORT, () => {
