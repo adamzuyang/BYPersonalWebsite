@@ -1,6 +1,6 @@
 const pathDepartureProxy = "https://barnettyang.herokuapp.com/pathDepartures"  // ?timeStamp={epoch timestamp in millis}
 
-const FAVORITES = ["GRV", "33S", "WTC", "CHR", "EXP"]
+const FAVORITES = ["GRV", "33S", "WTC", "CHR", "NEW"]
 const DIRORDER = ["ToNY", "ToNJ"]
 
 const READABLE_NAMES = {
@@ -11,7 +11,8 @@ const READABLE_NAMES = {
     "EXP": "EXCHANGE PL",
     "HAR": "HARRISON",
     "JSQ": "JOURNAL SQ",
-    "NEW": "NEWARK",
+    "NEW": "NEWPORT",
+    "NWK": "NEWARK",
     "HOB": "HOBOKEN",
     "09S": "9TH ST",
     "14S": "14TH ST",
