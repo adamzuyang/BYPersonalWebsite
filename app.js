@@ -85,27 +85,35 @@ app.get('/cs61b', (req, res) => {
     res.render('csm_cs61b', data);
 });
 
-// app.get('/path', (req, res) => {
-//     let maindata = JSON.parse(fs.readFileSync('json/main.json'));
-//     let globaldata = JSON.parse(fs.readFileSync('json/global.json'));
+app.get('/path', (req, res) => {
+    let maindata = JSON.parse(fs.readFileSync('json/main.json'));
+    let globaldata = JSON.parse(fs.readFileSync('json/global.json'));
 
-//     let data = mergeJSON.merge(maindata, globaldata);
-//     res.render('path', data);
-// });
+    let data = mergeJSON.merge(maindata, globaldata);
+    res.render('path', data);
+});
 
 app.get('/files/:file', (req, res) => {
     res.sendFile(`./public/files/${req.params.file}`);
-})
+});
 
 // Back-end routes
 
 app.get('/pathDepartures', async (req, res) => {
-    const pathDepartureURL = "https://www.panynj.gov/bin/portauthority/ridepath.json"
+    const pathDepartureURL = "https://www.panynj.gov/bin/portauthority/ridepath.json";
     const response = await fetch(`${pathDepartureURL}?timeStamp=${req.params.timeStamp}`);
     const data = await response.json();
     res.header("Access-Control-Allow-Origin", "*");
     res.json(data);
-})
+});
+
+app.get('/pathAlerts', async (req, res) => {
+    const pathAlertsURL = "https://www.panynj.gov/bin/portauthority/everbridge/incidents?status=All&department=Path";
+    const response = await fetch(`${pathDepartureURL}`);
+    const data = await response.json();
+    res.header("Access-Control-Allow-Origin", "*");
+    res.json(data);
+});
 
 app.listen(PORT, () => {
     console.log(`App listening on port 3000`)
