@@ -85,7 +85,16 @@ app.get('/cs61b', (req, res) => {
     res.render('csm_cs61b', data);
 });
 
+// app.get('/path', (req, res) => {
+//     let maindata = JSON.parse(fs.readFileSync('json/main.json'));
+//     let globaldata = JSON.parse(fs.readFileSync('json/global.json'));
+
+//     let data = mergeJSON.merge(maindata, globaldata);
+//     res.render('path', data);
+// });
+
 app.get('/files/:file', (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
     res.sendFile(`./public/files/${req.params.file}`);
 })
 
