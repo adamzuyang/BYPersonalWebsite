@@ -1,8 +1,11 @@
-const express = require("express");
+import fetch from 'node-fetch'
+import express from 'express'
+import path from 'path'
+import fs from 'fs'
+import mergeJSON from 'merge-json'
+
 const app = express()
-let path = require('path');
-const fs = require('fs');
-const mergeJSON = require("merge-json");
+const __dirname = path.resolve();
 
 const PORT = process.env.PORT || 3000;
 
