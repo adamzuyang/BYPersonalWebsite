@@ -1,4 +1,4 @@
-const apiUrl = "http://barnettyang.herokuapp.com/pathDepartures"  // ?timeStamp={epoch timestamp in millis}
+const pathDepartureProxy = "https://barnettyang.herokuapp.com/pathDepartures"  // ?timeStamp={epoch timestamp in millis}
 
 let pathDeparturesBusy = false;
 
@@ -7,7 +7,7 @@ async function fetchPathDepartures() {
         return;
     }
     const now = Date.now();
-    const response = await fetch(`${apiUrl}?timestamp=${now}`);
+    const response = await fetch(`${pathDepartureProxy}?timestamp=${now}`);
     const data = await response.json();
 
     let element = document.getElementById("pathDepartures");

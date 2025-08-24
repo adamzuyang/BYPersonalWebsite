@@ -109,7 +109,7 @@ app.get('/pathDepartures', async (req, res) => {
 
 app.get('/pathAlerts', async (req, res) => {
     const pathAlertsURL = "https://www.panynj.gov/bin/portauthority/everbridge/incidents?status=All&department=Path";
-    const response = await fetch(`${pathDepartureURL}`);
+    const response = await fetch(`${pathAlertsURL}`);
     const data = await response.json();
     res.header("Access-Control-Allow-Origin", "*");
     res.json(data);
