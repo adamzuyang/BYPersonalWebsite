@@ -1,4 +1,5 @@
 const pathDepartureProxy = "https://barnettyang.herokuapp.com/pathDepartures"  // ?timeStamp={epoch timestamp in millis}
+const pathAlertsProxy = "https://barnettyang.herokuapp.com/pathAlerts"
 
 const FAVORITES = ["GRV", "33S", "WTC", "CHR", "NEW"]
 const DIRORDER = ["ToNY", "ToNJ"]
@@ -24,8 +25,6 @@ const READABLE_DIRS = {
     "ToNJ": "To New Jersey",
 }
 
-let pathDeparturesBusy = false;
-
 function stationCompare(a, b) {
     let a_idx = FAVORITES.indexOf(a.consideredStation);
     let b_idx = FAVORITES.indexOf(b.consideredStation);
@@ -50,13 +49,44 @@ function dirCompare(a, b) {
     return a_idx - b_idx;
 }
 
-async function fetchPathDepartures() {
-    if (pathDeparturesBusy) {
+async function fetchPathAlerts() {
+    let element = document.getElementById("pathAlerts");
+
+    const response = await fetch(pathAlertsProxy);
+    if (response.status >= 400) {
+        element.innerHTML = "Failed to retrieve alerts!";
+        setTimeout(fetchPathAlerts, 5000);
         return;
     }
+    const json = await response.json();
+    let buttonElement = document.getElementById("pathAlertsButton");
+    if (!(json.status == "Success")) {
+        element.innerHTML = "Failed to retrieve alerts!";
+    } else {
+        let data = json.data;
+        buttonElement.innerHTML = `See Alerts (${data.length})`
+        if (data.length == 0) {
+            element.innerHTML = "No Alerts!"
+        } else {
+            let elementHTML = "";
+            for (const elem of data) {
+                const msg = elem.incidentMessage;
+                elementHTML += `<h5>${msg.subject}</h5><p>${msg.preMessage}</p>`
+            }
+            element.innerHTML = elementHTML;
+        }
+    }
+    setTimeout(fetchPathAlerts, 30000);
+}
+
+async function fetchPathDepartures() {
     const now = Date.now();
     const nowSeconds = Math.floor(now / 1000);
     const response = await fetch(`${pathDepartureProxy}?timestamp=${now}`);
+    if (response.status >= 400) {
+        setTimeout(fetchPathDepartures, 5000);
+        return;
+    }
     const data = await response.json();
 
     let element = document.getElementById("pathDepartures");
@@ -114,8 +144,8 @@ async function fetchPathDepartures() {
     }
     element.innerHTML = elementHTML;
 
-    pathDeparturesBusy = false;
+    setTimeout(fetchPathDepartures, 5000);
 }
 
+fetchPathAlerts();
 fetchPathDepartures();
-setInterval(fetchPathDepartures, 5000);
