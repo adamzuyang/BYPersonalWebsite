@@ -144,6 +144,8 @@ async function fetchPathDepartures() {
     }
     element.innerHTML = elementHTML;
 
+    updateTimeElement = document.getElementById("pathUpdateTime");
+    updateTimeElement.innerHTML = `Times are in ET. Up: ${(new Date(nowSeconds * 1000)).toLocaleTimeString("it-IT", {timeZone:"America/New_York"})}`
     setTimeout(fetchPathDepartures, 5000);
 }
 
