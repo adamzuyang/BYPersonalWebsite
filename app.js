@@ -100,19 +100,27 @@ app.get('/files/:file', (req, res) => {
 // Back-end routes
 
 app.get('/pathDepartures', async (req, res) => {
-    const pathDepartureURL = "https://www.panynj.gov/bin/portauthority/ridepath.json";
-    const response = await fetch(`${pathDepartureURL}?timeStamp=${req.params.timeStamp}`);
-    const data = await response.json();
-    res.header("Access-Control-Allow-Origin", "*");
-    res.json(data);
+    try {
+        const pathDepartureURL = "https://www.panynj.gov/bin/portauthority/ridepath.json";
+        const response = await fetch(`${pathDepartureURL}?timeStamp=${req.params.timeStamp}`);
+        const data = await response.json();
+        res.header("Access-Control-Allow-Origin", "*");
+        res.json(data);
+    } catch (e) {
+        console.error(e)
+    }
 });
 
 app.get('/pathAlerts', async (req, res) => {
-    const pathAlertsURL = "https://www.panynj.gov/bin/portauthority/everbridge/incidents?status=All&department=Path";
-    const response = await fetch(`${pathAlertsURL}`);
-    const data = await response.json();
-    res.header("Access-Control-Allow-Origin", "*");
-    res.json(data);
+    try {
+        const pathAlertsURL = "https://www.panynj.gov/bin/portauthority/everbridge/incidents?status=All&department=Path";
+        const response = await fetch(`${pathAlertsURL}`);
+        const data = await response.json();
+        res.header("Access-Control-Allow-Origin", "*");
+        res.json(data);
+    } catch (e) {
+        console.error(e);
+    }
 });
 
 app.listen(PORT, () => {
